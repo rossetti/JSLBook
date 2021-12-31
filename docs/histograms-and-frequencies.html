@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.2 Histograms and Frequencies | JSL - Java Simulation Library</title>
+  <meta name="description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.2 Histograms and Frequencies | JSL - Java Simulation Library" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.2 Histograms and Frequencies | JSL - Java Simulation Library" />
+  
+  <meta name="twitter:description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
+  
+
+<meta name="author" content="Manuel D. Rossetti" />
+
+
+<meta name="date" content="2021-12-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="creating-and-using-a-statistic.html"/>
+<link rel="next" href="batch-statistics.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Simulation Modeling using the Java Simulation Library</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Simulation Modeling</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="simulation-modeling.html"><a href="simulation-modeling.html"><i class="fa fa-check"></i><b>1.1</b> Simulation Modeling</a></li>
+<li class="chapter" data-level="1.2" data-path="why-simulate.html"><a href="why-simulate.html"><i class="fa fa-check"></i><b>1.2</b> Why Simulate?</a></li>
+<li class="chapter" data-level="1.3" data-path="types-of-systems-and-simulation-models.html"><a href="types-of-systems-and-simulation-models.html"><i class="fa fa-check"></i><b>1.3</b> Types of Systems and Simulation Models</a></li>
+<li class="chapter" data-level="1.4" data-path="simulation-descriptive-or-prescriptive-modeling.html"><a href="simulation-descriptive-or-prescriptive-modeling.html"><i class="fa fa-check"></i><b>1.4</b> Simulation: Descriptive or Prescriptive Modeling?</a></li>
+<li class="chapter" data-level="1.5" data-path="randomness-in-simulation.html"><a href="randomness-in-simulation.html"><i class="fa fa-check"></i><b>1.5</b> Randomness in Simulation</a></li>
+<li class="chapter" data-level="1.6" data-path="simulation-languages.html"><a href="simulation-languages.html"><i class="fa fa-check"></i><b>1.6</b> Simulation Languages</a></li>
+<li class="chapter" data-level="1.7" data-path="ch1-sec-simMeth.html"><a href="ch1-sec-simMeth.html"><i class="fa fa-check"></i><b>1.7</b> Simulation Methodology</a></li>
+<li class="chapter" data-level="1.8" data-path="overview-of-the-java-simulation-library.html"><a href="overview-of-the-java-simulation-library.html"><i class="fa fa-check"></i><b>1.8</b> Overview of the Java Simulation Library</a></li>
+<li class="chapter" data-level="1.9" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch2-rng.html"><a href="ch2-rng.html"><i class="fa fa-check"></i><b>2</b> Random Number Generation</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch2-generator.html"><a href="ch2-generator.html"><i class="fa fa-check"></i><b>2.1</b> Random Number Generator</a></li>
+<li class="chapter" data-level="2.2" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html"><i class="fa fa-check"></i><b>2.2</b> Random Package</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html#ch2:creatingStreams"><i class="fa fa-check"></i><b>2.2.1</b> Creating and Using Streams</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html#ch2:crn"><i class="fa fa-check"></i><b>2.2.2</b> Common Random Numbers</a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html#ch2:antitheticStreams"><i class="fa fa-check"></i><b>2.2.3</b> Creating and Using Antithetic Streams</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch2-FAQ.html"><a href="ch2-FAQ.html"><i class="fa fa-check"></i><b>2.3</b> Frequently Asked Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="random-variate-generation-and-probability-modeling.html"><a href="random-variate-generation-and-probability-modeling.html"><i class="fa fa-check"></i><b>3</b> Random Variate Generation and Probability Modeling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="continuous-and-discrete-random-variables.html"><a href="continuous-and-discrete-random-variables.html"><i class="fa fa-check"></i><b>3.1</b> Continuous and Discrete Random Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="overview-of-generation-algorithms.html"><a href="overview-of-generation-algorithms.html"><i class="fa fa-check"></i><b>3.2</b> Overview of Generation Algorithms</a></li>
+<li class="chapter" data-level="3.3" data-path="creating-and-using-random-variables.html"><a href="creating-and-using-random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Creating and Using Random Variables</a></li>
+<li class="chapter" data-level="3.4" data-path="modeling-probability-distributions.html"><a href="modeling-probability-distributions.html"><i class="fa fa-check"></i><b>3.4</b> Modeling Probability Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>4</b> Collecting Statistics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="creating-and-using-a-statistic.html"><a href="creating-and-using-a-statistic.html"><i class="fa fa-check"></i><b>4.1</b> Creating and Using a Statistic</a></li>
+<li class="chapter" data-level="4.2" data-path="histograms-and-frequencies.html"><a href="histograms-and-frequencies.html"><i class="fa fa-check"></i><b>4.2</b> Histograms and Frequencies</a></li>
+<li class="chapter" data-level="4.3" data-path="batch-statistics.html"><a href="batch-statistics.html"><i class="fa fa-check"></i><b>4.3</b> Batch Statistics</a></li>
+<li class="chapter" data-level="4.4" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
+<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introDEDS-Intro.html"><a href="introDEDS-Intro.html"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="introDEDS-deds.html"><a href="introDEDS-deds.html"><i class="fa fa-check"></i><b>6.2</b> Discrete-Event Dynamic Systems</a></li>
+<li class="chapter" data-level="6.3" data-path="HowDEDSClockWorks.html"><a href="HowDEDSClockWorks.html"><i class="fa fa-check"></i><b>6.3</b> How the Discrete-Event Clock Works</a></li>
+<li class="chapter" data-level="6.4" data-path="simulating-a-queueing-system-by-hand.html"><a href="simulating-a-queueing-system-by-hand.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
+<li class="chapter" data-level="6.5" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html"><i class="fa fa-check"></i><b>6.5</b> Modeling DEDS in the JSL</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#event-scheduling"><i class="fa fa-check"></i><b>6.5.1</b> Event Scheduling</a></li>
+<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#simple-event-scheduling-examples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
+<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#up-and-down-component-example"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
+<li class="chapter" data-level="6.5.4" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:pharmacy"><i class="fa fa-check"></i><b>6.5.4</b> Modeling a Simple Queueing System</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="introDEDS-Summary.html"><a href="introDEDS-Summary.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dem.html"><a href="dem.html"><i class="fa fa-check"></i><b>7</b> Modeling with Queues, Resources, and Stations</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="terminology-of-simulation-modeling.html"><a href="terminology-of-simulation-modeling.html"><i class="fa fa-check"></i><b>7.1</b> Terminology of Simulation Modeling</a></li>
+<li class="chapter" data-level="7.2" data-path="dem-entities.html"><a href="dem-entities.html"><i class="fa fa-check"></i><b>7.2</b> Entities and Attributes</a></li>
+<li class="chapter" data-level="7.3" data-path="dem-eg.html"><a href="dem-eg.html"><i class="fa fa-check"></i><b>7.3</b> Event Generators</a></li>
+<li class="chapter" data-level="7.4" data-path="dem-station.html"><a href="dem-station.html"><i class="fa fa-check"></i><b>7.4</b> The Station Package</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="dem-station.html"><a href="dem-station.html#modeling-simple-queueing-stations"><i class="fa fa-check"></i><b>7.4.1</b> Modeling Simple Queueing Stations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="dem-sharedResources.html"><a href="dem-sharedResources.html"><i class="fa fa-check"></i><b>7.5</b> Sharing a Resource</a></li>
+<li class="chapter" data-level="7.6" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html"><i class="fa fa-check"></i><b>7.6</b> Complex System Example</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html#dem:tiedyeShirts:cm"><i class="fa fa-check"></i><b>7.6.1</b> Conceptualizing the Model</a></li>
+<li class="chapter" data-level="7.6.2" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html#dem:tiedyeShirts:im"><i class="fa fa-check"></i><b>7.6.2</b> Implementing the Model</a></li>
+<li class="chapter" data-level="7.6.3" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html#dem:tiedyeShirts:results"><i class="fa fa-check"></i><b>7.6.3</b> Model Results</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="dem-summary.html"><a href="dem-summary.html"><i class="fa fa-check"></i><b>7.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simoa.html"><a href="simoa.html"><i class="fa fa-check"></i><b>8</b> Analyzing Simulation Output</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="simoa-datatypes.html"><a href="simoa-datatypes.html"><i class="fa fa-check"></i><b>8.1</b> Types of Statistical Variables</a></li>
+<li class="chapter" data-level="8.2" data-path="simoa-simtypes.html"><a href="simoa-simtypes.html"><i class="fa fa-check"></i><b>8.2</b> Types of Simulation With Respect To Output Analysis</a></li>
+<li class="chapter" data-level="8.3" data-path="simoa-finhorizon.html"><a href="simoa-finhorizon.html"><i class="fa fa-check"></i><b>8.3</b> Analysis of Finite Horizon Simulations</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="simoa-finhorizon.html"><a href="simoa-finhorizon.html#simoa:finhorizon:samplesize"><i class="fa fa-check"></i><b>8.3.1</b> Determining the Number of Replications</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="simoa-finhorizonex.html"><a href="simoa-finhorizonex.html"><i class="fa fa-check"></i><b>8.4</b> Finite Horizon Example</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="simoa-finhorizonex.html"><a href="simoa-finhorizonex.html#conceptualizing-the-model"><i class="fa fa-check"></i><b>8.4.1</b> Conceptualizing the Model</a></li>
+<li class="chapter" data-level="8.4.2" data-path="simoa-finhorizonex.html"><a href="simoa-finhorizonex.html#simoa:seqsampling"><i class="fa fa-check"></i><b>8.4.2</b> Sequential Sampling for Finite Horizon Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html"><i class="fa fa-check"></i><b>8.5</b> Analysis of Infinite Horizon Simulations</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:initialbias"><i class="fa fa-check"></i><b>8.5.1</b> Assessing the Effect of Initial Conditions</a></li>
+<li class="chapter" data-level="8.5.2" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:repDeletion"><i class="fa fa-check"></i><b>8.5.2</b> Performing the Method of Replication-Deletion</a></li>
+<li class="chapter" data-level="8.5.3" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:batchmeans"><i class="fa fa-check"></i><b>8.5.3</b> The Method of Batch Means</a></li>
+<li class="chapter" data-level="8.5.4" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:jslbatching"><i class="fa fa-check"></i><b>8.5.4</b> Performing the Method of Batch Means</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="simoa-comparingSystems.html"><a href="simoa-comparingSystems.html"><i class="fa fa-check"></i><b>8.6</b> Comparing System Configurations</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="simoa-comparingSystems.html"><a href="simoa-comparingSystems.html#simoa:comparingSystems:two"><i class="fa fa-check"></i><b>8.6.1</b> Comparing Two Systems</a></li>
+<li class="chapter" data-level="8.6.2" data-path="simoa-comparingSystems.html"><a href="simoa-comparingSystems.html#simoa:comparingSystems:MCB"><i class="fa fa-check"></i><b>8.6.2</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="simoa-summary.html"><a href="simoa-summary.html"><i class="fa fa-check"></i><b>8.7</b> Summary</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="miscellaneous-utility-classes.html"><a href="miscellaneous-utility-classes.html"><i class="fa fa-check"></i><b>A</b> Miscellaneous Utility Classes</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="reporting.html"><a href="reporting.html"><i class="fa fa-check"></i><b>A.1</b> Reporting</a></li>
+<li class="chapter" data-level="A.2" data-path="jslmath-class.html"><a href="jslmath-class.html"><i class="fa fa-check"></i><b>A.2</b> <code>JSLMath</code> Class</a></li>
+<li class="chapter" data-level="A.3" data-path="the-jsl-database.html"><a href="the-jsl-database.html"><i class="fa fa-check"></i><b>A.3</b> The JSL Database</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="the-jsl-database.html"><a href="the-jsl-database.html#the-jsl-database-structure"><i class="fa fa-check"></i><b>A.3.1</b> The JSL Database Structure</a></li>
+<li class="chapter" data-level="A.3.2" data-path="the-jsl-database.html"><a href="the-jsl-database.html#creating-and-using-a-default-jsl-database"><i class="fa fa-check"></i><b>A.3.2</b> Creating and Using a Default JSL Database</a></li>
+<li class="chapter" data-level="A.3.3" data-path="the-jsl-database.html"><a href="the-jsl-database.html#creating-and-using-jsl-databases"><i class="fa fa-check"></i><b>A.3.3</b> Creating and Using JSL Databases</a></li>
+<li class="chapter" data-level="A.3.4" data-path="the-jsl-database.html"><a href="the-jsl-database.html#querying-the-jsl-database"><i class="fa fa-check"></i><b>A.3.4</b> Querying the JSL Database</a></li>
+<li class="chapter" data-level="A.3.5" data-path="the-jsl-database.html"><a href="the-jsl-database.html#additional-functionality"><i class="fa fa-check"></i><b>A.3.5</b> Additional Functionality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="app-rnrv.html"><a href="app-rnrv.html"><i class="fa fa-check"></i><b>B</b> Generating Pseudo-Random Numbers and Random Variates</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="app-rnrv-rn.html"><a href="app-rnrv-rn.html"><i class="fa fa-check"></i><b>B.1</b> Pseudo Random Numbers</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="app-rnrv-rn.html"><a href="app-rnrv-rn.html#app:rnrv:rngs"><i class="fa fa-check"></i><b>B.1.1</b> Random Number Generators</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html"><i class="fa fa-check"></i><b>B.2</b> Generating Random Variates from Distributions</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#inverse-transform-method"><i class="fa fa-check"></i><b>B.2.1</b> Inverse Transform Method</a></li>
+<li class="chapter" data-level="B.2.2" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#convolution"><i class="fa fa-check"></i><b>B.2.2</b> Convolution</a></li>
+<li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
+<li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="app-idm-sec-rvPD.html"><a href="app-idm-sec-rvPD.html"><i class="fa fa-check"></i><b>C.1</b> Random Variables and Probability Distributions</a></li>
+<li class="chapter" data-level="C.2" data-path="app-idm-sec-MDD.html"><a href="app-idm-sec-MDD.html"><i class="fa fa-check"></i><b>C.2</b> Modeling with Discrete Distributions</a></li>
+<li class="chapter" data-level="C.3" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html"><i class="fa fa-check"></i><b>C.3</b> Fitting Discrete Distributions</a>
+<ul>
+<li class="chapter" data-level="C.3.1" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#AppDisFit:PoissonFit"><i class="fa fa-check"></i><b>C.3.1</b> Fitting a Poisson Distribution</a></li>
+<li class="chapter" data-level="C.3.2" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#visualizing-the-data"><i class="fa fa-check"></i><b>C.3.2</b> Visualizing the Data</a></li>
+<li class="chapter" data-level="C.3.3" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#estimating-the-rate-parameter-for-the-poisson-distribution"><i class="fa fa-check"></i><b>C.3.3</b> Estimating the Rate Parameter for the Poisson Distribution</a></li>
+<li class="chapter" data-level="C.3.4" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#chi-squared-goodness-of-fit-test-for-poisson-distribution"><i class="fa fa-check"></i><b>C.3.4</b> Chi-Squared Goodness of Fit Test for Poisson Distribution</a></li>
+<li class="chapter" data-level="C.3.5" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#subsub:chisqGOF"><i class="fa fa-check"></i><b>C.3.5</b> Chi-Squared Goodness of Fit Test</a></li>
+<li class="chapter" data-level="C.3.6" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#using-the-fitdistrplus-r-package-on-discrete-data"><i class="fa fa-check"></i><b>C.3.6</b> Using the fitdistrplus R Package on Discrete Data</a></li>
+<li class="chapter" data-level="C.3.7" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#fitting-a-discrete-empirical-distribution"><i class="fa fa-check"></i><b>C.3.7</b> Fitting a Discrete Empirical Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="C.4" data-path="app-idm-sec-MCD.html"><a href="app-idm-sec-MCD.html"><i class="fa fa-check"></i><b>C.4</b> Modeling with Continuous Distributions</a></li>
+<li class="chapter" data-level="C.5" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html"><i class="fa fa-check"></i><b>C.5</b> Fitting Continuous Distributions</a>
+<ul>
+<li class="chapter" data-level="C.5.1" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:visualizedata"><i class="fa fa-check"></i><b>C.5.1</b> Visualizing the Data</a></li>
+<li class="chapter" data-level="C.5.2" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:statsdata"><i class="fa fa-check"></i><b>C.5.2</b> Statistically Summarize the Data</a></li>
+<li class="chapter" data-level="C.5.3" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:hypothDist"><i class="fa fa-check"></i><b>C.5.3</b> Hypothesizing and Testing a Distribution</a></li>
+<li class="chapter" data-level="C.5.4" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>C.5.4</b> Kolmogorov-Smirnov Test</a></li>
+<li class="chapter" data-level="C.5.5" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:visFit"><i class="fa fa-check"></i><b>C.5.5</b> Visualizing the Fit</a></li>
+<li class="chapter" data-level="C.5.6" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idms2sb3"><i class="fa fa-check"></i><b>C.5.6</b> Using the Input Analyzer</a></li>
+</ul></li>
+<li class="chapter" data-level="C.6" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html"><i class="fa fa-check"></i><b>C.6</b> Testing Uniform (0,1) Pseudo-Random Numbers</a>
+<ul>
+<li class="chapter" data-level="C.6.1" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#chi-squared-goodness-of-fit-tests-for-pseudo-random-numbers"><i class="fa fa-check"></i><b>C.6.1</b> Chi-Squared Goodness of Fit Tests for Pseudo-Random Numbers</a></li>
+<li class="chapter" data-level="C.6.2" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#higher-dimensional-chi-squared-test"><i class="fa fa-check"></i><b>C.6.2</b> Higher Dimensional Chi-Squared Test</a></li>
+<li class="chapter" data-level="C.6.3" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#kolmogorov-smirnov-test-for-pseudo-random-numbers"><i class="fa fa-check"></i><b>C.6.3</b> Kolmogorov-Smirnov Test for Pseudo-Random Numbers</a></li>
+<li class="chapter" data-level="C.6.4" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#testing-for-independence-and-patterns-in-pseudo-random-numbers"><i class="fa fa-check"></i><b>C.6.4</b> Testing for Independence and Patterns in Pseudo-Random Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="C.7" data-path="app-distfit-idms2sb4.html"><a href="app-distfit-idms2sb4.html"><i class="fa fa-check"></i><b>C.7</b> Additional Distribution Modeling Concepts</a></li>
+<li class="chapter" data-level="C.8" data-path="app-idmSummary.html"><a href="app-idmSummary.html"><i class="fa fa-check"></i><b>C.8</b> Summary</a></li>
+<li class="chapter" data-level="C.9" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>C.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="app-qtAndInvT.html"><a href="app-qtAndInvT.html"><i class="fa fa-check"></i><b>D</b> Queueing Theory</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="app-qts1.html"><a href="app-qts1.html"><i class="fa fa-check"></i><b>D.1</b> Single Line Queueing Stations</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="app-qts1.html"><a href="app-qts1.html#queueing-notation"><i class="fa fa-check"></i><b>D.1.1</b> Queueing Notation</a></li>
+<li class="chapter" data-level="D.1.2" data-path="app-qts1.html"><a href="app-qts1.html#littles-formula"><i class="fa fa-check"></i><b>D.1.2</b> Little’s Formula</a></li>
+<li class="chapter" data-level="D.1.3" data-path="app-qts1.html"><a href="app-qts1.html#app:qts1sb1"><i class="fa fa-check"></i><b>D.1.3</b> Deriving Formulas for Markovian Single Queue Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="app-qts1sb2.html"><a href="app-qts1sb2.html"><i class="fa fa-check"></i><b>D.2</b> Examples and Applications of Queueing Analysis</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="app-qts1sb2.html"><a href="app-qts1sb2.html#infinite-queue-examples"><i class="fa fa-check"></i><b>D.2.1</b> Infinite Queue Examples</a></li>
+<li class="chapter" data-level="D.2.2" data-path="app-qts1sb2.html"><a href="app-qts1sb2.html#finite-queue-examples"><i class="fa fa-check"></i><b>D.2.2</b> Finite Queue Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="app-qts1sb3.html"><a href="app-qts1sb3.html"><i class="fa fa-check"></i><b>D.3</b> Non-Markovian Queues and Approximations</a></li>
+<li class="chapter" data-level="D.4" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html"><i class="fa fa-check"></i><b>D.4</b> Summary of Queueing Formulas</a>
+<ul>
+<li class="chapter" data-level="D.4.1" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mm1-queue"><i class="fa fa-check"></i><b>D.4.1</b> M/M/1 Queue</a></li>
+<li class="chapter" data-level="D.4.2" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmc-queue"><i class="fa fa-check"></i><b>D.4.2</b> M/M/c Queue</a></li>
+<li class="chapter" data-level="D.4.3" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmck-queue"><i class="fa fa-check"></i><b>D.4.3</b> M/M/c/k Queue</a></li>
+<li class="chapter" data-level="D.4.4" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mgcc-queue"><i class="fa fa-check"></i><b>D.4.4</b> M/G/c/c Queue</a></li>
+<li class="chapter" data-level="D.4.5" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mm1k-queue"><i class="fa fa-check"></i><b>D.4.5</b> M/M/1/k Queue</a></li>
+<li class="chapter" data-level="D.4.6" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmck-queue-1"><i class="fa fa-check"></i><b>D.4.6</b> M/M/c/k Queue</a></li>
+<li class="chapter" data-level="D.4.7" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mm1kk-queue"><i class="fa fa-check"></i><b>D.4.7</b> M/M/1/k/k Queue</a></li>
+<li class="chapter" data-level="D.4.8" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmckk-queue"><i class="fa fa-check"></i><b>D.4.8</b> M/M/c/k/k Queue</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>D.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>E</b> Distributions</a>
+<ul>
+<li class="chapter" data-level="E.1" data-path="app-DiscreteDistributions.html"><a href="app-DiscreteDistributions.html"><i class="fa fa-check"></i><b>E.1</b> Discrete Distrbutions</a></li>
+<li class="chapter" data-level="E.2" data-path="app-ContinuousDistributions.html"><a href="app-ContinuousDistributions.html"><i class="fa fa-check"></i><b>E.2</b> Continuous Distrbutions</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="app-StatTables.html"><a href="app-StatTables.html"><i class="fa fa-check"></i><b>F</b> Statistical Tables</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">JSL - Java Simulation Library</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="histograms-and-frequencies" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Histograms and Frequencies</h2>
+<p>A histogram tabulates counts and frequencies of observed data over a set of contiguous intervals. Let <span class="math inline">\(b_{0}, b_{1}, \cdots, b_{k}\)</span> be the breakpoints (end points) of the class intervals such that <span class="math inline">\(\left(b_{0}, b_{1} \right], \left(b_{1}, b_{2} \right], \cdots, \left(b_{k-1}, b_{k} \right]\)</span> form <span class="math inline">\(k\)</span> disjoint and adjacent intervals. The intervals do not have to be of equal width. Also, <span class="math inline">\(b_{0}\)</span> can be equal to <span class="math inline">\(-\infty\)</span> resulting in interval <span class="math inline">\(\left(-\infty, b_{1} \right]\)</span> and <span class="math inline">\(b_{k}\)</span> can be equal to <span class="math inline">\(+\infty\)</span> resulting in interval <span class="math inline">\(\left(b_{k-1}, +\infty \right)\)</span>. Define <span class="math inline">\(\Delta b_j = b_{j} - b_{j-1}\)</span> and if all the intervals have the same width (except perhaps for the end intervals), <span class="math inline">\(\Delta b = \Delta b_j\)</span>. To count the number of observations that fall in each interval, we can use the count function:
+<span class="math display">\[
+c(\vec{x}\leq b) = \#\lbrace x_i \leq b \rbrace \; i=1,\ldots,n
+\]</span>
+<span class="math inline">\(c(\vec{x}\leq b)\)</span> counts the number of observations less than or equal to <span class="math inline">\(x\)</span>. Let <span class="math inline">\(c_{j}\)</span> be the observed count of the <span class="math inline">\(x\)</span> values contained in the <span class="math inline">\(j^{th}\)</span> interval <span class="math inline">\(\left(b_{j-1}, b_{j} \right]\)</span>. Then, we can determine <span class="math inline">\(c_{j}\)</span> via the following equation:
+<span class="math display">\[
+c_{j} = c(\vec{x}\leq b_{j}) - c(\vec{x}\leq b_{j-1})
+\]</span>
+The key parameters of a histogram are:</p>
+<ul>
+<li>The first bin lower limit (<span class="math inline">\(b_{0}\)</span>): This is the starting point of the range over which the data will be tabulated.</li>
+<li>The number of bins (<span class="math inline">\(k\)</span>))</li>
+<li>The width of the bins, (<span class="math inline">\(\Delta b\)</span>)</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:Histogram"></span>
+<img src="figures/Histogram.png" alt="Histogram Class" width="60%" height="60%" />
+<p class="caption">
+Figure 4.4: Histogram Class
+</p>
+</div>
+<p>Figure <a href="histograms-and-frequencies.html#fig:Histogram">4.4</a> presents the methods of the <code>Histogram</code> class. The <code>Histogram</code> class is utilized in a very similar manner as the <code>Statistic</code> class by collecting observations. The observations are then tabulated into the bins. The <code>Histogram</code> class allows the user to tabulate the bin contents via the collect() methods inherited from the <code>AbstractStatistic</code> base class. Since data may fall below the first bin and after the last bin, the implementation also provides counts for those occurrences. Since a <code>Histogram</code> is a sub-class of <code>AbstractStatistic</code>, it also implements the <code>StatisticAccessorIfc</code> to provide summary statistics on the data tabulated within the bins. The <code>Histogram</code> class also provides static methods to create histograms based on a range (lower limit to upper limit) with a given number of bins. In this case, an appropriate bin width is computed.</p>
+<p>In some cases, the client may not know in advance the appropriate settings for the number of bins or the width of the bins. In this situation, one can use the <code>CachedHistogram</code> class, which first collects the data in a temporary cache array. Once the cache has been filled up, the <code>CachedHistogram</code> computes a reasonable lower limit, number of bins, and bin width based on the statistics collected over the cache. The underlying histogram is available via the getHistogram() method after the cache has been used.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb31-1"><a href="histograms-and-frequencies.html#cb31-1" aria-hidden="true" tabindex="-1"></a>ExponentialRV d <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb31-2"><a href="histograms-and-frequencies.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">// create a histogram with lower limit 0.0, 20 bins, of width 0.1</span></span>
+<span id="cb31-3"><a href="histograms-and-frequencies.html#cb31-3" aria-hidden="true" tabindex="-1"></a>Histogram h <span class="op">=</span> <span class="kw">new</span> <span class="fu">Histogram</span><span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="fl">0.1</span><span class="op">);</span></span>
+<span id="cb31-4"><a href="histograms-and-frequencies.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">100</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb31-5"><a href="histograms-and-frequencies.html#cb31-5" aria-hidden="true" tabindex="-1"></a>    h<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>d<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb31-6"><a href="histograms-and-frequencies.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb31-7"><a href="histograms-and-frequencies.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>h<span class="op">);</span></span></code></pre></div>
+<pre><code>Histogram: Histogram
+-------------------------------------
+Number of bins = 20
+Bin width = 0.1
+First bin starts at = 0.0
+Last bin ends at = 2.0
+Under flow count = 0.0
+Over flow count = 45.0
+Total bin count = 55.0
+Total count = 100.0
+-------------------------------------
+Bin Range        Count Total Prob  CumProb
+  1 [0.00,0.10)   2.0   2.0 0.036364 0.036364 
+  2 [0.10,0.20)   5.0   7.0 0.090909 0.127273 
+  3 [0.20,0.30)   5.0  12.0 0.090909 0.218182 
+  4 [0.30,0.40)   2.0  14.0 0.036364 0.254545 
+  5 [0.40,0.50)   7.0  21.0 0.127273 0.381818 
+  6 [0.50,0.60)   3.0  24.0 0.054545 0.436364 
+  7 [0.60,0.70)   3.0  27.0 0.054545 0.490909 
+  8 [0.70,0.80)   3.0  30.0 0.054545 0.545455 
+  9 [0.80,0.90)   2.0  32.0 0.036364 0.581818 
+ 10 [0.90,1.00)   2.0  34.0 0.036364 0.618182 
+ 11 [1.00,1.10)   5.0  39.0 0.090909 0.709091 
+ 12 [1.10,1.20)   6.0  45.0 0.109091 0.818182 
+ 13 [1.20,1.30)   2.0  47.0 0.036364 0.854545 
+ 14 [1.30,1.40)   2.0  49.0 0.036364 0.890909 
+ 15 [1.40,1.50)   3.0  52.0 0.054545 0.945455 
+ 16 [1.50,1.60)   1.0  53.0 0.018182 0.963636 
+ 17 [1.60,1.70)   1.0  54.0 0.018182 0.981818 
+ 18 [1.70,1.80)   1.0  55.0 0.018182 1.000000 
+ 19 [1.80,1.90)   0.0  55.0 0.000000 1.000000 
+ 20 [1.90,2.00)   0.0  55.0 0.000000 1.000000 </code></pre>
+<p>The JSL will also tabulate count frequencies when the values are only integers. This is accomplished with the <code>IntegerFrequency</code> class. Figure <a href="histograms-and-frequencies.html#fig:Frequency">4.5</a> indicates the methods of the <code>IntegerFrequency</code> class. The object can return information on the counts and proportions. It can even create a <code>DEmpiricalCDF</code> distribution based on the observed data.</p>
+<div class="figure"><span id="fig:Frequency"></span>
+<img src="figures/Frequency.png" alt="IntegerFrequence Class"  />
+<p class="caption">
+Figure 4.5: IntegerFrequence Class
+</p>
+</div>
+<p>In the following code example, an instance of the <code>IntegerFrequency</code> class is created. Then, an instance of a binomial random variable is used to generate a sample of 10,000 observations. The sample is then collected by the <code>IntegerFrequency</code> class’s <code>collect()</code> method.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb33-1"><a href="histograms-and-frequencies.html#cb33-1" aria-hidden="true" tabindex="-1"></a>IntegerFrequency f <span class="op">=</span> <span class="kw">new</span> <span class="fu">IntegerFrequency</span><span class="op">(</span><span class="st">&quot;Frequency Demo&quot;</span><span class="op">);</span></span>
+<span id="cb33-2"><a href="histograms-and-frequencies.html#cb33-2" aria-hidden="true" tabindex="-1"></a>BinomialRV bn <span class="op">=</span> <span class="kw">new</span> <span class="fu">BinomialRV</span><span class="op">(</span><span class="fl">0.5</span><span class="op">,</span> <span class="dv">100</span><span class="op">);</span></span>
+<span id="cb33-3"><a href="histograms-and-frequencies.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">[]</span> sample <span class="op">=</span> bn<span class="op">.</span><span class="fu">sample</span><span class="op">(</span><span class="dv">10000</span><span class="op">);</span></span>
+<span id="cb33-4"><a href="histograms-and-frequencies.html#cb33-4" aria-hidden="true" tabindex="-1"></a>f<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>sample<span class="op">);</span></span>
+<span id="cb33-5"><a href="histograms-and-frequencies.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>f<span class="op">);</span></span></code></pre></div>
+<p>As can be noted in the output, only those integers that are actually observed are tabulated in terms of the count of the number of times the integer is observed and its proportion. The user does not have to specify the range of possible integers; however, instances of <code>IntegerFrequency</code> can be created that specify a lower and upper limit on the tabulated values. The overflow and underflow counts then tabulate when observations fall outside of the specified range.</p>
+<pre><code>Frequency Tabulation Frequency Demo
+----------------------------------------
+Number of cells = 39
+Lower limit = -2147483648
+Upper limit = 2147483647
+Under flow count = 0
+Over flow count = 0
+Total count = 10000
+----------------------------------------
+Value    Count   Proportion
+31   1   1.0E-4
+33   4   4.0E-4
+34   5   5.0E-4
+35   9   9.0E-4
+36   17      0.0017
+37   28      0.0028
+38   41      0.0041
+39   74      0.0074
+40   100     0.01
+41   192     0.0192
+42   236     0.0236
+43   277     0.0277
+44   406     0.0406
+45   453     0.0453
+46   564     0.0564
+47   653     0.0653
+48   741     0.0741
+49   762     0.0762
+50   750     0.075
+51   768     0.0768
+52   783     0.0783
+53   679     0.0679
+54   600     0.06
+55   484     0.0484
+56   407     0.0407
+57   324     0.0324
+58   210     0.021
+59   155     0.0155
+60   108     0.0108
+61   74      0.0074
+62   41      0.0041
+63   15      0.0015
+64   15      0.0015
+65   17      0.0017
+66   3   3.0E-4
+67   1   1.0E-4
+69   1   1.0E-4
+70   1   1.0E-4
+71   1   1.0E-4
+----------------------------------------</code></pre>
+<p>Finally, the JSL provides the ability to define labeled states and to tabulate frequencies and proportions related to the visitation and transition between the states. This functionality is available in the <code>StateFrequency</code> class. The following code example creates an instance of <code>StateFrequency</code> by providing the number of states. The states are returned in a <code>List</code> and then 10,000 states are randomly selected from the list with equal probability using the <code>JSLRandom</code> functionality to randomly select from lists. The randomly selected state is then observed via the <code>collect()</code> method.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb35-1"><a href="histograms-and-frequencies.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">// number of states is 6</span></span>
+<span id="cb35-2"><a href="histograms-and-frequencies.html#cb35-2" aria-hidden="true" tabindex="-1"></a>StateFrequency sf <span class="op">=</span> <span class="kw">new</span> <span class="fu">StateFrequency</span><span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
+<span id="cb35-3"><a href="histograms-and-frequencies.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="bu">List</span><span class="op">&lt;</span><span class="bu">State</span><span class="op">&gt;</span> states <span class="op">=</span> sf<span class="op">.</span><span class="fu">getStates</span><span class="op">();</span></span>
+<span id="cb35-4"><a href="histograms-and-frequencies.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;=</span><span class="dv">10000</span><span class="op">;</span>i<span class="op">++){</span></span>
+<span id="cb35-5"><a href="histograms-and-frequencies.html#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">State</span> state <span class="op">=</span> JSLRandom<span class="op">.</span><span class="fu">randomlySelect</span><span class="op">(</span>states<span class="op">);</span></span>
+<span id="cb35-6"><a href="histograms-and-frequencies.html#cb35-6" aria-hidden="true" tabindex="-1"></a>    sf<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>state<span class="op">);</span></span>
+<span id="cb35-7"><a href="histograms-and-frequencies.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb35-8"><a href="histograms-and-frequencies.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>sf<span class="op">);</span></span></code></pre></div>
+<p>The output is what you would expect based on selecting the states with equal probability. Notice that the <code>StateFrequency</code> class not only tabulates the visits to the states, similar to <code>IntegerFrequency</code>, it also counts and tabulates the transitions between states. These detailed tabulations are available via the various methods of the class. See the Java docs for further details.</p>
+<pre><code>State Frequency Tabulation for: Identity#1
+State Labels
+State{id=1, number=0, name=&#39;State:0&#39;}
+State{id=2, number=1, name=&#39;State:1&#39;}
+State{id=3, number=2, name=&#39;State:2&#39;}
+State{id=4, number=3, name=&#39;State:3&#39;}
+State{id=5, number=4, name=&#39;State:4&#39;}
+State{id=6, number=5, name=&#39;State:5&#39;}
+State transition counts
+[288, 272, 264, 282, 265, 286]
+[283, 278, 283, 286, 296, 266]
+[286, 298, 263, 264, 247, 282]
+[271, 263, 275, 279, 280, 294]
+[274, 305, 273, 281, 296, 268]
+[254, 277, 282, 270, 313, 255]
+State transition proportions
+[0.17380808690404345, 0.16415208207604104, 0.15932407966203982, 0.17018708509354255, 0.15992757996378998, 0.17260108630054316]
+[0.16725768321513002, 0.16430260047281323, 0.16725768321513002, 0.1690307328605201, 0.17494089834515367, 0.15721040189125296]
+[0.174390243902439, 0.18170731707317073, 0.1603658536585366, 0.16097560975609757, 0.15060975609756097, 0.1719512195121951]
+[0.16305655836341756, 0.1582430806257521, 0.1654632972322503, 0.16787003610108303, 0.1684717208182912, 0.17689530685920576]
+[0.1614614024749558, 0.17972893341190335, 0.16087212728344136, 0.16558632881555688, 0.17442545668827342, 0.15792575132586917]
+[0.15384615384615385, 0.16777710478497881, 0.17080557238037553, 0.16353725015142337, 0.18958207147183526, 0.15445184736523318]
+
+Frequency Tabulation Identity#1
+----------------------------------------
+Number of cells = 6
+Lower limit = 0
+Upper limit = 5
+Under flow count = 0
+Over flow count = 0
+Total count = 10000
+----------------------------------------
+Value    Count   Proportion
+0    1657    0.1657
+1    1693    0.1693
+2    1640    0.164
+3    1662    0.1662
+4    1697    0.1697
+5    1651    0.1651
+----------------------------------------</code></pre>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="creating-and-using-a-statistic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="batch-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["JSLBook.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

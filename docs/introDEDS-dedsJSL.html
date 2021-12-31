@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.5 Modeling DEDS in the JSL | JSL - Java Simulation Library</title>
+  <meta name="description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.5 Modeling DEDS in the JSL | JSL - Java Simulation Library" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.5 Modeling DEDS in the JSL | JSL - Java Simulation Library" />
+  
+  <meta name="twitter:description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
+  
+
+<meta name="author" content="Manuel D. Rossetti" />
+
+
+<meta name="date" content="2021-12-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="simulating-a-queueing-system-by-hand.html"/>
+<link rel="next" href="introDEDS-Summary.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Simulation Modeling using the Java Simulation Library</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Simulation Modeling</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="simulation-modeling.html"><a href="simulation-modeling.html"><i class="fa fa-check"></i><b>1.1</b> Simulation Modeling</a></li>
+<li class="chapter" data-level="1.2" data-path="why-simulate.html"><a href="why-simulate.html"><i class="fa fa-check"></i><b>1.2</b> Why Simulate?</a></li>
+<li class="chapter" data-level="1.3" data-path="types-of-systems-and-simulation-models.html"><a href="types-of-systems-and-simulation-models.html"><i class="fa fa-check"></i><b>1.3</b> Types of Systems and Simulation Models</a></li>
+<li class="chapter" data-level="1.4" data-path="simulation-descriptive-or-prescriptive-modeling.html"><a href="simulation-descriptive-or-prescriptive-modeling.html"><i class="fa fa-check"></i><b>1.4</b> Simulation: Descriptive or Prescriptive Modeling?</a></li>
+<li class="chapter" data-level="1.5" data-path="randomness-in-simulation.html"><a href="randomness-in-simulation.html"><i class="fa fa-check"></i><b>1.5</b> Randomness in Simulation</a></li>
+<li class="chapter" data-level="1.6" data-path="simulation-languages.html"><a href="simulation-languages.html"><i class="fa fa-check"></i><b>1.6</b> Simulation Languages</a></li>
+<li class="chapter" data-level="1.7" data-path="ch1-sec-simMeth.html"><a href="ch1-sec-simMeth.html"><i class="fa fa-check"></i><b>1.7</b> Simulation Methodology</a></li>
+<li class="chapter" data-level="1.8" data-path="overview-of-the-java-simulation-library.html"><a href="overview-of-the-java-simulation-library.html"><i class="fa fa-check"></i><b>1.8</b> Overview of the Java Simulation Library</a></li>
+<li class="chapter" data-level="1.9" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch2-rng.html"><a href="ch2-rng.html"><i class="fa fa-check"></i><b>2</b> Random Number Generation</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch2-generator.html"><a href="ch2-generator.html"><i class="fa fa-check"></i><b>2.1</b> Random Number Generator</a></li>
+<li class="chapter" data-level="2.2" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html"><i class="fa fa-check"></i><b>2.2</b> Random Package</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html#ch2:creatingStreams"><i class="fa fa-check"></i><b>2.2.1</b> Creating and Using Streams</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html#ch2:crn"><i class="fa fa-check"></i><b>2.2.2</b> Common Random Numbers</a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch2-randompkg.html"><a href="ch2-randompkg.html#ch2:antitheticStreams"><i class="fa fa-check"></i><b>2.2.3</b> Creating and Using Antithetic Streams</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch2-FAQ.html"><a href="ch2-FAQ.html"><i class="fa fa-check"></i><b>2.3</b> Frequently Asked Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="random-variate-generation-and-probability-modeling.html"><a href="random-variate-generation-and-probability-modeling.html"><i class="fa fa-check"></i><b>3</b> Random Variate Generation and Probability Modeling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="continuous-and-discrete-random-variables.html"><a href="continuous-and-discrete-random-variables.html"><i class="fa fa-check"></i><b>3.1</b> Continuous and Discrete Random Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="overview-of-generation-algorithms.html"><a href="overview-of-generation-algorithms.html"><i class="fa fa-check"></i><b>3.2</b> Overview of Generation Algorithms</a></li>
+<li class="chapter" data-level="3.3" data-path="creating-and-using-random-variables.html"><a href="creating-and-using-random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Creating and Using Random Variables</a></li>
+<li class="chapter" data-level="3.4" data-path="modeling-probability-distributions.html"><a href="modeling-probability-distributions.html"><i class="fa fa-check"></i><b>3.4</b> Modeling Probability Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>4</b> Collecting Statistics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="creating-and-using-a-statistic.html"><a href="creating-and-using-a-statistic.html"><i class="fa fa-check"></i><b>4.1</b> Creating and Using a Statistic</a></li>
+<li class="chapter" data-level="4.2" data-path="histograms-and-frequencies.html"><a href="histograms-and-frequencies.html"><i class="fa fa-check"></i><b>4.2</b> Histograms and Frequencies</a></li>
+<li class="chapter" data-level="4.3" data-path="batch-statistics.html"><a href="batch-statistics.html"><i class="fa fa-check"></i><b>4.3</b> Batch Statistics</a></li>
+<li class="chapter" data-level="4.4" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
+<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introDEDS-Intro.html"><a href="introDEDS-Intro.html"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="introDEDS-deds.html"><a href="introDEDS-deds.html"><i class="fa fa-check"></i><b>6.2</b> Discrete-Event Dynamic Systems</a></li>
+<li class="chapter" data-level="6.3" data-path="HowDEDSClockWorks.html"><a href="HowDEDSClockWorks.html"><i class="fa fa-check"></i><b>6.3</b> How the Discrete-Event Clock Works</a></li>
+<li class="chapter" data-level="6.4" data-path="simulating-a-queueing-system-by-hand.html"><a href="simulating-a-queueing-system-by-hand.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
+<li class="chapter" data-level="6.5" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html"><i class="fa fa-check"></i><b>6.5</b> Modeling DEDS in the JSL</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#event-scheduling"><i class="fa fa-check"></i><b>6.5.1</b> Event Scheduling</a></li>
+<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#simple-event-scheduling-examples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
+<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#up-and-down-component-example"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
+<li class="chapter" data-level="6.5.4" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:pharmacy"><i class="fa fa-check"></i><b>6.5.4</b> Modeling a Simple Queueing System</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="introDEDS-Summary.html"><a href="introDEDS-Summary.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dem.html"><a href="dem.html"><i class="fa fa-check"></i><b>7</b> Modeling with Queues, Resources, and Stations</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="terminology-of-simulation-modeling.html"><a href="terminology-of-simulation-modeling.html"><i class="fa fa-check"></i><b>7.1</b> Terminology of Simulation Modeling</a></li>
+<li class="chapter" data-level="7.2" data-path="dem-entities.html"><a href="dem-entities.html"><i class="fa fa-check"></i><b>7.2</b> Entities and Attributes</a></li>
+<li class="chapter" data-level="7.3" data-path="dem-eg.html"><a href="dem-eg.html"><i class="fa fa-check"></i><b>7.3</b> Event Generators</a></li>
+<li class="chapter" data-level="7.4" data-path="dem-station.html"><a href="dem-station.html"><i class="fa fa-check"></i><b>7.4</b> The Station Package</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="dem-station.html"><a href="dem-station.html#modeling-simple-queueing-stations"><i class="fa fa-check"></i><b>7.4.1</b> Modeling Simple Queueing Stations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="dem-sharedResources.html"><a href="dem-sharedResources.html"><i class="fa fa-check"></i><b>7.5</b> Sharing a Resource</a></li>
+<li class="chapter" data-level="7.6" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html"><i class="fa fa-check"></i><b>7.6</b> Complex System Example</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html#dem:tiedyeShirts:cm"><i class="fa fa-check"></i><b>7.6.1</b> Conceptualizing the Model</a></li>
+<li class="chapter" data-level="7.6.2" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html#dem:tiedyeShirts:im"><i class="fa fa-check"></i><b>7.6.2</b> Implementing the Model</a></li>
+<li class="chapter" data-level="7.6.3" data-path="dem-tiedyeShirts.html"><a href="dem-tiedyeShirts.html#dem:tiedyeShirts:results"><i class="fa fa-check"></i><b>7.6.3</b> Model Results</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="dem-summary.html"><a href="dem-summary.html"><i class="fa fa-check"></i><b>7.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simoa.html"><a href="simoa.html"><i class="fa fa-check"></i><b>8</b> Analyzing Simulation Output</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="simoa-datatypes.html"><a href="simoa-datatypes.html"><i class="fa fa-check"></i><b>8.1</b> Types of Statistical Variables</a></li>
+<li class="chapter" data-level="8.2" data-path="simoa-simtypes.html"><a href="simoa-simtypes.html"><i class="fa fa-check"></i><b>8.2</b> Types of Simulation With Respect To Output Analysis</a></li>
+<li class="chapter" data-level="8.3" data-path="simoa-finhorizon.html"><a href="simoa-finhorizon.html"><i class="fa fa-check"></i><b>8.3</b> Analysis of Finite Horizon Simulations</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="simoa-finhorizon.html"><a href="simoa-finhorizon.html#simoa:finhorizon:samplesize"><i class="fa fa-check"></i><b>8.3.1</b> Determining the Number of Replications</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="simoa-finhorizonex.html"><a href="simoa-finhorizonex.html"><i class="fa fa-check"></i><b>8.4</b> Finite Horizon Example</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="simoa-finhorizonex.html"><a href="simoa-finhorizonex.html#conceptualizing-the-model"><i class="fa fa-check"></i><b>8.4.1</b> Conceptualizing the Model</a></li>
+<li class="chapter" data-level="8.4.2" data-path="simoa-finhorizonex.html"><a href="simoa-finhorizonex.html#simoa:seqsampling"><i class="fa fa-check"></i><b>8.4.2</b> Sequential Sampling for Finite Horizon Simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html"><i class="fa fa-check"></i><b>8.5</b> Analysis of Infinite Horizon Simulations</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:initialbias"><i class="fa fa-check"></i><b>8.5.1</b> Assessing the Effect of Initial Conditions</a></li>
+<li class="chapter" data-level="8.5.2" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:repDeletion"><i class="fa fa-check"></i><b>8.5.2</b> Performing the Method of Replication-Deletion</a></li>
+<li class="chapter" data-level="8.5.3" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:batchmeans"><i class="fa fa-check"></i><b>8.5.3</b> The Method of Batch Means</a></li>
+<li class="chapter" data-level="8.5.4" data-path="simoa-infhorizon.html"><a href="simoa-infhorizon.html#simoa:infhorizon:jslbatching"><i class="fa fa-check"></i><b>8.5.4</b> Performing the Method of Batch Means</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="simoa-comparingSystems.html"><a href="simoa-comparingSystems.html"><i class="fa fa-check"></i><b>8.6</b> Comparing System Configurations</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="simoa-comparingSystems.html"><a href="simoa-comparingSystems.html#simoa:comparingSystems:two"><i class="fa fa-check"></i><b>8.6.1</b> Comparing Two Systems</a></li>
+<li class="chapter" data-level="8.6.2" data-path="simoa-comparingSystems.html"><a href="simoa-comparingSystems.html#simoa:comparingSystems:MCB"><i class="fa fa-check"></i><b>8.6.2</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="simoa-summary.html"><a href="simoa-summary.html"><i class="fa fa-check"></i><b>8.7</b> Summary</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="miscellaneous-utility-classes.html"><a href="miscellaneous-utility-classes.html"><i class="fa fa-check"></i><b>A</b> Miscellaneous Utility Classes</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="reporting.html"><a href="reporting.html"><i class="fa fa-check"></i><b>A.1</b> Reporting</a></li>
+<li class="chapter" data-level="A.2" data-path="jslmath-class.html"><a href="jslmath-class.html"><i class="fa fa-check"></i><b>A.2</b> <code>JSLMath</code> Class</a></li>
+<li class="chapter" data-level="A.3" data-path="the-jsl-database.html"><a href="the-jsl-database.html"><i class="fa fa-check"></i><b>A.3</b> The JSL Database</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="the-jsl-database.html"><a href="the-jsl-database.html#the-jsl-database-structure"><i class="fa fa-check"></i><b>A.3.1</b> The JSL Database Structure</a></li>
+<li class="chapter" data-level="A.3.2" data-path="the-jsl-database.html"><a href="the-jsl-database.html#creating-and-using-a-default-jsl-database"><i class="fa fa-check"></i><b>A.3.2</b> Creating and Using a Default JSL Database</a></li>
+<li class="chapter" data-level="A.3.3" data-path="the-jsl-database.html"><a href="the-jsl-database.html#creating-and-using-jsl-databases"><i class="fa fa-check"></i><b>A.3.3</b> Creating and Using JSL Databases</a></li>
+<li class="chapter" data-level="A.3.4" data-path="the-jsl-database.html"><a href="the-jsl-database.html#querying-the-jsl-database"><i class="fa fa-check"></i><b>A.3.4</b> Querying the JSL Database</a></li>
+<li class="chapter" data-level="A.3.5" data-path="the-jsl-database.html"><a href="the-jsl-database.html#additional-functionality"><i class="fa fa-check"></i><b>A.3.5</b> Additional Functionality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="app-rnrv.html"><a href="app-rnrv.html"><i class="fa fa-check"></i><b>B</b> Generating Pseudo-Random Numbers and Random Variates</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="app-rnrv-rn.html"><a href="app-rnrv-rn.html"><i class="fa fa-check"></i><b>B.1</b> Pseudo Random Numbers</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="app-rnrv-rn.html"><a href="app-rnrv-rn.html#app:rnrv:rngs"><i class="fa fa-check"></i><b>B.1.1</b> Random Number Generators</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html"><i class="fa fa-check"></i><b>B.2</b> Generating Random Variates from Distributions</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#inverse-transform-method"><i class="fa fa-check"></i><b>B.2.1</b> Inverse Transform Method</a></li>
+<li class="chapter" data-level="B.2.2" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#convolution"><i class="fa fa-check"></i><b>B.2.2</b> Convolution</a></li>
+<li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
+<li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="app-idm-sec-rvPD.html"><a href="app-idm-sec-rvPD.html"><i class="fa fa-check"></i><b>C.1</b> Random Variables and Probability Distributions</a></li>
+<li class="chapter" data-level="C.2" data-path="app-idm-sec-MDD.html"><a href="app-idm-sec-MDD.html"><i class="fa fa-check"></i><b>C.2</b> Modeling with Discrete Distributions</a></li>
+<li class="chapter" data-level="C.3" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html"><i class="fa fa-check"></i><b>C.3</b> Fitting Discrete Distributions</a>
+<ul>
+<li class="chapter" data-level="C.3.1" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#AppDisFit:PoissonFit"><i class="fa fa-check"></i><b>C.3.1</b> Fitting a Poisson Distribution</a></li>
+<li class="chapter" data-level="C.3.2" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#visualizing-the-data"><i class="fa fa-check"></i><b>C.3.2</b> Visualizing the Data</a></li>
+<li class="chapter" data-level="C.3.3" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#estimating-the-rate-parameter-for-the-poisson-distribution"><i class="fa fa-check"></i><b>C.3.3</b> Estimating the Rate Parameter for the Poisson Distribution</a></li>
+<li class="chapter" data-level="C.3.4" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#chi-squared-goodness-of-fit-test-for-poisson-distribution"><i class="fa fa-check"></i><b>C.3.4</b> Chi-Squared Goodness of Fit Test for Poisson Distribution</a></li>
+<li class="chapter" data-level="C.3.5" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#subsub:chisqGOF"><i class="fa fa-check"></i><b>C.3.5</b> Chi-Squared Goodness of Fit Test</a></li>
+<li class="chapter" data-level="C.3.6" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#using-the-fitdistrplus-r-package-on-discrete-data"><i class="fa fa-check"></i><b>C.3.6</b> Using the fitdistrplus R Package on Discrete Data</a></li>
+<li class="chapter" data-level="C.3.7" data-path="app-idm-sec-fitDiscrete.html"><a href="app-idm-sec-fitDiscrete.html#fitting-a-discrete-empirical-distribution"><i class="fa fa-check"></i><b>C.3.7</b> Fitting a Discrete Empirical Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="C.4" data-path="app-idm-sec-MCD.html"><a href="app-idm-sec-MCD.html"><i class="fa fa-check"></i><b>C.4</b> Modeling with Continuous Distributions</a></li>
+<li class="chapter" data-level="C.5" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html"><i class="fa fa-check"></i><b>C.5</b> Fitting Continuous Distributions</a>
+<ul>
+<li class="chapter" data-level="C.5.1" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:visualizedata"><i class="fa fa-check"></i><b>C.5.1</b> Visualizing the Data</a></li>
+<li class="chapter" data-level="C.5.2" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:statsdata"><i class="fa fa-check"></i><b>C.5.2</b> Statistically Summarize the Data</a></li>
+<li class="chapter" data-level="C.5.3" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:hypothDist"><i class="fa fa-check"></i><b>C.5.3</b> Hypothesizing and Testing a Distribution</a></li>
+<li class="chapter" data-level="C.5.4" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>C.5.4</b> Kolmogorov-Smirnov Test</a></li>
+<li class="chapter" data-level="C.5.5" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idm:subsec:visFit"><i class="fa fa-check"></i><b>C.5.5</b> Visualizing the Fit</a></li>
+<li class="chapter" data-level="C.5.6" data-path="app-idm-sec-fitContinuous.html"><a href="app-idm-sec-fitContinuous.html#app:idms2sb3"><i class="fa fa-check"></i><b>C.5.6</b> Using the Input Analyzer</a></li>
+</ul></li>
+<li class="chapter" data-level="C.6" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html"><i class="fa fa-check"></i><b>C.6</b> Testing Uniform (0,1) Pseudo-Random Numbers</a>
+<ul>
+<li class="chapter" data-level="C.6.1" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#chi-squared-goodness-of-fit-tests-for-pseudo-random-numbers"><i class="fa fa-check"></i><b>C.6.1</b> Chi-Squared Goodness of Fit Tests for Pseudo-Random Numbers</a></li>
+<li class="chapter" data-level="C.6.2" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#higher-dimensional-chi-squared-test"><i class="fa fa-check"></i><b>C.6.2</b> Higher Dimensional Chi-Squared Test</a></li>
+<li class="chapter" data-level="C.6.3" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#kolmogorov-smirnov-test-for-pseudo-random-numbers"><i class="fa fa-check"></i><b>C.6.3</b> Kolmogorov-Smirnov Test for Pseudo-Random Numbers</a></li>
+<li class="chapter" data-level="C.6.4" data-path="app-distfit-testU01.html"><a href="app-distfit-testU01.html#testing-for-independence-and-patterns-in-pseudo-random-numbers"><i class="fa fa-check"></i><b>C.6.4</b> Testing for Independence and Patterns in Pseudo-Random Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="C.7" data-path="app-distfit-idms2sb4.html"><a href="app-distfit-idms2sb4.html"><i class="fa fa-check"></i><b>C.7</b> Additional Distribution Modeling Concepts</a></li>
+<li class="chapter" data-level="C.8" data-path="app-idmSummary.html"><a href="app-idmSummary.html"><i class="fa fa-check"></i><b>C.8</b> Summary</a></li>
+<li class="chapter" data-level="C.9" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>C.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="app-qtAndInvT.html"><a href="app-qtAndInvT.html"><i class="fa fa-check"></i><b>D</b> Queueing Theory</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="app-qts1.html"><a href="app-qts1.html"><i class="fa fa-check"></i><b>D.1</b> Single Line Queueing Stations</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="app-qts1.html"><a href="app-qts1.html#queueing-notation"><i class="fa fa-check"></i><b>D.1.1</b> Queueing Notation</a></li>
+<li class="chapter" data-level="D.1.2" data-path="app-qts1.html"><a href="app-qts1.html#littles-formula"><i class="fa fa-check"></i><b>D.1.2</b> Little’s Formula</a></li>
+<li class="chapter" data-level="D.1.3" data-path="app-qts1.html"><a href="app-qts1.html#app:qts1sb1"><i class="fa fa-check"></i><b>D.1.3</b> Deriving Formulas for Markovian Single Queue Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="app-qts1sb2.html"><a href="app-qts1sb2.html"><i class="fa fa-check"></i><b>D.2</b> Examples and Applications of Queueing Analysis</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="app-qts1sb2.html"><a href="app-qts1sb2.html#infinite-queue-examples"><i class="fa fa-check"></i><b>D.2.1</b> Infinite Queue Examples</a></li>
+<li class="chapter" data-level="D.2.2" data-path="app-qts1sb2.html"><a href="app-qts1sb2.html#finite-queue-examples"><i class="fa fa-check"></i><b>D.2.2</b> Finite Queue Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="app-qts1sb3.html"><a href="app-qts1sb3.html"><i class="fa fa-check"></i><b>D.3</b> Non-Markovian Queues and Approximations</a></li>
+<li class="chapter" data-level="D.4" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html"><i class="fa fa-check"></i><b>D.4</b> Summary of Queueing Formulas</a>
+<ul>
+<li class="chapter" data-level="D.4.1" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mm1-queue"><i class="fa fa-check"></i><b>D.4.1</b> M/M/1 Queue</a></li>
+<li class="chapter" data-level="D.4.2" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmc-queue"><i class="fa fa-check"></i><b>D.4.2</b> M/M/c Queue</a></li>
+<li class="chapter" data-level="D.4.3" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmck-queue"><i class="fa fa-check"></i><b>D.4.3</b> M/M/c/k Queue</a></li>
+<li class="chapter" data-level="D.4.4" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mgcc-queue"><i class="fa fa-check"></i><b>D.4.4</b> M/G/c/c Queue</a></li>
+<li class="chapter" data-level="D.4.5" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mm1k-queue"><i class="fa fa-check"></i><b>D.4.5</b> M/M/1/k Queue</a></li>
+<li class="chapter" data-level="D.4.6" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmck-queue-1"><i class="fa fa-check"></i><b>D.4.6</b> M/M/c/k Queue</a></li>
+<li class="chapter" data-level="D.4.7" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mm1kk-queue"><i class="fa fa-check"></i><b>D.4.7</b> M/M/1/k/k Queue</a></li>
+<li class="chapter" data-level="D.4.8" data-path="app-qt-sec-formulas.html"><a href="app-qt-sec-formulas.html#mmckk-queue"><i class="fa fa-check"></i><b>D.4.8</b> M/M/c/k/k Queue</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>D.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>E</b> Distributions</a>
+<ul>
+<li class="chapter" data-level="E.1" data-path="app-DiscreteDistributions.html"><a href="app-DiscreteDistributions.html"><i class="fa fa-check"></i><b>E.1</b> Discrete Distrbutions</a></li>
+<li class="chapter" data-level="E.2" data-path="app-ContinuousDistributions.html"><a href="app-ContinuousDistributions.html"><i class="fa fa-check"></i><b>E.2</b> Continuous Distrbutions</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="app-StatTables.html"><a href="app-StatTables.html"><i class="fa fa-check"></i><b>F</b> Statistical Tables</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">JSL - Java Simulation Library</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introDEDS:dedsJSL" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Modeling DEDS in the JSL</h2>
+<p>Discrete event modeling within the JSL is facilitated by two packages:
+1) the <code>jsl.simulation</code> package and 2) the <code>jsl.calendar</code> package. The <code>jsl.simulation</code>
+package has classes that implement behavior associated with simulation
+events and models. The <code>jsl.calendar</code> package has classes that facilitate the
+scheduling and processing of events.</p>
+<div id="event-scheduling" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Event Scheduling</h3>
+<p>The following classes within the <code>jsl.simulation</code> package work together to
+provide for the scheduling and execution of events:</p>
+<ul>
+<li><p><code>Simulation</code> - An instance of Simulation holds the model and
+facilitates the running of the simulation according to run
+parameters such as simulation run length and number of replications.</p></li>
+<li><p><code>Executive</code> - The Executive controls the execution of the events and
+works with the calendar package to ensure that events are executed
+and the appropriate model logic is called at the appropriate event
+time. This class is responsible for placing the events on a
+calendar, allowing events to be canceled, and executing the events
+in the correct order.</p></li>
+<li><p><code>JSLEvent</code> – This class represents a simulation event. The
+attributes of JSLEvent provide information about the name, time,
+priority, and type of the event. The user can also check whether or
+not the event is canceled or if it has been scheduled. In addition,
+a general attribute of type Object is associated with an event and
+can be used to pass information along with the event.</p></li>
+<li><p><code>ModelElement</code> – This class serves as a base class for all classes
+that are within a simulation model. It provides access to the
+scheduler and ensures that model elements participate in common
+simulation actions (e.g. warm up, initialization, etc.).</p></li>
+<li><p><code>Model</code> - An instance of a Model is required to serve as the parent
+to any model elements within a simulation model. It is the top-level
+container for model elements.</p></li>
+<li><p><code>SchedulingElement</code> – SchedulingElement is a sub-class of
+ModelElement and facilitates the scheduling of events within a
+simulation model. Classes that require significant event scheduling
+should sub-class from SchedulingElement.</p></li>
+</ul>
+<p>Figure <a href="introDEDS-dedsJSL.html#fig:jslModeling">6.5</a> illustrates the relationships between the
+classes <code>Model</code>, <code>ModelElement</code>, <code>SchedulingElement</code>, <code>Simulation</code>, and
+<code>Executive.</code> The <code>ModelElement</code> class represents the primary building block
+for JSL models. A <code>ModelElement</code> represents something (an element) that
+can be placed within an instance of a <code>Model</code>. The <code>Model</code> class subclasses
+<code>ModelElement</code>. Every <code>ModelElement</code> can contain many other instances of
+<code>ModelElement</code>. As such, an instance of a <code>Model</code> can also contain model
+elements. There can only be one instance of the <code>Model</code> class within the
+simulation. It acts as the parent (container) for all other model
+elements. Model elements in turn also hold other model elements.
+Instances arranged in this pattern form an object hierarchy that
+represents the simulation model. The instance of a Simulation holds
+(references) the instance of the <code>Model</code> class. <code>Simulation</code> also references
+the <code>Executive.</code> The instance of the <code>Executive</code> uses an instance of a class
+that implements the <code>CalendarIfc</code> interface. The simulation also
+references an instance of the <code>Experiment</code> class. The <code>Experiment</code> class
+allows the specification and control of the run parameters for the
+simulation. Every instance of a <code>ModelElement</code> must be a child of another
+<code>ModelElement</code> or the <code>Model</code>. This implies that instances of <code>ModelElement</code>
+have access to the main model, which has access to an instance of
+<code>Simulation</code> and thus the instance of the <code>Executive</code>. Therefore sub-classes
+of <code>ModelElement</code> have access to the <code>Executive</code> and can schedule events.</p>
+<div class="figure"><span id="fig:jslModeling"></span>
+<img src="figures/ch4/jslmodeling.png" alt="jsl.simulation Package and Relationships"  />
+<p class="caption">
+Figure 6.5: jsl.simulation Package and Relationships
+</p>
+</div>
+<p>The <code>SchedulingElement</code> class is a special kind of <code>ModelElement</code> that
+facilitates the scheduling of events. <code>SchedulingElement</code> is an abstract
+base class for building other classes that schedule events. Sub-classes
+of the <code>SchedulingElement</code> class will have a set of methods that
+facilitate the scheduling of events.</p>
+<div class="figure"><span id="fig:SchedulingElement"></span>
+<img src="figures/ch4/SchedulingElement.png" alt="SchedulingElement and its scheduling methods"  />
+<p class="caption">
+Figure 6.6: SchedulingElement and its scheduling methods
+</p>
+</div>
+<p>Figure <a href="introDEDS-dedsJSL.html#fig:SchedulingElement">6.6</a> illustrates the protected methods of
+the <code>SchedulingElement</code> class. Since these methods are protected,
+sub-classes will have them available through inheritance. There are two
+major types of scheduling methods: one for rescheduling already existing
+events and another for scheduling new events. The scheduling of new
+events results in the creation of a new <code>JSLEvent</code> and the placement of
+the event on the event calendar via the <code>Executive.</code></p>
+<p>The following code listing illustrates the key method for
+scheduling events within the class SchedulingElement. Notice that the instance of the <code>Executive</code> is called via <code>getExecutive()</code>. In addition, the user can supply information for the
+creation of an event such as its time, name, and priority. The user can
+also provide an instance of classes that implement the <code>EventActionIfc</code>
+interface. This interface promises to have an <code>action()</code> method. Within
+the <code>action()</code> method the user can provide the code that is necessary to
+represent the state changes associated with the event.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb45-1"><a href="introDEDS-dedsJSL.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span> Creates an event and schedules it onto the event calendar<span class="co">. </span> This is the main scheduling method that</span>
+<span id="cb45-2"><a href="introDEDS-dedsJSL.html#cb45-2" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> all other scheduling methods call<span class="co">.</span>  The other methods are just convenience methods for this method<span class="co">.</span></span>
+<span id="cb45-3"><a href="introDEDS-dedsJSL.html#cb45-3" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span></span>
+<span id="cb45-4"><a href="introDEDS-dedsJSL.html#cb45-4" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>param <span class="kw">&lt;T&gt;</span> the type associated with the attached message</span>
+<span id="cb45-5"><a href="introDEDS-dedsJSL.html#cb45-5" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>param action represents an ActionListener that will handle the change of state logic</span>
+<span id="cb45-6"><a href="introDEDS-dedsJSL.html#cb45-6" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>param time represents the inter<span class="co">-</span>event time<span class="co">,</span> i<span class="co">.</span>e<span class="co">.</span> the interval from the current time to when the</span>
+<span id="cb45-7"><a href="introDEDS-dedsJSL.html#cb45-7" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span>        event will need to occur</span>
+<span id="cb45-8"><a href="introDEDS-dedsJSL.html#cb45-8" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>param priority is used to influence the ordering of events</span>
+<span id="cb45-9"><a href="introDEDS-dedsJSL.html#cb45-9" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>param message is a generic Object that may represent data to be transmitted with the event</span>
+<span id="cb45-10"><a href="introDEDS-dedsJSL.html#cb45-10" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>param name the name of the event</span>
+<span id="cb45-11"><a href="introDEDS-dedsJSL.html#cb45-11" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">@</span>return a valid JSLEvent</span>
+<span id="cb45-12"><a href="introDEDS-dedsJSL.html#cb45-12" aria-hidden="true" tabindex="-1"></a> <span class="co">*/</span></span>
+<span id="cb45-13"><a href="introDEDS-dedsJSL.html#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="kw">protected</span> <span class="dt">final</span> <span class="op">&lt;</span>T<span class="op">&gt;</span> JSLEvent<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="fu">scheduleEvent</span><span class="op">(</span>EventActionIfc<span class="op">&lt;</span>T<span class="op">&gt;</span> action<span class="op">,</span> <span class="dt">double</span> time<span class="op">,</span> <span class="dt">int</span> priority<span class="op">,</span> T message<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb45-14"><a href="introDEDS-dedsJSL.html#cb45-14" aria-hidden="true" tabindex="-1"></a>    JSLEvent<span class="op">&lt;</span>T<span class="op">&gt;</span> event <span class="op">=</span> <span class="fu">getExecutive</span><span class="op">().</span><span class="fu">scheduleEvent</span><span class="op">(</span>action<span class="op">,</span> time<span class="op">,</span> priority<span class="op">,</span> message<span class="op">,</span> name<span class="op">,</span> <span class="kw">this</span><span class="op">);</span></span>
+<span id="cb45-15"><a href="introDEDS-dedsJSL.html#cb45-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>event<span class="op">);</span></span>
+<span id="cb45-16"><a href="introDEDS-dedsJSL.html#cb45-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>There are two ways that the user can
+provide event action code: 1) provide a class that implements the
+<code>EventActionIfc</code> interface and supply it when scheduling the event or 2)
+by treating the <code>EventActionIfc</code> as a functional interface and using Java 8’s functional method representation. Providing an inner class that implements the <code>EventActionIfc</code> interface will be illustrated here.</p>
+</div>
+<div id="simple-event-scheduling-examples" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Simple Event Scheduling Examples</h3>
+<p>This section presents two simple examples to illustrate event
+scheduling. The first example illustrates the scheduling of events using the <code>EventActionIfc</code> interface. The second example shows how to simulate a Poisson process and collect
+simple statistics.</p>
+<div id="implementing-event-actions-using-the-eventactionifc-interface" class="section level4" number="6.5.2.1">
+<h4><span class="header-section-number">6.5.2.1</span> Implementing Event Actions Using the EventActionIfc Interface</h4>
+<p>In the first example, there will be two events scheduled with actions.
+The time between the events will all be deterministic. The specifics of
+the events are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Event Action One: This event occurs only once at time 10.0 and schedules the Action Two event to occur 5.0 time units later. It also prints out a message.</li>
+<li>Event Action Two: This event prints out a message. Then, it schedules an action one event 15 time units into the future. It also reschedules itself to reoccur in 20 minutes.</li>
+</ol>
+<p>The following code listing provides the code for this simple event
+example. Let’s walk carefully through the construction and execution of
+this code.</p>
+<p>First, the class sub-classes from <code>SchedulingElement</code>. This
+enables the class to have access to all the scheduling methods within
+<code>SchedulingElement</code> and provides one method that needs to be overridden:
+<code>initialize()</code>. Every <code>ModelElement</code> has an <code>initialize()</code>
+method. The base class, ModelElement’s <code>initialize()</code> method does nothing.
+However, the <code>initialize()</code> method is <em>critical</em> to properly modeling
+using instances of <code>ModelElement</code> within the JSL architecture. The purpose of the
+<code>initialize()</code> method is to provide code that can occur once at the
+beginning of each replication of the simulation, prior to the execution
+of any events. Thus, the <code>initialize()</code> method is the perfect location to
+schedule initial events onto the event calendar so that when the
+replications associated with the simulation are executed initial events
+will be on the calendar ready for execution. Notice that in this example
+the <code>initialize()</code> method does two things:</p>
+<ol style="list-style-type: decimal">
+<li>schedules the first event action one event at time 10.0 via the call:
+scheduleEvent(myEventActionOne, 10.0)</li>
+<li>schedules the first action two event at time 20.0 via the call:
+scheduleEvent(myEventActionTwo, 20.0)</li>
+</ol>
+<div class="sourceCode" id="cb46"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb46-1"><a href="introDEDS-dedsJSL.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> SchedulingEventExamples <span class="kw">extends</span> SchedulingElement <span class="op">{</span></span>
+<span id="cb46-2"><a href="introDEDS-dedsJSL.html#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="introDEDS-dedsJSL.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> EventActionOne myEventActionOne<span class="op">;</span></span>
+<span id="cb46-4"><a href="introDEDS-dedsJSL.html#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> EventActionTwo myEventActionTwo<span class="op">;</span></span>
+<span id="cb46-5"><a href="introDEDS-dedsJSL.html#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="introDEDS-dedsJSL.html#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SchedulingEventExamples</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb46-7"><a href="introDEDS-dedsJSL.html#cb46-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb46-8"><a href="introDEDS-dedsJSL.html#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb46-9"><a href="introDEDS-dedsJSL.html#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="introDEDS-dedsJSL.html#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SchedulingEventExamples</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb46-11"><a href="introDEDS-dedsJSL.html#cb46-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb46-12"><a href="introDEDS-dedsJSL.html#cb46-12" aria-hidden="true" tabindex="-1"></a>        myEventActionOne <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventActionOne</span><span class="op">();</span></span>
+<span id="cb46-13"><a href="introDEDS-dedsJSL.html#cb46-13" aria-hidden="true" tabindex="-1"></a>        myEventActionTwo <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventActionTwo</span><span class="op">();</span></span>
+<span id="cb46-14"><a href="introDEDS-dedsJSL.html#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb46-15"><a href="introDEDS-dedsJSL.html#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-16"><a href="introDEDS-dedsJSL.html#cb46-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb46-17"><a href="introDEDS-dedsJSL.html#cb46-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">initialize</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb46-18"><a href="introDEDS-dedsJSL.html#cb46-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// schedule a type 1 event at time 10.0</span></span>
+<span id="cb46-19"><a href="introDEDS-dedsJSL.html#cb46-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myEventActionOne<span class="op">,</span> <span class="fl">10.0</span><span class="op">);</span></span>
+<span id="cb46-20"><a href="introDEDS-dedsJSL.html#cb46-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// schedule an event that uses myEventAction for time 20.0</span></span>
+<span id="cb46-21"><a href="introDEDS-dedsJSL.html#cb46-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myEventActionTwo<span class="op">,</span> <span class="fl">20.0</span><span class="op">);</span></span>
+<span id="cb46-22"><a href="introDEDS-dedsJSL.html#cb46-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb46-23"><a href="introDEDS-dedsJSL.html#cb46-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-24"><a href="introDEDS-dedsJSL.html#cb46-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> EventActionOne <span class="kw">extends</span> EventAction <span class="op">{</span></span>
+<span id="cb46-25"><a href="introDEDS-dedsJSL.html#cb46-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb46-26"><a href="introDEDS-dedsJSL.html#cb46-26" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb46-27"><a href="introDEDS-dedsJSL.html#cb46-27" aria-hidden="true" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;EventActionOne at time : &quot;</span> <span class="op">+</span> <span class="fu">getTime</span><span class="op">());</span></span>
+<span id="cb46-28"><a href="introDEDS-dedsJSL.html#cb46-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb46-29"><a href="introDEDS-dedsJSL.html#cb46-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb46-30"><a href="introDEDS-dedsJSL.html#cb46-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-31"><a href="introDEDS-dedsJSL.html#cb46-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> EventActionTwo <span class="kw">extends</span> EventAction <span class="op">{</span></span>
+<span id="cb46-32"><a href="introDEDS-dedsJSL.html#cb46-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb46-33"><a href="introDEDS-dedsJSL.html#cb46-33" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent jsle<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb46-34"><a href="introDEDS-dedsJSL.html#cb46-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;EventActionTwo at time : &quot;</span> <span class="op">+</span> <span class="fu">getTime</span><span class="op">());</span></span>
+<span id="cb46-35"><a href="introDEDS-dedsJSL.html#cb46-35" aria-hidden="true" tabindex="-1"></a>            <span class="co">// schedule a type 1 event for time t + 15</span></span>
+<span id="cb46-36"><a href="introDEDS-dedsJSL.html#cb46-36" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scheduleEvent</span><span class="op">(</span>myEventActionOne<span class="op">,</span> <span class="fl">15.0</span><span class="op">);</span></span>
+<span id="cb46-37"><a href="introDEDS-dedsJSL.html#cb46-37" aria-hidden="true" tabindex="-1"></a>            <span class="co">// reschedule the EventAction event for t + 20</span></span>
+<span id="cb46-38"><a href="introDEDS-dedsJSL.html#cb46-38" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rescheduleEvent</span><span class="op">(</span>jsle<span class="op">,</span> <span class="fl">20.0</span><span class="op">);</span></span>
+<span id="cb46-39"><a href="introDEDS-dedsJSL.html#cb46-39" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb46-40"><a href="introDEDS-dedsJSL.html#cb46-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb46-41"><a href="introDEDS-dedsJSL.html#cb46-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-42"><a href="introDEDS-dedsJSL.html#cb46-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb46-43"><a href="introDEDS-dedsJSL.html#cb46-43" aria-hidden="true" tabindex="-1"></a>        Simulation s <span class="op">=</span> <span class="kw">new</span> <span class="fu">Simulation</span><span class="op">(</span><span class="st">&quot;Scheduling Example&quot;</span><span class="op">);</span></span>
+<span id="cb46-44"><a href="introDEDS-dedsJSL.html#cb46-44" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">SchedulingEventExamples</span><span class="op">(</span>s<span class="op">.</span><span class="fu">getModel</span><span class="op">());</span></span>
+<span id="cb46-45"><a href="introDEDS-dedsJSL.html#cb46-45" aria-hidden="true" tabindex="-1"></a>        s<span class="op">.</span><span class="fu">setLengthOfReplication</span><span class="op">(</span><span class="fl">100.0</span><span class="op">);</span></span>
+<span id="cb46-46"><a href="introDEDS-dedsJSL.html#cb46-46" aria-hidden="true" tabindex="-1"></a>        s<span class="op">.</span><span class="fu">run</span><span class="op">();</span></span>
+<span id="cb46-47"><a href="introDEDS-dedsJSL.html#cb46-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb46-48"><a href="introDEDS-dedsJSL.html#cb46-48" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The call <code>scheduleEvent(myEventAction, 20.0)</code> schedules an event 20 time
+units into the future where the event will be handled via the instance
+of the class <code>EventActionTwo</code>, which implements the <code>EventActionIfc</code> interface.
+The reference <code>myEventActionTwo</code> refers to an object of type <code>EventActionTwo</code>,
+which is an instance of the inner classes defined within
+<code>SchedulingEventExamples</code>. This variable is defined as as class attribute
+on line 4 and an instance is created in the constructor on line 11. To
+summarize, the <code>initialize()</code> method is used to schedule the initial occurances of the two types of events. The <code>initialize()</code> method occurs right before time 0.0. That is, it occurs right before the simulation clock starts.</p>
+<p>Now, let us examine the actions that occur for the two types of events. Within the <code>action()</code> method of <code>EventActionOne</code>, we see the following code:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb47-1"><a href="introDEDS-dedsJSL.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;EventActionOne at time : &quot;</span> <span class="op">+</span> <span class="fu">getTime</span><span class="op">());</span></span></code></pre></div>
+<p>Here a simple message is printed that includes the simulation time via the inherited <code>getTime()</code> method of the <code>ModelElement</code> class. Thus, by implementing the <code>action()</code> method of the <code>EventActionIfc</code> interface, you can supply the logic that occurs when the event is executed by the simulation executive. In the implemented <code>EventActionTwo</code> class, a simple message is printed and event action one is scheduled. In addition, the <code>rescheduleEvent()</code> method is used to reschedule the event that was supplied as part of the <code>action()</code> method. Since the attributes of the event remain the same,
+the event is “recycled” to occur at the new scheduled time.</p>
+<p>The main method associated with the <code>SchedulingEventExamples</code> class
+indicates how to create and run a simulation model. The first line of the main method creates an instance of a <code>Simulation</code>. The next line makes an instance of
+<code>SchedulingEventExamples</code> and attaches it to the simulation model. The
+method call, <code>s.getModel()</code> returns an instance of the <code>Model</code> class that is
+associated with the instance of the <code>Simulation</code>. The next line sets up the
+simulation to run for 100 time units and the last line tells the simulation to
+begin executing via the <code>run()</code> method. The output of the code is as follows:</p>
+<pre><code>EventActionOne at time : 10.0
+EventActionTwo at time : 20.0
+EventActionOne at time : 35.0
+EventActionTwo at time : 40.0
+EventActionOne at time : 55.0
+EventActionTwo at time : 60.0
+EventActionOne at time : 75.0
+EventActionTwo at time : 80.0
+EventActionOne at time : 95.0
+EventActionTwo at time : 100.0</code></pre>
+<p>Notice that event action one output occurs at time 10.0. This is due to the event that was scheduled within the <code>initialize()</code> method. Event action two occurs for the first time at time 20.0 and then every 20 time units. Notice that event action one occurs at time 35.0. This is due to the event being scheduled in the action method of event action two.</p>
+</div>
+<div id="overview-of-simuation-run-context" class="section level4" number="6.5.2.2">
+<h4><span class="header-section-number">6.5.2.2</span> Overview of Simuation Run Context</h4>
+<p>When the simulation runs, much underlying code is executed. At this
+stage it is not critically important to understand how this code works;
+however, it is useful to understand, in a general sense, what is
+happening. The following outlines the basic processes that are occurring
+when <code>s.run()</code> occurs:</p>
+<ol style="list-style-type: decimal">
+<li><p>Setup the simulation experiment</p></li>
+<li><p>For each replication of the simulation:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Initialize the replication</p></li>
+<li><p>Initialize the executive and calendar</p></li>
+<li><p>Initialize the model and all model elements</p></li>
+<li><p>While there are events on the event calendar or the simulation
+is not stopped</p>
+<ol style="list-style-type: lower-roman">
+<li><p>Determine the next event to execute</p></li>
+<li><p>Update the current simulation time to the time of the next
+event</p></li>
+<li><p>Call the action() method of the instance of <code>EventActionIfc</code> that was attached to the next event.</p></li>
+<li><p>Execute the actions associated with the next event</p></li>
+</ol></li>
+<li><p>Execute end of replication model logic</p></li>
+</ol></li>
+<li><p>Execute end of simulation experiment logic</p></li>
+</ol>
+<p>Step 2(b) initializes the executive and calendar and ensures that there
+are no events at the beginning of the simulation. It also resets the
+simulation time to 0.0. Then, step 2(c) initializes the model. In this
+step, the initialize() methods of all of the model elements are
+executed. This is why it was important to implement the <code>initialize()</code>
+method in the example and have it schedule the initial events. Then,
+step 2(c) begins the execution of the events that were placed on the
+calendar. In looking at the code listings, it is not possible to ascertain how the action() methods are actually invoked unless you
+understand that during step 2(c) each scheduled event is removed from
+the calendar and its associated action called. In the case of the event action one
+and two events in the example, these actions are specified in the action() method of EventActionOne and EventActionTwo. After all the events in the
+calendar are executed or the simulation is not otherwise stopped, the
+replication is ended. Any clean up logic (such as statistical
+collection) is executed at the end of the replication. Finally, after
+all replications have been executed, any logic associated with ending
+the simulation experiment is invoked. Thus, even though the code does
+not directly call the event logic it is still invoked by the simulation
+executive because the events are scheduled. Thus, if you schedule
+events, you can be assured that the logic associated with the events
+will be executed.</p>
+</div>
+<div id="simulating-a-poisson-process" class="section level4" number="6.5.2.3">
+<h4><span class="header-section-number">6.5.2.3</span> Simulating a Poisson Process</h4>
+<p>The second simple example illustrates how to simulate a Poisson process.
+Recall that a Poisson process models the number of events that occur
+within some time interval. For a Poisson process the time between events
+is exponentially distributed with a mean that is the reciprocal of the
+rate of occurrence for the events. For simplicity, this example
+simulates a Poisson process with rate 1 arrival per unit time. Thus, the
+mean time between events is 1.0 time unit. In this case the action is very simple, incrementing a counter that is tracking the number of events that have
+occurred.</p>
+<p>The code for this example is as follows.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb49-1"><a href="introDEDS-dedsJSL.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> SimplePoissonProcess <span class="kw">extends</span> SchedulingElement <span class="op">{</span></span>
+<span id="cb49-2"><a href="introDEDS-dedsJSL.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="introDEDS-dedsJSL.html#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> RandomVariable myTBE<span class="op">;</span></span>
+<span id="cb49-4"><a href="introDEDS-dedsJSL.html#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> Counter myCount<span class="op">;</span></span>
+<span id="cb49-5"><a href="introDEDS-dedsJSL.html#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">EventHandler</span> myEventHandler<span class="op">;</span></span>
+<span id="cb49-6"><a href="introDEDS-dedsJSL.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="introDEDS-dedsJSL.html#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SimplePoissonProcess</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb49-8"><a href="introDEDS-dedsJSL.html#cb49-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb49-9"><a href="introDEDS-dedsJSL.html#cb49-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb49-10"><a href="introDEDS-dedsJSL.html#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="introDEDS-dedsJSL.html#cb49-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SimplePoissonProcess</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb49-12"><a href="introDEDS-dedsJSL.html#cb49-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb49-13"><a href="introDEDS-dedsJSL.html#cb49-13" aria-hidden="true" tabindex="-1"></a>        myTBE <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">1.0</span><span class="op">));</span></span>
+<span id="cb49-14"><a href="introDEDS-dedsJSL.html#cb49-14" aria-hidden="true" tabindex="-1"></a>        myCount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Counts events&quot;</span><span class="op">);</span></span>
+<span id="cb49-15"><a href="introDEDS-dedsJSL.html#cb49-15" aria-hidden="true" tabindex="-1"></a>        myEventHandler <span class="op">=</span> <span class="kw">new</span> <span class="bu">EventHandler</span><span class="op">();</span></span>
+<span id="cb49-16"><a href="introDEDS-dedsJSL.html#cb49-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb49-17"><a href="introDEDS-dedsJSL.html#cb49-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-18"><a href="introDEDS-dedsJSL.html#cb49-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb49-19"><a href="introDEDS-dedsJSL.html#cb49-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">initialize</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb49-20"><a href="introDEDS-dedsJSL.html#cb49-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myEventHandler<span class="op">,</span> myTBE<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb49-21"><a href="introDEDS-dedsJSL.html#cb49-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb49-22"><a href="introDEDS-dedsJSL.html#cb49-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-23"><a href="introDEDS-dedsJSL.html#cb49-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> <span class="bu">EventHandler</span> <span class="kw">extends</span> EventAction <span class="op">{</span></span>
+<span id="cb49-24"><a href="introDEDS-dedsJSL.html#cb49-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb49-25"><a href="introDEDS-dedsJSL.html#cb49-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent evt<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb49-26"><a href="introDEDS-dedsJSL.html#cb49-26" aria-hidden="true" tabindex="-1"></a>            myCount<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
+<span id="cb49-27"><a href="introDEDS-dedsJSL.html#cb49-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scheduleEvent</span><span class="op">(</span>myEventHandler<span class="op">,</span> myTBE<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb49-28"><a href="introDEDS-dedsJSL.html#cb49-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb49-29"><a href="introDEDS-dedsJSL.html#cb49-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb49-30"><a href="introDEDS-dedsJSL.html#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-31"><a href="introDEDS-dedsJSL.html#cb49-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb49-32"><a href="introDEDS-dedsJSL.html#cb49-32" aria-hidden="true" tabindex="-1"></a>        Simulation s <span class="op">=</span> <span class="kw">new</span> <span class="fu">Simulation</span><span class="op">(</span><span class="st">&quot;Simple PP&quot;</span><span class="op">);</span></span>
+<span id="cb49-33"><a href="introDEDS-dedsJSL.html#cb49-33" aria-hidden="true" tabindex="-1"></a>        <span class="kw">new</span> <span class="fu">SimplePoissonProcess</span><span class="op">(</span>s<span class="op">.</span><span class="fu">getModel</span><span class="op">());</span></span>
+<span id="cb49-34"><a href="introDEDS-dedsJSL.html#cb49-34" aria-hidden="true" tabindex="-1"></a>        s<span class="op">.</span><span class="fu">setLengthOfReplication</span><span class="op">(</span><span class="fl">20.0</span><span class="op">);</span></span>
+<span id="cb49-35"><a href="introDEDS-dedsJSL.html#cb49-35" aria-hidden="true" tabindex="-1"></a>        s<span class="op">.</span><span class="fu">setNumberOfReplications</span><span class="op">(</span><span class="dv">50</span><span class="op">);</span></span>
+<span id="cb49-36"><a href="introDEDS-dedsJSL.html#cb49-36" aria-hidden="true" tabindex="-1"></a>        s<span class="op">.</span><span class="fu">run</span><span class="op">();</span></span>
+<span id="cb49-37"><a href="introDEDS-dedsJSL.html#cb49-37" aria-hidden="true" tabindex="-1"></a>        SimulationReporter r <span class="op">=</span> s<span class="op">.</span><span class="fu">makeSimulationReporter</span><span class="op">();</span></span>
+<span id="cb49-38"><a href="introDEDS-dedsJSL.html#cb49-38" aria-hidden="true" tabindex="-1"></a>        r<span class="op">.</span><span class="fu">printAcrossReplicationSummaryStatistics</span><span class="op">();</span></span>
+<span id="cb49-39"><a href="introDEDS-dedsJSL.html#cb49-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Done!&quot;</span><span class="op">);</span></span>
+<span id="cb49-40"><a href="introDEDS-dedsJSL.html#cb49-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb49-41"><a href="introDEDS-dedsJSL.html#cb49-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>There are a few new elements of this code to
+note. First, this example uses two new JSL model elements:
+<code>RandomVariable</code> and <code>Counter</code>. A <code>RandomVariable</code> is a sub-class of
+<code>ModelElement</code> that is used to represent random variables within a
+simulation model. The <code>RandomVariable</code> class must be supplied an instance
+of a class that implements the <code>RandomIfc</code> interface. Recall that
+implementations of the <code>RandomIfc</code> interface have a <code>getValue()</code> method that
+returns a random value and permit random number stream control. The
+supplied stream control is important when utilized advanced simulation
+statistical methods. For example, stream control is used to advance the
+state of the underlying stream to the next substream at the end of every
+replication of the model. This helps in synchronizing the use of random
+numbers in certain types of experimental setups.</p>
+<p>A <code>Counter</code> is also a sub-class of <code>ModelElement</code> which facilitates the incrementing and
+decrementing of a variable and the statistical collection of the
+variable across replications. The value of the variable associated with
+the instance of a <code>Counter</code> is automatically reset to 0.0 at the beginning
+of each replication. Lines 2 and 3 within the constructor create the
+instances of the <code>RandomVariable</code> and the <code>Counter</code>.</p>
+<p>Since we are modeling a Poisson process, the <code>initialize()</code> method is used
+to schedule the first event using the random variable that represents
+the time between events. This occurs on the only line of the <code>initialize()</code> method. The event logic, found in the inner class <code>EventHandler</code>,
+causes the counter to be incremented. Then, the next arrival is scheduled
+to occur. Thus, it is very easy to model an arrival process using this
+pattern. The last items to note are in the <code>main()</code> method of the class,
+where the simulation is created and run. In setting up the simulation,
+the run length is set to 20 time units and the number of
+replications associated with the simulation is set to 50.</p>
+<p>A replication represents a sample path of the simulation that starts and
+ends under the same conditions. Thus, statistics collected on each
+replication represent independent and identically distributed
+observations of the simulation model’s execution. In this example, there
+will be 50 observations of the counter observed. Since we have a Poisson
+process with rate 1 event per time unit and we are observing the process
+for 20 time units, we should expect that about 20 events should occur on
+average.</p>
+<p>Right after the <code>run()</code> method is called, an instance of a <code>SimulationReporter</code> is created for the
+simulation. A <code>SimulationReporter</code> has the ability to write out
+statistical output associated with the simulation. The code uses the
+<code>printAcrossReplicationSummaryStatistics()</code> method to write out a simple
+summary report across the 50 replications for the <code>Counter</code>. Note that
+using the <code>Counter</code> to count the events provided for automatically
+collected statistics across the replications for the counter. As you can
+see from the output, the average number of events is close to the
+theoretically expected amount.</p>
+<pre><code>Across Replication Statistical Summary Report
+Sat Dec 31 13:02:53 EST 2016
+Simulation Results for Model: Simple PP_Model
+
+Number of Replications: 50
+Length of Warm up period: 0.0
+Length of Replications: 20.0
+
+-----------------------------------------------------------
+Counters
+-----------------------------------------------------------
+Name                  Average       Std. Dev.    Count
+-----------------------------------------------------------
+Counts events        20.500000      4.870779     50.000000 
+-----------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="up-and-down-component-example" class="section level3" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> Up and Down Component Example</h3>
+<p>This section further illustrates DEDS modeling with a component of a
+system that is subject to random failures. The component has two states
+UP and DOWN. The time until failure is random and governed by an
+exponential distribution with a mean of 1.0 time units. This represents
+the time that the component is in the UP state. Once the component
+fails, the component goes into the DOWN state. The time that the
+component spends in the DOWN state is governed by an exponential
+distribution with a mean of 2.0 time units. In this model, we are
+interested in estimating the proportion of time that the component is in
+the UP state and tracking the number of failures over the running time
+of the simulation. In addition, we are interested in measuring the cycle
+length of the component. The cycle length is the time between entering
+the UP state. The cycle length should be equal to the sum of the time
+spent in the up and down states.</p>
+<div class="figure"><span id="fig:UpDownComponent"></span>
+<img src="figures/ch4/UpDownComponent.png" alt="Up and Down Component Process"  />
+<p class="caption">
+Figure 6.7: Up and Down Component Process
+</p>
+</div>
+<p>Figure <a href="introDEDS-dedsJSL.html#fig:UpDownComponent">6.7</a> illustrates the dynamics of the
+component over time.</p>
+<p>The following steps are useful in developing this model:</p>
+<ol style="list-style-type: decimal">
+<li>Conceptualize the system/objects and their states</li>
+<li>Determine the events and the actions associated with the events</li>
+<li>Determine how to represent the system and objects as ModelElements</li>
+<li>Determine how to initialize and run the model</li>
+</ol>
+<p>The first step is to conceptualize how to model the system and the state
+of the component. A model element, UpDownComponent, will be used to
+model the component. To track the state of the component, it is
+necessary to know whether or not the component is UP or DOWN. A variable
+can be used to represent this state. However, since we need to estimate
+the proportion of time that the component is in the UP state, a
+<code>TimeWeighted</code> variable will be used. <code>TimeWeighted</code> is a sub-class of
+<code>ModelElement</code> that facilitates the observation and statistical collection
+of time-based variables. Time-bases variables, which are discussed
+further in the next Chapter, are a type of variable that changes values
+at particular instants of time. Time-based variables must have
+time-weighted statistics collected. Time-weighted statistics weights the
+value of the variable by the proportion of time that the variable is set
+to a value. To collect statistics on the cycle length we can use a
+<code>ResponseVariable</code>. <code>ResponseVariable</code> is a sub-class of <code>ModelElement</code> that
+can take on values within a simulation model and allows easy statistical
+observation of its values during the simulation run. This class provides
+observation-based statistical collection. Further discussion of
+observation-based statistics will be presented in the next Chapter.</p>
+<p>Because this system is so simple the required performance measures can
+be easily computed theoretically. According to renewal theory, the
+probability of being in the UP state in the long run should be equal to:</p>
+<p><span class="math display">\[P(UP) = \frac{\theta_{u}}{\theta_{u}+\theta_{d}} = \frac{1.0}{1.0+2.0}=0.\overline{33}\]</span></p>
+<p>where <span class="math inline">\(\theta_{u}\)</span> is the mean of the up-time distribution and
+<span class="math inline">\(\theta_{d}\)</span> is the mean of the down-time distribution. In addition, the
+expected cycle length should be <span class="math inline">\(\theta_{u}+\theta_{d} = 3.0\)</span>.</p>
+<p>The <code>UpDownComponent</code> class extends the <code>SchedulingElement</code> class and has
+object references to instances of <code>RandomVariable</code>, <code>TimeWeighted</code>,
+<code>ResponseVariable</code>, and <code>Counter</code> classes. Within the constructor of
+<code>UpDownComponent</code>, we need to create the instances of these objects for
+use within the class, as shown in the following code fragment.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb51-1"><a href="introDEDS-dedsJSL.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> UpDownComponent <span class="kw">extends</span> SchedulingElement <span class="op">{</span></span>
+<span id="cb51-2"><a href="introDEDS-dedsJSL.html#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="introDEDS-dedsJSL.html#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">int</span> UP <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb51-4"><a href="introDEDS-dedsJSL.html#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">int</span> DOWN <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb51-5"><a href="introDEDS-dedsJSL.html#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> RandomVariable myUpTime<span class="op">;</span></span>
+<span id="cb51-6"><a href="introDEDS-dedsJSL.html#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> RandomVariable myDownTime<span class="op">;</span></span>
+<span id="cb51-7"><a href="introDEDS-dedsJSL.html#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> TimeWeighted myState<span class="op">;</span></span>
+<span id="cb51-8"><a href="introDEDS-dedsJSL.html#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ResponseVariable myCycleLength<span class="op">;</span></span>
+<span id="cb51-9"><a href="introDEDS-dedsJSL.html#cb51-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> Counter myCountFailures<span class="op">;</span></span>
+<span id="cb51-10"><a href="introDEDS-dedsJSL.html#cb51-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> UpChangeAction myUpChangeAction <span class="op">=</span> <span class="kw">new</span> <span class="fu">UpChangeAction</span><span class="op">();</span></span>
+<span id="cb51-11"><a href="introDEDS-dedsJSL.html#cb51-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> DownChangeAction myDownChangeAction <span class="op">=</span> <span class="kw">new</span> <span class="fu">DownChangeAction</span><span class="op">();</span></span>
+<span id="cb51-12"><a href="introDEDS-dedsJSL.html#cb51-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">double</span> myTimeLastUp<span class="op">;</span></span>
+<span id="cb51-13"><a href="introDEDS-dedsJSL.html#cb51-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-14"><a href="introDEDS-dedsJSL.html#cb51-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">UpDownComponent</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb51-15"><a href="introDEDS-dedsJSL.html#cb51-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb51-16"><a href="introDEDS-dedsJSL.html#cb51-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb51-17"><a href="introDEDS-dedsJSL.html#cb51-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-18"><a href="introDEDS-dedsJSL.html#cb51-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">UpDownComponent</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb51-19"><a href="introDEDS-dedsJSL.html#cb51-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb51-20"><a href="introDEDS-dedsJSL.html#cb51-20" aria-hidden="true" tabindex="-1"></a>        RVariableIfc utd <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb51-21"><a href="introDEDS-dedsJSL.html#cb51-21" aria-hidden="true" tabindex="-1"></a>        RVariableIfc dtd <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">2.0</span><span class="op">);</span></span>
+<span id="cb51-22"><a href="introDEDS-dedsJSL.html#cb51-22" aria-hidden="true" tabindex="-1"></a>        myUpTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> utd<span class="op">,</span> <span class="st">&quot;up time&quot;</span><span class="op">);</span></span>
+<span id="cb51-23"><a href="introDEDS-dedsJSL.html#cb51-23" aria-hidden="true" tabindex="-1"></a>        myDownTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> dtd<span class="op">,</span> <span class="st">&quot;down time&quot;</span><span class="op">);</span></span>
+<span id="cb51-24"><a href="introDEDS-dedsJSL.html#cb51-24" aria-hidden="true" tabindex="-1"></a>        myState <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;state&quot;</span><span class="op">);</span></span>
+<span id="cb51-25"><a href="introDEDS-dedsJSL.html#cb51-25" aria-hidden="true" tabindex="-1"></a>        myCycleLength <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResponseVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;cycle length&quot;</span><span class="op">);</span></span>
+<span id="cb51-26"><a href="introDEDS-dedsJSL.html#cb51-26" aria-hidden="true" tabindex="-1"></a>        myCountFailures <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;count failures&quot;</span><span class="op">);</span></span>
+<span id="cb51-27"><a href="introDEDS-dedsJSL.html#cb51-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>Lines 3 and 4 define two constants to represent
+the up and down states. Lines 5-9 declare additional references
+needed to represent the up and down time random variables and the
+variables that need statistical collection (myState, myCycleLength, and
+myCountFailures). Lines 10 and 11 define and create the event actions
+associated with the end of the up-time and the end of the down time. The
+variable <code>myTimeLastUp</code> is used to keep track of the time that the
+component last changed into the UP state, which allows the cycle length
+to be collected. In lines 20-23, the random variables for the up and
+downtime are constructed using exponential distributions.</p>
+<p>As show in the following code listing, the <code>initialize()</code> method sets up the component.The variable <code>myTimeLastUp</code> is set to 0.0 in order to assume that the last time the component was in the UP state started at time 0.0. Thus,
+we are assuming that the component starts the simulation in the UP
+state. Finally, in line 7 the initial event is scheduled to cause the
+component to go down according to the uptime distribution. This is the
+first event and then the component can start its regular up and down
+pattern. In the action associated with the change to the UP state,
+line 18 sets the state to UP. Line 22 schedules the time until the
+component goes down. Line 16 causes statistics to be collected on the
+value of the cycle length. The code <code>getTime()-myTimeLastUp</code> represents
+the elapsed time since the value of <code>myTimeLastUp</code> was set (in line 20),
+which represents the cycle length. The <code>DownChangeAction</code> is very similar.
+Line 31 counts the number of failures (times that the component has gone
+down). Line 32 sets the state of the component to DOWN and line 34
+schedules when the component should next transition into the UP state.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb52-1"><a href="introDEDS-dedsJSL.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb52-2"><a href="introDEDS-dedsJSL.html#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// assume that the component starts in the UP state at time 0.0</span></span>
+<span id="cb52-3"><a href="introDEDS-dedsJSL.html#cb52-3" aria-hidden="true" tabindex="-1"></a>    myTimeLastUp <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb52-4"><a href="introDEDS-dedsJSL.html#cb52-4" aria-hidden="true" tabindex="-1"></a>    myState<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span>UP<span class="op">);</span></span>
+<span id="cb52-5"><a href="introDEDS-dedsJSL.html#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// schedule the time that it goes down</span></span>
+<span id="cb52-6"><a href="introDEDS-dedsJSL.html#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scheduleEvent</span><span class="op">(</span>myDownChangeAction<span class="op">,</span> myUpTime<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb52-7"><a href="introDEDS-dedsJSL.html#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">//schedule(myDownChangeAction).name(&quot;Down&quot;).in(myUpTime).units();</span></span>
+<span id="cb52-8"><a href="introDEDS-dedsJSL.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb52-9"><a href="introDEDS-dedsJSL.html#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="introDEDS-dedsJSL.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="kw">class</span> UpChangeAction <span class="kw">extends</span> EventAction <span class="op">{</span></span>
+<span id="cb52-11"><a href="introDEDS-dedsJSL.html#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="introDEDS-dedsJSL.html#cb52-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb52-13"><a href="introDEDS-dedsJSL.html#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb52-14"><a href="introDEDS-dedsJSL.html#cb52-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// this event action represents what happens when the component goes up</span></span>
+<span id="cb52-15"><a href="introDEDS-dedsJSL.html#cb52-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// record the cycle length, the time btw up states</span></span>
+<span id="cb52-16"><a href="introDEDS-dedsJSL.html#cb52-16" aria-hidden="true" tabindex="-1"></a>        myCycleLength<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()</span> <span class="op">-</span> myTimeLastUp<span class="op">);</span></span>
+<span id="cb52-17"><a href="introDEDS-dedsJSL.html#cb52-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// component has just gone up, change its state value</span></span>
+<span id="cb52-18"><a href="introDEDS-dedsJSL.html#cb52-18" aria-hidden="true" tabindex="-1"></a>        myState<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span>UP<span class="op">);</span></span>
+<span id="cb52-19"><a href="introDEDS-dedsJSL.html#cb52-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// record the time it went up</span></span>
+<span id="cb52-20"><a href="introDEDS-dedsJSL.html#cb52-20" aria-hidden="true" tabindex="-1"></a>        myTimeLastUp <span class="op">=</span> <span class="fu">getTime</span><span class="op">();</span></span>
+<span id="cb52-21"><a href="introDEDS-dedsJSL.html#cb52-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">// schedule the down state change after the uptime</span></span>
+<span id="cb52-22"><a href="introDEDS-dedsJSL.html#cb52-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myDownChangeAction<span class="op">,</span> myUpTime<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb52-23"><a href="introDEDS-dedsJSL.html#cb52-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb52-24"><a href="introDEDS-dedsJSL.html#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb52-25"><a href="introDEDS-dedsJSL.html#cb52-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-26"><a href="introDEDS-dedsJSL.html#cb52-26" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="kw">class</span> DownChangeAction <span class="kw">extends</span> EventAction <span class="op">{</span></span>
+<span id="cb52-27"><a href="introDEDS-dedsJSL.html#cb52-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-28"><a href="introDEDS-dedsJSL.html#cb52-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb52-29"><a href="introDEDS-dedsJSL.html#cb52-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb52-30"><a href="introDEDS-dedsJSL.html#cb52-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">// component has just gone down, change its state value</span></span>
+<span id="cb52-31"><a href="introDEDS-dedsJSL.html#cb52-31" aria-hidden="true" tabindex="-1"></a>        myCountFailures<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
+<span id="cb52-32"><a href="introDEDS-dedsJSL.html#cb52-32" aria-hidden="true" tabindex="-1"></a>        myState<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span>DOWN<span class="op">);</span></span>
+<span id="cb52-33"><a href="introDEDS-dedsJSL.html#cb52-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">// schedule when it goes up afer the down time</span></span>
+<span id="cb52-34"><a href="introDEDS-dedsJSL.html#cb52-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myUpChangeAction<span class="op">,</span> myDownTime<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb52-35"><a href="introDEDS-dedsJSL.html#cb52-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb52-36"><a href="introDEDS-dedsJSL.html#cb52-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The following listing presents the code to construct and execute the
+simulation. This code is very similar to previously presented code for
+running a simulation. In line 3, the simulation is constructed. Then, in
+line 5, the model associated with the simulation is accessed. This model
+is then used to construct an instance of the UpDownComponent in line 7.
+Finally, lines 9-15 represent getting a SimulationReporter, running the
+simulation, and causing output to be written to the console.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb53-1"><a href="introDEDS-dedsJSL.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb53-2"><a href="introDEDS-dedsJSL.html#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// create the simulation</span></span>
+<span id="cb53-3"><a href="introDEDS-dedsJSL.html#cb53-3" aria-hidden="true" tabindex="-1"></a>    Simulation s <span class="op">=</span> <span class="kw">new</span> <span class="fu">Simulation</span><span class="op">(</span><span class="st">&quot;UpDownComponent&quot;</span><span class="op">);</span></span>
+<span id="cb53-4"><a href="introDEDS-dedsJSL.html#cb53-4" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="fu">turnOnDefaultEventTraceReport</span><span class="op">();</span></span>
+<span id="cb53-5"><a href="introDEDS-dedsJSL.html#cb53-5" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="fu">turnOnLogReport</span><span class="op">();</span></span>
+<span id="cb53-6"><a href="introDEDS-dedsJSL.html#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// get the model associated with the simulation</span></span>
+<span id="cb53-7"><a href="introDEDS-dedsJSL.html#cb53-7" aria-hidden="true" tabindex="-1"></a>    Model m <span class="op">=</span> s<span class="op">.</span><span class="fu">getModel</span><span class="op">();</span></span>
+<span id="cb53-8"><a href="introDEDS-dedsJSL.html#cb53-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// create the model element and attach it to the model</span></span>
+<span id="cb53-9"><a href="introDEDS-dedsJSL.html#cb53-9" aria-hidden="true" tabindex="-1"></a>    UpDownComponent tv <span class="op">=</span> <span class="kw">new</span> <span class="fu">UpDownComponent</span><span class="op">(</span>m<span class="op">);</span></span>
+<span id="cb53-10"><a href="introDEDS-dedsJSL.html#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// make the simulation reporter</span></span>
+<span id="cb53-11"><a href="introDEDS-dedsJSL.html#cb53-11" aria-hidden="true" tabindex="-1"></a>    SimulationReporter r <span class="op">=</span> s<span class="op">.</span><span class="fu">makeSimulationReporter</span><span class="op">();</span></span>
+<span id="cb53-12"><a href="introDEDS-dedsJSL.html#cb53-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// set the running parameters of the simulation</span></span>
+<span id="cb53-13"><a href="introDEDS-dedsJSL.html#cb53-13" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="fu">setNumberOfReplications</span><span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb53-14"><a href="introDEDS-dedsJSL.html#cb53-14" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="fu">setLengthOfReplication</span><span class="op">(</span><span class="fl">5000.0</span><span class="op">);</span></span>
+<span id="cb53-15"><a href="introDEDS-dedsJSL.html#cb53-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// tell the simulation to run</span></span>
+<span id="cb53-16"><a href="introDEDS-dedsJSL.html#cb53-16" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="fu">run</span><span class="op">();</span></span>
+<span id="cb53-17"><a href="introDEDS-dedsJSL.html#cb53-17" aria-hidden="true" tabindex="-1"></a>    r<span class="op">.</span><span class="fu">printAcrossReplicationSummaryStatistics</span><span class="op">();</span></span>
+<span id="cb53-18"><a href="introDEDS-dedsJSL.html#cb53-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The results for the average time in the up state and the cycle length are consistent
+with the theoretically computed results.</p>
+<pre><code>---------------------------------------------------------
+Across Replication Statistical Summary Report
+Sat Dec 31 18:31:27 EST 2016
+Simulation Results for Model: UpDownComponent_Model
+
+Number of Replications: 30
+Length of Warm up period: 0.0
+Length of Replications: 5000.0
+---------------------------------------------------------
+Response Variables
+---------------------------------------------------------
+Name              Average       Std. Dev.       Count 
+---------------------------------------------------------
+state             0.335537       0.005846       30.000000 
+cycle length      2.994080       0.040394       30.000000 
+---------------------------------------------------------
+
+---------------------------------------------------------
+Counters
+---------------------------------------------------------
+Name             Average        Std. Dev.    Count 
+---------------------------------------------------------
+count failures   1670.066667    22.996152    30.000000 
+---------------------------------------------------------</code></pre>
+<p>This example only scratches the surface of what is possible. Imagine if
+there were 20 components. We could easily create 20 of instances and add
+them to the model. Even more interesting would be to define the state of
+the system based on which components were in the up state. This would be
+the beginning of modeling the reliability of a complex system. This type
+of modeling can be achieved by making the individual model elements
+(e.g. <code>UpDownComponent</code>) more reusable and allow the modeling objects to
+interact in complex ways. More complex modeling will be the focus of the
+next chapter.</p>
+</div>
+<div id="introDEDS:pharmacy" class="section level3" number="6.5.4">
+<h3><span class="header-section-number">6.5.4</span> Modeling a Simple Queueing System</h3>
+<p>This example considers a small pharmacy that has a single line for
+waiting customers and only one pharmacist. Assume that customers arrive
+at a drive through pharmacy window according to a Poisson distribution
+with a mean of 10 per hour. The time that it takes the pharmacist to
+serve the customer is random and data has indicated that the time is
+well modeled with an exponential distribution with a mean of 3 minutes.
+Customers who arrive to the pharmacy are served in the order of arrival
+and enough space is available within the parking area of the adjacent
+grocery store to accommodate any waiting customers.</p>
+<div class="figure"><span id="fig:DriveThruPharmacy"></span>
+<img src="figures/ch4/ch4fig8.png" alt="Drive Through Pharmacy" width="80%" height="80%" />
+<p class="caption">
+Figure 6.8: Drive Through Pharmacy
+</p>
+</div>
+<p>The drive through pharmacy system can be conceptualized as a single
+server waiting line system, where the server is the pharmacist. An
+idealized representation of this system is shown in Figure <a href="introDEDS-dedsJSL.html#fig:DriveThruPharmacy">6.8</a>. If the pharmacist is busy serving a
+customer, then additional customers will wait in line. In such a
+situation, management might be interested in how long customers wait in
+line, before being served by the pharmacist. In addition, management
+might want to predict if the number of waiting cars will be large.
+Finally, they might want to estimate the utilization of the pharmacist
+in order to ensure that he or she is not too busy.</p>
+<p>When modeling the system first question to ask is: <em>What is the system</em>?
+In this situation, the system is the pharmacist and the potential
+customers as idealized in Figure <a href="introDEDS-dedsJSL.html#fig:DriveThruPharmacy">6.8</a>. Now you should consider the entities of
+the system. An entity is a conceptual thing of importance that flows
+through a system potentially using the resources of the system.
+Therefore, one of the first questions to ask when developing a model is:
+<em>What are the entities</em>? In this situation, the entities are the
+customers that need to use the pharmacy. This is because customers are
+discrete things that enter the system, flow through the system, and then
+depart the system.</p>
+<p>Since entities often use things as they flow through the system, a
+natural question is to ask: <em>What are the resources that are used by the
+entities</em>? A resource is something that is used by the entities and that
+may constrain the flow of the entities within the system. Another way to
+think of resources is to think of the things that provide service in the
+system. In this situation, the entities “use” the pharmacist in order to
+get their medicine. Thus, the pharmacist is a resource.</p>
+<p>Another useful conceptual modeling tool is the <em>activity diagram</em>. An
+<em>activity</em> is an operation that takes time to complete. An activity is
+associated with the state of an object over an interval of time.
+Activities are defined by the occurrence of two events which represent
+the activity’s beginning time and ending time and mark the entrance and
+exit of the state associated with the activity. An activity diagram is a
+pictorial representation of the process (steps of activities) for an
+entity and its interaction with resources while within the system. If
+the entity is a temporary entity (i.e. it flows through the system) the
+activity diagram is called an activity flow diagram. If the entity is
+permanent (i.e. it remains in the system throughout its life) the
+activity diagram is called an activity cycle diagram. The notation of an
+activity diagram is very simple, and can be augmented as needed to
+explain additional concepts:</p>
+<p>Queues: shown as a circle with queue labeled inside</p>
+<p>Activities: shown as a rectangle with appropriate label inside</p>
+<p>Resources: shown as small circles with resource labeled inside</p>
+<p>Lines/arcs: indicating flow (precedence ordering) for engagement of entities in
+activities or for obtaining resources. Dotted lines are used to
+indicate the seizing and releasing of resources.</p>
+<p>zigzag lines: indicate the creation or destruction of entities</p>
+<p>Activity diagrams are especially useful for illustrating how entities
+interact with resources. In addition, activity diagrams help in finding
+the events and in identifying some the state changes that must be
+modeled. Activity diagrams are easy to build by hand and serve as a
+useful communication mechanism. Since they have a simple set of symbols,
+it is easy to use an activity diagram to communicate with people who
+have little simulation background. Activity diagrams are an excellent
+mechanism to document a conceptual model of the system before building
+the model.</p>
+<div class="figure"><span id="fig:DTPActivityDiagram"></span>
+<img src="figures/ch4/ch4fig9.png" alt="Activity Diagram of Drive through Pharmacy" width="80%" height="80%" />
+<p class="caption">
+Figure 6.9: Activity Diagram of Drive through Pharmacy
+</p>
+</div>
+<p>Figure <a href="introDEDS-dedsJSL.html#fig:DTPActivityDiagram">6.9</a> shows the activity diagram for the
+pharmacy situation. The diagram describes the life of an entity within
+the system. The zigzag lines at the top of the diagram indicate the
+creation of an entity. Consider following the life of the customer
+through the pharmacy. Following the direction of the arrows, the
+customers are first created and then enter the queue. Notice that the
+diagram clearly shows that there is a queue for the drive-through
+customers. You should think of the entity flowing through the diagram.
+As it flows through the queue, the customer attempts to start an
+activity. In this case, the activity requires a resource. The pharmacist
+is shown as a resource (circle) next to the rectangle that represents
+the service activity.</p>
+<p>The customer requires the resource in order to start its service
+activity. This is indicated by the dashed arrow from the pharmacist
+(resource) to the top of the service activity rectangle. If the customer
+does not get the resource, they wait in the queue. Once they receive the
+number of units of the resource requested, they proceed with the
+activity. The activity represents a delay of time and in this case the
+resource is used throughout the delay. After the activity is completed,
+the customer releases the pharmacist (resource). This is indicated by
+another dashed arrow, with the direction indicating that the units of the resource aare
+being put back or released. After the customer completes its service
+activity, the customer leaves the system. This is indicated with the
+zigzag lines going to no-where and indicating that the object leaves the
+system and is disposed The conceptual model of this system can be
+summarized as follows:</p>
+<p>System: The system has a pharmacist that acts as a resource, customers that
+act as entities, and a queue to hold the waiting customers. The
+state of the system includes the number of customers in the system,
+in the queue, and in service.</p>
+<p>Events: Arrivals of customers to the system, which occur within an
+inter-event time that is exponentially distributed with a mean of 6
+minutes.</p>
+<p>Activities: The service time of the customers are exponentially distributed with
+a mean of 3 minutes.</p>
+<p>Conditional delays: A conditional delay occurs when an entity has to wait for a
+condition to occur in order to proceed. In this system, the customer
+may have to wait in a queue until the pharmacist becomes available.</p>
+<p>With an activity diagram and pseudo-code such as this available to
+represent a solid conceptual understanding of the system, you can begin
+the model development process.</p>
+<p>In the current example, pharmacy customers arrive according to a Poisson
+process with a mean of <span class="math inline">\(\lambda\)</span> = 10 per hour. According to probability
+theory, this implies that the time between arrivals is exponentially
+distributed with a mean of (1/<span class="math inline">\(\lambda\)</span>). Thus, for this situation, the
+mean time between arrivals is 6 minutes.</p>
+<p><span class="math display">\[\frac{1}{\lambda} = \frac{\text{1 hour}}{\text{10 customers}} \times \frac{\text{60 minutes}}{\text{1 hour}} = \frac{\text{6 minutes}}{\text{customers}}\]</span></p>
+<p>Let’s assume that the pharmacy is open 24 hours a day, 7 days a week. In
+other words, it is always open. In addition, assume that the arrival
+process does not vary with respect to time. Finally, assume that
+management is interested in understanding the long term behavior of this
+system in terms of the average waiting time of customers, the average
+number of customers, and the utilization of the pharmacist.</p>
+<p>To simulate this situation over time, you must specify how long to run
+the model. Ideally, since management is interested in long run
+performance, you should run the model for an infinite amount of time to
+get long term performance; however, you probably don’t want to wait that
+long! For the sake of simplicity, assume that 10,000 hours of operation
+is long enough.</p>
+<p>The logic of this model follows very closely the discussion of the bank
+teller example. The following code listing presents the definition of the variables and their creation.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb55-1"><a href="introDEDS-dedsJSL.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> DriveThroughPharmacy <span class="kw">extends</span> SchedulingElement <span class="op">{</span></span>
+<span id="cb55-2"><a href="introDEDS-dedsJSL.html#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="introDEDS-dedsJSL.html#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> myNumPharmacists<span class="op">;</span></span>
+<span id="cb55-4"><a href="introDEDS-dedsJSL.html#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Queue</span><span class="op">&lt;</span>QObject<span class="op">&gt;</span> myWaitingQ<span class="op">;</span></span>
+<span id="cb55-5"><a href="introDEDS-dedsJSL.html#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> RandomIfc myServiceRS<span class="op">;</span></span>
+<span id="cb55-6"><a href="introDEDS-dedsJSL.html#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> RandomIfc myArrivalRS<span class="op">;</span></span>
+<span id="cb55-7"><a href="introDEDS-dedsJSL.html#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> RandomVariable myServiceRV<span class="op">;</span></span>
+<span id="cb55-8"><a href="introDEDS-dedsJSL.html#cb55-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> RandomVariable myArrivalRV<span class="op">;</span></span>
+<span id="cb55-9"><a href="introDEDS-dedsJSL.html#cb55-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> TimeWeighted myNumBusy<span class="op">;</span></span>
+<span id="cb55-10"><a href="introDEDS-dedsJSL.html#cb55-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> TimeWeighted myNS<span class="op">;</span></span>
+<span id="cb55-11"><a href="introDEDS-dedsJSL.html#cb55-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ResponseVariable mySysTime<span class="op">;</span></span>
+<span id="cb55-12"><a href="introDEDS-dedsJSL.html#cb55-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ArrivalEventAction myArrivalEventAction<span class="op">;</span></span>
+<span id="cb55-13"><a href="introDEDS-dedsJSL.html#cb55-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> EndServiceEventAction myEndServiceEventAction<span class="op">;</span></span>
+<span id="cb55-14"><a href="introDEDS-dedsJSL.html#cb55-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> Counter myNumCustomers<span class="op">;</span></span>
+<span id="cb55-15"><a href="introDEDS-dedsJSL.html#cb55-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-16"><a href="introDEDS-dedsJSL.html#cb55-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DriveThroughPharmacy</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-17"><a href="introDEDS-dedsJSL.html#cb55-17" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb55-18"><a href="introDEDS-dedsJSL.html#cb55-18" aria-hidden="true" tabindex="-1"></a>                <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">1.0</span><span class="op">),</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">0.5</span><span class="op">));</span></span>
+<span id="cb55-19"><a href="introDEDS-dedsJSL.html#cb55-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb55-20"><a href="introDEDS-dedsJSL.html#cb55-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-21"><a href="introDEDS-dedsJSL.html#cb55-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DriveThroughPharmacy</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="dt">int</span> numServers<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-22"><a href="introDEDS-dedsJSL.html#cb55-22" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> numServers<span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">1.0</span><span class="op">),</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">0.5</span><span class="op">));</span></span>
+<span id="cb55-23"><a href="introDEDS-dedsJSL.html#cb55-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb55-24"><a href="introDEDS-dedsJSL.html#cb55-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-25"><a href="introDEDS-dedsJSL.html#cb55-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DriveThroughPharmacy</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="dt">int</span> numServers<span class="op">,</span> RandomIfc ad<span class="op">,</span> RandomIfc sd<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-26"><a href="introDEDS-dedsJSL.html#cb55-26" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">);</span></span>
+<span id="cb55-27"><a href="introDEDS-dedsJSL.html#cb55-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setNumberOfPharmacists</span><span class="op">(</span>numServers<span class="op">);</span></span>
+<span id="cb55-28"><a href="introDEDS-dedsJSL.html#cb55-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setServiceRS</span><span class="op">(</span>sd<span class="op">);</span></span>
+<span id="cb55-29"><a href="introDEDS-dedsJSL.html#cb55-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setArrivalRS</span><span class="op">(</span>ad<span class="op">);</span></span>
+<span id="cb55-30"><a href="introDEDS-dedsJSL.html#cb55-30" aria-hidden="true" tabindex="-1"></a>        myWaitingQ <span class="op">=</span> <span class="kw">new</span> <span class="bu">Queue</span><span class="op">&lt;&gt;(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;PharmacyQ&quot;</span><span class="op">);</span></span>
+<span id="cb55-31"><a href="introDEDS-dedsJSL.html#cb55-31" aria-hidden="true" tabindex="-1"></a>        myNumBusy <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> <span class="st">&quot;NumBusy&quot;</span><span class="op">);</span></span>
+<span id="cb55-32"><a href="introDEDS-dedsJSL.html#cb55-32" aria-hidden="true" tabindex="-1"></a>        myNS <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> <span class="st">&quot;# in System&quot;</span><span class="op">);</span></span>
+<span id="cb55-33"><a href="introDEDS-dedsJSL.html#cb55-33" aria-hidden="true" tabindex="-1"></a>        mySysTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResponseVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;System Time&quot;</span><span class="op">);</span></span>
+<span id="cb55-34"><a href="introDEDS-dedsJSL.html#cb55-34" aria-hidden="true" tabindex="-1"></a>        myNumCustomers <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Num Served&quot;</span><span class="op">);</span></span>
+<span id="cb55-35"><a href="introDEDS-dedsJSL.html#cb55-35" aria-hidden="true" tabindex="-1"></a>        myArrivalEventAction <span class="op">=</span> <span class="kw">new</span> <span class="fu">ArrivalEventAction</span><span class="op">();</span></span>
+<span id="cb55-36"><a href="introDEDS-dedsJSL.html#cb55-36" aria-hidden="true" tabindex="-1"></a>        myEndServiceEventAction <span class="op">=</span> <span class="kw">new</span> <span class="fu">EndServiceEventAction</span><span class="op">();</span></span>
+<span id="cb55-37"><a href="introDEDS-dedsJSL.html#cb55-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The <code>RandomVariable</code> class is used to model the time between
+arrivals and the service time random variables. The <code>TimeWeighted</code> class
+is used to model the number of busy servers and the number of customers
+in the system. A <code>ResponseVariable</code> is used to model the time spent in the
+system. There are two events represented by implementing the
+<code>EventActionIfc</code> interface to model the arrival event and the end of
+service event. Finally, a new JSL class, the <code>Queue</code> class, is used to
+model the waiting line within the system. The <code>Queue</code> class is a sub-class
+of <code>ModelElement</code> that is able to hold instances of the class <code>QObject</code> and
+will automatically collect statistics on the number in the queue and the
+time spent in the queue. The following code listing shows the logic required to model the
+arrivals to the pharmacy.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb56-1"><a href="introDEDS-dedsJSL.html#cb56-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">initialize</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb56-2"><a href="introDEDS-dedsJSL.html#cb56-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">.</span><span class="fu">initialize</span><span class="op">();</span></span>
+<span id="cb56-3"><a href="introDEDS-dedsJSL.html#cb56-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// start the arrivals</span></span>
+<span id="cb56-4"><a href="introDEDS-dedsJSL.html#cb56-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myArrivalEventAction<span class="op">,</span> myArrivalRV<span class="op">);</span></span>
+<span id="cb56-5"><a href="introDEDS-dedsJSL.html#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb56-6"><a href="introDEDS-dedsJSL.html#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="introDEDS-dedsJSL.html#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> ArrivalEventAction <span class="kw">extends</span> EventAction <span class="op">{</span></span>
+<span id="cb56-8"><a href="introDEDS-dedsJSL.html#cb56-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb56-9"><a href="introDEDS-dedsJSL.html#cb56-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb56-10"><a href="introDEDS-dedsJSL.html#cb56-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">//   schedule the next arrival</span></span>
+<span id="cb56-11"><a href="introDEDS-dedsJSL.html#cb56-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scheduleEvent</span><span class="op">(</span>myArrivalEventAction<span class="op">,</span> myArrivalRV<span class="op">);</span></span>
+<span id="cb56-12"><a href="introDEDS-dedsJSL.html#cb56-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">enterSystem</span><span class="op">();</span></span>
+<span id="cb56-13"><a href="introDEDS-dedsJSL.html#cb56-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb56-14"><a href="introDEDS-dedsJSL.html#cb56-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb56-15"><a href="introDEDS-dedsJSL.html#cb56-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-16"><a href="introDEDS-dedsJSL.html#cb56-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">enterSystem</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb56-17"><a href="introDEDS-dedsJSL.html#cb56-17" aria-hidden="true" tabindex="-1"></a>        myNS<span class="op">.</span><span class="fu">increment</span><span class="op">();</span> <span class="co">// new customer arrived</span></span>
+<span id="cb56-18"><a href="introDEDS-dedsJSL.html#cb56-18" aria-hidden="true" tabindex="-1"></a>        QObject arrivingCustomer <span class="op">=</span> <span class="kw">new</span> <span class="fu">QObject</span><span class="op">(</span><span class="fu">getTime</span><span class="op">());</span></span>
+<span id="cb56-19"><a href="introDEDS-dedsJSL.html#cb56-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-20"><a href="introDEDS-dedsJSL.html#cb56-20" aria-hidden="true" tabindex="-1"></a>        myWaitingQ<span class="op">.</span><span class="fu">enqueue</span><span class="op">(</span>arrivingCustomer<span class="op">);</span> <span class="co">// enqueue the newly arriving customer</span></span>
+<span id="cb56-21"><a href="introDEDS-dedsJSL.html#cb56-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>myNumBusy<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">&lt;</span> myNumPharmacists<span class="op">)</span> <span class="op">{</span> <span class="co">// server available</span></span>
+<span id="cb56-22"><a href="introDEDS-dedsJSL.html#cb56-22" aria-hidden="true" tabindex="-1"></a>            myNumBusy<span class="op">.</span><span class="fu">increment</span><span class="op">();</span> <span class="co">// make server busy</span></span>
+<span id="cb56-23"><a href="introDEDS-dedsJSL.html#cb56-23" aria-hidden="true" tabindex="-1"></a>            QObject customer <span class="op">=</span> myWaitingQ<span class="op">.</span><span class="fu">removeNext</span><span class="op">();</span> <span class="co">//remove the next customer</span></span>
+<span id="cb56-24"><a href="introDEDS-dedsJSL.html#cb56-24" aria-hidden="true" tabindex="-1"></a>            <span class="co">// schedule end of service, include the customer as the event&#39;s message</span></span>
+<span id="cb56-25"><a href="introDEDS-dedsJSL.html#cb56-25" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scheduleEvent</span><span class="op">(</span>myEndServiceEventAction<span class="op">,</span> myServiceRV<span class="op">,</span> customer<span class="op">);</span></span>
+<span id="cb56-26"><a href="introDEDS-dedsJSL.html#cb56-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb56-27"><a href="introDEDS-dedsJSL.html#cb56-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>In line 4 the first arrival event is scheduled
+within the <code>initialize()</code> method. The <code>ArrivalEventAction</code> implementation
+schedules the next arrival using the time between arrival random
+variable and calls a private method named <code>enterSystem()</code>. This method
+handles the logic for when a customer enters the system. First, the
+number in the system is incremented and then the customer is enqueued.
+In line 17, an instance of a <code>QObject</code> is created and its creation time is
+supplied as the current simulation time using <code>getTime()</code>. Then, the
+instance of the <code>Queue</code> class, <code>myWaitingQ</code>, is used to place the customer
+in the queue using the <code>enqueue()</code> method. Note that even if the customer
+receives immediate service, we still need to place the customer in the
+queue because we need to correctly record that there was a zero wait
+time. In lines 19-24, the number of busy servers is checked againts the
+number of pharmacists. If a server is available, then the server is made
+busy, the customer is removed from the queue, and the end of service for
+the customer is scheduled. The scheduling of the end of service is
+particularly important to note. In line 23, the reference to the <code>QObject</code>
+is supplied when calling the <code>scheduleEvent()</code> method. This method has
+signature:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb57-1"><a href="introDEDS-dedsJSL.html#cb57-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span> Creates an event and schedules it onto the event calendar</span>
+<span id="cb57-2"><a href="introDEDS-dedsJSL.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param <span class="kw">&lt;T&gt;</span> the type associated with the attached message</span>
+<span id="cb57-3"><a href="introDEDS-dedsJSL.html#cb57-3" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param action represents an ActionListener that will handle the change of state logic</span>
+<span id="cb57-4"><a href="introDEDS-dedsJSL.html#cb57-4" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param time represents the inter<span class="co">-</span>event time<span class="co">,</span> i<span class="co">.</span>e<span class="co">.</span> the interval from the current time to when the</span>
+<span id="cb57-5"><a href="introDEDS-dedsJSL.html#cb57-5" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>        event will need to occur</span>
+<span id="cb57-6"><a href="introDEDS-dedsJSL.html#cb57-6" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param message is a generic Object that may represent data to be transmitted with the event</span>
+<span id="cb57-7"><a href="introDEDS-dedsJSL.html#cb57-7" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>return a valid JSLEvent</span>
+<span id="cb57-8"><a href="introDEDS-dedsJSL.html#cb57-8" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb57-9"><a href="introDEDS-dedsJSL.html#cb57-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">final</span> <span class="op">&lt;</span>T<span class="op">&gt;</span> JSLEvent<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="fu">scheduleEvent</span><span class="op">(</span>EventActionIfc<span class="op">&lt;</span>T<span class="op">&gt;</span> action<span class="op">,</span> GetValueIfc time<span class="op">,</span> T message<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb57-10"><a href="introDEDS-dedsJSL.html#cb57-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span><span class="fu">scheduleEvent</span><span class="op">(</span>action<span class="op">,</span> time<span class="op">.</span><span class="fu">getValue</span><span class="op">(),</span> JSLEvent<span class="op">.</span><span class="fu">DEFAULT_PRIORITY</span><span class="op">,</span> message<span class="op">,</span> <span class="fu">getName</span><span class="op">()));</span></span>
+<span id="cb57-11"><a href="introDEDS-dedsJSL.html#cb57-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>Notice that the last argument of the method is of type <code>T</code>, which is defined as a generic parameter for the method. Thus, using this method, any instance of any class can be supplied.
+Notice also that the <code>GetValueIfc</code> interface is used to supply the time.
+This is why just the name of the service time random variable can be
+used. The method automatically called the <code>getValue()</code> method of the
+argument in order to determine the time until the event’s occurrence.</p>
+<p>The following code fragment presents the logic associated with the end
+of service event.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb58-1"><a href="introDEDS-dedsJSL.html#cb58-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> EndServiceEventAction <span class="kw">implements</span> EventActionIfc<span class="op">&lt;</span>QObject<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb58-2"><a href="introDEDS-dedsJSL.html#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="introDEDS-dedsJSL.html#cb58-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb58-4"><a href="introDEDS-dedsJSL.html#cb58-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent<span class="op">&lt;</span>QObject<span class="op">&gt;</span> event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb58-5"><a href="introDEDS-dedsJSL.html#cb58-5" aria-hidden="true" tabindex="-1"></a>            myNumBusy<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span> <span class="co">// customer is leaving server is freed</span></span>
+<span id="cb58-6"><a href="introDEDS-dedsJSL.html#cb58-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(!</span>myWaitingQ<span class="op">.</span><span class="fu">isEmpty</span><span class="op">())</span> <span class="op">{</span> <span class="co">// queue is not empty</span></span>
+<span id="cb58-7"><a href="introDEDS-dedsJSL.html#cb58-7" aria-hidden="true" tabindex="-1"></a>                QObject customer <span class="op">=</span> myWaitingQ<span class="op">.</span><span class="fu">removeNext</span><span class="op">();</span> <span class="co">//remove the next customer</span></span>
+<span id="cb58-8"><a href="introDEDS-dedsJSL.html#cb58-8" aria-hidden="true" tabindex="-1"></a>                myNumBusy<span class="op">.</span><span class="fu">increment</span><span class="op">();</span> <span class="co">// make server busy</span></span>
+<span id="cb58-9"><a href="introDEDS-dedsJSL.html#cb58-9" aria-hidden="true" tabindex="-1"></a>                <span class="co">// schedule end of service</span></span>
+<span id="cb58-10"><a href="introDEDS-dedsJSL.html#cb58-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scheduleEvent</span><span class="op">(</span>myEndServiceEventAction<span class="op">,</span> myServiceRV<span class="op">,</span> customer<span class="op">);</span></span>
+<span id="cb58-11"><a href="introDEDS-dedsJSL.html#cb58-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb58-12"><a href="introDEDS-dedsJSL.html#cb58-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">departSystem</span><span class="op">(</span>event<span class="op">.</span><span class="fu">getMessage</span><span class="op">());</span></span>
+<span id="cb58-13"><a href="introDEDS-dedsJSL.html#cb58-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb58-14"><a href="introDEDS-dedsJSL.html#cb58-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb58-15"><a href="introDEDS-dedsJSL.html#cb58-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-16"><a href="introDEDS-dedsJSL.html#cb58-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">departSystem</span><span class="op">(</span>QObject departingCustomer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb58-17"><a href="introDEDS-dedsJSL.html#cb58-17" aria-hidden="true" tabindex="-1"></a>        mySysTime<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()</span> <span class="op">-</span> departingCustomer<span class="op">.</span><span class="fu">getCreateTime</span><span class="op">());</span></span>
+<span id="cb58-18"><a href="introDEDS-dedsJSL.html#cb58-18" aria-hidden="true" tabindex="-1"></a>        myNS<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span> <span class="co">// customer left system</span></span>
+<span id="cb58-19"><a href="introDEDS-dedsJSL.html#cb58-19" aria-hidden="true" tabindex="-1"></a>        myNumCustomers<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
+<span id="cb58-20"><a href="introDEDS-dedsJSL.html#cb58-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>First the number of busy servers is decremented
+because the service is becoming idle. Then, the queue is
+checked to see if it is not empty. If the queue is not empty, then the
+next customer must be removed, the server made busy again
+and the customer scheduled into service. Finally, the
+private method, <code>departSystem()</code> is called. The argument to this method is
+<code>event.getMessage()</code>. The <code>getMessage()</code> method of <code>JSLEvent</code> will
+return the object that was scheduled with the event. Since the <code>JSLEvent</code> was provided a <code>QObject</code> for the generic type in the signature of the <code>action()</code> method, we do not need to cast this object to type <code>QObject.</code> The <code>departSystem()</code> method simply collects
+statistics using the <code>ResponseVariable</code>, <code>mySysTime</code> and the <code>TimeWeighted</code>,
+<code>myNS.</code> These objects represent the system time and the number in the
+system, respectively.</p>
+<p>The following method can be used to run the model based on a desired number of servers.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb59-1"><a href="introDEDS-dedsJSL.html#cb59-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">runModel</span><span class="op">(</span><span class="dt">int</span> numServers<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb59-2"><a href="introDEDS-dedsJSL.html#cb59-2" aria-hidden="true" tabindex="-1"></a>        Simulation sim <span class="op">=</span> <span class="kw">new</span> <span class="fu">Simulation</span><span class="op">(</span><span class="st">&quot;Drive Through Pharmacy&quot;</span><span class="op">);</span></span>
+<span id="cb59-3"><a href="introDEDS-dedsJSL.html#cb59-3" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setNumberOfReplications</span><span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
+<span id="cb59-4"><a href="introDEDS-dedsJSL.html#cb59-4" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setLengthOfReplication</span><span class="op">(</span><span class="fl">20000.0</span><span class="op">);</span></span>
+<span id="cb59-5"><a href="introDEDS-dedsJSL.html#cb59-5" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setLengthOfWarmUp</span><span class="op">(</span><span class="fl">5000.0</span><span class="op">);</span></span>
+<span id="cb59-6"><a href="introDEDS-dedsJSL.html#cb59-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// add DriveThroughPharmacy to the main model</span></span>
+<span id="cb59-7"><a href="introDEDS-dedsJSL.html#cb59-7" aria-hidden="true" tabindex="-1"></a>        DriveThroughPharmacy dtp <span class="op">=</span> <span class="kw">new</span> <span class="fu">DriveThroughPharmacy</span><span class="op">(</span>sim<span class="op">.</span><span class="fu">getModel</span><span class="op">(),</span> numServers<span class="op">);</span></span>
+<span id="cb59-8"><a href="introDEDS-dedsJSL.html#cb59-8" aria-hidden="true" tabindex="-1"></a>        dtp<span class="op">.</span><span class="fu">setArrivalRS</span><span class="op">(</span><span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">6.0</span><span class="op">));</span></span>
+<span id="cb59-9"><a href="introDEDS-dedsJSL.html#cb59-9" aria-hidden="true" tabindex="-1"></a>        dtp<span class="op">.</span><span class="fu">setServiceRS</span><span class="op">(</span><span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">3.0</span><span class="op">));</span></span>
+<span id="cb59-10"><a href="introDEDS-dedsJSL.html#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="introDEDS-dedsJSL.html#cb59-11" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">run</span><span class="op">();</span></span>
+<span id="cb59-12"><a href="introDEDS-dedsJSL.html#cb59-12" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">printHalfWidthSummaryReport</span><span class="op">();</span></span>
+<span id="cb59-13"><a href="introDEDS-dedsJSL.html#cb59-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The reports indicate that customers wait about 3 minutes on average in
+the line. The utilization of the pharmacist is about 50%. This means
+that about 50% of the time the pharmacist was busy. For this type of
+system, this is probably not a bad utilization, considering that the
+pharmacist probably has other in-store duties. The reports also indicate
+that there was less than one customer on average waiting for service.</p>
+<pre><code>Across Replication Statistical Summary Report
+Mon Jan 02 16:05:23 CST 2017
+Simulation Results for Model: Drive Through Pharmacy_Model
+
+
+Number of Replications: 30
+Length of Warm up period: 5000.0
+Length of Replications: 20000.0
+-------------------------------------------------------------------------------
+Response Variables
+-------------------------------------------------------------------------------
+Name                                  Average       Std. Dev.    Count 
+-------------------------------------------------------------------------------
+PharmacyQ : Number In Q              0.490898        0.065510       30.000000 
+PharmacyQ : Time In Q                2.960012        0.351724       30.000000 
+NumBusy                              0.495274        0.016848       30.000000 
+# in System                          0.986173        0.080988       30.000000 
+System Time                          5.950288        0.403270       30.000000 
+-------------------------------------------------------------------------------</code></pre>
+<p>This single server waiting line system is a very common situation in
+practice. In fact, this exact situation has been studied mathematically
+through a branch of operations research called queuing theory. For
+specific modeling situations, formulas for the long term performance of
+queuing systems can be derived. This particular pharmacy model happens
+to be an example of an M/M/1 queuing model. The first M stands for
+Markov arrivals, the second M stands for Markov service times, and the 1
+represents a single server. Markov was a famous mathematician who
+examined the exponential distribution and its properties. According to
+queuing theory, the expected number of customer in queue, <span class="math inline">\(L_q\)</span>, for the
+M/M/1 model is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\label{ch4:eq:mm1}
+L_q &amp; = \dfrac{\rho^2}{1 - \rho} \\
+\rho &amp; = \lambda/\mu \\
+\lambda &amp; = \text{arrival rate to queue} \\
+\mu &amp; = \text{service rate}
+\end{aligned}
+\]</span></p>
+<p>In addition, the expected waiting time in queue is given by
+<span class="math inline">\(W_q = L_q/\lambda\)</span>. In the pharmacy model, <span class="math inline">\(\lambda\)</span> = 1/6, i.e. 1
+customer every 6 minutes on average, and <span class="math inline">\(\mu\)</span> = 1/3, i.e. 1 customer
+every 3 minutes on average. The quantity, <span class="math inline">\(\rho\)</span>, is called the
+utilization of the server. Using these values in the formulas for <span class="math inline">\(L_q\)</span>
+and <span class="math inline">\(W_q\)</span> results in:</p>
+<p><span class="math display">\[\begin{aligned}
+\rho &amp; = 0.5 \\
+L_q  &amp; = \dfrac{0.5 \times 0.5}{1 - 0.5} = 0.5  \\
+W_q &amp; = \dfrac{0.5}{1/6} = 3 \: \text{minutes}\end{aligned}\]</span></p>
+<p>In comparing these analytical results with the simulation results, you
+can see that they match to within statistical error. Later in this text,
+the analytical treatment of queues and the simulation of queues will be
+developed. These analytical results are available for this special case
+because the arrival and service distributions are exponential; however,
+simple analytical results are not available for many common
+distributions, e.g. lognormal. With simulation, you can easily estimate
+the above quantities as well as many other performance measures of
+interest for wide ranging queuing situations. For example, through
+simulation you can easily estimate the chance that there are 3 or more
+cars waiting.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="simulating-a-queueing-system-by-hand.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introDEDS-Summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["JSLBook.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
