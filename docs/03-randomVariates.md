@@ -334,7 +334,7 @@ These methods are designed to perform their calculations in a numerically stable
 
 * `stdNormalCDF(double z)` - the cumulative probability for a $Z ~ N(0,1)$ random variable, i.e. $F(z) = P(Z \leq z)$
 * `stdNormalComplementaryCDF(double z)` - returns $1-P(Z \leq z)$
-* `stdNormalInvCDF(double p)` - returns $ z = F^{-1}(p)$ the inverse of the cumulative distribution function
+* `stdNormalInvCDF(double p)` - returns $z = F^{-1}(p)$ the inverse of the cumulative distribution function
 
 The Student-T distribution also has two static convenience methods to facilitate computations.
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.2 Simulating the Game of Craps | JSL - Java Simulation Library</title>
+  <title>5.3 Simulating the Game of Craps | JSL - Java Simulation Library</title>
   <meta name="description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.2 Simulating the Game of Craps | JSL - Java Simulation Library" />
+  <meta property="og:title" content="5.3 Simulating the Game of Craps | JSL - Java Simulation Library" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.2 Simulating the Game of Craps | JSL - Java Simulation Library" />
+  <meta name="twitter:title" content="5.3 Simulating the Game of Craps | JSL - Java Simulation Library" />
   
   <meta name="twitter:description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2021-12-31" />
+<meta name="date" content="2022-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ssMC.html"/>
-<link rel="next" href="introDEDS.html"/>
+<link rel="prev" href="ch5-StatReview.html"/>
+<link rel="next" href="the-news-vendor-problem.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -203,7 +203,15 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
-<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html"><i class="fa fa-check"></i><b>5.2</b> Review of Statistical Concepts</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#point-estimates-and-confidence-intervals"><i class="fa fa-check"></i><b>5.2.1</b> Point Estimates and Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#ch5:SampleSize"><i class="fa fa-check"></i><b>5.2.2</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#determining-the-sample-size-for-a-monte-carlo-simulation-experiment"><i class="fa fa-check"></i><b>5.2.3</b> Determining the Sample Size for a Monte Carlo Simulation Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.3</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.4" data-path="the-news-vendor-problem.html"><a href="the-news-vendor-problem.html"><i class="fa fa-check"></i><b>5.4</b> The News Vendor Problem</a></li>
+<li class="chapter" data-level="5.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
 <ul>
@@ -292,7 +300,7 @@ div.csl-indent {
 <li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
 <li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
 <li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
@@ -384,73 +392,72 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="craps" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Simulating the Game of Craps</h2>
+<div id="craps" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Simulating the Game of Craps</h2>
 <p>Consider the game of “craps” as played in Las Vegas. The basic rules of the game are as follows: one player, the “shooter,” rolls a pair of dice. If the outcome of that roll is a 2, 3, or 12, the shooter immediately loses; if it is a 7 or an 11, the shooter wins. In all other cases, the number the shooter rolls on the first toss becomes the “point,” which the shooter must try to duplicate on subsequent rolls. If the shooter manages to roll the point before rolling a 7, the shooter wins; otherwise the shooter loses. It may take several rolls to determine whether the shooter wins or loses. After the first roll, only a 7 or the point have any significance until the win or loss is decided. Using the JSL random and statistic packages give answers and corresponding estimates to the following questions. Be sure to report your estimates in the form of confidence intervals.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Before the first roll of the dice, what is the probability the shooter will ultimately win?</li>
 <li>What is the expected number of rolls required to decide the win or loss?</li>
 </ol>
 <p>The solution to this problem involves the use of the Statistic class to collect the probability that the shooter will win and for the expected number of rolls. The following code illustrates the approach. The <code>DUniformRV</code> class is used to represent the two dice. Two statistics are created to estimate the probability of winning and to estimate the expected number of rolls required to decide a win or a loss. A for loop is use to simulate 5000 games. For each game, the logic of winning, losing or matching the first point. When the game is ended the instances of <code>Statistic</code> are used to collect the outcomes.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb43-1"><a href="craps.html#cb43-1" aria-hidden="true" tabindex="-1"></a>DUniformRV d1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">DUniformRV</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
-<span id="cb43-2"><a href="craps.html#cb43-2" aria-hidden="true" tabindex="-1"></a>DUniformRV d2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">DUniformRV</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
-<span id="cb43-3"><a href="craps.html#cb43-3" aria-hidden="true" tabindex="-1"></a>Statistic probOfWinning <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Prob of winning&quot;</span><span class="op">);</span></span>
-<span id="cb43-4"><a href="craps.html#cb43-4" aria-hidden="true" tabindex="-1"></a>Statistic numTosses <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Number of Toss Statistics&quot;</span><span class="op">);</span></span>
-<span id="cb43-5"><a href="craps.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numGames <span class="op">=</span> <span class="dv">5000</span><span class="op">;</span></span>
-<span id="cb43-6"><a href="craps.html#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> k <span class="op">&lt;=</span> numGames<span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb43-7"><a href="craps.html#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> winner <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb43-8"><a href="craps.html#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> point <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d1<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">+</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d2<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
-<span id="cb43-9"><a href="craps.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numberoftoss <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb43-10"><a href="craps.html#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-11"><a href="craps.html#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>point <span class="op">==</span> <span class="dv">7</span> <span class="op">||</span> point <span class="op">==</span> <span class="dv">11</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb43-12"><a href="craps.html#cb43-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// automatic winner</span></span>
-<span id="cb43-13"><a href="craps.html#cb43-13" aria-hidden="true" tabindex="-1"></a>        winner <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb43-14"><a href="craps.html#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>point <span class="op">==</span> <span class="dv">2</span> <span class="op">||</span> point <span class="op">==</span> <span class="dv">3</span> <span class="op">||</span> point <span class="op">==</span> <span class="dv">12</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb43-15"><a href="craps.html#cb43-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// automatic loser</span></span>
-<span id="cb43-16"><a href="craps.html#cb43-16" aria-hidden="true" tabindex="-1"></a>        winner <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb43-17"><a href="craps.html#cb43-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> <span class="co">// now must roll to get point</span></span>
-<span id="cb43-18"><a href="craps.html#cb43-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">boolean</span> continueRolling <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb43-19"><a href="craps.html#cb43-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>continueRolling <span class="op">==</span> <span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb43-20"><a href="craps.html#cb43-20" aria-hidden="true" tabindex="-1"></a>            <span class="co">// increment number of tosses</span></span>
-<span id="cb43-21"><a href="craps.html#cb43-21" aria-hidden="true" tabindex="-1"></a>            numberoftoss<span class="op">++;</span> </span>
-<span id="cb43-22"><a href="craps.html#cb43-22" aria-hidden="true" tabindex="-1"></a>            <span class="co">// make next roll</span></span>
-<span id="cb43-23"><a href="craps.html#cb43-23" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> nextRoll <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d1<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">+</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d2<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
-<span id="cb43-24"><a href="craps.html#cb43-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>nextRoll <span class="op">==</span> point<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb43-25"><a href="craps.html#cb43-25" aria-hidden="true" tabindex="-1"></a>                <span class="co">// hit the point, stop rolling</span></span>
-<span id="cb43-26"><a href="craps.html#cb43-26" aria-hidden="true" tabindex="-1"></a>                winner <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb43-27"><a href="craps.html#cb43-27" aria-hidden="true" tabindex="-1"></a>                continueRolling <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb43-28"><a href="craps.html#cb43-28" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>nextRoll <span class="op">==</span> <span class="dv">7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb43-29"><a href="craps.html#cb43-29" aria-hidden="true" tabindex="-1"></a>                <span class="co">// crapped out, stop rolling</span></span>
-<span id="cb43-30"><a href="craps.html#cb43-30" aria-hidden="true" tabindex="-1"></a>                winner <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb43-31"><a href="craps.html#cb43-31" aria-hidden="true" tabindex="-1"></a>                continueRolling <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb43-32"><a href="craps.html#cb43-32" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb43-33"><a href="craps.html#cb43-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb43-34"><a href="craps.html#cb43-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb43-35"><a href="craps.html#cb43-35" aria-hidden="true" tabindex="-1"></a>    probOfWinning<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>winner<span class="op">);</span></span>
-<span id="cb43-36"><a href="craps.html#cb43-36" aria-hidden="true" tabindex="-1"></a>    numTosses<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>numberoftoss<span class="op">);</span></span>
-<span id="cb43-37"><a href="craps.html#cb43-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb43-38"><a href="craps.html#cb43-38" aria-hidden="true" tabindex="-1"></a>StatisticReporter reporter <span class="op">=</span> <span class="kw">new</span> <span class="fu">StatisticReporter</span><span class="op">();</span></span>
-<span id="cb43-39"><a href="craps.html#cb43-39" aria-hidden="true" tabindex="-1"></a>reporter<span class="op">.</span><span class="fu">addStatistic</span><span class="op">(</span>probOfWinning<span class="op">);</span></span>
-<span id="cb43-40"><a href="craps.html#cb43-40" aria-hidden="true" tabindex="-1"></a>reporter<span class="op">.</span><span class="fu">addStatistic</span><span class="op">(</span>numTosses<span class="op">);</span></span>
-<span id="cb43-41"><a href="craps.html#cb43-41" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>reporter<span class="op">.</span><span class="fu">getHalfWidthSummaryReport</span><span class="op">());</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb47-1"><a href="craps.html#cb47-1" aria-hidden="true" tabindex="-1"></a>DUniformRV d1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">DUniformRV</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
+<span id="cb47-2"><a href="craps.html#cb47-2" aria-hidden="true" tabindex="-1"></a>DUniformRV d2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">DUniformRV</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
+<span id="cb47-3"><a href="craps.html#cb47-3" aria-hidden="true" tabindex="-1"></a>Statistic probOfWinning <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Prob of winning&quot;</span><span class="op">);</span></span>
+<span id="cb47-4"><a href="craps.html#cb47-4" aria-hidden="true" tabindex="-1"></a>Statistic numTosses <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Number of Toss Statistics&quot;</span><span class="op">);</span></span>
+<span id="cb47-5"><a href="craps.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numGames <span class="op">=</span> <span class="dv">5000</span><span class="op">;</span></span>
+<span id="cb47-6"><a href="craps.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> k <span class="op">&lt;=</span> numGames<span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb47-7"><a href="craps.html#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> winner <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb47-8"><a href="craps.html#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> point <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d1<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">+</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d2<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb47-9"><a href="craps.html#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numberoftoss <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb47-10"><a href="craps.html#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="craps.html#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>point <span class="op">==</span> <span class="dv">7</span> <span class="op">||</span> point <span class="op">==</span> <span class="dv">11</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb47-12"><a href="craps.html#cb47-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// automatic winner</span></span>
+<span id="cb47-13"><a href="craps.html#cb47-13" aria-hidden="true" tabindex="-1"></a>        winner <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb47-14"><a href="craps.html#cb47-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>point <span class="op">==</span> <span class="dv">2</span> <span class="op">||</span> point <span class="op">==</span> <span class="dv">3</span> <span class="op">||</span> point <span class="op">==</span> <span class="dv">12</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb47-15"><a href="craps.html#cb47-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// automatic loser</span></span>
+<span id="cb47-16"><a href="craps.html#cb47-16" aria-hidden="true" tabindex="-1"></a>        winner <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb47-17"><a href="craps.html#cb47-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> <span class="co">// now must roll to get point</span></span>
+<span id="cb47-18"><a href="craps.html#cb47-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">boolean</span> continueRolling <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb47-19"><a href="craps.html#cb47-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>continueRolling <span class="op">==</span> <span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb47-20"><a href="craps.html#cb47-20" aria-hidden="true" tabindex="-1"></a>            <span class="co">// increment number of tosses</span></span>
+<span id="cb47-21"><a href="craps.html#cb47-21" aria-hidden="true" tabindex="-1"></a>            numberoftoss<span class="op">++;</span> </span>
+<span id="cb47-22"><a href="craps.html#cb47-22" aria-hidden="true" tabindex="-1"></a>            <span class="co">// make next roll</span></span>
+<span id="cb47-23"><a href="craps.html#cb47-23" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> nextRoll <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d1<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">+</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> d2<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb47-24"><a href="craps.html#cb47-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>nextRoll <span class="op">==</span> point<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb47-25"><a href="craps.html#cb47-25" aria-hidden="true" tabindex="-1"></a>                <span class="co">// hit the point, stop rolling</span></span>
+<span id="cb47-26"><a href="craps.html#cb47-26" aria-hidden="true" tabindex="-1"></a>                winner <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb47-27"><a href="craps.html#cb47-27" aria-hidden="true" tabindex="-1"></a>                continueRolling <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb47-28"><a href="craps.html#cb47-28" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>nextRoll <span class="op">==</span> <span class="dv">7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb47-29"><a href="craps.html#cb47-29" aria-hidden="true" tabindex="-1"></a>                <span class="co">// crapped out, stop rolling</span></span>
+<span id="cb47-30"><a href="craps.html#cb47-30" aria-hidden="true" tabindex="-1"></a>                winner <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb47-31"><a href="craps.html#cb47-31" aria-hidden="true" tabindex="-1"></a>                continueRolling <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb47-32"><a href="craps.html#cb47-32" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb47-33"><a href="craps.html#cb47-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb47-34"><a href="craps.html#cb47-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb47-35"><a href="craps.html#cb47-35" aria-hidden="true" tabindex="-1"></a>    probOfWinning<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>winner<span class="op">);</span></span>
+<span id="cb47-36"><a href="craps.html#cb47-36" aria-hidden="true" tabindex="-1"></a>    numTosses<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>numberoftoss<span class="op">);</span></span>
+<span id="cb47-37"><a href="craps.html#cb47-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb47-38"><a href="craps.html#cb47-38" aria-hidden="true" tabindex="-1"></a>StatisticReporter reporter <span class="op">=</span> <span class="kw">new</span> <span class="fu">StatisticReporter</span><span class="op">();</span></span>
+<span id="cb47-39"><a href="craps.html#cb47-39" aria-hidden="true" tabindex="-1"></a>reporter<span class="op">.</span><span class="fu">addStatistic</span><span class="op">(</span>probOfWinning<span class="op">);</span></span>
+<span id="cb47-40"><a href="craps.html#cb47-40" aria-hidden="true" tabindex="-1"></a>reporter<span class="op">.</span><span class="fu">addStatistic</span><span class="op">(</span>numTosses<span class="op">);</span></span>
+<span id="cb47-41"><a href="craps.html#cb47-41" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>reporter<span class="op">.</span><span class="fu">getHalfWidthSummaryReport</span><span class="op">());</span></span></code></pre></div>
 <p>As we can see from the results of the statistics reporter, the probability of winning is just a little less than 50 percent.</p>
 <pre><code>Half-Width Statistical Summary Report - Confidence Level (95.000)% 
 
-Name                                                Count         Average      Half-Width 
----------------------------------------------------------------------------------------------------- 
-Prob of winning                                      5000          0.4960          0.0139 
-Number of Toss Statistics                            5000          3.4342          0.0856 
----------------------------------------------------------------------------------------------------- </code></pre>
-
+Name                            Count         Average      Half-Width 
+-------------------------------------------------------------------------------- 
+Prob of winning                   5000         0.4960          0.0139 
+Number of Toss Statistics         5000         3.4342          0.0856 
+-------------------------------------------------------------------------------- </code></pre>
+<p>Now let’s look at a slightly more complex static simulation.</p>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="ssMC.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introDEDS.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ch5-StatReview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-news-vendor-problem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

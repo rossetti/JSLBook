@@ -33,10 +33,10 @@ situations.  The purpose of this appendix is not to provide a comprehensive trea
 
 ## Single Line Queueing Stations {#app:qts1}
 
-Chapter \@ref(ch2) presented
+Chapter \@ref(introDEDS) presented
 the pharmacy model and analyzed it with a single server, single queue
 queueing system called the M/M/1. This section shows how the formulas
-for the M/M/1 model in Chapter \@ref(ch2) were derived and discusses the key notation and
+for the M/M/1 model are derived and discusses the key notation and
 assumptions of analytical models for systems with a single queue. In
 addition, you will also learn how to simulate variations of these
 models.
@@ -220,7 +220,7 @@ in the queue plus the expected time spent in service.
 
 ### Little's Formula
 
-Chapter \@ref(ch3) presented
+Chapter \@ref(introDEDS) presented
 time persistent data and computed time-averages. For queueing systems,
 one can show that relationships exist between such quantities as the
 expected number in the queue and the expected waiting time in the queue.

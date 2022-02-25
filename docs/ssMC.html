@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2021-12-31" />
+<meta name="date" content="2022-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="mcm.html"/>
-<link rel="next" href="craps.html"/>
+<link rel="next" href="ch5-StatReview.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -203,7 +203,15 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
-<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html"><i class="fa fa-check"></i><b>5.2</b> Review of Statistical Concepts</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#point-estimates-and-confidence-intervals"><i class="fa fa-check"></i><b>5.2.1</b> Point Estimates and Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#ch5:SampleSize"><i class="fa fa-check"></i><b>5.2.2</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#determining-the-sample-size-for-a-monte-carlo-simulation-experiment"><i class="fa fa-check"></i><b>5.2.3</b> Determining the Sample Size for a Monte Carlo Simulation Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.3</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.4" data-path="the-news-vendor-problem.html"><a href="the-news-vendor-problem.html"><i class="fa fa-check"></i><b>5.4</b> The News Vendor Problem</a></li>
+<li class="chapter" data-level="5.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
 <ul>
@@ -292,7 +300,7 @@ div.csl-indent {
 <li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
 <li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
 <li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
@@ -454,25 +462,28 @@ the area under <span class="math inline">\(f(x) = x^{\frac{1}{2}}\)</span> over 
 <span class="math inline">\(Y_i = (4-1)\sqrt{X{_i}}= 3\sqrt{X{_i}}\)</span>. In addition, for this simple example,
 we can easily check if our Monte Carlo approach is working because we
 know the true area.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb41-1"><a href="ssMC.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
-<span id="cb41-2"><a href="ssMC.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="fl">4.0</span><span class="op">;</span></span>
-<span id="cb41-3"><a href="ssMC.html#cb41-3" aria-hidden="true" tabindex="-1"></a>UniformRV ucdf <span class="op">=</span> <span class="kw">new</span> <span class="fu">UniformRV</span><span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
-<span id="cb41-4"><a href="ssMC.html#cb41-4" aria-hidden="true" tabindex="-1"></a>Statistic stat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Area Estimator&quot;</span><span class="op">);</span></span>
-<span id="cb41-5"><a href="ssMC.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> <span class="co">// sample size</span></span>
-<span id="cb41-6"><a href="ssMC.html#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;=</span>n<span class="op">;</span>i<span class="op">++){</span></span>
-<span id="cb41-7"><a href="ssMC.html#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x <span class="op">=</span> ucdf<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
-<span id="cb41-8"><a href="ssMC.html#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> gx <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span><span class="op">(</span>x<span class="op">);</span></span>
-<span id="cb41-9"><a href="ssMC.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> y <span class="op">=</span> <span class="op">(</span>b<span class="op">-</span>a<span class="op">)*</span>gx<span class="op">;</span></span>
-<span id="cb41-10"><a href="ssMC.html#cb41-10" aria-hidden="true" tabindex="-1"></a>    stat<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>y<span class="op">);</span></span>
-<span id="cb41-11"><a href="ssMC.html#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb41-12"><a href="ssMC.html#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;True Area = </span><span class="sc">%10.3f\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="fl">14.0</span><span class="op">/</span><span class="fl">3.0</span><span class="op">);</span></span>
-<span id="cb41-13"><a href="ssMC.html#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;Area estimate = </span><span class="sc">%10.3f\n</span><span class="st">&quot;</span><span class="op">,</span> stat<span class="op">.</span><span class="fu">getAverage</span><span class="op">());</span></span>
-<span id="cb41-14"><a href="ssMC.html#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Confidence Interval&quot;</span><span class="op">);</span></span>
-<span id="cb41-15"><a href="ssMC.html#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>stat<span class="op">.</span><span class="fu">getConfidenceInterval</span><span class="op">());</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb40-1"><a href="ssMC.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb40-2"><a href="ssMC.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="fl">4.0</span><span class="op">;</span></span>
+<span id="cb40-3"><a href="ssMC.html#cb40-3" aria-hidden="true" tabindex="-1"></a>UniformRV ucdf <span class="op">=</span> <span class="kw">new</span> <span class="fu">UniformRV</span><span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb40-4"><a href="ssMC.html#cb40-4" aria-hidden="true" tabindex="-1"></a>Statistic stat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Area Estimator&quot;</span><span class="op">);</span></span>
+<span id="cb40-5"><a href="ssMC.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> <span class="co">// sample size</span></span>
+<span id="cb40-6"><a href="ssMC.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;=</span>n<span class="op">;</span>i<span class="op">++){</span></span>
+<span id="cb40-7"><a href="ssMC.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x <span class="op">=</span> ucdf<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb40-8"><a href="ssMC.html#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> gx <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span><span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb40-9"><a href="ssMC.html#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> y <span class="op">=</span> <span class="op">(</span>b<span class="op">-</span>a<span class="op">)*</span>gx<span class="op">;</span></span>
+<span id="cb40-10"><a href="ssMC.html#cb40-10" aria-hidden="true" tabindex="-1"></a>    stat<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>y<span class="op">);</span></span>
+<span id="cb40-11"><a href="ssMC.html#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-12"><a href="ssMC.html#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;True Area = </span><span class="sc">%10.3f\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="fl">14.0</span><span class="op">/</span><span class="fl">3.0</span><span class="op">);</span></span>
+<span id="cb40-13"><a href="ssMC.html#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;Area estimate = </span><span class="sc">%10.3f\n</span><span class="st">&quot;</span><span class="op">,</span> stat<span class="op">.</span><span class="fu">getAverage</span><span class="op">());</span></span>
+<span id="cb40-14"><a href="ssMC.html#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Confidence Interval&quot;</span><span class="op">);</span></span>
+<span id="cb40-15"><a href="ssMC.html#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>stat<span class="op">.</span><span class="fu">getConfidenceInterval</span><span class="op">());</span></span></code></pre></div>
 <pre><code>True Area =      4.667
 Area estimate =      4.781
 Confidence Interval
 [4.608646560421988, 4.952515649272401]</code></pre>
+<p>Because confidence intervals may form the basis for decision making, you
+can use the confidence interval half-width in determining the sample
+size. A review of these and other statistical concepts will be the focus of the next section.</p>
 </div>
             </section>
 
@@ -480,7 +491,7 @@ Confidence Interval
         </div>
       </div>
 <a href="mcm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="craps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ch5-StatReview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

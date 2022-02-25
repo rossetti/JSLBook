@@ -516,11 +516,11 @@ approximate results. The assumption of normality is typically justified
 when across replication statistics are based on within replication
 averages.
 
-Since the first two methods have previously been presented, this chapter will discuss the half-width ratio method because it is often seen in practice.
+Determining the sample size for a simulation experiment has already been discussed in Section  \@ref(ch5:SampleSize) of Chapter \@ref(mcm), the following section will illustrate the half-width ratio method for determining the number of replications because it is often seen in practice.
 
 ### Determining the Number of Replications {#simoa:finhorizon:samplesize}
 
-If you make a pilot run of $n_0$ replications you can use the half-width from the pilot run
+As a reminder, we repeat some of the exposition from Section  \@ref(ch5:SampleSize).  If you make a pilot run of $n_0$ replications you can use the half-width from the pilot run
 to determine how many replications you need to have to be close to a
 desired half-width bound in the full experiment. This is called the
 *half-width ratio method*.
@@ -530,41 +530,34 @@ $n_0$ replications.
 
 \begin{equation}
 h_0 = t_{\alpha/2, n_0 - 1} \dfrac{s_0}{\sqrt{n_0}}
-(\#eq:hNot)
+(\#eq:hNotc)
 \end{equation}
 
 Solving for $n_0$ yields:
 
 \begin{equation}
 n_0 = t_{\alpha/2, n_0 -1}^{2} \dfrac{s_{0}^{2}}{h_{0}^{2}}
-(\#eq:n_0)
+(\#eq:n_0c)
 \end{equation}
 
 Similarly for any $n$, we have:
 
 \begin{equation}
 n = t_{\alpha/2, n-1}^{2} \dfrac{s^{2}}{h^{2}}
-(\#eq:n)
+(\#eq:nc)
 \end{equation}
 
-Taking the ratio of $n_0$ to $n$ (equations \@ref(eq:n_0) and \@ref(eq:n)) and assuming
+Taking the ratio of $n_0$ to $n$ using equations \@ref(eq:n_0c) and (\@ref(eq:nc) and assuming
 that $t_{\alpha/2, n-1}$ is approximately equal to
 $t_{\alpha/2, n_0 - 1}$ and $s^2$ is approximately equal to $s_0^2$,
 yields,
 
 \begin{equation}
 n \cong n_0 \dfrac{h_0^2}{h^2} = n_0 \left(\frac{h_0}{h}\right)^2
-(\#eq:hwratio)
+(\#eq:hwratioc)
 \end{equation}
 
-Equation (\@ref(eq:hwratio)) is the half-width ratio equation.
-
-In the case of an indicator variable such as, $I_r$, which was suggested
-for use in estimating the probability that there are customers in the
-bank after 5 pm, the sampled observations are clearly not normally
-distributed. In this case, since you are estimating a proportion, you
-can use the sample size determination techniques for estimating
-proportions previously described.
+Equation \@ref(eq:hwratioc) is the half-width ratio equation.
 
 Now, let's look at an example. Suppose a pilot run of a
 simulation model estimated that the average waiting time for a customer
@@ -582,7 +575,7 @@ $$n \cong n_0 \left(\frac{h_0}{h}\right)^2 = 15 \left(\frac{1.04}{0.1}\right)^2 
 To estimate a sample size based on the normal approximation method, we
 need to have the estimate of the initial sample standard deviation.
 Unfortunately, this is not directly reported, but it can be computed
-using Equation (\@ref(eq:hNot)). Rearranging Equation (\@ref(eq:hNot))
+using Equation \@ref(eq:hNotc). Rearranging Equation \@ref(eq:hNotc)
 to solve for $s_0$, yields:
 
 $$s_0 = \dfrac{h_0\sqrt{n_0}}{t_{\alpha/2, n_0 - 1}}$$
@@ -615,6 +608,13 @@ The three methods resulted in following recommendations:
 
 As noted in the discussion, the half-width ratio method recommended the
 largest number of replications.
+
+In the case of an indicator variable such as, $I_r$, which was suggested
+for use in estimating the probability that there are customers in the
+bank after 5 pm, the sampled observations are clearly not normally
+distributed. In this case, since you are estimating a proportion, you
+can use the sample size determination techniques for estimating
+proportions via equations \@ref(eq:propCI) and \@ref(eq:pSampleSize).
 
 ## Finite Horizon Example {#simoa:finhorizonex}
 
@@ -1064,7 +1064,7 @@ $$
 
 If you wanted to use the iterative method, you must first determine the
 standard deviation from the pilot replications. In the case of multiple
-replications, you can use the half-width value and equation (\@ref(eq:hNot)) to compute $s_0$.
+replications, you can use the half-width value and equation (\@ref(eq:hNotc)) to compute $s_0$.
 
 Rerunning the simulation with $n = 61$, yields a half-width of 20.77,
 which is very close to the criteria of 20. Note that the make and
@@ -1946,7 +1946,7 @@ the 95% confidence interval contains this value.
 The process described here for determining the warm up period for steady
 state simulation is tedious and time consuming. Research into automating
 this process is still an active area of investigation. The recent work
-by [@robinson2005automated] and @Rossetti:2005aa holds some promise in
+by [@robinson2005automated] and @Rossetti2005aa holds some promise in
 this regard; however, there remains the need to integrate these methods
 into computer simulation software. Even though determining the warm up
 period is tedious, some consideration of the warm up period should be

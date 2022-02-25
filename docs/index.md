@@ -1,7 +1,7 @@
 --- 
 title: "JSL - Java Simulation Library"
 author: "Manuel D. Rossetti"
-date: "2021-12-31"
+date: "2022-02-25"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 header-includes:

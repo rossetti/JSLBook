@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2021-12-31" />
+<meta name="date" content="2022-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,15 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
-<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html"><i class="fa fa-check"></i><b>5.2</b> Review of Statistical Concepts</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#point-estimates-and-confidence-intervals"><i class="fa fa-check"></i><b>5.2.1</b> Point Estimates and Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#ch5:SampleSize"><i class="fa fa-check"></i><b>5.2.2</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#determining-the-sample-size-for-a-monte-carlo-simulation-experiment"><i class="fa fa-check"></i><b>5.2.3</b> Determining the Sample Size for a Monte Carlo Simulation Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.3</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.4" data-path="the-news-vendor-problem.html"><a href="the-news-vendor-problem.html"><i class="fa fa-check"></i><b>5.4</b> The News Vendor Problem</a></li>
+<li class="chapter" data-level="5.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
 <ul>
@@ -292,7 +300,7 @@ div.csl-indent {
 <li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
 <li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
 <li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
@@ -483,44 +491,38 @@ normally distributed, you must rely on the central limit theorem to get
 approximate results. The assumption of normality is typically justified
 when across replication statistics are based on within replication
 averages.</p>
-<p>Since the first two methods have previously been presented, this chapter will discuss the half-width ratio method because it is often seen in practice.</p>
+<p>Determining the sample size for a simulation experiment has already been discussed in Section <a href="ch5-StatReview.html#ch5:SampleSize">5.2.2</a> of Chapter <a href="mcm.html#mcm">5</a>, the following section will illustrate the half-width ratio method for determining the number of replications because it is often seen in practice.</p>
 <div id="simoa:finhorizon:samplesize" class="section level3" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> Determining the Number of Replications</h3>
-<p>If you make a pilot run of <span class="math inline">\(n_0\)</span> replications you can use the half-width from the pilot run
+<p>As a reminder, we repeat some of the exposition from Section <a href="ch5-StatReview.html#ch5:SampleSize">5.2.2</a>. If you make a pilot run of <span class="math inline">\(n_0\)</span> replications you can use the half-width from the pilot run
 to determine how many replications you need to have to be close to a
 desired half-width bound in the full experiment. This is called the
 <em>half-width ratio method</em>.</p>
 <p>Let <span class="math inline">\(h_0\)</span> be the initial value for the half-width from the pilot run of
 <span class="math inline">\(n_0\)</span> replications.</p>
-<p><span class="math display" id="eq:hNot">\[\begin{equation}
+<p><span class="math display" id="eq:hNotc">\[\begin{equation}
 h_0 = t_{\alpha/2, n_0 - 1} \dfrac{s_0}{\sqrt{n_0}}
 \tag{8.1}
 \end{equation}\]</span></p>
 <p>Solving for <span class="math inline">\(n_0\)</span> yields:</p>
 <p><span class="math display">\[\begin{equation}
 n_0 = t_{\alpha/2, n_0 -1}^{2} \dfrac{s_{0}^{2}}{h_{0}^{2}}
-(\#eq:n_0)
+(\#eq:n_0c)
 \end{equation}\]</span></p>
 <p>Similarly for any <span class="math inline">\(n\)</span>, we have:</p>
-<p><span class="math display" id="eq:n">\[\begin{equation}
+<p><span class="math display" id="eq:nc">\[\begin{equation}
 n = t_{\alpha/2, n-1}^{2} \dfrac{s^{2}}{h^{2}}
 \tag{8.2}
 \end{equation}\]</span></p>
-<p>Taking the ratio of <span class="math inline">\(n_0\)</span> to <span class="math inline">\(n\)</span> (equations @ref(eq:n_0) and <a href="simoa-finhorizon.html#eq:n">(8.2)</a>) and assuming
+<p>Taking the ratio of <span class="math inline">\(n_0\)</span> to <span class="math inline">\(n\)</span> using equations @ref(eq:n_0c) and (<a href="simoa-finhorizon.html#eq:nc">(8.2)</a> and assuming
 that <span class="math inline">\(t_{\alpha/2, n-1}\)</span> is approximately equal to
 <span class="math inline">\(t_{\alpha/2, n_0 - 1}\)</span> and <span class="math inline">\(s^2\)</span> is approximately equal to <span class="math inline">\(s_0^2\)</span>,
 yields,</p>
-<p><span class="math display" id="eq:hwratio">\[\begin{equation}
+<p><span class="math display" id="eq:hwratioc">\[\begin{equation}
 n \cong n_0 \dfrac{h_0^2}{h^2} = n_0 \left(\frac{h_0}{h}\right)^2
 \tag{8.3}
 \end{equation}\]</span></p>
-<p>Equation (<a href="simoa-finhorizon.html#eq:hwratio">(8.3)</a>) is the half-width ratio equation.</p>
-<p>In the case of an indicator variable such as, <span class="math inline">\(I_r\)</span>, which was suggested
-for use in estimating the probability that there are customers in the
-bank after 5 pm, the sampled observations are clearly not normally
-distributed. In this case, since you are estimating a proportion, you
-can use the sample size determination techniques for estimating
-proportions previously described.</p>
+<p>Equation <a href="simoa-finhorizon.html#eq:hwratioc">(8.3)</a> is the half-width ratio equation.</p>
 <p>Now, let’s look at an example. Suppose a pilot run of a
 simulation model estimated that the average waiting time for a customer
 during the day was 11.485 minutes based on an initial sample size of 15
@@ -534,7 +536,7 @@ waiting time in the queue.</p>
 <p>To estimate a sample size based on the normal approximation method, we
 need to have the estimate of the initial sample standard deviation.
 Unfortunately, this is not directly reported, but it can be computed
-using Equation (<a href="simoa-finhorizon.html#eq:hNot">(8.1)</a>). Rearranging Equation (<a href="simoa-finhorizon.html#eq:hNot">(8.1)</a>)
+using Equation <a href="simoa-finhorizon.html#eq:hNotc">(8.1)</a>. Rearranging Equation <a href="simoa-finhorizon.html#eq:hNotc">(8.1)</a>
 to solve for <span class="math inline">\(s_0\)</span>, yields:</p>
 <p><span class="math display">\[s_0 = \dfrac{h_0\sqrt{n_0}}{t_{\alpha/2, n_0 - 1}}\]</span></p>
 <p>Since we have a 95% confidence interval with <span class="math inline">\(n_0 = 15\)</span>, we have that
@@ -560,6 +562,12 @@ Figure 8.2: Iterative Method for Sample Size via Goal Seek
 </ul>
 <p>As noted in the discussion, the half-width ratio method recommended the
 largest number of replications.</p>
+<p>In the case of an indicator variable such as, <span class="math inline">\(I_r\)</span>, which was suggested
+for use in estimating the probability that there are customers in the
+bank after 5 pm, the sampled observations are clearly not normally
+distributed. In this case, since you are estimating a proportion, you
+can use the sample size determination techniques for estimating
+proportions via equations <a href="ch5-StatReview.html#eq:propCI">(5.9)</a> and <a href="ch5-StatReview.html#eq:pSampleSize">(5.10)</a>.</p>
 </div>
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2021-12-31" />
+<meta name="date" content="2022-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,15 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
-<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html"><i class="fa fa-check"></i><b>5.2</b> Review of Statistical Concepts</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#point-estimates-and-confidence-intervals"><i class="fa fa-check"></i><b>5.2.1</b> Point Estimates and Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#ch5:SampleSize"><i class="fa fa-check"></i><b>5.2.2</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#determining-the-sample-size-for-a-monte-carlo-simulation-experiment"><i class="fa fa-check"></i><b>5.2.3</b> Determining the Sample Size for a Monte Carlo Simulation Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.3</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.4" data-path="the-news-vendor-problem.html"><a href="the-news-vendor-problem.html"><i class="fa fa-check"></i><b>5.4</b> The News Vendor Problem</a></li>
+<li class="chapter" data-level="5.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
 <ul>
@@ -292,7 +300,7 @@ div.csl-indent {
 <li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
 <li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
 <li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
@@ -1247,34 +1255,34 @@ The null hypothesis is that the data come from the hypothesized
 distribution versus the alternative hypothesis that the data do not come
 from the hypothesized distribution.</p>
 <p>Let’s perform a Chi-squared goodness of fit test of computer lab data for the Poisson distribution. A good first step in analyzing discrete data is to summarize the observations in a table. We can do that easily with the R <em>table()</em> function.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="app-idm-sec-fitDiscrete.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tabulate the counts</span></span>
-<span id="cb96-2"><a href="app-idm-sec-fitDiscrete.html#cb96-2" aria-hidden="true" tabindex="-1"></a>tCnts <span class="ot">=</span> <span class="fu">table</span>(p2<span class="sc">$</span>N)</span>
-<span id="cb96-3"><a href="app-idm-sec-fitDiscrete.html#cb96-3" aria-hidden="true" tabindex="-1"></a>tCnts</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="app-idm-sec-fitDiscrete.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tabulate the counts</span></span>
+<span id="cb102-2"><a href="app-idm-sec-fitDiscrete.html#cb102-2" aria-hidden="true" tabindex="-1"></a>tCnts <span class="ot">=</span> <span class="fu">table</span>(p2<span class="sc">$</span>N)</span>
+<span id="cb102-3"><a href="app-idm-sec-fitDiscrete.html#cb102-3" aria-hidden="true" tabindex="-1"></a>tCnts</span></code></pre></div>
 <pre><code>## 
 ##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 
 ##  1  3  2  7 13 16 21 25 20 21 11  7  5  6  1  1</code></pre>
 <p>From this analysis, we see that there were no week-period combinations that had 0 observations, 1 that had 1 count, 3 that had 2 counts, and so forth. Now, we will estimate the rate parameter of the hypothesized Poisson distribution using Equation <a href="app-idm-sec-fitDiscrete.html#eq:PoissonMLE">(C.6)</a> and tabulate the expected number of observations for a proposed set of classes.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="app-idm-sec-fitDiscrete.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get number of observations</span></span>
-<span id="cb98-2"><a href="app-idm-sec-fitDiscrete.html#cb98-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">length</span>(p2<span class="sc">$</span>N)</span>
-<span id="cb98-3"><a href="app-idm-sec-fitDiscrete.html#cb98-3" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="app-idm-sec-fitDiscrete.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get number of observations</span></span>
+<span id="cb104-2"><a href="app-idm-sec-fitDiscrete.html#cb104-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">length</span>(p2<span class="sc">$</span>N)</span>
+<span id="cb104-3"><a href="app-idm-sec-fitDiscrete.html#cb104-3" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div>
 <pre><code>## [1] 160</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="app-idm-sec-fitDiscrete.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate the rate for Poisson from the data</span></span>
-<span id="cb100-2"><a href="app-idm-sec-fitDiscrete.html#cb100-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">=</span> <span class="fu">mean</span>(p2<span class="sc">$</span>N)</span>
-<span id="cb100-3"><a href="app-idm-sec-fitDiscrete.html#cb100-3" aria-hidden="true" tabindex="-1"></a>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="app-idm-sec-fitDiscrete.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate the rate for Poisson from the data</span></span>
+<span id="cb106-2"><a href="app-idm-sec-fitDiscrete.html#cb106-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">=</span> <span class="fu">mean</span>(p2<span class="sc">$</span>N)</span>
+<span id="cb106-3"><a href="app-idm-sec-fitDiscrete.html#cb106-3" aria-hidden="true" tabindex="-1"></a>lambda</span></code></pre></div>
 <pre><code>## [1] 8.275</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="app-idm-sec-fitDiscrete.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># setup vector of x&#39;s across domain of Poisson</span></span>
-<span id="cb102-2"><a href="app-idm-sec-fitDiscrete.html#cb102-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span></span>
-<span id="cb102-3"><a href="app-idm-sec-fitDiscrete.html#cb102-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="app-idm-sec-fitDiscrete.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># setup vector of x&#39;s across domain of Poisson</span></span>
+<span id="cb108-2"><a href="app-idm-sec-fitDiscrete.html#cb108-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span></span>
+<span id="cb108-3"><a href="app-idm-sec-fitDiscrete.html#cb108-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##  [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="app-idm-sec-fitDiscrete.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the probability for Poisson</span></span>
-<span id="cb104-2"><a href="app-idm-sec-fitDiscrete.html#cb104-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">=</span> <span class="fu">dpois</span>(x, lambda)</span>
-<span id="cb104-3"><a href="app-idm-sec-fitDiscrete.html#cb104-3" aria-hidden="true" tabindex="-1"></a>prob</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="app-idm-sec-fitDiscrete.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the probability for Poisson</span></span>
+<span id="cb110-2"><a href="app-idm-sec-fitDiscrete.html#cb110-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">=</span> <span class="fu">dpois</span>(x, lambda)</span>
+<span id="cb110-3"><a href="app-idm-sec-fitDiscrete.html#cb110-3" aria-hidden="true" tabindex="-1"></a>prob</span></code></pre></div>
 <pre><code>##  [1] 0.0002548081 0.0021085367 0.0087240706 0.0240638947 0.0497821822
 ##  [6] 0.0823895116 0.1136288681 0.1343255548 0.1389429957 0.1277503655
 ## [11] 0.1057134275 0.0795253284 0.0548393410 0.0349073498 0.0206327371
 ## [16] 0.0113823933</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="app-idm-sec-fitDiscrete.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view the expected counts for these probabilities</span></span>
-<span id="cb106-2"><a href="app-idm-sec-fitDiscrete.html#cb106-2" aria-hidden="true" tabindex="-1"></a>prob<span class="sc">*</span>n</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="app-idm-sec-fitDiscrete.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view the expected counts for these probabilities</span></span>
+<span id="cb112-2"><a href="app-idm-sec-fitDiscrete.html#cb112-2" aria-hidden="true" tabindex="-1"></a>prob<span class="sc">*</span>n</span></code></pre></div>
 <pre><code>##  [1]  0.04076929  0.33736587  1.39585130  3.85022316  7.96514916 13.18232186
 ##  [7] 18.18061890 21.49208877 22.23087932 20.44005848 16.91414839 12.72405254
 ## [13]  8.77429457  5.58517596  3.30123794  1.82118293</code></pre>
@@ -1283,42 +1291,42 @@ from the hypothesized distribution.</p>
 P\left\{X=x\right\} = \frac{e^{-\lambda}\lambda^{x}}{x!} \quad \lambda &gt; 0, \quad x = 0, 1, \ldots
 \]</span>
 Then, by multiplying each probability, <span class="math inline">\(P\left\{X=i\right\} = p_i\)</span> by the number of observations <span class="math inline">\(n=160\)</span>, we can get the expected number, <span class="math inline">\(n\times p_i\)</span>, that we should observed under the hypothesized distribution. Since the expected values for <span class="math inline">\(x = 0, 1, 2, 3, 4\)</span> are so small, we consolidate them in to one class to have the expected number to be at least 5. We will also consolidate the range <span class="math inline">\(x \geq 13\)</span> into a single class and the values of 11 and 12 into a class.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="app-idm-sec-fitDiscrete.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the probability for the classes</span></span>
-<span id="cb108-2"><a href="app-idm-sec-fitDiscrete.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the vector is indexed starting at 1, prob[1] = P(X=0)</span></span>
-<span id="cb108-3"><a href="app-idm-sec-fitDiscrete.html#cb108-3" aria-hidden="true" tabindex="-1"></a>cProb <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">sum</span>(prob[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]), prob[<span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>], <span class="fu">sum</span>(prob[<span class="dv">12</span><span class="sc">:</span><span class="dv">13</span>]), <span class="fu">ppois</span>(<span class="dv">12</span>, lambda, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb108-4"><a href="app-idm-sec-fitDiscrete.html#cb108-4" aria-hidden="true" tabindex="-1"></a>cProb</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="app-idm-sec-fitDiscrete.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the probability for the classes</span></span>
+<span id="cb114-2"><a href="app-idm-sec-fitDiscrete.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the vector is indexed starting at 1, prob[1] = P(X=0)</span></span>
+<span id="cb114-3"><a href="app-idm-sec-fitDiscrete.html#cb114-3" aria-hidden="true" tabindex="-1"></a>cProb <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">sum</span>(prob[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]), prob[<span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>], <span class="fu">sum</span>(prob[<span class="dv">12</span><span class="sc">:</span><span class="dv">13</span>]), <span class="fu">ppois</span>(<span class="dv">12</span>, lambda, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb114-4"><a href="app-idm-sec-fitDiscrete.html#cb114-4" aria-hidden="true" tabindex="-1"></a>cProb</span></code></pre></div>
 <pre><code>## [1] 0.08493349 0.08238951 0.11362887 0.13432555 0.13894300 0.12775037 0.10571343
 ## [8] 0.13436467 0.07795112</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="app-idm-sec-fitDiscrete.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the expected counts for each of the classes</span></span>
-<span id="cb110-2"><a href="app-idm-sec-fitDiscrete.html#cb110-2" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">=</span> cProb<span class="sc">*</span>n</span>
-<span id="cb110-3"><a href="app-idm-sec-fitDiscrete.html#cb110-3" aria-hidden="true" tabindex="-1"></a>expected</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="app-idm-sec-fitDiscrete.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the expected counts for each of the classes</span></span>
+<span id="cb116-2"><a href="app-idm-sec-fitDiscrete.html#cb116-2" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">=</span> cProb<span class="sc">*</span>n</span>
+<span id="cb116-3"><a href="app-idm-sec-fitDiscrete.html#cb116-3" aria-hidden="true" tabindex="-1"></a>expected</span></code></pre></div>
 <pre><code>## [1] 13.58936 13.18232 18.18062 21.49209 22.23088 20.44006 16.91415 21.49835
 ## [9] 12.47218</code></pre>
 <p>Thus, we will use the following <span class="math inline">\(k=9\)</span> classes: {0,1,2,3,4}, {5}, <span class="math inline">\(\cdots\)</span>, {10}, {11,12}, and {13 or more }. Now, we need to summarize the observed frequencies for the proposed classes.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="app-idm-sec-fitDiscrete.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform tabulated counts to data frame</span></span>
-<span id="cb112-2"><a href="app-idm-sec-fitDiscrete.html#cb112-2" aria-hidden="true" tabindex="-1"></a>dfCnts <span class="ot">=</span> <span class="fu">as.data.frame</span>(tCnts)</span>
-<span id="cb112-3"><a href="app-idm-sec-fitDiscrete.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># extract only frequencies</span></span>
-<span id="cb112-4"><a href="app-idm-sec-fitDiscrete.html#cb112-4" aria-hidden="true" tabindex="-1"></a>cnts <span class="ot">=</span> dfCnts<span class="sc">$</span>Freq</span>
-<span id="cb112-5"><a href="app-idm-sec-fitDiscrete.html#cb112-5" aria-hidden="true" tabindex="-1"></a>cnts</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="app-idm-sec-fitDiscrete.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform tabulated counts to data frame</span></span>
+<span id="cb118-2"><a href="app-idm-sec-fitDiscrete.html#cb118-2" aria-hidden="true" tabindex="-1"></a>dfCnts <span class="ot">=</span> <span class="fu">as.data.frame</span>(tCnts)</span>
+<span id="cb118-3"><a href="app-idm-sec-fitDiscrete.html#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="co"># extract only frequencies</span></span>
+<span id="cb118-4"><a href="app-idm-sec-fitDiscrete.html#cb118-4" aria-hidden="true" tabindex="-1"></a>cnts <span class="ot">=</span> dfCnts<span class="sc">$</span>Freq</span>
+<span id="cb118-5"><a href="app-idm-sec-fitDiscrete.html#cb118-5" aria-hidden="true" tabindex="-1"></a>cnts</span></code></pre></div>
 <pre><code>##  [1]  1  3  2  7 13 16 21 25 20 21 11  7  5  6  1  1</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="app-idm-sec-fitDiscrete.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># consolidate classes for observed</span></span>
-<span id="cb114-2"><a href="app-idm-sec-fitDiscrete.html#cb114-2" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">sum</span>(cnts[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), cnts[<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>], <span class="fu">sum</span>(cnts[<span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>]), <span class="fu">sum</span>(cnts[<span class="dv">13</span><span class="sc">:</span><span class="dv">16</span>]))</span>
-<span id="cb114-3"><a href="app-idm-sec-fitDiscrete.html#cb114-3" aria-hidden="true" tabindex="-1"></a>observed</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="app-idm-sec-fitDiscrete.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># consolidate classes for observed</span></span>
+<span id="cb120-2"><a href="app-idm-sec-fitDiscrete.html#cb120-2" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">sum</span>(cnts[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), cnts[<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>], <span class="fu">sum</span>(cnts[<span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>]), <span class="fu">sum</span>(cnts[<span class="dv">13</span><span class="sc">:</span><span class="dv">16</span>]))</span>
+<span id="cb120-3"><a href="app-idm-sec-fitDiscrete.html#cb120-3" aria-hidden="true" tabindex="-1"></a>observed</span></code></pre></div>
 <pre><code>## [1] 13 13 16 21 25 20 21 18 13</code></pre>
 <p>Now, we have both the observed and expected tabulated and can proceed with the chi-squared goodness of fit test. We will compute the result directly using Equation <a href="app-idm-sec-fitDiscrete.html#eq:chisq">(C.7)</a>.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="app-idm-sec-fitDiscrete.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the observed minus expected components</span></span>
-<span id="cb116-2"><a href="app-idm-sec-fitDiscrete.html#cb116-2" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">=</span> ((observed <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>expected</span>
-<span id="cb116-3"><a href="app-idm-sec-fitDiscrete.html#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the chi-squared test statistic</span></span>
-<span id="cb116-4"><a href="app-idm-sec-fitDiscrete.html#cb116-4" aria-hidden="true" tabindex="-1"></a>sumchisq <span class="ot">=</span> <span class="fu">sum</span>(chisq)</span>
-<span id="cb116-5"><a href="app-idm-sec-fitDiscrete.html#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="co"># chi-squared test statistic</span></span>
-<span id="cb116-6"><a href="app-idm-sec-fitDiscrete.html#cb116-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sumchisq)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="app-idm-sec-fitDiscrete.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the observed minus expected components</span></span>
+<span id="cb122-2"><a href="app-idm-sec-fitDiscrete.html#cb122-2" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">=</span> ((observed <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>expected</span>
+<span id="cb122-3"><a href="app-idm-sec-fitDiscrete.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the chi-squared test statistic</span></span>
+<span id="cb122-4"><a href="app-idm-sec-fitDiscrete.html#cb122-4" aria-hidden="true" tabindex="-1"></a>sumchisq <span class="ot">=</span> <span class="fu">sum</span>(chisq)</span>
+<span id="cb122-5"><a href="app-idm-sec-fitDiscrete.html#cb122-5" aria-hidden="true" tabindex="-1"></a><span class="co"># chi-squared test statistic</span></span>
+<span id="cb122-6"><a href="app-idm-sec-fitDiscrete.html#cb122-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sumchisq)</span></code></pre></div>
 <pre><code>## [1] 2.233903</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="app-idm-sec-fitDiscrete.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the degrees of freedom, with 1 estimated parameter s = 1</span></span>
-<span id="cb118-2"><a href="app-idm-sec-fitDiscrete.html#cb118-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">length</span>(expected) <span class="sc">-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb118-3"><a href="app-idm-sec-fitDiscrete.html#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the p-value</span></span>
-<span id="cb118-4"><a href="app-idm-sec-fitDiscrete.html#cb118-4" aria-hidden="true" tabindex="-1"></a>pvalue <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(sumchisq, df)</span>
-<span id="cb118-5"><a href="app-idm-sec-fitDiscrete.html#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value</span></span>
-<span id="cb118-6"><a href="app-idm-sec-fitDiscrete.html#cb118-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="app-idm-sec-fitDiscrete.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the degrees of freedom, with 1 estimated parameter s = 1</span></span>
+<span id="cb124-2"><a href="app-idm-sec-fitDiscrete.html#cb124-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">length</span>(expected) <span class="sc">-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb124-3"><a href="app-idm-sec-fitDiscrete.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the p-value</span></span>
+<span id="cb124-4"><a href="app-idm-sec-fitDiscrete.html#cb124-4" aria-hidden="true" tabindex="-1"></a>pvalue <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(sumchisq, df)</span>
+<span id="cb124-5"><a href="app-idm-sec-fitDiscrete.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value</span></span>
+<span id="cb124-6"><a href="app-idm-sec-fitDiscrete.html#cb124-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue)</span></code></pre></div>
 <pre><code>## [1] 0.9457686</code></pre>
 <p>Based on such a high p-value, we would not reject <span class="math inline">\(H_0\)</span>. Thus, we can conclude that there is not enough evidence to suggest that the lab arrival count data is some other distribution than the Poisson distribution. In this section, we did the Chi-squared test <em>by-hand</em>. R has a package that facilitates distribution fitting called, <em>fitdistrplus</em>. We will use this package to analyze the computer lab arrival data again in the next section.</p>
 </div>
@@ -1346,14 +1354,14 @@ theoretical distribution.</p>
 summary(fp)
 plot(fp)
 gofstat(fp)</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="app-idm-sec-fitDiscrete.html#cb122-1" aria-hidden="true" tabindex="-1"></a>fp <span class="ot">=</span> <span class="fu">fitdist</span>(p2<span class="sc">$</span>N, <span class="st">&quot;pois&quot;</span>)</span>
-<span id="cb122-2"><a href="app-idm-sec-fitDiscrete.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fp)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="app-idm-sec-fitDiscrete.html#cb128-1" aria-hidden="true" tabindex="-1"></a>fp <span class="ot">=</span> <span class="fu">fitdist</span>(p2<span class="sc">$</span>N, <span class="st">&quot;pois&quot;</span>)</span>
+<span id="cb128-2"><a href="app-idm-sec-fitDiscrete.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fp)</span></code></pre></div>
 <pre><code>## Fitting of the distribution &#39; pois &#39; by maximum likelihood 
 ## Parameters : 
 ##        estimate Std. Error
 ## lambda    8.275  0.2274176
 ## Loglikelihood:  -393.7743   AIC:  789.5485   BIC:  792.6237</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="app-idm-sec-fitDiscrete.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gofstat</span>(fp)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="app-idm-sec-fitDiscrete.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gofstat</span>(fp)</span></code></pre></div>
 <pre><code>## Chi-squared statistic:  2.233903 
 ## Degree of freedom of the Chi-squared distribution:  7 
 ## Chi-squared p-value:  0.9457686 
@@ -1489,8 +1497,8 @@ a discrete empirical distribution to the proportions observed in the
 sample. Using the table() command, we can summarize the counts. Then, by
 dividing by 40 (the total number of observations), we can get the
 proportions as show in the <span class="math inline">\(R\)</span> listing.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="app-idm-sec-fitDiscrete.html#cb127-1" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">=</span> <span class="fu">table</span>(packageCnt)</span>
-<span id="cb127-2"><a href="app-idm-sec-fitDiscrete.html#cb127-2" aria-hidden="true" tabindex="-1"></a>tp<span class="sc">/</span><span class="fu">length</span>(packageCnt)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="app-idm-sec-fitDiscrete.html#cb133-1" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">=</span> <span class="fu">table</span>(packageCnt)</span>
+<span id="cb133-2"><a href="app-idm-sec-fitDiscrete.html#cb133-2" aria-hidden="true" tabindex="-1"></a>tp<span class="sc">/</span><span class="fu">length</span>(packageCnt)</span></code></pre></div>
 <pre><code>## packageCnt
 ##   100   110   120   130   140   150 
 ## 0.050 0.150 0.225 0.375 0.125 0.075</code></pre>

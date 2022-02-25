@@ -4,7 +4,7 @@
 
 \begin{table}
 
-\caption{(\#tab:ZTable)Cumulative standard normal distribution, z = -3.49 to 0}
+\caption{(\#tab:LowerZTable)Cumulative standard normal distribution, z = -3.49 to 0}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{lrrrrrrrrrr}
@@ -62,7 +62,7 @@
 
 \begin{table}
 
-\caption{(\#tab:ZTable)Cumulative standard normal distribution, z = 0.0 to 3.49}
+\caption{(\#tab:UpperZTable)Cumulative standard normal distribution, z = 0.0 to 3.49}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{lrrrrrrrrrr}

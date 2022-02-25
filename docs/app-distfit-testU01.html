@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2021-12-31" />
+<meta name="date" content="2022-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,15 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
-<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html"><i class="fa fa-check"></i><b>5.2</b> Review of Statistical Concepts</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#point-estimates-and-confidence-intervals"><i class="fa fa-check"></i><b>5.2.1</b> Point Estimates and Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#ch5:SampleSize"><i class="fa fa-check"></i><b>5.2.2</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#determining-the-sample-size-for-a-monte-carlo-simulation-experiment"><i class="fa fa-check"></i><b>5.2.3</b> Determining the Sample Size for a Monte Carlo Simulation Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.3</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.4" data-path="the-news-vendor-problem.html"><a href="the-news-vendor-problem.html"><i class="fa fa-check"></i><b>5.4</b> The News Vendor Problem</a></li>
+<li class="chapter" data-level="5.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
 <ul>
@@ -292,7 +300,7 @@ div.csl-indent {
 <li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
 <li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
 <li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
@@ -699,10 +707,10 @@ Computing the p-value for <span class="math inline">\(k-s-1=10-0-1=9\)</span> de
 would not reject the hypothesis that the observed data is <span class="math inline">\(U(0,1)\)</span>. This process can be readily implemented within a spreadsheet or performed using R. Assuming that the file, u01data.txt, contains the PRNs for this example, then the following R commands will
 perform the test:<br />
 </p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="app-distfit-testU01.html#cb174-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
-<span id="cb174-2"><a href="app-distfit-testU01.html#cb174-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="co"># set up the break points</span></span>
-<span id="cb174-3"><a href="app-distfit-testU01.html#cb174-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> <span class="fu">hist</span>(data, b, <span class="at">right =</span> <span class="cn">FALSE</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>) <span class="co"># tabulate the counts</span></span>
-<span id="cb174-4"><a href="app-distfit-testU01.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(h<span class="sc">$</span>counts) <span class="co"># perform the test</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="app-distfit-testU01.html#cb180-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
+<span id="cb180-2"><a href="app-distfit-testU01.html#cb180-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="co"># set up the break points</span></span>
+<span id="cb180-3"><a href="app-distfit-testU01.html#cb180-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> <span class="fu">hist</span>(data, b, <span class="at">right =</span> <span class="cn">FALSE</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>) <span class="co"># tabulate the counts</span></span>
+<span id="cb180-4"><a href="app-distfit-testU01.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(h<span class="sc">$</span>counts) <span class="co"># perform the test</span></span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
@@ -1000,7 +1008,7 @@ D^{-}_{n} &amp; = \underset{1 \leq i \leq n}{\max} \Bigl\lbrace x_{(i)} - \frac{
 \]</span>
 Thus, we have that</p>
 <p><span class="math display">\[D_{n} = \max \lbrace D^{+}_{n}, D^{-}_{n} \rbrace = \max \lbrace 0.038, 0.108 \rbrace = 0.108\]</span>
-Referring to Table <a href="app-StatTables.html#tab:ksValues">F.4</a> and using the approximation for sample sizes greater
+Referring to Table <a href="app-StatTables.html#tab:ksValues">F.5</a> and using the approximation for sample sizes greater
 than 35, we have that <span class="math inline">\(D_{0.05} \approx 1.36/\sqrt{n}\)</span>. Thus,
 <span class="math inline">\(D_{0.05} \approx 1.36/\sqrt{100} = 0.136\)</span>. Since <span class="math inline">\(D_{n} &lt; D_{0.05}\)</span>, we
 would not reject the hypothesis that the data is uniformly distribution
@@ -1011,8 +1019,8 @@ statistical software <span class="math inline">\(R\)</span>. Assuming that the f
 contains the data for this example, then the following R commands will
 perform the test:<br />
 </p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="app-distfit-testU01.html#cb178-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
-<span id="cb178-2"><a href="app-distfit-testU01.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(data,<span class="st">&quot;punif&quot;</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># perform the test</span></span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="app-distfit-testU01.html#cb184-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
+<span id="cb184-2"><a href="app-distfit-testU01.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(data,<span class="st">&quot;punif&quot;</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># perform the test</span></span></code></pre></div>
 <pre><code>## 
 ##  One-sample Kolmogorov-Smirnov test
 ## 
@@ -1042,7 +1050,7 @@ band, we can conclude that the data are likely independent observations.</p>
 Figure C.28: Autocorrelation Plot for u01data.txt Data Set
 </p>
 </div>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="app-distfit-testU01.html#cb180-1" aria-hidden="true" tabindex="-1"></a>rho</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="app-distfit-testU01.html#cb186-1" aria-hidden="true" tabindex="-1"></a>rho</span></code></pre></div>
 <pre><code>## 
 ## Autocorrelations of series &#39;data&#39;, by lag
 ## 

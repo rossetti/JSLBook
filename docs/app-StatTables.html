@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2021-12-31" />
+<meta name="date" content="2022-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,15 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="mcm.html"><a href="mcm.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Methods</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ssMC.html"><a href="ssMC.html"><i class="fa fa-check"></i><b>5.1</b> Simple Monte Carlo Integration</a></li>
-<li class="chapter" data-level="5.2" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.2</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html"><i class="fa fa-check"></i><b>5.2</b> Review of Statistical Concepts</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#point-estimates-and-confidence-intervals"><i class="fa fa-check"></i><b>5.2.1</b> Point Estimates and Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2.2" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#ch5:SampleSize"><i class="fa fa-check"></i><b>5.2.2</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="5.2.3" data-path="ch5-StatReview.html"><a href="ch5-StatReview.html#determining-the-sample-size-for-a-monte-carlo-simulation-experiment"><i class="fa fa-check"></i><b>5.2.3</b> Determining the Sample Size for a Monte Carlo Simulation Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="craps.html"><a href="craps.html"><i class="fa fa-check"></i><b>5.3</b> Simulating the Game of Craps</a></li>
+<li class="chapter" data-level="5.4" data-path="the-news-vendor-problem.html"><a href="the-news-vendor-problem.html"><i class="fa fa-check"></i><b>5.4</b> The News Vendor Problem</a></li>
+<li class="chapter" data-level="5.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="introDEDS.html"><a href="introDEDS.html"><i class="fa fa-check"></i><b>6</b> Introduction to Discrete Event Modeling</a>
 <ul>
@@ -292,7 +300,7 @@ div.csl-indent {
 <li class="chapter" data-level="B.2.3" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#acceptancerejection"><i class="fa fa-check"></i><b>B.2.3</b> Acceptance/Rejection</a></li>
 <li class="chapter" data-level="B.2.4" data-path="app-rnrv-rvs.html"><a href="app-rnrv-rvs.html#AppRNRV:subsec:MTSRV"><i class="fa fa-check"></i><b>B.2.4</b> Mixture Distributions, Truncated Distributions, and Shifted Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
+<li class="chapter" data-level="B.3" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>B.3</b> Summary</a></li>
 <li class="chapter" data-level="B.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>B.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="app-idm.html"><a href="app-idm.html"><i class="fa fa-check"></i><b>C</b> Probability Distribution Modeling</a>
@@ -388,7 +396,7 @@ div.csl-indent {
 <h1><span class="header-section-number">F</span> Statistical Tables</h1>
 <table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:ZTable">Table F.1: </span>Cumulative standard normal distribution, z = -3.49 to 0
+<span id="tab:LowerZTable">Table F.1: </span>Cumulative standard normal distribution, z = -3.49 to 0
 </caption>
 <thead>
 <tr>
@@ -1657,7 +1665,7 @@ div.csl-indent {
 <div style="page-break-after: always;"></div>
 <table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:ZTable">Table F.1: </span>Cumulative standard normal distribution, z = 0.0 to 3.49
+<span id="tab:UpperZTable">Table F.2: </span>Cumulative standard normal distribution, z = 0.0 to 3.49
 </caption>
 <thead>
 <tr>
@@ -2925,7 +2933,7 @@ div.csl-indent {
 </table>
 <div id="tab:tdist">
 <table>
-<caption><span id="tab:tdis">Table F.2: </span> Percentage Points <span class="math inline">\(t_{\nu,\alpha}\)</span> of the Student-t Distribution</caption>
+<caption><span id="tab:tdis">Table F.3: </span> Percentage Points <span class="math inline">\(t_{\nu,\alpha}\)</span> of the Student-t Distribution</caption>
 <thead>
 <tr class="header">
 <th align="right"><span class="math inline">\(\nu \backslash \alpha\)</span></th>
@@ -3374,7 +3382,7 @@ div.csl-indent {
 </div>
 <div id="tab:chidist">
 <table>
-<caption><span id="tab:chidist">Table F.3: </span> Percentage Points <span class="math inline">\(\chi^{2}_{\nu,\alpha}\)</span> of the Chi-Square Distribution (<span class="math inline">\(\nu\)</span>) degrees of freedom</caption>
+<caption><span id="tab:chidist">Table F.4: </span> Percentage Points <span class="math inline">\(\chi^{2}_{\nu,\alpha}\)</span> of the Chi-Square Distribution (<span class="math inline">\(\nu\)</span>) degrees of freedom</caption>
 <thead>
 <tr class="header">
 <th align="right"><span class="math inline">\(\nu \backslash \alpha\)</span></th>
@@ -3857,7 +3865,7 @@ div.csl-indent {
 <div style="page-break-after: always;"></div>
 <div id="tab:ksValues">
 <table>
-<caption><span id="tab:ksValues">Table F.4: </span> Kolmogorov-Smirnov Test Critical Values</caption>
+<caption><span id="tab:ksValues">Table F.5: </span> Kolmogorov-Smirnov Test Critical Values</caption>
 <thead>
 <tr class="header">
 <th align="center">n</th>
