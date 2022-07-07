@@ -327,7 +327,7 @@ to the next event, the current simulation time is updated to the time of
 the next event and any changes to the system associated with the next
 event are executed. This allows the simulation to evolve over time.
 
-## Simulating a Queueing System By Hand
+## Simulating a Queueing System By Hand {#QHandExample}
 
 This section builds on the concepts discussed in the previous section in order to provide insights into how discrete event simulations operate.  In order to do this, we will simulate a simple queueing system by hand.  That is, we will process each of the events that occur as well as the state changes in order to trace the operation of the system through time.  
 
@@ -1031,7 +1031,7 @@ provide event action code: 1) provide a class that implements the
 `EventActionIfc` interface and supply it when scheduling the event or 2)
 by treating the `EventActionIfc` as a functional interface and using Java 8's functional method representation.  Providing an inner class that implements the `EventActionIfc` interface will be illustrated here.
 
-### Simple Event Scheduling Examples
+### Simple Event Scheduling Examples {#introDEDS:schedExamples}
 
 This section presents two simple examples to illustrate event
 scheduling. The first example illustrates the scheduling of events using the `EventActionIfc` interface. The second example shows how to simulate a Poisson process and collect
@@ -1160,7 +1160,7 @@ EventActionTwo at time : 100.0
 
 Notice that event action one output occurs at time 10.0. This is due to the event that was scheduled within the `initialize()` method. Event action two occurs for the first time at time 20.0 and then every 20 time units. Notice that event action one occurs at time 35.0. This is due to the event being scheduled in the action method of event action two.
 
-#### Overview of Simuation Run Context
+#### Overview of Simuation Run Context {#introDEDS:overview}
 
 When the simulation runs, much underlying code is executed. At this
 stage it is not critically important to understand how this code works;
@@ -1215,7 +1215,7 @@ executive because the events are scheduled. Thus, if you schedule
 events, you can be assured that the logic associated with the events
 will be executed.
 
-#### Simulating a Poisson Process
+#### Simulating a Poisson Process {#introDEDS:pois}
 
 The second simple example illustrates how to simulate a Poisson process.
 Recall that a Poisson process models the number of events that occur
@@ -1340,7 +1340,7 @@ Counts events        20.500000      4.870779     50.000000
 -----------------------------------------------------------
 ```
 
-### Up and Down Component Example
+### Up and Down Component Example {#introDEDS:updown}
 
 This section further illustrates DEDS modeling with a component of a
 system that is subject to random failures. The component has two states
@@ -1627,17 +1627,17 @@ activity diagram is called an activity cycle diagram. The notation of an
 activity diagram is very simple, and can be augmented as needed to
 explain additional concepts:
 
-Queues: shown as a circle with queue labeled inside
+- Queues: shown as a circle with queue labeled inside
 
-Activities: shown as a rectangle with appropriate label inside
+- Activities: shown as a rectangle with appropriate label inside
 
-Resources: shown as small circles with resource labeled inside
+- Resources: shown as small circles with resource labeled inside
 
-Lines/arcs: indicating flow (precedence ordering) for engagement of entities in
+- Lines/arcs: indicating flow (precedence ordering) for engagement of entities in
     activities or for obtaining resources. Dotted lines are used to
     indicate the seizing and releasing of resources.
     
-zigzag lines: indicate the creation or destruction of entities
+- zigzag lines: indicate the creation or destruction of entities
 
 Activity diagrams are especially useful for illustrating how entities
 interact with resources. In addition, activity diagrams help in finding
@@ -1650,7 +1650,7 @@ mechanism to document a conceptual model of the system before building
 the model.
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth,height=0.8\textheight]{./figures/ch4/ch4fig9} \caption{Activity Diagram of Drive through Pharmacy}(\#fig:DTPActivityDiagram)
+\includegraphics[width=0.75\linewidth,height=0.75\textheight]{./figures/ch4/ch4fig9} \caption{Activity Diagram of Drive through Pharmacy}(\#fig:DTPActivityDiagram)
 \end{figure}
 
 Figure \@ref(fig:DTPActivityDiagram) shows the activity diagram for the
@@ -1681,19 +1681,19 @@ zigzag lines going to no-where and indicating that the object leaves the
 system and is disposed The conceptual model of this system can be
 summarized as follows:
 
-System:   The system has a pharmacist that acts as a resource, customers that
+- System:   The system has a pharmacist that acts as a resource, customers that
     act as entities, and a queue to hold the waiting customers. The
     state of the system includes the number of customers in the system,
     in the queue, and in service.
     
-Events:   Arrivals of customers to the system, which occur within an
+- Events:   Arrivals of customers to the system, which occur within an
     inter-event time that is exponentially distributed with a mean of 6
     minutes.
     
-Activities:   The service time of the customers are exponentially distributed with
+- Activities:   The service time of the customers are exponentially distributed with
     a mean of 3 minutes.
     
-Conditional delays:   A conditional delay occurs when an entity has to wait for a
+- Conditional delays:   A conditional delay occurs when an entity has to wait for a
     condition to occur in order to proceed. In this system, the customer
     may have to wait in a queue until the pharmacist becomes available.
 
@@ -1724,60 +1724,96 @@ long! For the sake of simplicity, assume that 10,000 hours of operation
 is long enough.
 
 The logic of this model follows very closely the discussion of the bank
-teller example.  The following code listing presents the definition of the variables and their creation. 
+teller example.  Let's define the following variable:
+
+-   Let $t$ represent the current simulation clock time.
+-   Let $c$ represent the number of available pharmacists
+-   Let $N(t)$ represent the number of customers in the system at any time $t$.
+-   Let $Q(t)$ represent the number of customers waiting in line for the at any time $t$.
+-   Let $B(t)$ represent the number of pharmacists that are busy at any time $t$.
+-   Let $TBA_i$ represent the time between arrivals, which we will assume is exponentially distributed with a mean of 6 minutes.
+-   Let $ST_i$ represent the service time of the $i^{th}$ customer, which we will assume is exponentially distributed with a mean of 3 minutes.
+-   Let $E_a$ represent the arrival event.
+-   Let $E_s$ represent the end of service event.
+-   Let $K$ represent the number of customers processed
+
+Within the JSL model, we will model $N(t)$, $Q(t)$, and $B(t)$ with instances of the `TimeWeighted` class  The use of the `TimeWeighted` class will automate the collection of time averages for these variables as discussed in Section \@ref(QHandExample).   Both $TBA_i$ and $ST_i$ will be modeled with instances of the `RandomVariable` class instantiated with instances of the `ExponentialRV` class.  The pseudo-code for this situation is as follows.
+
+*Arrival Actions for Event $E_a$*
+```
+N(t) = N(t) + 1
+if (B(t) < c)
+  B(t) = B(t) + 1
+  schedule E_s at time t + ST_i
+else
+  Q(t) = Q(t) + 1
+endif
+schedule E_a at time t + TBA_i
+```
+
+In the arrival actions, first we increment the number of customers in the system.  Then, the number of busy pharmacists is compared to the number of pharmacists that are available.  If there is an available pharmacist, the number of busy pharmacists is incremented and the end of service for the arriving customer is scheduled.  If all the pharmacists are busy, then the customer must wait in the queue, which is indicated by incrementing the number in the queue. To continue the arrival process, the arrival of the next customer is scheduled.
+
+*End of Service Actions for Event $E_s$*
+```
+B(t) = B(t) - 1
+if (Q(t) > 0)
+  Q(t) = Q(t) - 1
+  B(t) = B(t) + 1
+  schedule E_s at time t + ST_i
+endif
+N(t) = N(t) - 1
+K = K + 1
+```
+
+In the end of service actions, the number of busy pharmacists is decreased by one because the pharmacist has completed service for the departing customer.  Then the queue is checked to see if it has customers.  If the queue has customers, then a customer is removed from the queue (decreasing the number in queue) and the number of busy pharmacists is increased by one. In addition, the end of service event is scheduled.  Finally, the number of customers in the system is decremented and the count of the total customers processes is incremented.
+
+The following code listing presents the definition of the variables and their creation within Java. The drive through pharmacy system is modeled via a class `DriveThroughPharmacy` that sub-classes from `SchedulingElement` to provide the ability to schedule events.  The `RandomVariable` instances `myServiceRV` and `myArrivalRV` are used to represent the $ST_i$ and $TBA_i$ random variables. $B(t)$, $N(t)$, and $Q(t)$ are modeled with the objects `myNumBusy`, `myNS`, and `myQ`, respectively, all instances of the `TimeWeighted` class. The tabulation of the number of processed customers, $K$, is modeled with a JSL counter, using the `Counter` class.
 
 ```java
 public class DriveThroughPharmacy extends SchedulingElement {
 
     private int myNumPharmacists;
-    private Queue<QObject> myWaitingQ;
-    private RandomIfc myServiceRS;
-    private RandomIfc myArrivalRS;
-    private RandomVariable myServiceRV;
-    private RandomVariable myArrivalRV;
-    private TimeWeighted myNumBusy;
-    private TimeWeighted myNS;
-    private ResponseVariable mySysTime;
-    private ArrivalEventAction myArrivalEventAction;
-    private EndServiceEventAction myEndServiceEventAction;
-    private Counter myNumCustomers;
+    private final RandomVariable myServiceRV;
+    private final RandomVariable myArrivalRV;
+    private final TimeWeighted myNumBusy;
+    private final TimeWeighted myNS;
+    private final TimeWeighted myQ;
+    private final ArrivalEventAction myArrivalEventAction;
+    private final EndServiceEventAction myEndServiceEventAction;
+    private final Counter myNumCustomers;
 
     public DriveThroughPharmacy(ModelElement parent) {
         this(parent, 1,
                 new ExponentialRV(1.0), new ExponentialRV(0.5));
     }
 
-    public DriveThroughPharmacy(ModelElement parent, int numServers) {
-        this(parent, numServers, new ExponentialRV(1.0), new ExponentialRV(0.5));
+    public DriveThroughPharmacy(ModelElement parent, int numPharmacists) {
+        this(parent, numPharmacists, new ExponentialRV(1.0), new ExponentialRV(0.5));
     }
 
-    public DriveThroughPharmacy(ModelElement parent, int numServers, RandomIfc ad, RandomIfc sd) {
+    public DriveThroughPharmacy(ModelElement parent, int numPharmacists,
+                                RandomIfc timeBtwArrivals, RandomIfc serviceTime) {
         super(parent);
-        setNumberOfPharmacists(numServers);
-        setServiceRS(sd);
-        setArrivalRS(ad);
-        myWaitingQ = new Queue<>(this, "PharmacyQ");
+        Objects.requireNonNull(timeBtwArrivals, "The time between arrivals must not be null");
+        Objects.requireNonNull(serviceTime, "The service time must not be null");
+        if (numPharmacists <= 0){
+            throw new IllegalArgumentException("The number of pharmacists must be >= 1");
+        }
+        myNumPharmacists = numPharmacists;
+        myArrivalRV = new RandomVariable(this, timeBtwArrivals, "Arrival RV");
+        myServiceRV = new RandomVariable(this, serviceTime, "Service RV");
+        myQ = new TimeWeighted(this, "PharmacyQ");
         myNumBusy = new TimeWeighted(this, 0.0, "NumBusy");
         myNS = new TimeWeighted(this, 0.0, "# in System");
-        mySysTime = new ResponseVariable(this, "System Time");
         myNumCustomers = new Counter(this, "Num Served");
         myArrivalEventAction = new ArrivalEventAction();
         myEndServiceEventAction = new EndServiceEventAction();
     }
 ```
 
-The `RandomVariable` class is used to model the time between
-arrivals and the service time random variables. The `TimeWeighted` class
-is used to model the number of busy servers and the number of customers
-in the system. A `ResponseVariable` is used to model the time spent in the
-system. There are two events represented by implementing the
-`EventActionIfc` interface to model the arrival event and the end of
-service event. Finally, a new JSL class, the `Queue` class, is used to
-model the waiting line within the system. The `Queue` class is a sub-class
-of `ModelElement` that is able to hold instances of the class `QObject` and
-will automatically collect statistics on the number in the queue and the
-time spent in the queue. The following code listing shows the logic required to model the
-arrivals to the pharmacy.
+The main constructor of the `DriveThroughPharmacy` class checks for valid input parameters, instantiates the JSL model elements, and instantiates the arrival and end of service event actions.  Notice how the other constructors call the main constructor with default arguments.
+
+As can be seen in the following Java code, the arrival event is represented by the inner class `ArrivalEventAction` extending the abstract class `EventAction` to model the arrival event action. The Java code closely follows the pseudo-code. Notice the use of the `initialize()` method to schedule the first arrival event. The `initialize()` method is called just prior to the start of the replication for the simulation. The modeler can think of the `initialize()` method as being called at time $t^{-}=0$.
 
 ```java
     protected void initialize() {
@@ -1786,106 +1822,55 @@ arrivals to the pharmacy.
         scheduleEvent(myArrivalEventAction, myArrivalRV);
     }
 
-    private class ArrivalEventAction extends EventAction {
+   private class ArrivalEventAction extends EventAction {
+
         @Override
         public void action(JSLEvent event) {
-            //	 schedule the next arrival
+            myNS.increment(); // new customer arrived
+            if (myNumBusy.getValue() < myNumPharmacists) { // server available
+                myNumBusy.increment(); // make server busy
+                // schedule end of service
+                scheduleEvent(myEndServiceEventAction, myServiceRV);
+            } else {
+                myQ.increment(); // customer must wait
+            }
+            // always schedule the next arrival
             scheduleEvent(myArrivalEventAction, myArrivalRV);
-            enterSystem();
-        }
-    }
-
-    private void enterSystem() {
-        myNS.increment(); // new customer arrived
-        QObject arrivingCustomer = new QObject(getTime());
-
-        myWaitingQ.enqueue(arrivingCustomer); // enqueue the newly arriving customer
-        if (myNumBusy.getValue() < myNumPharmacists) { // server available
-            myNumBusy.increment(); // make server busy
-            QObject customer = myWaitingQ.removeNext(); //remove the next customer
-            // schedule end of service, include the customer as the event's message
-            scheduleEvent(myEndServiceEventAction, myServiceRV, customer);
         }
     }
 ```
 
 In line 4 the first arrival event is scheduled
-within the `initialize()` method. The `ArrivalEventAction` implementation
-schedules the next arrival using the time between arrival random
-variable and calls a private method named `enterSystem()`. This method
-handles the logic for when a customer enters the system. First, the
-number in the system is incremented and then the customer is enqueued.
-In line 17, an instance of a `QObject` is created and its creation time is
-supplied as the current simulation time using `getTime()`. Then, the
-instance of the `Queue` class, `myWaitingQ`, is used to place the customer
-in the queue using the `enqueue()` method. Note that even if the customer
-receives immediate service, we still need to place the customer in the
-queue because we need to correctly record that there was a zero wait
-time. In lines 19-24, the number of busy servers is checked againts the
-number of pharmacists. If a server is available, then the server is made
-busy, the customer is removed from the queue, and the end of service for
-the customer is scheduled. The scheduling of the end of service is
-particularly important to note. In line 23, the reference to the `QObject`
-is supplied when calling the `scheduleEvent()` method. This method has
-signature:
-
-```java
-    /** Creates an event and schedules it onto the event calendar
-     * @param <T> the type associated with the attached message
-     * @param action represents an ActionListener that will handle the change of state logic
-     * @param time represents the inter-event time, i.e. the interval from the current time to when the
-     *        event will need to occur
-     * @param message is a generic Object that may represent data to be transmitted with the event
-     * @return a valid JSLEvent
-     */
-    protected final <T> JSLEvent<T> scheduleEvent(EventActionIfc<T> action, GetValueIfc time, T message) {
-        return (scheduleEvent(action, time.getValue(), JSLEvent.DEFAULT_PRIORITY, message, getName()));
-    }
-```
-
-Notice that the last argument of the method is of type `T`, which is defined as a generic parameter for the method. Thus, using this method, any instance of any class can be supplied.
-Notice also that the `GetValueIfc` interface is used to supply the time.
-This is why just the name of the service time random variable can be
-used. The method automatically called the `getValue()` method of the
-argument in order to determine the time until the event's occurrence.
+within the `initialize()` method. Within the `ArrivalEventAction` class implementation of
+the `action()` method, we see the number of customers in the system incremented, the status of the pharmacists checked, and customers either starting service or having to wait in the queue.
 
 The following code fragment presents the logic associated with the end
 of service event. 
 
 ```java
-    private class EndServiceEventAction implements EventActionIfc<QObject> {
+    private class EndServiceEventAction extends EventAction {
 
         @Override
-        public void action(JSLEvent<QObject> event) {
+        public void action(JSLEvent event) {
             myNumBusy.decrement(); // customer is leaving server is freed
-            if (!myWaitingQ.isEmpty()) { // queue is not empty
-                QObject customer = myWaitingQ.removeNext(); //remove the next customer
+            if (myQ.getValue() > 0) { // queue is not empty
+                myQ.decrement();//remove the next customer
                 myNumBusy.increment(); // make server busy
                 // schedule end of service
-                scheduleEvent(myEndServiceEventAction, myServiceRV, customer);
+                scheduleEvent(myEndServiceEventAction, myServiceRV);
             }
-            departSystem(event.getMessage());
+            myNS.decrement(); // customer left system
+            myNumCustomers.increment();
         }
-    }
-
-    private void departSystem(QObject departingCustomer) {
-        mySysTime.setValue(getTime() - departingCustomer.getCreateTime());
-        myNS.decrement(); // customer left system
-        myNumCustomers.increment();
     }
 ```
 
 First the number of busy servers is decremented
-because the service is becoming idle. Then, the queue is
+because a pharmacist is becoming idle. Then, the queue is
 checked to see if it is not empty. If the queue is not empty, then the
 next customer must be removed, the server made busy again
-and the customer scheduled into service. Finally, the
-private method, `departSystem()` is called. The argument to this method is
-`event.getMessage()`. The `getMessage()` method of `JSLEvent` will
-return the object that was scheduled with the event. Since the `JSLEvent` was provided a `QObject` for the generic type in the signature of the `action()` method, we do not need to cast this object to type `QObject.` The `departSystem()` method simply collects
-statistics using the `ResponseVariable`, `mySysTime` and the `TimeWeighted`,
-`myNS.` These objects represent the system time and the number in the
-system, respectively.
+and the customer scheduled into service. Finally,  the `TimeWeighted` variable,
+`myNS`, indicates that a customer has departed the system and the `Counter` for the number of customers processed is incremented. 
 
 The following method can be used to run the model based on a desired number of servers.
 
@@ -1905,32 +1890,23 @@ The following method can be used to run the model based on a desired number of s
     }
 ```
 
-The reports indicate that customers wait about 3 minutes on average in
-the line. The utilization of the pharmacist is about 50%. This means
+The reports indicate that the utilization of the pharmacist is about 50%. This means
 that about 50% of the time the pharmacist was busy. For this type of
 system, this is probably not a bad utilization, considering that the
 pharmacist probably has other in-store duties. The reports also indicate
 that there was less than one customer on average waiting for service.
 
-    Across Replication Statistical Summary Report
-    Mon Jan 02 16:05:23 CST 2017
-    Simulation Results for Model: Drive Through Pharmacy_Model
+```
+Half-Width Statistical Summary Report - Confidence Level (95.000)% 
 
-
-    Number of Replications: 30
-    Length of Warm up period: 5000.0
-    Length of Replications: 20000.0
-    -------------------------------------------------------------------------------
-    Response Variables
-    -------------------------------------------------------------------------------
-    Name                                  Average       Std. Dev.    Count 
-    -------------------------------------------------------------------------------
-    PharmacyQ : Number In Q              0.490898        0.065510       30.000000 
-    PharmacyQ : Time In Q                2.960012        0.351724       30.000000 
-    NumBusy                              0.495274        0.016848       30.000000 
-    # in System                          0.986173        0.080988       30.000000 
-    System Time                          5.950288        0.403270       30.000000 
-    -------------------------------------------------------------------------------
+Name                  	        Count 	      Average 	   Half-Width 
+----------------------------------------------------------------------- 
+PharmacyQ                         30 	       0.4976 	       0.0270 
+NumBusy                           30 	       0.4994 	       0.0055 
+# in System                       30 	       0.9971 	       0.0316 
+Num Served                        30 	    2507.6333 	      20.5291 
+-----------------------------------------------------------------------
+```
 
 This single server waiting line system is a very common situation in
 practice. In fact, this exact situation has been studied mathematically
@@ -1967,9 +1943,7 @@ L_q  & = \dfrac{0.5 \times 0.5}{1 - 0.5} = 0.5  \\
 W_q & = \dfrac{0.5}{1/6} = 3 \: \text{minutes}\end{aligned}$$
 
 In comparing these analytical results with the simulation results, you
-can see that they match to within statistical error. Later in this text,
-the analytical treatment of queues and the simulation of queues will be
-developed. These analytical results are available for this special case
+can see that they match to within statistical error. The appendix presents an analytical treatment of queues. These analytical results are available for this special case
 because the arrival and service distributions are exponential; however,
 simple analytical results are not available for many common
 distributions, e.g. lognormal. With simulation, you can easily estimate
@@ -1984,7 +1958,7 @@ This chapter introduced how to model discrete event dynamic systems
 using the JSL. The JSL facilitates the model building process, the model
 running process, and the output analysis process.
 
-The model elements covered included:
+The main model elements covered included:
 
 `Model`:   Used to hold all model elements. Automatically created by the
     Simulation class.

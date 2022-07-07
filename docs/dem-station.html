@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2022-02-25" />
+<meta name="date" content="2022-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,12 +218,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.1" data-path="introDEDS-Intro.html"><a href="introDEDS-Intro.html"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="introDEDS-deds.html"><a href="introDEDS-deds.html"><i class="fa fa-check"></i><b>6.2</b> Discrete-Event Dynamic Systems</a></li>
 <li class="chapter" data-level="6.3" data-path="HowDEDSClockWorks.html"><a href="HowDEDSClockWorks.html"><i class="fa fa-check"></i><b>6.3</b> How the Discrete-Event Clock Works</a></li>
-<li class="chapter" data-level="6.4" data-path="simulating-a-queueing-system-by-hand.html"><a href="simulating-a-queueing-system-by-hand.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
+<li class="chapter" data-level="6.4" data-path="QHandExample.html"><a href="QHandExample.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
 <li class="chapter" data-level="6.5" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html"><i class="fa fa-check"></i><b>6.5</b> Modeling DEDS in the JSL</a>
 <ul>
 <li class="chapter" data-level="6.5.1" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#event-scheduling"><i class="fa fa-check"></i><b>6.5.1</b> Event Scheduling</a></li>
-<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#simple-event-scheduling-examples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
-<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#up-and-down-component-example"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
+<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:schedExamples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
+<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:updown"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
 <li class="chapter" data-level="6.5.4" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:pharmacy"><i class="fa fa-check"></i><b>6.5.4</b> Modeling a Simple Queueing System</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="introDEDS-Summary.html"><a href="introDEDS-Summary.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
@@ -412,15 +412,15 @@ Figure 7.3: Major Classes within Station Package
 <p>Figure <a href="dem-station.html#fig:StationPkg">7.3</a> illustrates the primary classes and
 interfaces within the station package. There are two key interfaces:
 <code>SendQObjectIfc</code> and <code>ReceiveQObjectIfc</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb68-1"><a href="dem-station.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> SendQObjectIfc <span class="op">{</span></span>
-<span id="cb68-2"><a href="dem-station.html#cb68-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb68-3"><a href="dem-station.html#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">send</span><span class="op">(</span>QObject qObj<span class="op">);</span></span>
-<span id="cb68-4"><a href="dem-station.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb68-5"><a href="dem-station.html#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-6"><a href="dem-station.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> ReceiveQObjectIfc <span class="op">{</span></span>
-<span id="cb68-7"><a href="dem-station.html#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-8"><a href="dem-station.html#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject qObj<span class="op">);</span></span>
-<span id="cb68-9"><a href="dem-station.html#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb69-1"><a href="dem-station.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> SendQObjectIfc <span class="op">{</span></span>
+<span id="cb69-2"><a href="dem-station.html#cb69-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb69-3"><a href="dem-station.html#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">send</span><span class="op">(</span>QObject qObj<span class="op">);</span></span>
+<span id="cb69-4"><a href="dem-station.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb69-5"><a href="dem-station.html#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="dem-station.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> ReceiveQObjectIfc <span class="op">{</span></span>
+<span id="cb69-7"><a href="dem-station.html#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-8"><a href="dem-station.html#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject qObj<span class="op">);</span></span>
+<span id="cb69-9"><a href="dem-station.html#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The interfaces define single methods, <code>send(QObject qObj)</code> and <code>receive(QObject qObj)</code>, which permit
 implementors to promise the capability of receiving and sending objects
 of type <code>QObject</code>. Figure <a href="dem-station.html#fig:Station">7.4</a> illustrates the connection between the Station class and <code>SendQObjectIfc</code> and <code>ReceiveQObjectIfc</code>. This design permits the development of model elements that
@@ -450,120 +450,120 @@ in Figure <a href="dem-station.html#fig:Station">7.4</a>. Notice that <code>Stat
 instance, and has a reference to an instance of a <code>SendQObjectIfc</code>
 interface.</p>
 <p>If the client does not supplier either an object that implements the <code>ReceiveQObjectIfc</code> interface or an object that implements the <code>SendQObjectIfc</code> interface, then an exception will be thrown. The object that implements the <code>ReceiveQObjectIfc</code> interface is meant to be a direct connection (i.e. something that can directly receive instances of <code>QObject</code>). Sometimes, the logic to determine where to send the <code>QObject</code> is complex. In which case, the user can either sub-class the <code>Station</code> class or provide a instance of a class that implements the <code>SendQObjectIfc</code> interface. This allows the sending logic to be delegated to another class rather than forcing the user to sub-class the <code>Station</code> class. This flexibility can be confusing to users of the class.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb69-1"><a href="dem-station.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Station <span class="kw">extends</span> SchedulingElement <span class="kw">implements</span> ReceiveQObjectIfc <span class="op">{</span></span>
-<span id="cb69-2"><a href="dem-station.html#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-3"><a href="dem-station.html#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-4"><a href="dem-station.html#cb69-4" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> Can be supplied in order to provide logic</span>
-<span id="cb69-5"><a href="dem-station.html#cb69-5" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  to send the QObject to its next receiver</span>
-<span id="cb69-6"><a href="dem-station.html#cb69-6" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-7"><a href="dem-station.html#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> SendQObjectIfc mySender<span class="op">;</span></span>
-<span id="cb69-8"><a href="dem-station.html#cb69-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-9"><a href="dem-station.html#cb69-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span> Can be used to directly tell the receiver to receive the departing</span>
-<span id="cb69-10"><a href="dem-station.html#cb69-10" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  QObject</span>
-<span id="cb69-11"><a href="dem-station.html#cb69-11" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
-<span id="cb69-12"><a href="dem-station.html#cb69-12" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-13"><a href="dem-station.html#cb69-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ReceiveQObjectIfc myNextReceiver<span class="op">;</span></span>
-<span id="cb69-14"><a href="dem-station.html#cb69-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-15"><a href="dem-station.html#cb69-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-16"><a href="dem-station.html#cb69-16" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span></span>
-<span id="cb69-17"><a href="dem-station.html#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param parent the parent model element</span>
-<span id="cb69-18"><a href="dem-station.html#cb69-18" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-19"><a href="dem-station.html#cb69-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">Station</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-20"><a href="dem-station.html#cb69-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
-<span id="cb69-21"><a href="dem-station.html#cb69-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-22"><a href="dem-station.html#cb69-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-23"><a href="dem-station.html#cb69-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-24"><a href="dem-station.html#cb69-24" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span></span>
-<span id="cb69-25"><a href="dem-station.html#cb69-25" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param parent the parent model element</span>
-<span id="cb69-26"><a href="dem-station.html#cb69-26" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param name a unique name</span>
-<span id="cb69-27"><a href="dem-station.html#cb69-27" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-28"><a href="dem-station.html#cb69-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">Station</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-29"><a href="dem-station.html#cb69-29" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> name<span class="op">);</span></span>
-<span id="cb69-30"><a href="dem-station.html#cb69-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-31"><a href="dem-station.html#cb69-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-32"><a href="dem-station.html#cb69-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-33"><a href="dem-station.html#cb69-33" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
-<span id="cb69-34"><a href="dem-station.html#cb69-34" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param parent the parent model element</span>
-<span id="cb69-35"><a href="dem-station.html#cb69-35" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param sender can be null<span class="co">,</span> represents something that can send QObjects</span>
-<span id="cb69-36"><a href="dem-station.html#cb69-36" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param name a unique name</span>
-<span id="cb69-37"><a href="dem-station.html#cb69-37" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-38"><a href="dem-station.html#cb69-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">Station</span><span class="op">(</span>ModelElement parent<span class="op">,</span> SendQObjectIfc sender<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-39"><a href="dem-station.html#cb69-39" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
-<span id="cb69-40"><a href="dem-station.html#cb69-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setSender</span><span class="op">(</span>sender<span class="op">);</span></span>
-<span id="cb69-41"><a href="dem-station.html#cb69-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-42"><a href="dem-station.html#cb69-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-43"><a href="dem-station.html#cb69-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-44"><a href="dem-station.html#cb69-44" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> A Station may or may not have a helper object that implements the </span>
-<span id="cb69-45"><a href="dem-station.html#cb69-45" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  SendQObjectIfc interface<span class="co">. </span> If this helper object is supplied it will</span>
-<span id="cb69-46"><a href="dem-station.html#cb69-46" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  be used to send the processed QObject to its next location for</span>
-<span id="cb69-47"><a href="dem-station.html#cb69-47" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  processing<span class="co">.</span></span>
-<span id="cb69-48"><a href="dem-station.html#cb69-48" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>return the thing that will be used to send the completed QObject</span>
-<span id="cb69-49"><a href="dem-station.html#cb69-49" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-50"><a href="dem-station.html#cb69-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> SendQObjectIfc <span class="fu">getSender</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb69-51"><a href="dem-station.html#cb69-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> mySender<span class="op">;</span></span>
-<span id="cb69-52"><a href="dem-station.html#cb69-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-53"><a href="dem-station.html#cb69-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-54"><a href="dem-station.html#cb69-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-55"><a href="dem-station.html#cb69-55" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> A Station may or may not have a helper object that implements the </span>
-<span id="cb69-56"><a href="dem-station.html#cb69-56" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  SendQObjectIfc interface<span class="co">. </span> If this helper object is supplied it will</span>
-<span id="cb69-57"><a href="dem-station.html#cb69-57" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  be used to send the processed QObject to its next location for</span>
-<span id="cb69-58"><a href="dem-station.html#cb69-58" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  processing<span class="co">.</span></span>
-<span id="cb69-59"><a href="dem-station.html#cb69-59" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param sender the thing that will be used to send the completed QObject</span>
-<span id="cb69-60"><a href="dem-station.html#cb69-60" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-61"><a href="dem-station.html#cb69-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">void</span> <span class="fu">setSender</span><span class="op">(</span>SendQObjectIfc sender<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-62"><a href="dem-station.html#cb69-62" aria-hidden="true" tabindex="-1"></a>        mySender <span class="op">=</span> sender<span class="op">;</span></span>
-<span id="cb69-63"><a href="dem-station.html#cb69-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-64"><a href="dem-station.html#cb69-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-65"><a href="dem-station.html#cb69-65" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-66"><a href="dem-station.html#cb69-66" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
-<span id="cb69-67"><a href="dem-station.html#cb69-67" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  ReceiveQObjectIfc interface<span class="co">. </span> If this helper object is supplied and</span>
-<span id="cb69-68"><a href="dem-station.html#cb69-68" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the SendQObjectIfc helper is not supplied<span class="co">,</span> then the object that implements</span>
-<span id="cb69-69"><a href="dem-station.html#cb69-69" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the ReceiveQObjectIfc will be the next receiver for the QObject when using </span>
-<span id="cb69-70"><a href="dem-station.html#cb69-70" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  default send<span class="co">()</span> method<span class="co">.</span></span>
-<span id="cb69-71"><a href="dem-station.html#cb69-71" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>return the thing that should receive the completed QObject<span class="co">,</span> may be null</span>
-<span id="cb69-72"><a href="dem-station.html#cb69-72" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-73"><a href="dem-station.html#cb69-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> ReceiveQObjectIfc <span class="fu">getNextReceiver</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb69-74"><a href="dem-station.html#cb69-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> myNextReceiver<span class="op">;</span></span>
-<span id="cb69-75"><a href="dem-station.html#cb69-75" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-76"><a href="dem-station.html#cb69-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-77"><a href="dem-station.html#cb69-77" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-78"><a href="dem-station.html#cb69-78" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
-<span id="cb69-79"><a href="dem-station.html#cb69-79" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  ReceiveQObjectIfc interface<span class="co">. </span> If this helper object is supplied and</span>
-<span id="cb69-80"><a href="dem-station.html#cb69-80" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the SendQObjectIfc helper is not supplied<span class="co">,</span> then the object that implements</span>
-<span id="cb69-81"><a href="dem-station.html#cb69-81" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the ReceiveQObjectIfc will be the next receiver for the QObject when using </span>
-<span id="cb69-82"><a href="dem-station.html#cb69-82" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  default send<span class="co">()</span> method<span class="co">.</span></span>
-<span id="cb69-83"><a href="dem-station.html#cb69-83" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param receiver the thing that should receive the completed QObject<span class="co">,</span> may be null</span>
-<span id="cb69-84"><a href="dem-station.html#cb69-84" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-85"><a href="dem-station.html#cb69-85" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">void</span> <span class="fu">setNextReceiver</span><span class="op">(</span>ReceiveQObjectIfc receiver<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-86"><a href="dem-station.html#cb69-86" aria-hidden="true" tabindex="-1"></a>        myNextReceiver <span class="op">=</span> receiver<span class="op">;</span></span>
-<span id="cb69-87"><a href="dem-station.html#cb69-87" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-88"><a href="dem-station.html#cb69-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-89"><a href="dem-station.html#cb69-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb69-90"><a href="dem-station.html#cb69-90" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
-<span id="cb69-91"><a href="dem-station.html#cb69-91" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  SendQObjectIfc interface<span class="co">. </span> If this helper object is supplied it will</span>
-<span id="cb69-92"><a href="dem-station.html#cb69-92" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  be used to send the processed QObject to its next location for</span>
-<span id="cb69-93"><a href="dem-station.html#cb69-93" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  processing<span class="co">.</span></span>
-<span id="cb69-94"><a href="dem-station.html#cb69-94" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
-<span id="cb69-95"><a href="dem-station.html#cb69-95" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
-<span id="cb69-96"><a href="dem-station.html#cb69-96" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  ReceiveQObjectIfc interface<span class="co">.</span>  If this helper object is supplied and</span>
-<span id="cb69-97"><a href="dem-station.html#cb69-97" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the SendQObjectIfc helper is not supplied<span class="co">,</span> then the object that implements</span>
-<span id="cb69-98"><a href="dem-station.html#cb69-98" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the ReceiveQObjectIfc will be the next receiver for the QObject</span>
-<span id="cb69-99"><a href="dem-station.html#cb69-99" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
-<span id="cb69-100"><a href="dem-station.html#cb69-100" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  If neither helper object is supplied then a runtime exception will</span>
-<span id="cb69-101"><a href="dem-station.html#cb69-101" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  occur when trying to use the send<span class="co">()</span> method     </span>
-<span id="cb69-102"><a href="dem-station.html#cb69-102" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param qObj the completed QObject</span>
-<span id="cb69-103"><a href="dem-station.html#cb69-103" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb69-104"><a href="dem-station.html#cb69-104" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">send</span><span class="op">(</span>QObject qObj<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-105"><a href="dem-station.html#cb69-105" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">getSender</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-106"><a href="dem-station.html#cb69-106" aria-hidden="true" tabindex="-1"></a>            <span class="fu">getSender</span><span class="op">().</span><span class="fu">send</span><span class="op">(</span>qObj<span class="op">);</span></span>
-<span id="cb69-107"><a href="dem-station.html#cb69-107" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span><span class="fu">getNextReceiver</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-108"><a href="dem-station.html#cb69-108" aria-hidden="true" tabindex="-1"></a>            <span class="fu">getNextReceiver</span><span class="op">().</span><span class="fu">receive</span><span class="op">(</span>qObj<span class="op">);</span></span>
-<span id="cb69-109"><a href="dem-station.html#cb69-109" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb69-110"><a href="dem-station.html#cb69-110" aria-hidden="true" tabindex="-1"></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span><span class="op">(</span><span class="st">&quot;No valid sender or receiver&quot;</span><span class="op">);</span></span>
-<span id="cb69-111"><a href="dem-station.html#cb69-111" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb69-112"><a href="dem-station.html#cb69-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb69-113"><a href="dem-station.html#cb69-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-114"><a href="dem-station.html#cb69-114" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb70-1"><a href="dem-station.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Station <span class="kw">extends</span> SchedulingElement <span class="kw">implements</span> ReceiveQObjectIfc <span class="op">{</span></span>
+<span id="cb70-2"><a href="dem-station.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="dem-station.html#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-4"><a href="dem-station.html#cb70-4" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> Can be supplied in order to provide logic</span>
+<span id="cb70-5"><a href="dem-station.html#cb70-5" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  to send the QObject to its next receiver</span>
+<span id="cb70-6"><a href="dem-station.html#cb70-6" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-7"><a href="dem-station.html#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> SendQObjectIfc mySender<span class="op">;</span></span>
+<span id="cb70-8"><a href="dem-station.html#cb70-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-9"><a href="dem-station.html#cb70-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span> Can be used to directly tell the receiver to receive the departing</span>
+<span id="cb70-10"><a href="dem-station.html#cb70-10" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  QObject</span>
+<span id="cb70-11"><a href="dem-station.html#cb70-11" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
+<span id="cb70-12"><a href="dem-station.html#cb70-12" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-13"><a href="dem-station.html#cb70-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ReceiveQObjectIfc myNextReceiver<span class="op">;</span></span>
+<span id="cb70-14"><a href="dem-station.html#cb70-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-15"><a href="dem-station.html#cb70-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-16"><a href="dem-station.html#cb70-16" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span></span>
+<span id="cb70-17"><a href="dem-station.html#cb70-17" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param parent the parent model element</span>
+<span id="cb70-18"><a href="dem-station.html#cb70-18" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-19"><a href="dem-station.html#cb70-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">Station</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-20"><a href="dem-station.html#cb70-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb70-21"><a href="dem-station.html#cb70-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-22"><a href="dem-station.html#cb70-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-23"><a href="dem-station.html#cb70-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-24"><a href="dem-station.html#cb70-24" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span></span>
+<span id="cb70-25"><a href="dem-station.html#cb70-25" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param parent the parent model element</span>
+<span id="cb70-26"><a href="dem-station.html#cb70-26" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param name a unique name</span>
+<span id="cb70-27"><a href="dem-station.html#cb70-27" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-28"><a href="dem-station.html#cb70-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">Station</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-29"><a href="dem-station.html#cb70-29" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb70-30"><a href="dem-station.html#cb70-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-31"><a href="dem-station.html#cb70-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-32"><a href="dem-station.html#cb70-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-33"><a href="dem-station.html#cb70-33" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
+<span id="cb70-34"><a href="dem-station.html#cb70-34" aria-hidden="true" tabindex="-1"></a><span class="co">     * @</span>param parent the parent model element</span>
+<span id="cb70-35"><a href="dem-station.html#cb70-35" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param sender can be null<span class="co">,</span> represents something that can send QObjects</span>
+<span id="cb70-36"><a href="dem-station.html#cb70-36" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param name a unique name</span>
+<span id="cb70-37"><a href="dem-station.html#cb70-37" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-38"><a href="dem-station.html#cb70-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">Station</span><span class="op">(</span>ModelElement parent<span class="op">,</span> SendQObjectIfc sender<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-39"><a href="dem-station.html#cb70-39" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb70-40"><a href="dem-station.html#cb70-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setSender</span><span class="op">(</span>sender<span class="op">);</span></span>
+<span id="cb70-41"><a href="dem-station.html#cb70-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-42"><a href="dem-station.html#cb70-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-43"><a href="dem-station.html#cb70-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-44"><a href="dem-station.html#cb70-44" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> A Station may or may not have a helper object that implements the </span>
+<span id="cb70-45"><a href="dem-station.html#cb70-45" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  SendQObjectIfc interface<span class="co">. </span> If this helper object is supplied it will</span>
+<span id="cb70-46"><a href="dem-station.html#cb70-46" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  be used to send the processed QObject to its next location for</span>
+<span id="cb70-47"><a href="dem-station.html#cb70-47" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  processing<span class="co">.</span></span>
+<span id="cb70-48"><a href="dem-station.html#cb70-48" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>return the thing that will be used to send the completed QObject</span>
+<span id="cb70-49"><a href="dem-station.html#cb70-49" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-50"><a href="dem-station.html#cb70-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> SendQObjectIfc <span class="fu">getSender</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb70-51"><a href="dem-station.html#cb70-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> mySender<span class="op">;</span></span>
+<span id="cb70-52"><a href="dem-station.html#cb70-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-53"><a href="dem-station.html#cb70-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-54"><a href="dem-station.html#cb70-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-55"><a href="dem-station.html#cb70-55" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> A Station may or may not have a helper object that implements the </span>
+<span id="cb70-56"><a href="dem-station.html#cb70-56" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  SendQObjectIfc interface<span class="co">. </span> If this helper object is supplied it will</span>
+<span id="cb70-57"><a href="dem-station.html#cb70-57" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  be used to send the processed QObject to its next location for</span>
+<span id="cb70-58"><a href="dem-station.html#cb70-58" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  processing<span class="co">.</span></span>
+<span id="cb70-59"><a href="dem-station.html#cb70-59" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param sender the thing that will be used to send the completed QObject</span>
+<span id="cb70-60"><a href="dem-station.html#cb70-60" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-61"><a href="dem-station.html#cb70-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">void</span> <span class="fu">setSender</span><span class="op">(</span>SendQObjectIfc sender<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-62"><a href="dem-station.html#cb70-62" aria-hidden="true" tabindex="-1"></a>        mySender <span class="op">=</span> sender<span class="op">;</span></span>
+<span id="cb70-63"><a href="dem-station.html#cb70-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-64"><a href="dem-station.html#cb70-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-65"><a href="dem-station.html#cb70-65" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-66"><a href="dem-station.html#cb70-66" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
+<span id="cb70-67"><a href="dem-station.html#cb70-67" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  ReceiveQObjectIfc interface<span class="co">. </span> If this helper object is supplied and</span>
+<span id="cb70-68"><a href="dem-station.html#cb70-68" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the SendQObjectIfc helper is not supplied<span class="co">,</span> then the object that implements</span>
+<span id="cb70-69"><a href="dem-station.html#cb70-69" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the ReceiveQObjectIfc will be the next receiver for the QObject when using </span>
+<span id="cb70-70"><a href="dem-station.html#cb70-70" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  default send<span class="co">()</span> method<span class="co">.</span></span>
+<span id="cb70-71"><a href="dem-station.html#cb70-71" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>return the thing that should receive the completed QObject<span class="co">,</span> may be null</span>
+<span id="cb70-72"><a href="dem-station.html#cb70-72" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-73"><a href="dem-station.html#cb70-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> ReceiveQObjectIfc <span class="fu">getNextReceiver</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb70-74"><a href="dem-station.html#cb70-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> myNextReceiver<span class="op">;</span></span>
+<span id="cb70-75"><a href="dem-station.html#cb70-75" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-76"><a href="dem-station.html#cb70-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-77"><a href="dem-station.html#cb70-77" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-78"><a href="dem-station.html#cb70-78" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
+<span id="cb70-79"><a href="dem-station.html#cb70-79" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  ReceiveQObjectIfc interface<span class="co">. </span> If this helper object is supplied and</span>
+<span id="cb70-80"><a href="dem-station.html#cb70-80" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the SendQObjectIfc helper is not supplied<span class="co">,</span> then the object that implements</span>
+<span id="cb70-81"><a href="dem-station.html#cb70-81" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the ReceiveQObjectIfc will be the next receiver for the QObject when using </span>
+<span id="cb70-82"><a href="dem-station.html#cb70-82" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  default send<span class="co">()</span> method<span class="co">.</span></span>
+<span id="cb70-83"><a href="dem-station.html#cb70-83" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param receiver the thing that should receive the completed QObject<span class="co">,</span> may be null</span>
+<span id="cb70-84"><a href="dem-station.html#cb70-84" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-85"><a href="dem-station.html#cb70-85" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">void</span> <span class="fu">setNextReceiver</span><span class="op">(</span>ReceiveQObjectIfc receiver<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-86"><a href="dem-station.html#cb70-86" aria-hidden="true" tabindex="-1"></a>        myNextReceiver <span class="op">=</span> receiver<span class="op">;</span></span>
+<span id="cb70-87"><a href="dem-station.html#cb70-87" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-88"><a href="dem-station.html#cb70-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-89"><a href="dem-station.html#cb70-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb70-90"><a href="dem-station.html#cb70-90" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
+<span id="cb70-91"><a href="dem-station.html#cb70-91" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  SendQObjectIfc interface<span class="co">. </span> If this helper object is supplied it will</span>
+<span id="cb70-92"><a href="dem-station.html#cb70-92" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  be used to send the processed QObject to its next location for</span>
+<span id="cb70-93"><a href="dem-station.html#cb70-93" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  processing<span class="co">.</span></span>
+<span id="cb70-94"><a href="dem-station.html#cb70-94" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
+<span id="cb70-95"><a href="dem-station.html#cb70-95" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  A Station may or may not have a helper object that implements the </span>
+<span id="cb70-96"><a href="dem-station.html#cb70-96" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  ReceiveQObjectIfc interface<span class="co">.</span>  If this helper object is supplied and</span>
+<span id="cb70-97"><a href="dem-station.html#cb70-97" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the SendQObjectIfc helper is not supplied<span class="co">,</span> then the object that implements</span>
+<span id="cb70-98"><a href="dem-station.html#cb70-98" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  the ReceiveQObjectIfc will be the next receiver for the QObject</span>
+<span id="cb70-99"><a href="dem-station.html#cb70-99" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> </span>
+<span id="cb70-100"><a href="dem-station.html#cb70-100" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  If neither helper object is supplied then a runtime exception will</span>
+<span id="cb70-101"><a href="dem-station.html#cb70-101" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span>  occur when trying to use the send<span class="co">()</span> method     </span>
+<span id="cb70-102"><a href="dem-station.html#cb70-102" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> <span class="co">@</span>param qObj the completed QObject</span>
+<span id="cb70-103"><a href="dem-station.html#cb70-103" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb70-104"><a href="dem-station.html#cb70-104" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">send</span><span class="op">(</span>QObject qObj<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-105"><a href="dem-station.html#cb70-105" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">getSender</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-106"><a href="dem-station.html#cb70-106" aria-hidden="true" tabindex="-1"></a>            <span class="fu">getSender</span><span class="op">().</span><span class="fu">send</span><span class="op">(</span>qObj<span class="op">);</span></span>
+<span id="cb70-107"><a href="dem-station.html#cb70-107" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span><span class="fu">getNextReceiver</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-108"><a href="dem-station.html#cb70-108" aria-hidden="true" tabindex="-1"></a>            <span class="fu">getNextReceiver</span><span class="op">().</span><span class="fu">receive</span><span class="op">(</span>qObj<span class="op">);</span></span>
+<span id="cb70-109"><a href="dem-station.html#cb70-109" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb70-110"><a href="dem-station.html#cb70-110" aria-hidden="true" tabindex="-1"></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span><span class="op">(</span><span class="st">&quot;No valid sender or receiver&quot;</span><span class="op">);</span></span>
+<span id="cb70-111"><a href="dem-station.html#cb70-111" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb70-112"><a href="dem-station.html#cb70-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb70-113"><a href="dem-station.html#cb70-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-114"><a href="dem-station.html#cb70-114" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <div id="modeling-simple-queueing-stations" class="section level3" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> Modeling Simple Queueing Stations</h3>
 <p>In this section, the station package is used to implement a simple
@@ -619,52 +619,52 @@ to the <code>SingleQueueStation</code>. Within the <code>Arrivals</code> class, 
 components needed to model the situation. The <code>RecieveQObjectIfc</code> and the
 <code>Station</code> concept play an integral role in facilitating how the object
 instances are connected.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb70-1"><a href="dem-station.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> GGCQueuingStation <span class="kw">extends</span> ModelElement <span class="op">{</span></span>
-<span id="cb70-2"><a href="dem-station.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="dem-station.html#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> EventGenerator myArrivalGenerator<span class="op">;</span></span>
-<span id="cb70-4"><a href="dem-station.html#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> SingleQueueStation mySQS<span class="op">;</span></span>
-<span id="cb70-5"><a href="dem-station.html#cb70-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ResponseVariable mySystemTime<span class="op">;</span></span>
-<span id="cb70-6"><a href="dem-station.html#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> TimeWeighted myNumInSystem<span class="op">;</span></span>
-<span id="cb70-7"><a href="dem-station.html#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> SResource myServers<span class="op">;</span></span>
-<span id="cb70-8"><a href="dem-station.html#cb70-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> RandomVariable mySTRV<span class="op">;</span></span>
-<span id="cb70-9"><a href="dem-station.html#cb70-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-10"><a href="dem-station.html#cb70-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">GGCQueuingStation</span><span class="op">(</span>ModelElement parent<span class="op">,</span> RandomIfc tba<span class="op">,</span> RandomIfc st<span class="op">,</span></span>
-<span id="cb70-11"><a href="dem-station.html#cb70-11" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> numServers<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb70-12"><a href="dem-station.html#cb70-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> tba<span class="op">,</span> st<span class="op">,</span> numServers<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
-<span id="cb70-13"><a href="dem-station.html#cb70-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb70-14"><a href="dem-station.html#cb70-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-15"><a href="dem-station.html#cb70-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">GGCQueuingStation</span><span class="op">(</span>ModelElement parent<span class="op">,</span> RandomIfc tba<span class="op">,</span> RandomIfc st<span class="op">,</span></span>
-<span id="cb70-16"><a href="dem-station.html#cb70-16" aria-hidden="true" tabindex="-1"></a>                             <span class="dt">int</span> numServers<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb70-17"><a href="dem-station.html#cb70-17" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
-<span id="cb70-18"><a href="dem-station.html#cb70-18" aria-hidden="true" tabindex="-1"></a>        myArrivalGenerator <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventGenerator</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">Arrivals</span><span class="op">(),</span> tba<span class="op">,</span> tba<span class="op">);</span></span>
-<span id="cb70-19"><a href="dem-station.html#cb70-19" aria-hidden="true" tabindex="-1"></a>        myServers <span class="op">=</span> <span class="kw">new</span> <span class="fu">SResource</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> numServers<span class="op">,</span> <span class="st">&quot;Servers&quot;</span><span class="op">);</span></span>
-<span id="cb70-20"><a href="dem-station.html#cb70-20" aria-hidden="true" tabindex="-1"></a>        mySTRV <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> st<span class="op">);</span></span>
-<span id="cb70-21"><a href="dem-station.html#cb70-21" aria-hidden="true" tabindex="-1"></a>        mySQS <span class="op">=</span> <span class="kw">new</span> <span class="fu">SingleQueueStation</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> myServers<span class="op">,</span> mySTRV<span class="op">,</span> <span class="st">&quot;Station&quot;</span><span class="op">);</span></span>
-<span id="cb70-22"><a href="dem-station.html#cb70-22" aria-hidden="true" tabindex="-1"></a>        mySQS<span class="op">.</span><span class="fu">setNextReceiver</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Dispose</span><span class="op">());</span></span>
-<span id="cb70-23"><a href="dem-station.html#cb70-23" aria-hidden="true" tabindex="-1"></a>        mySystemTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResponseVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;System Time&quot;</span><span class="op">);</span></span>
-<span id="cb70-24"><a href="dem-station.html#cb70-24" aria-hidden="true" tabindex="-1"></a>        myNumInSystem <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Num in System&quot;</span><span class="op">);</span></span>
-<span id="cb70-25"><a href="dem-station.html#cb70-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb70-26"><a href="dem-station.html#cb70-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-27"><a href="dem-station.html#cb70-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> Arrivals <span class="kw">implements</span> EventGeneratorActionIfc <span class="op">{</span></span>
-<span id="cb70-28"><a href="dem-station.html#cb70-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-29"><a href="dem-station.html#cb70-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
-<span id="cb70-30"><a href="dem-station.html#cb70-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generate</span><span class="op">(</span>EventGenerator generator<span class="op">,</span> JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb70-31"><a href="dem-station.html#cb70-31" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
-<span id="cb70-32"><a href="dem-station.html#cb70-32" aria-hidden="true" tabindex="-1"></a>            mySQS<span class="op">.</span><span class="fu">receive</span><span class="op">(</span><span class="kw">new</span> <span class="fu">QObject</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()));</span></span>
-<span id="cb70-33"><a href="dem-station.html#cb70-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb70-34"><a href="dem-station.html#cb70-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-35"><a href="dem-station.html#cb70-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb70-36"><a href="dem-station.html#cb70-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-37"><a href="dem-station.html#cb70-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Dispose <span class="kw">implements</span> ReceiveQObjectIfc <span class="op">{</span></span>
-<span id="cb70-38"><a href="dem-station.html#cb70-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-39"><a href="dem-station.html#cb70-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
-<span id="cb70-40"><a href="dem-station.html#cb70-40" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject qObj<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb70-41"><a href="dem-station.html#cb70-41" aria-hidden="true" tabindex="-1"></a>            <span class="co">// collect final statistics</span></span>
-<span id="cb70-42"><a href="dem-station.html#cb70-42" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span></span>
-<span id="cb70-43"><a href="dem-station.html#cb70-43" aria-hidden="true" tabindex="-1"></a>            mySystemTime<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()</span> <span class="op">-</span> qObj<span class="op">.</span><span class="fu">getCreateTime</span><span class="op">());</span></span>
-<span id="cb70-44"><a href="dem-station.html#cb70-44" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb70-45"><a href="dem-station.html#cb70-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-46"><a href="dem-station.html#cb70-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb71-1"><a href="dem-station.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> GGCQueuingStation <span class="kw">extends</span> ModelElement <span class="op">{</span></span>
+<span id="cb71-2"><a href="dem-station.html#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="dem-station.html#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> EventGenerator myArrivalGenerator<span class="op">;</span></span>
+<span id="cb71-4"><a href="dem-station.html#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> SingleQueueStation mySQS<span class="op">;</span></span>
+<span id="cb71-5"><a href="dem-station.html#cb71-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> ResponseVariable mySystemTime<span class="op">;</span></span>
+<span id="cb71-6"><a href="dem-station.html#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> TimeWeighted myNumInSystem<span class="op">;</span></span>
+<span id="cb71-7"><a href="dem-station.html#cb71-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> SResource myServers<span class="op">;</span></span>
+<span id="cb71-8"><a href="dem-station.html#cb71-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> RandomVariable mySTRV<span class="op">;</span></span>
+<span id="cb71-9"><a href="dem-station.html#cb71-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-10"><a href="dem-station.html#cb71-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">GGCQueuingStation</span><span class="op">(</span>ModelElement parent<span class="op">,</span> RandomIfc tba<span class="op">,</span> RandomIfc st<span class="op">,</span></span>
+<span id="cb71-11"><a href="dem-station.html#cb71-11" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> numServers<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb71-12"><a href="dem-station.html#cb71-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> tba<span class="op">,</span> st<span class="op">,</span> numServers<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb71-13"><a href="dem-station.html#cb71-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb71-14"><a href="dem-station.html#cb71-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-15"><a href="dem-station.html#cb71-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">GGCQueuingStation</span><span class="op">(</span>ModelElement parent<span class="op">,</span> RandomIfc tba<span class="op">,</span> RandomIfc st<span class="op">,</span></span>
+<span id="cb71-16"><a href="dem-station.html#cb71-16" aria-hidden="true" tabindex="-1"></a>                             <span class="dt">int</span> numServers<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb71-17"><a href="dem-station.html#cb71-17" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb71-18"><a href="dem-station.html#cb71-18" aria-hidden="true" tabindex="-1"></a>        myArrivalGenerator <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventGenerator</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">Arrivals</span><span class="op">(),</span> tba<span class="op">,</span> tba<span class="op">);</span></span>
+<span id="cb71-19"><a href="dem-station.html#cb71-19" aria-hidden="true" tabindex="-1"></a>        myServers <span class="op">=</span> <span class="kw">new</span> <span class="fu">SResource</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> numServers<span class="op">,</span> <span class="st">&quot;Servers&quot;</span><span class="op">);</span></span>
+<span id="cb71-20"><a href="dem-station.html#cb71-20" aria-hidden="true" tabindex="-1"></a>        mySTRV <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> st<span class="op">);</span></span>
+<span id="cb71-21"><a href="dem-station.html#cb71-21" aria-hidden="true" tabindex="-1"></a>        mySQS <span class="op">=</span> <span class="kw">new</span> <span class="fu">SingleQueueStation</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> myServers<span class="op">,</span> mySTRV<span class="op">,</span> <span class="st">&quot;Station&quot;</span><span class="op">);</span></span>
+<span id="cb71-22"><a href="dem-station.html#cb71-22" aria-hidden="true" tabindex="-1"></a>        mySQS<span class="op">.</span><span class="fu">setNextReceiver</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Dispose</span><span class="op">());</span></span>
+<span id="cb71-23"><a href="dem-station.html#cb71-23" aria-hidden="true" tabindex="-1"></a>        mySystemTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResponseVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;System Time&quot;</span><span class="op">);</span></span>
+<span id="cb71-24"><a href="dem-station.html#cb71-24" aria-hidden="true" tabindex="-1"></a>        myNumInSystem <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Num in System&quot;</span><span class="op">);</span></span>
+<span id="cb71-25"><a href="dem-station.html#cb71-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb71-26"><a href="dem-station.html#cb71-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-27"><a href="dem-station.html#cb71-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> Arrivals <span class="kw">implements</span> EventGeneratorActionIfc <span class="op">{</span></span>
+<span id="cb71-28"><a href="dem-station.html#cb71-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-29"><a href="dem-station.html#cb71-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb71-30"><a href="dem-station.html#cb71-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generate</span><span class="op">(</span>EventGenerator generator<span class="op">,</span> JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb71-31"><a href="dem-station.html#cb71-31" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
+<span id="cb71-32"><a href="dem-station.html#cb71-32" aria-hidden="true" tabindex="-1"></a>            mySQS<span class="op">.</span><span class="fu">receive</span><span class="op">(</span><span class="kw">new</span> <span class="fu">QObject</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()));</span></span>
+<span id="cb71-33"><a href="dem-station.html#cb71-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb71-34"><a href="dem-station.html#cb71-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-35"><a href="dem-station.html#cb71-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb71-36"><a href="dem-station.html#cb71-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-37"><a href="dem-station.html#cb71-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Dispose <span class="kw">implements</span> ReceiveQObjectIfc <span class="op">{</span></span>
+<span id="cb71-38"><a href="dem-station.html#cb71-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-39"><a href="dem-station.html#cb71-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb71-40"><a href="dem-station.html#cb71-40" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject qObj<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb71-41"><a href="dem-station.html#cb71-41" aria-hidden="true" tabindex="-1"></a>            <span class="co">// collect final statistics</span></span>
+<span id="cb71-42"><a href="dem-station.html#cb71-42" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span></span>
+<span id="cb71-43"><a href="dem-station.html#cb71-43" aria-hidden="true" tabindex="-1"></a>            mySystemTime<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()</span> <span class="op">-</span> qObj<span class="op">.</span><span class="fu">getCreateTime</span><span class="op">());</span></span>
+<span id="cb71-44"><a href="dem-station.html#cb71-44" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb71-45"><a href="dem-station.html#cb71-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-46"><a href="dem-station.html#cb71-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 <p>The last piece of this puzzle is how the <code>SingleQueueStation</code> class
 implements the abstract base class <code>Station</code> and becomes a component that
 can be reused in various models. Recall the logic for handling arrivals
@@ -684,55 +684,55 @@ to <code>serveNext()</code>. Upon the end of service the <code>EndServiceAction<
 Notice that the resource is released, and then the queue is
 checked. Finally, the <code>send()</code> method is used to send the
 <code>QObject</code> to whereever it is intended to go.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb71-1"><a href="dem-station.html#cb71-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">double</span> <span class="fu">getServiceTime</span><span class="op">(</span>QObject customer<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb71-2"><a href="dem-station.html#cb71-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span> t<span class="op">;</span></span>
-<span id="cb71-3"><a href="dem-station.html#cb71-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">getUseQObjectServiceTimeOption</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb71-4"><a href="dem-station.html#cb71-4" aria-hidden="true" tabindex="-1"></a>            Optional<span class="op">&lt;</span>GetValueIfc<span class="op">&gt;</span> valueObject <span class="op">=</span> customer<span class="op">.</span><span class="fu">getValueObject</span><span class="op">();</span></span>
-<span id="cb71-5"><a href="dem-station.html#cb71-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>valueObject<span class="op">.</span><span class="fu">isPresent</span><span class="op">()){</span></span>
-<span id="cb71-6"><a href="dem-station.html#cb71-6" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> valueObject<span class="op">.</span><span class="fu">get</span><span class="op">().</span><span class="fu">getValue</span><span class="op">();</span></span>
-<span id="cb71-7"><a href="dem-station.html#cb71-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb71-8"><a href="dem-station.html#cb71-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IllegalStateException</span><span class="op">(</span><span class="st">&quot;Attempted to use QObject.getValueObject() when no object was set&quot;</span><span class="op">);</span></span>
-<span id="cb71-9"><a href="dem-station.html#cb71-9" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb71-10"><a href="dem-station.html#cb71-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb71-11"><a href="dem-station.html#cb71-11" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> <span class="fu">getServiceTime</span><span class="op">().</span><span class="fu">getValue</span><span class="op">();</span></span>
-<span id="cb71-12"><a href="dem-station.html#cb71-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb71-13"><a href="dem-station.html#cb71-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> t<span class="op">;</span></span>
-<span id="cb71-14"><a href="dem-station.html#cb71-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb71-15"><a href="dem-station.html#cb71-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-16"><a href="dem-station.html#cb71-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
-<span id="cb71-17"><a href="dem-station.html#cb71-17" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> Called to determine which waiting QObject will be served next Determines</span>
-<span id="cb71-18"><a href="dem-station.html#cb71-18" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> the next customer<span class="co">,</span> seizes the resource<span class="co">,</span> and schedules the end of the</span>
-<span id="cb71-19"><a href="dem-station.html#cb71-19" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> service<span class="co">.</span></span>
-<span id="cb71-20"><a href="dem-station.html#cb71-20" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
-<span id="cb71-21"><a href="dem-station.html#cb71-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">serveNext</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb71-22"><a href="dem-station.html#cb71-22" aria-hidden="true" tabindex="-1"></a>        QObject customer <span class="op">=</span> myWaitingQ<span class="op">.</span><span class="fu">removeNext</span><span class="op">();</span> <span class="co">//remove the next customer</span></span>
-<span id="cb71-23"><a href="dem-station.html#cb71-23" aria-hidden="true" tabindex="-1"></a>        myResource<span class="op">.</span><span class="fu">seize</span><span class="op">();</span></span>
-<span id="cb71-24"><a href="dem-station.html#cb71-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// schedule end of service</span></span>
-<span id="cb71-25"><a href="dem-station.html#cb71-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myEndServiceAction<span class="op">,</span> <span class="fu">getServiceTime</span><span class="op">(</span>customer<span class="op">),</span> customer<span class="op">);</span></span>
-<span id="cb71-26"><a href="dem-station.html#cb71-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb71-27"><a href="dem-station.html#cb71-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-28"><a href="dem-station.html#cb71-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
-<span id="cb71-29"><a href="dem-station.html#cb71-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject customer<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb71-30"><a href="dem-station.html#cb71-30" aria-hidden="true" tabindex="-1"></a>        myNS<span class="op">.</span><span class="fu">increment</span><span class="op">();</span> <span class="co">// new customer arrived</span></span>
-<span id="cb71-31"><a href="dem-station.html#cb71-31" aria-hidden="true" tabindex="-1"></a>        myWaitingQ<span class="op">.</span><span class="fu">enqueue</span><span class="op">(</span>customer<span class="op">);</span> <span class="co">// enqueue the newly arriving customer</span></span>
-<span id="cb71-32"><a href="dem-station.html#cb71-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">isResourceAvailable</span><span class="op">())</span> <span class="op">{</span> <span class="co">// server available</span></span>
-<span id="cb71-33"><a href="dem-station.html#cb71-33" aria-hidden="true" tabindex="-1"></a>            <span class="fu">serveNext</span><span class="op">();</span></span>
-<span id="cb71-34"><a href="dem-station.html#cb71-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb71-35"><a href="dem-station.html#cb71-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb71-36"><a href="dem-station.html#cb71-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-37"><a href="dem-station.html#cb71-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">class</span> EndServiceAction <span class="kw">implements</span> EventActionIfc<span class="op">&lt;</span>QObject<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb71-38"><a href="dem-station.html#cb71-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-39"><a href="dem-station.html#cb71-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
-<span id="cb71-40"><a href="dem-station.html#cb71-40" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent<span class="op">&lt;</span>QObject<span class="op">&gt;</span> event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb71-41"><a href="dem-station.html#cb71-41" aria-hidden="true" tabindex="-1"></a>            QObject leavingCustomer <span class="op">=</span> event<span class="op">.</span><span class="fu">getMessage</span><span class="op">();</span></span>
-<span id="cb71-42"><a href="dem-station.html#cb71-42" aria-hidden="true" tabindex="-1"></a>            myNS<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span> <span class="co">// customer departed</span></span>
-<span id="cb71-43"><a href="dem-station.html#cb71-43" aria-hidden="true" tabindex="-1"></a>            myResource<span class="op">.</span><span class="fu">release</span><span class="op">();</span></span>
-<span id="cb71-44"><a href="dem-station.html#cb71-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span><span class="fu">isQueueNotEmpty</span><span class="op">())</span> <span class="op">{</span> <span class="co">// queue is not empty</span></span>
-<span id="cb71-45"><a href="dem-station.html#cb71-45" aria-hidden="true" tabindex="-1"></a>                <span class="fu">serveNext</span><span class="op">();</span></span>
-<span id="cb71-46"><a href="dem-station.html#cb71-46" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb71-47"><a href="dem-station.html#cb71-47" aria-hidden="true" tabindex="-1"></a>            <span class="fu">send</span><span class="op">(</span>leavingCustomer<span class="op">);</span></span>
-<span id="cb71-48"><a href="dem-station.html#cb71-48" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb71-49"><a href="dem-station.html#cb71-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb72-1"><a href="dem-station.html#cb72-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">double</span> <span class="fu">getServiceTime</span><span class="op">(</span>QObject customer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb72-2"><a href="dem-station.html#cb72-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span> t<span class="op">;</span></span>
+<span id="cb72-3"><a href="dem-station.html#cb72-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">getUseQObjectServiceTimeOption</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb72-4"><a href="dem-station.html#cb72-4" aria-hidden="true" tabindex="-1"></a>            Optional<span class="op">&lt;</span>GetValueIfc<span class="op">&gt;</span> valueObject <span class="op">=</span> customer<span class="op">.</span><span class="fu">getValueObject</span><span class="op">();</span></span>
+<span id="cb72-5"><a href="dem-station.html#cb72-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>valueObject<span class="op">.</span><span class="fu">isPresent</span><span class="op">()){</span></span>
+<span id="cb72-6"><a href="dem-station.html#cb72-6" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> valueObject<span class="op">.</span><span class="fu">get</span><span class="op">().</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb72-7"><a href="dem-station.html#cb72-7" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb72-8"><a href="dem-station.html#cb72-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IllegalStateException</span><span class="op">(</span><span class="st">&quot;Attempted to use QObject.getValueObject() when no object was set&quot;</span><span class="op">);</span></span>
+<span id="cb72-9"><a href="dem-station.html#cb72-9" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb72-10"><a href="dem-station.html#cb72-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb72-11"><a href="dem-station.html#cb72-11" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> <span class="fu">getServiceTime</span><span class="op">().</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb72-12"><a href="dem-station.html#cb72-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb72-13"><a href="dem-station.html#cb72-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> t<span class="op">;</span></span>
+<span id="cb72-14"><a href="dem-station.html#cb72-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb72-15"><a href="dem-station.html#cb72-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-16"><a href="dem-station.html#cb72-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb72-17"><a href="dem-station.html#cb72-17" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> Called to determine which waiting QObject will be served next Determines</span>
+<span id="cb72-18"><a href="dem-station.html#cb72-18" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> the next customer<span class="co">,</span> seizes the resource<span class="co">,</span> and schedules the end of the</span>
+<span id="cb72-19"><a href="dem-station.html#cb72-19" aria-hidden="true" tabindex="-1"></a>     <span class="co">*</span> service<span class="co">.</span></span>
+<span id="cb72-20"><a href="dem-station.html#cb72-20" aria-hidden="true" tabindex="-1"></a>     <span class="co">*/</span></span>
+<span id="cb72-21"><a href="dem-station.html#cb72-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="dt">void</span> <span class="fu">serveNext</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb72-22"><a href="dem-station.html#cb72-22" aria-hidden="true" tabindex="-1"></a>        QObject customer <span class="op">=</span> myWaitingQ<span class="op">.</span><span class="fu">removeNext</span><span class="op">();</span> <span class="co">//remove the next customer</span></span>
+<span id="cb72-23"><a href="dem-station.html#cb72-23" aria-hidden="true" tabindex="-1"></a>        myResource<span class="op">.</span><span class="fu">seize</span><span class="op">();</span></span>
+<span id="cb72-24"><a href="dem-station.html#cb72-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// schedule end of service</span></span>
+<span id="cb72-25"><a href="dem-station.html#cb72-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scheduleEvent</span><span class="op">(</span>myEndServiceAction<span class="op">,</span> <span class="fu">getServiceTime</span><span class="op">(</span>customer<span class="op">),</span> customer<span class="op">);</span></span>
+<span id="cb72-26"><a href="dem-station.html#cb72-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb72-27"><a href="dem-station.html#cb72-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-28"><a href="dem-station.html#cb72-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb72-29"><a href="dem-station.html#cb72-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject customer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb72-30"><a href="dem-station.html#cb72-30" aria-hidden="true" tabindex="-1"></a>        myNS<span class="op">.</span><span class="fu">increment</span><span class="op">();</span> <span class="co">// new customer arrived</span></span>
+<span id="cb72-31"><a href="dem-station.html#cb72-31" aria-hidden="true" tabindex="-1"></a>        myWaitingQ<span class="op">.</span><span class="fu">enqueue</span><span class="op">(</span>customer<span class="op">);</span> <span class="co">// enqueue the newly arriving customer</span></span>
+<span id="cb72-32"><a href="dem-station.html#cb72-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">isResourceAvailable</span><span class="op">())</span> <span class="op">{</span> <span class="co">// server available</span></span>
+<span id="cb72-33"><a href="dem-station.html#cb72-33" aria-hidden="true" tabindex="-1"></a>            <span class="fu">serveNext</span><span class="op">();</span></span>
+<span id="cb72-34"><a href="dem-station.html#cb72-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb72-35"><a href="dem-station.html#cb72-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb72-36"><a href="dem-station.html#cb72-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-37"><a href="dem-station.html#cb72-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">class</span> EndServiceAction <span class="kw">implements</span> EventActionIfc<span class="op">&lt;</span>QObject<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb72-38"><a href="dem-station.html#cb72-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-39"><a href="dem-station.html#cb72-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb72-40"><a href="dem-station.html#cb72-40" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">action</span><span class="op">(</span>JSLEvent<span class="op">&lt;</span>QObject<span class="op">&gt;</span> event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb72-41"><a href="dem-station.html#cb72-41" aria-hidden="true" tabindex="-1"></a>            QObject leavingCustomer <span class="op">=</span> event<span class="op">.</span><span class="fu">getMessage</span><span class="op">();</span></span>
+<span id="cb72-42"><a href="dem-station.html#cb72-42" aria-hidden="true" tabindex="-1"></a>            myNS<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span> <span class="co">// customer departed</span></span>
+<span id="cb72-43"><a href="dem-station.html#cb72-43" aria-hidden="true" tabindex="-1"></a>            myResource<span class="op">.</span><span class="fu">release</span><span class="op">();</span></span>
+<span id="cb72-44"><a href="dem-station.html#cb72-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span><span class="fu">isQueueNotEmpty</span><span class="op">())</span> <span class="op">{</span> <span class="co">// queue is not empty</span></span>
+<span id="cb72-45"><a href="dem-station.html#cb72-45" aria-hidden="true" tabindex="-1"></a>                <span class="fu">serveNext</span><span class="op">();</span></span>
+<span id="cb72-46"><a href="dem-station.html#cb72-46" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb72-47"><a href="dem-station.html#cb72-47" aria-hidden="true" tabindex="-1"></a>            <span class="fu">send</span><span class="op">(</span>leavingCustomer<span class="op">);</span></span>
+<span id="cb72-48"><a href="dem-station.html#cb72-48" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb72-49"><a href="dem-station.html#cb72-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 <p>This is the same <code>send()</code> method that was previously discussed. Thus, because the receiver was set to be
 the instance of <code>Dispose</code>, the departing customer will be sent to the
 <code>GGCQueueingStation</code> where the statistics will be collected, as previously
@@ -759,25 +759,25 @@ Figure 7.6: The SResource Class
 </div>
 <p>The following listing illustrates how to build and run an
 instance of a GGCQueuingStation by simulating a M/M/2 queue.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb72-1"><a href="dem-station.html#cb72-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb72-2"><a href="dem-station.html#cb72-2" aria-hidden="true" tabindex="-1"></a>        Simulation sim <span class="op">=</span> <span class="kw">new</span> <span class="fu">Simulation</span><span class="op">(</span><span class="st">&quot;M/M/2&quot;</span><span class="op">);</span></span>
-<span id="cb72-3"><a href="dem-station.html#cb72-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// get the model</span></span>
-<span id="cb72-4"><a href="dem-station.html#cb72-4" aria-hidden="true" tabindex="-1"></a>        Model m <span class="op">=</span> sim<span class="op">.</span><span class="fu">getModel</span><span class="op">();</span></span>
-<span id="cb72-5"><a href="dem-station.html#cb72-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// add system to the main model</span></span>
-<span id="cb72-6"><a href="dem-station.html#cb72-6" aria-hidden="true" tabindex="-1"></a>        ExponentialRV tba <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb72-7"><a href="dem-station.html#cb72-7" aria-hidden="true" tabindex="-1"></a>        ExponentialRV st <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">.8</span><span class="op">);</span></span>
-<span id="cb72-8"><a href="dem-station.html#cb72-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> ns <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb72-9"><a href="dem-station.html#cb72-9" aria-hidden="true" tabindex="-1"></a>        GGCQueuingStation system <span class="op">=</span> <span class="kw">new</span> <span class="fu">GGCQueuingStation</span><span class="op">(</span>m<span class="op">,</span> tba<span class="op">,</span> st<span class="op">,</span> ns<span class="op">);</span></span>
-<span id="cb72-10"><a href="dem-station.html#cb72-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// set the parameters of the experiment</span></span>
-<span id="cb72-11"><a href="dem-station.html#cb72-11" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setNumberOfReplications</span><span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
-<span id="cb72-12"><a href="dem-station.html#cb72-12" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setLengthOfReplication</span><span class="op">(</span><span class="fl">20000.0</span><span class="op">);</span></span>
-<span id="cb72-13"><a href="dem-station.html#cb72-13" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setLengthOfWarmUp</span><span class="op">(</span><span class="fl">5000.0</span><span class="op">);</span></span>
-<span id="cb72-14"><a href="dem-station.html#cb72-14" aria-hidden="true" tabindex="-1"></a>        SimulationReporter r <span class="op">=</span> sim<span class="op">.</span><span class="fu">makeSimulationReporter</span><span class="op">();</span></span>
-<span id="cb72-15"><a href="dem-station.html#cb72-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Simulation started.&quot;</span><span class="op">);</span></span>
-<span id="cb72-16"><a href="dem-station.html#cb72-16" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">run</span><span class="op">();</span></span>
-<span id="cb72-17"><a href="dem-station.html#cb72-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Simulation completed.&quot;</span><span class="op">);</span></span>
-<span id="cb72-18"><a href="dem-station.html#cb72-18" aria-hidden="true" tabindex="-1"></a>        r<span class="op">.</span><span class="fu">printAcrossReplicationSummaryStatistics</span><span class="op">();</span></span>
-<span id="cb72-19"><a href="dem-station.html#cb72-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb73-1"><a href="dem-station.html#cb73-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb73-2"><a href="dem-station.html#cb73-2" aria-hidden="true" tabindex="-1"></a>        Simulation sim <span class="op">=</span> <span class="kw">new</span> <span class="fu">Simulation</span><span class="op">(</span><span class="st">&quot;M/M/2&quot;</span><span class="op">);</span></span>
+<span id="cb73-3"><a href="dem-station.html#cb73-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// get the model</span></span>
+<span id="cb73-4"><a href="dem-station.html#cb73-4" aria-hidden="true" tabindex="-1"></a>        Model m <span class="op">=</span> sim<span class="op">.</span><span class="fu">getModel</span><span class="op">();</span></span>
+<span id="cb73-5"><a href="dem-station.html#cb73-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// add system to the main model</span></span>
+<span id="cb73-6"><a href="dem-station.html#cb73-6" aria-hidden="true" tabindex="-1"></a>        ExponentialRV tba <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb73-7"><a href="dem-station.html#cb73-7" aria-hidden="true" tabindex="-1"></a>        ExponentialRV st <span class="op">=</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">.8</span><span class="op">);</span></span>
+<span id="cb73-8"><a href="dem-station.html#cb73-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> ns <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb73-9"><a href="dem-station.html#cb73-9" aria-hidden="true" tabindex="-1"></a>        GGCQueuingStation system <span class="op">=</span> <span class="kw">new</span> <span class="fu">GGCQueuingStation</span><span class="op">(</span>m<span class="op">,</span> tba<span class="op">,</span> st<span class="op">,</span> ns<span class="op">);</span></span>
+<span id="cb73-10"><a href="dem-station.html#cb73-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// set the parameters of the experiment</span></span>
+<span id="cb73-11"><a href="dem-station.html#cb73-11" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setNumberOfReplications</span><span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
+<span id="cb73-12"><a href="dem-station.html#cb73-12" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setLengthOfReplication</span><span class="op">(</span><span class="fl">20000.0</span><span class="op">);</span></span>
+<span id="cb73-13"><a href="dem-station.html#cb73-13" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">setLengthOfWarmUp</span><span class="op">(</span><span class="fl">5000.0</span><span class="op">);</span></span>
+<span id="cb73-14"><a href="dem-station.html#cb73-14" aria-hidden="true" tabindex="-1"></a>        SimulationReporter r <span class="op">=</span> sim<span class="op">.</span><span class="fu">makeSimulationReporter</span><span class="op">();</span></span>
+<span id="cb73-15"><a href="dem-station.html#cb73-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Simulation started.&quot;</span><span class="op">);</span></span>
+<span id="cb73-16"><a href="dem-station.html#cb73-16" aria-hidden="true" tabindex="-1"></a>        sim<span class="op">.</span><span class="fu">run</span><span class="op">();</span></span>
+<span id="cb73-17"><a href="dem-station.html#cb73-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Simulation completed.&quot;</span><span class="op">);</span></span>
+<span id="cb73-18"><a href="dem-station.html#cb73-18" aria-hidden="true" tabindex="-1"></a>        r<span class="op">.</span><span class="fu">printAcrossReplicationSummaryStatistics</span><span class="op">();</span></span>
+<span id="cb73-19"><a href="dem-station.html#cb73-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 <p>This is the same as any JSL run. In this case, the <code>GGCQueueingStation</code> class used a
 <code>SingleQueueStation</code> to do, essentially, all of the work. Now, imagine
 many queueing stations organized into a system. Because the
@@ -794,40 +794,40 @@ instance of a class that implements the <code>ReceiveQObjectIfc</code> interface
 collects the total time in the system and the number of customers in the
 system. This should begin to indicate how complex networks of queueing
 stations can be formed and simulated.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb73-1"><a href="dem-station.html#cb73-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">TandemQueue</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb73-2"><a href="dem-station.html#cb73-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
-<span id="cb73-3"><a href="dem-station.html#cb73-3" aria-hidden="true" tabindex="-1"></a>        myTBA <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">1.0</span><span class="op">/</span><span class="fl">1.1</span><span class="op">));</span></span>
-<span id="cb73-4"><a href="dem-station.html#cb73-4" aria-hidden="true" tabindex="-1"></a>        myST1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">0.8</span><span class="op">));</span></span>
-<span id="cb73-5"><a href="dem-station.html#cb73-5" aria-hidden="true" tabindex="-1"></a>        myST2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">0.7</span><span class="op">));</span></span>
-<span id="cb73-6"><a href="dem-station.html#cb73-6" aria-hidden="true" tabindex="-1"></a>        myArrivalGenerator <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventGenerator</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">Arrivals</span><span class="op">(),</span> myTBA<span class="op">,</span> myTBA<span class="op">);</span></span>
-<span id="cb73-7"><a href="dem-station.html#cb73-7" aria-hidden="true" tabindex="-1"></a>        myStation1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">SingleQueueStation</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> myST1<span class="op">,</span> <span class="st">&quot;Station1&quot;</span><span class="op">);</span></span>
-<span id="cb73-8"><a href="dem-station.html#cb73-8" aria-hidden="true" tabindex="-1"></a>        myStation2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">SingleQueueStation</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> myST2<span class="op">,</span> <span class="st">&quot;Station2&quot;</span><span class="op">);</span></span>
-<span id="cb73-9"><a href="dem-station.html#cb73-9" aria-hidden="true" tabindex="-1"></a>        myStation1<span class="op">.</span><span class="fu">setNextReceiver</span><span class="op">(</span>myStation2<span class="op">);</span></span>
-<span id="cb73-10"><a href="dem-station.html#cb73-10" aria-hidden="true" tabindex="-1"></a>        myStation2<span class="op">.</span><span class="fu">setNextReceiver</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Dispose</span><span class="op">());</span></span>
-<span id="cb73-11"><a href="dem-station.html#cb73-11" aria-hidden="true" tabindex="-1"></a>        mySysTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResponseVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;System Time&quot;</span><span class="op">);</span></span>
-<span id="cb73-12"><a href="dem-station.html#cb73-12" aria-hidden="true" tabindex="-1"></a>        myNumInSystem <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;NumInSystem&quot;</span><span class="op">);</span></span>
-<span id="cb73-13"><a href="dem-station.html#cb73-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb73-14"><a href="dem-station.html#cb73-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-15"><a href="dem-station.html#cb73-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Arrivals <span class="kw">implements</span> EventGeneratorActionIfc <span class="op">{</span></span>
-<span id="cb73-16"><a href="dem-station.html#cb73-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-17"><a href="dem-station.html#cb73-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
-<span id="cb73-18"><a href="dem-station.html#cb73-18" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generate</span><span class="op">(</span>EventGenerator generator<span class="op">,</span> JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb73-19"><a href="dem-station.html#cb73-19" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
-<span id="cb73-20"><a href="dem-station.html#cb73-20" aria-hidden="true" tabindex="-1"></a>            myStation1<span class="op">.</span><span class="fu">receive</span><span class="op">(</span><span class="kw">new</span> <span class="fu">QObject</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()));</span></span>
-<span id="cb73-21"><a href="dem-station.html#cb73-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb73-22"><a href="dem-station.html#cb73-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-23"><a href="dem-station.html#cb73-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb73-24"><a href="dem-station.html#cb73-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-25"><a href="dem-station.html#cb73-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Dispose <span class="kw">implements</span> ReceiveQObjectIfc <span class="op">{</span></span>
-<span id="cb73-26"><a href="dem-station.html#cb73-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-27"><a href="dem-station.html#cb73-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
-<span id="cb73-28"><a href="dem-station.html#cb73-28" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject qObj<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb73-29"><a href="dem-station.html#cb73-29" aria-hidden="true" tabindex="-1"></a>           <span class="co">// collect system time</span></span>
-<span id="cb73-30"><a href="dem-station.html#cb73-30" aria-hidden="true" tabindex="-1"></a>            mySysTime<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()</span> <span class="op">-</span> qObj<span class="op">.</span><span class="fu">getCreateTime</span><span class="op">());</span></span>
-<span id="cb73-31"><a href="dem-station.html#cb73-31" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span></span>
-<span id="cb73-32"><a href="dem-station.html#cb73-32" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb73-33"><a href="dem-station.html#cb73-33" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb73-34"><a href="dem-station.html#cb73-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb74-1"><a href="dem-station.html#cb74-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">TandemQueue</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb74-2"><a href="dem-station.html#cb74-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb74-3"><a href="dem-station.html#cb74-3" aria-hidden="true" tabindex="-1"></a>        myTBA <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">1.0</span><span class="op">/</span><span class="fl">1.1</span><span class="op">));</span></span>
+<span id="cb74-4"><a href="dem-station.html#cb74-4" aria-hidden="true" tabindex="-1"></a>        myST1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">0.8</span><span class="op">));</span></span>
+<span id="cb74-5"><a href="dem-station.html#cb74-5" aria-hidden="true" tabindex="-1"></a>        myST2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span><span class="fl">0.7</span><span class="op">));</span></span>
+<span id="cb74-6"><a href="dem-station.html#cb74-6" aria-hidden="true" tabindex="-1"></a>        myArrivalGenerator <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventGenerator</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">Arrivals</span><span class="op">(),</span> myTBA<span class="op">,</span> myTBA<span class="op">);</span></span>
+<span id="cb74-7"><a href="dem-station.html#cb74-7" aria-hidden="true" tabindex="-1"></a>        myStation1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">SingleQueueStation</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> myST1<span class="op">,</span> <span class="st">&quot;Station1&quot;</span><span class="op">);</span></span>
+<span id="cb74-8"><a href="dem-station.html#cb74-8" aria-hidden="true" tabindex="-1"></a>        myStation2 <span class="op">=</span> <span class="kw">new</span> <span class="fu">SingleQueueStation</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> myST2<span class="op">,</span> <span class="st">&quot;Station2&quot;</span><span class="op">);</span></span>
+<span id="cb74-9"><a href="dem-station.html#cb74-9" aria-hidden="true" tabindex="-1"></a>        myStation1<span class="op">.</span><span class="fu">setNextReceiver</span><span class="op">(</span>myStation2<span class="op">);</span></span>
+<span id="cb74-10"><a href="dem-station.html#cb74-10" aria-hidden="true" tabindex="-1"></a>        myStation2<span class="op">.</span><span class="fu">setNextReceiver</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Dispose</span><span class="op">());</span></span>
+<span id="cb74-11"><a href="dem-station.html#cb74-11" aria-hidden="true" tabindex="-1"></a>        mySysTime <span class="op">=</span> <span class="kw">new</span> <span class="fu">ResponseVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;System Time&quot;</span><span class="op">);</span></span>
+<span id="cb74-12"><a href="dem-station.html#cb74-12" aria-hidden="true" tabindex="-1"></a>        myNumInSystem <span class="op">=</span> <span class="kw">new</span> <span class="fu">TimeWeighted</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;NumInSystem&quot;</span><span class="op">);</span></span>
+<span id="cb74-13"><a href="dem-station.html#cb74-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb74-14"><a href="dem-station.html#cb74-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-15"><a href="dem-station.html#cb74-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Arrivals <span class="kw">implements</span> EventGeneratorActionIfc <span class="op">{</span></span>
+<span id="cb74-16"><a href="dem-station.html#cb74-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-17"><a href="dem-station.html#cb74-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb74-18"><a href="dem-station.html#cb74-18" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generate</span><span class="op">(</span>EventGenerator generator<span class="op">,</span> JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb74-19"><a href="dem-station.html#cb74-19" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
+<span id="cb74-20"><a href="dem-station.html#cb74-20" aria-hidden="true" tabindex="-1"></a>            myStation1<span class="op">.</span><span class="fu">receive</span><span class="op">(</span><span class="kw">new</span> <span class="fu">QObject</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()));</span></span>
+<span id="cb74-21"><a href="dem-station.html#cb74-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb74-22"><a href="dem-station.html#cb74-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-23"><a href="dem-station.html#cb74-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb74-24"><a href="dem-station.html#cb74-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-25"><a href="dem-station.html#cb74-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Dispose <span class="kw">implements</span> ReceiveQObjectIfc <span class="op">{</span></span>
+<span id="cb74-26"><a href="dem-station.html#cb74-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-27"><a href="dem-station.html#cb74-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb74-28"><a href="dem-station.html#cb74-28" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receive</span><span class="op">(</span>QObject qObj<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb74-29"><a href="dem-station.html#cb74-29" aria-hidden="true" tabindex="-1"></a>           <span class="co">// collect system time</span></span>
+<span id="cb74-30"><a href="dem-station.html#cb74-30" aria-hidden="true" tabindex="-1"></a>            mySysTime<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span><span class="fu">getTime</span><span class="op">()</span> <span class="op">-</span> qObj<span class="op">.</span><span class="fu">getCreateTime</span><span class="op">());</span></span>
+<span id="cb74-31"><a href="dem-station.html#cb74-31" aria-hidden="true" tabindex="-1"></a>            myNumInSystem<span class="op">.</span><span class="fu">decrement</span><span class="op">();</span></span>
+<span id="cb74-32"><a href="dem-station.html#cb74-32" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb74-33"><a href="dem-station.html#cb74-33" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb74-34"><a href="dem-station.html#cb74-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 </div>
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2022-02-25" />
+<meta name="date" content="2022-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,12 +218,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.1" data-path="introDEDS-Intro.html"><a href="introDEDS-Intro.html"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="introDEDS-deds.html"><a href="introDEDS-deds.html"><i class="fa fa-check"></i><b>6.2</b> Discrete-Event Dynamic Systems</a></li>
 <li class="chapter" data-level="6.3" data-path="HowDEDSClockWorks.html"><a href="HowDEDSClockWorks.html"><i class="fa fa-check"></i><b>6.3</b> How the Discrete-Event Clock Works</a></li>
-<li class="chapter" data-level="6.4" data-path="simulating-a-queueing-system-by-hand.html"><a href="simulating-a-queueing-system-by-hand.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
+<li class="chapter" data-level="6.4" data-path="QHandExample.html"><a href="QHandExample.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
 <li class="chapter" data-level="6.5" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html"><i class="fa fa-check"></i><b>6.5</b> Modeling DEDS in the JSL</a>
 <ul>
 <li class="chapter" data-level="6.5.1" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#event-scheduling"><i class="fa fa-check"></i><b>6.5.1</b> Event Scheduling</a></li>
-<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#simple-event-scheduling-examples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
-<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#up-and-down-component-example"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
+<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:schedExamples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
+<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:updown"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
 <li class="chapter" data-level="6.5.4" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:pharmacy"><i class="fa fa-check"></i><b>6.5.4</b> Modeling a Simple Queueing System</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="introDEDS-Summary.html"><a href="introDEDS-Summary.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
@@ -707,10 +707,10 @@ Computing the p-value for <span class="math inline">\(k-s-1=10-0-1=9\)</span> de
 would not reject the hypothesis that the observed data is <span class="math inline">\(U(0,1)\)</span>. This process can be readily implemented within a spreadsheet or performed using R. Assuming that the file, u01data.txt, contains the PRNs for this example, then the following R commands will
 perform the test:<br />
 </p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="app-distfit-testU01.html#cb180-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
-<span id="cb180-2"><a href="app-distfit-testU01.html#cb180-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="co"># set up the break points</span></span>
-<span id="cb180-3"><a href="app-distfit-testU01.html#cb180-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> <span class="fu">hist</span>(data, b, <span class="at">right =</span> <span class="cn">FALSE</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>) <span class="co"># tabulate the counts</span></span>
-<span id="cb180-4"><a href="app-distfit-testU01.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(h<span class="sc">$</span>counts) <span class="co"># perform the test</span></span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="app-distfit-testU01.html#cb181-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
+<span id="cb181-2"><a href="app-distfit-testU01.html#cb181-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="co"># set up the break points</span></span>
+<span id="cb181-3"><a href="app-distfit-testU01.html#cb181-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> <span class="fu">hist</span>(data, b, <span class="at">right =</span> <span class="cn">FALSE</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>) <span class="co"># tabulate the counts</span></span>
+<span id="cb181-4"><a href="app-distfit-testU01.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(h<span class="sc">$</span>counts) <span class="co"># perform the test</span></span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
@@ -1019,8 +1019,8 @@ statistical software <span class="math inline">\(R\)</span>. Assuming that the f
 contains the data for this example, then the following R commands will
 perform the test:<br />
 </p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="app-distfit-testU01.html#cb184-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
-<span id="cb184-2"><a href="app-distfit-testU01.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(data,<span class="st">&quot;punif&quot;</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># perform the test</span></span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="app-distfit-testU01.html#cb185-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">scan</span>(<span class="at">file=</span><span class="st">&quot;data/AppDistFitting/u01data.txt&quot;</span>) <span class="co"># read in the file</span></span>
+<span id="cb185-2"><a href="app-distfit-testU01.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(data,<span class="st">&quot;punif&quot;</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># perform the test</span></span></code></pre></div>
 <pre><code>## 
 ##  One-sample Kolmogorov-Smirnov test
 ## 
@@ -1050,7 +1050,7 @@ band, we can conclude that the data are likely independent observations.</p>
 Figure C.28: Autocorrelation Plot for u01data.txt Data Set
 </p>
 </div>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="app-distfit-testU01.html#cb186-1" aria-hidden="true" tabindex="-1"></a>rho</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="app-distfit-testU01.html#cb187-1" aria-hidden="true" tabindex="-1"></a>rho</span></code></pre></div>
 <pre><code>## 
 ## Autocorrelations of series &#39;data&#39;, by lag
 ## 

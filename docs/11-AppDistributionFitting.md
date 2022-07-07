@@ -2425,7 +2425,7 @@ observation is in row 1 column 2, and so forth. This data is available
 in the text file *PharmacyInputModelingExampleData.txt* that accompanies
 this chapter.
 
-::: {#tab:PharmacyData}
+:::{#tab:PharmacyData}
   -------- -------- -------- -------- --------
      61     278.73   194.68   55.33    398.39
    59.09    70.55    151.65   58.45    86.88

@@ -24,7 +24,7 @@
 <meta name="author" content="Manuel D. Rossetti" />
 
 
-<meta name="date" content="2022-02-25" />
+<meta name="date" content="2022-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,12 +218,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.1" data-path="introDEDS-Intro.html"><a href="introDEDS-Intro.html"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="introDEDS-deds.html"><a href="introDEDS-deds.html"><i class="fa fa-check"></i><b>6.2</b> Discrete-Event Dynamic Systems</a></li>
 <li class="chapter" data-level="6.3" data-path="HowDEDSClockWorks.html"><a href="HowDEDSClockWorks.html"><i class="fa fa-check"></i><b>6.3</b> How the Discrete-Event Clock Works</a></li>
-<li class="chapter" data-level="6.4" data-path="simulating-a-queueing-system-by-hand.html"><a href="simulating-a-queueing-system-by-hand.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
+<li class="chapter" data-level="6.4" data-path="QHandExample.html"><a href="QHandExample.html"><i class="fa fa-check"></i><b>6.4</b> Simulating a Queueing System By Hand</a></li>
 <li class="chapter" data-level="6.5" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html"><i class="fa fa-check"></i><b>6.5</b> Modeling DEDS in the JSL</a>
 <ul>
 <li class="chapter" data-level="6.5.1" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#event-scheduling"><i class="fa fa-check"></i><b>6.5.1</b> Event Scheduling</a></li>
-<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#simple-event-scheduling-examples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
-<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#up-and-down-component-example"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
+<li class="chapter" data-level="6.5.2" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:schedExamples"><i class="fa fa-check"></i><b>6.5.2</b> Simple Event Scheduling Examples</a></li>
+<li class="chapter" data-level="6.5.3" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:updown"><i class="fa fa-check"></i><b>6.5.3</b> Up and Down Component Example</a></li>
 <li class="chapter" data-level="6.5.4" data-path="introDEDS-dedsJSL.html"><a href="introDEDS-dedsJSL.html#introDEDS:pharmacy"><i class="fa fa-check"></i><b>6.5.4</b> Modeling a Simple Queueing System</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="introDEDS-Summary.html"><a href="introDEDS-Summary.html"><i class="fa fa-check"></i><b>6.6</b> Summary</a></li>
@@ -451,38 +451,38 @@ Notice how a counter is used to count the number of events and a
 different counter is used to count the number of arrivals based on the
 random variable representing the number of occurrences governed by the
 discrete empirical distribution function.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb67-1"><a href="dem-eg.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> EventGeneratorCPP <span class="kw">extends</span> SchedulingElement <span class="op">{</span></span>
-<span id="cb67-2"><a href="dem-eg.html#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-3"><a href="dem-eg.html#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> EventGenerator myArrivalGenerator<span class="op">;</span></span>
-<span id="cb67-4"><a href="dem-eg.html#cb67-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> Counter myEventCounter<span class="op">;</span></span>
-<span id="cb67-5"><a href="dem-eg.html#cb67-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> Counter myArrivalCounter<span class="op">;</span></span>
-<span id="cb67-6"><a href="dem-eg.html#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> RandomVariable myTBA<span class="op">;</span></span>
-<span id="cb67-7"><a href="dem-eg.html#cb67-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> RandomVariable myNumArrivals<span class="op">;</span></span>
-<span id="cb67-8"><a href="dem-eg.html#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-9"><a href="dem-eg.html#cb67-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">EventGeneratorCPP</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb67-10"><a href="dem-eg.html#cb67-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
-<span id="cb67-11"><a href="dem-eg.html#cb67-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb67-12"><a href="dem-eg.html#cb67-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-13"><a href="dem-eg.html#cb67-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">EventGeneratorCPP</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="dt">double</span> tba<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb67-14"><a href="dem-eg.html#cb67-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
-<span id="cb67-15"><a href="dem-eg.html#cb67-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span><span class="op">[]</span> values <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
-<span id="cb67-16"><a href="dem-eg.html#cb67-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span><span class="op">[]</span> cdf <span class="op">=</span> <span class="op">{</span><span class="fl">0.2</span><span class="op">,</span> <span class="fl">0.5</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">};</span></span>
-<span id="cb67-17"><a href="dem-eg.html#cb67-17" aria-hidden="true" tabindex="-1"></a>        myNumArrivals <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">DEmpiricalRV</span><span class="op">(</span>values<span class="op">,</span> cdf<span class="op">));</span></span>
-<span id="cb67-18"><a href="dem-eg.html#cb67-18" aria-hidden="true" tabindex="-1"></a>        myTBA <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span>tba<span class="op">));</span></span>
-<span id="cb67-19"><a href="dem-eg.html#cb67-19" aria-hidden="true" tabindex="-1"></a>        myEventCounter <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Counts Events&quot;</span><span class="op">);</span></span>
-<span id="cb67-20"><a href="dem-eg.html#cb67-20" aria-hidden="true" tabindex="-1"></a>        myArrivalCounter <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Counts Arrivals&quot;</span><span class="op">);</span></span>
-<span id="cb67-21"><a href="dem-eg.html#cb67-21" aria-hidden="true" tabindex="-1"></a>        myArrivalGenerator <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventGenerator</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">Arrivals</span><span class="op">(),</span> myTBA<span class="op">,</span> myTBA<span class="op">);</span></span>
-<span id="cb67-22"><a href="dem-eg.html#cb67-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb67-23"><a href="dem-eg.html#cb67-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-24"><a href="dem-eg.html#cb67-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Arrivals <span class="kw">implements</span> EventGeneratorActionIfc <span class="op">{</span></span>
-<span id="cb67-25"><a href="dem-eg.html#cb67-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
-<span id="cb67-26"><a href="dem-eg.html#cb67-26" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generate</span><span class="op">(</span>EventGenerator generator<span class="op">,</span> JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb67-27"><a href="dem-eg.html#cb67-27" aria-hidden="true" tabindex="-1"></a>            myEventCounter<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
-<span id="cb67-28"><a href="dem-eg.html#cb67-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> n <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span>myNumArrivals<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
-<span id="cb67-29"><a href="dem-eg.html#cb67-29" aria-hidden="true" tabindex="-1"></a>            myArrivalCounter<span class="op">.</span><span class="fu">increment</span><span class="op">(</span>n<span class="op">);</span></span>
-<span id="cb67-30"><a href="dem-eg.html#cb67-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb67-31"><a href="dem-eg.html#cb67-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb67-32"><a href="dem-eg.html#cb67-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb68-1"><a href="dem-eg.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> EventGeneratorCPP <span class="kw">extends</span> SchedulingElement <span class="op">{</span></span>
+<span id="cb68-2"><a href="dem-eg.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="dem-eg.html#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> EventGenerator myArrivalGenerator<span class="op">;</span></span>
+<span id="cb68-4"><a href="dem-eg.html#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> Counter myEventCounter<span class="op">;</span></span>
+<span id="cb68-5"><a href="dem-eg.html#cb68-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> Counter myArrivalCounter<span class="op">;</span></span>
+<span id="cb68-6"><a href="dem-eg.html#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> RandomVariable myTBA<span class="op">;</span></span>
+<span id="cb68-7"><a href="dem-eg.html#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> RandomVariable myNumArrivals<span class="op">;</span></span>
+<span id="cb68-8"><a href="dem-eg.html#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="dem-eg.html#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">EventGeneratorCPP</span><span class="op">(</span>ModelElement parent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb68-10"><a href="dem-eg.html#cb68-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">(</span>parent<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb68-11"><a href="dem-eg.html#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb68-12"><a href="dem-eg.html#cb68-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-13"><a href="dem-eg.html#cb68-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">EventGeneratorCPP</span><span class="op">(</span>ModelElement parent<span class="op">,</span> <span class="dt">double</span> tba<span class="op">,</span> <span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb68-14"><a href="dem-eg.html#cb68-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">super</span><span class="op">(</span>parent<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb68-15"><a href="dem-eg.html#cb68-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span><span class="op">[]</span> values <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
+<span id="cb68-16"><a href="dem-eg.html#cb68-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span><span class="op">[]</span> cdf <span class="op">=</span> <span class="op">{</span><span class="fl">0.2</span><span class="op">,</span> <span class="fl">0.5</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">};</span></span>
+<span id="cb68-17"><a href="dem-eg.html#cb68-17" aria-hidden="true" tabindex="-1"></a>        myNumArrivals <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">DEmpiricalRV</span><span class="op">(</span>values<span class="op">,</span> cdf<span class="op">));</span></span>
+<span id="cb68-18"><a href="dem-eg.html#cb68-18" aria-hidden="true" tabindex="-1"></a>        myTBA <span class="op">=</span> <span class="kw">new</span> <span class="fu">RandomVariable</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">ExponentialRV</span><span class="op">(</span>tba<span class="op">));</span></span>
+<span id="cb68-19"><a href="dem-eg.html#cb68-19" aria-hidden="true" tabindex="-1"></a>        myEventCounter <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Counts Events&quot;</span><span class="op">);</span></span>
+<span id="cb68-20"><a href="dem-eg.html#cb68-20" aria-hidden="true" tabindex="-1"></a>        myArrivalCounter <span class="op">=</span> <span class="kw">new</span> <span class="fu">Counter</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="st">&quot;Counts Arrivals&quot;</span><span class="op">);</span></span>
+<span id="cb68-21"><a href="dem-eg.html#cb68-21" aria-hidden="true" tabindex="-1"></a>        myArrivalGenerator <span class="op">=</span> <span class="kw">new</span> <span class="fu">EventGenerator</span><span class="op">(</span><span class="kw">this</span><span class="op">,</span> <span class="kw">new</span> <span class="fu">Arrivals</span><span class="op">(),</span> myTBA<span class="op">,</span> myTBA<span class="op">);</span></span>
+<span id="cb68-22"><a href="dem-eg.html#cb68-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb68-23"><a href="dem-eg.html#cb68-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-24"><a href="dem-eg.html#cb68-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">protected</span> <span class="kw">class</span> Arrivals <span class="kw">implements</span> EventGeneratorActionIfc <span class="op">{</span></span>
+<span id="cb68-25"><a href="dem-eg.html#cb68-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">@Override</span></span>
+<span id="cb68-26"><a href="dem-eg.html#cb68-26" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generate</span><span class="op">(</span>EventGenerator generator<span class="op">,</span> JSLEvent event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb68-27"><a href="dem-eg.html#cb68-27" aria-hidden="true" tabindex="-1"></a>            myEventCounter<span class="op">.</span><span class="fu">increment</span><span class="op">();</span></span>
+<span id="cb68-28"><a href="dem-eg.html#cb68-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> n <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span>myNumArrivals<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb68-29"><a href="dem-eg.html#cb68-29" aria-hidden="true" tabindex="-1"></a>            myArrivalCounter<span class="op">.</span><span class="fu">increment</span><span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb68-30"><a href="dem-eg.html#cb68-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb68-31"><a href="dem-eg.html#cb68-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb68-32"><a href="dem-eg.html#cb68-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <code>EventGenerator</code> class allows for the periodic generation of events
 similar to that achieved by “Create” modules in other simulation languages.
 This class works in conjunction with the <code>EventGeneratorActionIfc</code>
