@@ -425,7 +425,7 @@ day's worth of arrival data, but you need to simulate a month's worth of
 system operation. If you simply re-drive your simulation using the 1
 day's worth of data, you are not simulating different days! It is much
 more advisable to develop probability models either from historical data
-or from data that you capture in developing your model. Appendix \@ref(app:idm)
+or from data that you capture in developing your model. Appendix \@ref(app-idm)
 discusses some of the tools and techniques for modeling probability
 distributions.
 
@@ -437,7 +437,7 @@ scale. For example, if the inter-arrival time is exponential then a
 random sample drawn from that distribution would represent the time
 interval until the occurrence of the next arrival. The process of
 generating random numbers and random variables within simulation is
-presented in Appendix \@ref(app:rnrv).
+presented in Appendix \@ref(app-rnrv).
 
 ## Simulation Languages
 
@@ -502,7 +502,7 @@ using , the modeler describes the process that an \"entity\" experiences
 while flowing through or using the elements of the system. You will
 learn about how facilitates process modeling throughout this textbook.
 
-## Simulation Methodology {#ch1:sec:simMeth}
+## Simulation Methodology {#ch1-sec-simMeth}
 
 This section presents a brief overview of the steps of simulation
 modeling by discussing the process in the context of a methodology. A

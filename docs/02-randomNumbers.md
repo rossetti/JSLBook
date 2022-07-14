@@ -1,4 +1,4 @@
-# Random Number Generation {#ch2:rng}
+# Random Number Generation {#ch2-rng}
 
 **[Learning Objectives]{.smallcaps}**
 
@@ -6,7 +6,7 @@
     Library (JSL)
 -	To understand how to control random number streams within the JSL
 
-## Random Number Generator {#ch2:generator}
+## Random Number Generator {#ch2-generator}
 
 This section discusses how to random number generation is implemented
 within the JSL. The purpose is to present how these concepts can be put into
@@ -67,7 +67,7 @@ when performing simulation experiments. The generator was subjected to a
 rigorous battery of statistical tests and is known to have excellent
 statistical properties.
 
-## Random Package {#ch2:randompkg}
+## Random Package {#ch2-randompkg}
 
 The concepts within L'Ecuyer et al. (2002) have been implemented within the [`jsl.utilities.random.rng`](https://rossetti.git-pages.uark.edu/JSL-Documentation/jsl/utilities/random/rng/package-summary.html) package in the JSL. A key organizing principle for the `random` package is the use of Java interfaces. A Java interface allows classes to act like other classes. It is a mechanism by which a class can promise to have
 certain behaviors (i.e. methods). The JSL utilizes interfaces to
@@ -148,7 +148,7 @@ The random number stream provider also facilitates the control of all streams th
 
 Many random number generators require the specification of a seed to start the generated sequence.  Even though the generator within the JSL use seeds, there really is not any need to utilize the seeds because of the well defined methods for moving within the streams.  Now, let's illustrate how to create and manipulate streams.
 
-### Creating and Using Streams {#ch2:creatingStreams}
+### Creating and Using Streams {#ch2-creatingStreams}
 To create a random number stream, the user must utilize an instance of `RNStreamProvider`.  This process is illustrated in in the following code.  This code creates two instances of `RNStreamProvider` and gets the first stream from each instance.  The instances of `RNStreamProvider` use the exact same underlying default seeds. Thus, they produce *exactly the same* sequence of streams.
 
 (ref:example1) Exhibit 1 Creating a Stream Provider
@@ -253,7 +253,7 @@ u = 0.9655872822837334
 u = 0.9961841304801171
 Notice that they are different from the first 3.
 ```
-### Common Random Numbers {#ch2:crn}
+### Common Random Numbers {#ch2-crn}
 Common random numbers (CRN) is a Monte Carlo method that has different experiments utilize the same random numbers. CRN is a variance reduction technique that allows the experimenter to block out the effect of the random numbers used in the experiment.  To facilitate the use of common random numbers the JSL has the aforementioned stream control mechanism. One way to implement common random numbers is to use two instances of `RNStreamProvider` as was previously illustrated.  In that case, the two providers produce the same sequence of streams and thus those streams can be used on the different experiments.  An alternative method that does not require the use of two providers is to create a copy of the stream directly from the stream instance. The following code clones the stream instance. 
 
 ```java
@@ -309,7 +309,7 @@ Notice that the generated numbers are the same.
 ```
 Thus, a experiment can be executed, then the random numbers reset to the desired location. Then, by changing the experimental conditions and re-running the simulation, the same random numbers are used. If many streams are used, then by accessing the `RNStreamProvider` you can reset all of the controlled streams with one call and then perform the next experiment.
 
-### Creating and Using Antithetic Streams {#ch2:antitheticStreams}
+### Creating and Using Antithetic Streams {#ch2-antitheticStreams}
 Recall that if a pseudo-random number is called $U$ then its antithetic value is $1-U$.  There are a number of methods to access antithetic values. The simplest is to create an antithetic instance from a given stream.  This is illustrated is in the following code. Please note that the antithetic stream instance is not produced by the underlying `RNStreamProvider` and thus it is not part of the set of streams managed or controlled by the provider. The new instance process directly creates the new stream based on the current stream so that it has the same underling state and it is set to produce antithetic values.
 
 ```java
@@ -369,7 +369,7 @@ Notice that the second set of random numbers is the complement of the first set 
   4        0.174153 
   5        0.778370
 ```
-## Frequently Asked Questions {#ch2:FAQ}
+## Frequently Asked Questions {#ch2-FAQ}
 
 1. **What are pseudo-random numbers?**
 Numbers generated through an algorithm that appear to be random, when in fact, they are created by a deterministic process.

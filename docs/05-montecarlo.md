@@ -146,7 +146,7 @@ Because confidence intervals may form the basis for decision making, you
 can use the confidence interval half-width in determining the sample
 size. A review of these and other statistical concepts will be the focus of the next section.
 
-## Review of Statistical Concepts {#ch5:StatReview}
+## Review of Statistical Concepts {#ch5-StatReview}
 
 The simulation models that have been illustrated have
 estimated the quantity of interest with a point estimate (i.e.
@@ -157,7 +157,7 @@ The approach that we will take is to determine the number of samples so
 that we can have high confidence in our point estimate. In order to
 address these issues, we need to review some basic statistical concepts in order to understand the meaning of sampling error.
 
-### Point Estimates and Confidence Intervals
+### Point Estimates and Confidence Intervals {#ch5-point-est}
 
 Let $x_{i}$ represent the $i^{th}$ observations in a sample, $x_{1}, x_{2},...x_{n}$ of size $n$. Represent the random variables in the sample as $X_{1}, X_{2},...X_{n}$. The
 random variables form a random sample, if 1) the $X_{i}$ are independent
@@ -274,7 +274,7 @@ qt(1-(alpha/2),5)
 ```
 
 
-### Sample Size Determination {#ch5:SampleSize}
+### Sample Size Determination {#ch5-SampleSize}
 
 The confidence interval for a point estimator can serve as the basis for
 determining how many observations to have in the sample. From Equation (\@ref(eq:ci)), the quantity:
@@ -357,7 +357,7 @@ these sample size techniques for each of your performance measures and
 then use the maximum sample size required across the performance
 measures. Now, let's illustrate these methods based on a small Arena simulation.
 
-### Determining the Sample Size for a Monte Carlo Simulation Experiment
+### Determining the Sample Size for a Monte Carlo Simulation Experiment {#ch5-sample-size}
 
 To facilitate some of the calculations related to determining the sample size for a simulation experiment, I have constructed a spreadsheet called *SampleSizeDetermination.xlsx*, which is found in the book support files for this chapter. You may want to utilize that spreadsheet as you go through this an subsequent sections. 
 
@@ -519,7 +519,7 @@ We see that for this pilot sample, the half-width ratio method recommends a subs
 Based on these examples, you should have a basic understanding of how a
 simulation experiment can be performed to meet a desired margin of error. In general, simulation models are much more interesting than this simple example. 
 
-## Simulating the Game of Craps {#craps}
+## Simulating the Game of Craps {#ch5-craps}
 
 Consider the game of “craps” as played in Las Vegas.  The basic rules of the game are as follows:  one player, the “shooter”, rolls a pair of dice.  If the outcome of that roll is a 2, 3, or 12, the shooter immediately loses; if it is a 7 or an 11, the shooter wins.  In all other cases, the number the shooter rolls on the first toss becomes the “point”, which the shooter must try to duplicate on subsequent rolls.  If the shooter manages to roll the point before rolling a 7, the shooter wins; otherwise the shooter loses.  It may take several rolls to determine whether the shooter wins or loses.  After the first roll, only a 7 or the point have any significance until the win or loss is decided.  Using the JSL random and statistic packages give answers and corresponding estimates to the following questions. Be sure to report your estimates in the form of confidence intervals.
 
@@ -587,7 +587,7 @@ Now let's look at a slightly more complex static simulation.
 
 \FloatBarrier
 
-## The News Vendor Problem
+## The News Vendor Problem {#ch5-newsvendor}
 
 The news vendor model is a classic inventory model that allows for the
 modeling of how much to order for a decision maker facing uncertain

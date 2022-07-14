@@ -49,7 +49,7 @@ alternatives. To begin the discussion you need to build an understanding
 of the types of statistical quantities that may be produced by a
 simulation experiment.
 
-## Types of Statistical Variables {#simoa:datatypes}
+## Types of Statistical Variables {#simoa-datatypes}
 
 A simulation experiment occurs when the modeler sets the input
 parameters to the model and executes the simulation. This causes events
@@ -295,7 +295,7 @@ replication, we need to develop an understanding for the types of
 simulation situations that require specialized statistical analysis. The
 next section introduces this important topic.
 
-## Types of Simulation With Respect To Output Analysis {#simoa:simtypes}
+## Types of Simulation With Respect To Output Analysis {#simoa-simtypes}
 
 When modeling a system, specific measurement goals for the simulation
 responses are often required. The goals, coupled with how the system
@@ -399,7 +399,7 @@ study to see if they can just as well be met with a finite planning
 horizon. The analysis of both of these types of simulations will be
 discussed in this chapter through examples.
 
-## Analysis of Finite Horizon Simulations {#simoa:finhorizon}
+## Analysis of Finite Horizon Simulations {#simoa-finhorizon}
 
 This section illustrates how tally-based and time-persistent statistics
 are collected within a replication and how statistics are collected
@@ -516,11 +516,11 @@ approximate results. The assumption of normality is typically justified
 when across replication statistics are based on within replication
 averages.
 
-Determining the sample size for a simulation experiment has already been discussed in Section  \@ref(ch5:SampleSize) of Chapter \@ref(mcm), the following section will illustrate the half-width ratio method for determining the number of replications because it is often seen in practice.
+Determining the sample size for a simulation experiment has already been discussed in Section  \@ref(ch5-SampleSize) of Chapter \@ref(mcm), the following section will illustrate the half-width ratio method for determining the number of replications because it is often seen in practice.
 
-### Determining the Number of Replications {#simoa:finhorizon:samplesize}
+### Determining the Number of Replications {#simoa-finhorizon-samplesize}
 
-As a reminder, we repeat some of the exposition from Section  \@ref(ch5:SampleSize).  If you make a pilot run of $n_0$ replications you can use the half-width from the pilot run
+As a reminder, we repeat some of the exposition from Section  \@ref(ch5-SampleSize).  If you make a pilot run of $n_0$ replications you can use the half-width from the pilot run
 to determine how many replications you need to have to be close to a
 desired half-width bound in the full experiment. This is called the
 *half-width ratio method*.
@@ -616,7 +616,7 @@ distributed. In this case, since you are estimating a proportion, you
 can use the sample size determination techniques for estimating
 proportions via equations \@ref(eq:propCI) and \@ref(eq:pSampleSize).
 
-## Finite Horizon Example {#simoa:finhorizonex}
+## Finite Horizon Example {#simoa-finhorizonex}
 
 This section presents a fictitious system involving the production of rings. The example illustrates how to collect tally based
 statistics, time based statistics, and statistics that can only be
@@ -1078,7 +1078,7 @@ assumptions are reasonably met, there will be a high likelihood that the
 desired half-width will be very close to the desired criteria, as show
 in this example.
 
-### Sequential Sampling for Finite Horizon Simulations {#simoa:seqsampling}
+### Sequential Sampling for Finite Horizon Simulations {#simoa-seqsampling}
 
 The methods discussed for determining the sample size are based on
 pre-determining a *fixed* sample size and then making the replications.
@@ -1247,7 +1247,7 @@ completed may be different each time.
 
   : Half-Width Summary Report for Sequential Analysis
 
-## Analysis of Infinite Horizon Simulations {#simoa:infhorizon}
+## Analysis of Infinite Horizon Simulations {#simoa-infhorizon}
 
 This section discusses how to plan and analyze infinite horizon
 simulations. When analyzing infinite horizon simulations, the primary
@@ -1465,7 +1465,7 @@ addressing the problem of the non-stationary aspects of the data. The
 next section looks at ways to mitigate the non-stationary aspect of
 within-replication data for infinite horizon simulations.
 
-### Assessing the Effect of Initial Conditions {#simoa:infhorizon:initialbias}
+### Assessing the Effect of Initial Conditions {#simoa-infhorizon-initialbias}
 
 Consider the output stochastic process $X_i$ of the simulation. Let
 $F_i(x|I)$ be the conditional cumulative distribution function of $X_i$
@@ -1740,7 +1740,7 @@ points.
 The next section illustrates how to perform the method of
 replication-deletion on this simple M/M/1 model.
 
-### Performing the Method of Replication-Deletion {#simoa:infhorizon:repDeletion}
+### Performing the Method of Replication-Deletion {#simoa-infhorizon-repDeletion}
 
 The first step in performing the method of replication-deletion is to
 determine the length of the warm up period. This example illustrates how
@@ -1791,7 +1791,7 @@ $$3000 \; \text{customers} \times \frac{\text{minute}}{\text{1 customer}} \; = 3
 and therefore the initial $T_e$ should be 30,000 minutes. That is, you
 should specify 30,000 minutes for the replication length.
 
-#### Determining the Warm Up Period {#simoa:infhorizon:warmup}
+#### Determining the Warm Up Period {#simoa-infhorizon-warmup}
 
 To perform a more rigorous analysis of the warm up period, we need to
 run the simulation for multiple replications and capture the data
@@ -1981,7 +1981,7 @@ and has been automated in within the JSL. The next section discusses the
 statistical basis for the batch means method and addresses some of the
 practical issues of using it within the JSL.
 
-### The Method of Batch Means {#simoa:infhorizon:batchmeans}
+### The Method of Batch Means {#simoa-infhorizon-batchmeans}
 
 In the batch mean method, only one simulation run is executed. After
 deleting the warm up period, the remainder of the run is divided into
@@ -2156,7 +2156,7 @@ The hypothesis is rejected if $C > z_\alpha$ for a given confidence
 level $\alpha$. If the batch means do not pass the test, *Correlated* is
 reported for the half-width on the statistical reports.
 
-### Performing the Method of Batch Means {#simoa:infhorizon:jslbatching}
+### Performing the Method of Batch Means {#simoa-infhorizon-jslbatching}
 
 Performing the method of batch means in the JSL is relatively straight
 forward. The following assumes that a warm up period analysis has
@@ -2404,7 +2404,7 @@ alternative system configurations and to assist in choosing which
 configurations are best according to the decision criteria. The next
 section discusses how to compare different system configurations.
 
-## Comparing System Configurations {#simoa:comparingSystems}
+## Comparing System Configurations {#simoa-comparingSystems}
 
 The previous sections have concentrated on estimating the performance of
 a system through the execution of a single simulation model. The running
@@ -2438,7 +2438,7 @@ methods to ensure that the differences in performance are not simply due
 to sampling error. In other words, you want to be confident that one
 system is statistically better (or worse) than the other system.
 
-### Comparing Two Systems {#simoa:comparingSystems:two}
+### Comparing Two Systems {#simoa-comparingSystems-two}
 
 The techniques for comparing two systems via simulation are essentially
 the same as that found in books that cover the statistical analysis of
@@ -2507,7 +2507,7 @@ of unknown variance with independent samples. Then, we focus on the case
 of dependence between the samples. Finally, how to use the JSL to do the
 work of the analysis will be illustrated.
 
-#### Analyzing Two Independent Samples {#simoa:comparingSystems:twoIND}
+#### Analyzing Two Independent Samples {#simoa-comparingSystems-twoIND}
 
 Although the variances are unknown, the unknown variances are either
 equal or not equal. In the situation where the variances are equal, the
@@ -2685,7 +2685,7 @@ contained within the indifference zone, then you can conclude with
 confidence that there is no practical difference between the two
 systems.
 
-#### Analyzing Two Dependent Samples {#simoa:comparingSystems:twoDep}
+#### Analyzing Two Dependent Samples {#simoa-comparingSystems-twoDep}
 
 In this situation, continue to assume that the observations within a
 sample are independent and identically distributed random variables;
@@ -2818,18 +2818,18 @@ method. In this context, the worker is the factor that should be
 blocked. In the simulation context, the random numbers are being blocked
 when using common random numbers.
 
-#### Using Common Random Numbers {#simoa:comparingSystems:CRN}
+#### Using Common Random Numbers {#simoa-comparingSystems-CRN}
 
 The following explores how independent sampling and common random
 numbers can be implemented.
 
 IN PROGRESS
 
-### Multiple Comparisons {#simoa:comparingSystems:MCB}
+### Multiple Comparisons {#simoa-comparingSystems-MCB}
 
 IN PROGRESS
 
-## Summary {#simoa:summary}
+## Summary {#simoa-summary}
 
 This chapter described many of the statistical aspects of simulation
 that you will typically encounter in performing a simulation study. An

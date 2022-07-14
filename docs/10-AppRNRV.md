@@ -1,6 +1,6 @@
 \clearpage 
 
-# Generating Pseudo-Random Numbers and Random Variates {#app:rnrv}
+# Generating Pseudo-Random Numbers and Random Variates {#app-rnrv}
 
 **[Learning Objectives]{.smallcaps}**
 
@@ -37,7 +37,7 @@ sequences to be transformed so that they can represent a wide variety of
 random variables (e.g. normal, Poisson, etc.). The algorithms that
 govern these procedures are described in the second part of this chapter.
 
-## Pseudo Random Numbers {#app:rnrv:rn}
+## Pseudo Random Numbers {#app-rnrv-rn}
 
 This section indicates how uniformly distributed random numbers over
 the range from 0 to 1 are obtained within simulation programs. While
@@ -96,7 +96,7 @@ implications of random number generation. A more rigorous treatment of
 random number and random variable generation can be found such texts as
 [@fishman2006first] and [@devroye1986nonuniform].
 
-### Random Number Generators {#app:rnrv:rngs}
+### Random Number Generators {#app-rnrv-rngs}
 
 Over the history of scientific computing, there have been a wide variety
 of techniques and algorithms proposed and used for generating
@@ -438,7 +438,7 @@ when performing simulation experiments. The generator was subjected to a
 rigorous battery of statistical tests and is known to have excellent
 statistical properties. The subject of modeling and testing different distributions is deferred to a separate part of this book.
 
-## Generating Random Variates from Distributions {#app:rnrv:rvs}
+## Generating Random Variates from Distributions {#app-rnrv-rvs}
 
 In simulation, pseudo random numbers serve as the foundation for
 generating samples from probability distribution models. We will now
@@ -1303,7 +1303,7 @@ acceptance rejection algorithm for a probability density function,
 $f(x)$, if it has an infinite range because it may be more challenging
 to find a good majorizing function.
 
-### Mixture Distributions, Truncated Distributions, and Shifted Random Variables {#AppRNRV:subsec:MTSRV}
+### Mixture Distributions, Truncated Distributions, and Shifted Random Variables {#AppRNRV-subsec-MTSRV}
 
 This section describes three random variate generation methods that
 build on the previously discussed methods. These methods allow for more
@@ -1583,7 +1583,7 @@ simulation including:
 
 -   Generating random variates and processes
 
-Appendices \@ref(app:DiscreteDistributions) and \@ref(app:ContinuousDistributions) summarize many of the properties of common discrete and continuous distributions. These topics provide a solid foundation for modeling random components within simulation models. Not only should you now understand how
+Appendices \@ref(app-DiscreteDistributions) and \@ref(app-ContinuousDistributions) summarize many of the properties of common discrete and continuous distributions. These topics provide a solid foundation for modeling random components within simulation models. Not only should you now understand how
 random numbers are generated you also know how to transform those
 numbers to allow the generation from a wide variety of probability
 distributions. To further your study of random variate generation, you should study the generation of multi-variate distributions.  

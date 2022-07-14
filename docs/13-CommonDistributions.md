@@ -1,7 +1,7 @@
 \clearpage 
 # Distributions 
 
-## Discrete Distrbutions {#app:DiscreteDistributions}
+## Discrete Distrbutions {#app-DiscreteDistributions}
 
   **Bernoulli**             $Ber(p)$
   ------------------------- --------------------------------------
@@ -82,7 +82,7 @@
   Spreadsheet Generation:   =RANDBETWEEN(a,b)
   Modeling:                 equal occurrence over a range of integers
 
-## Continuous Distrbutions {#app:ContinuousDistributions}
+## Continuous Distrbutions {#app-ContinuousDistributions}
 
   **Uniform**               $U(a,b)$
   ------------------------- ----------------------------------------------------------

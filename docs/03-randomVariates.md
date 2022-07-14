@@ -1,4 +1,4 @@
-# Random Variate Generation and Probability Modeling
+# Random Variate Generation and Probability Modeling {#ch3-rv}
 
 **[Learning Objectives]{.smallcaps}**
 
@@ -20,7 +20,7 @@ example, if `d` is a reference to an instance of a sub-class of type
 
 ![(\#fig:RVariableIfc)Random Variable Interfaces](./figures/RVariableIfc.png) 
 
-## Continuous and Discrete Random Variables
+## Continuous and Discrete Random Variables {#ch3-cont-disc-rv}
 
 The names and parameters associated with the continuous random variables
 are as follows:
@@ -61,7 +61,7 @@ are as follows:
 -   VConstantRV(double value), a degenerate probability mass on a single
     value that can be changed
 
-## Overview of Generation Algorithms
+## Overview of Generation Algorithms {#ch3-algo}
 
 As you can see, the name of the distribution followed by the letters RV designate the class names.  Implementations of these classes extend the `AbstractRVarable` class, which implements the `RVariableIfc` interface.  Users simply create and instance of the class and then use it to get a sequence of values that have the named probability distribution. In order to implement a new random variable (i.e. some random variable
 that is not already implemented) you can extend the class
@@ -91,7 +91,7 @@ use numerically stable methods to compute the cumulative distribution
 function values. The `DEmpiricalRV` class also searches through the
 cumulative distribution function.
 
-## Creating and Using Random Variables
+## Creating and Using Random Variables {#ch3-rv-java}
 
 The following example code illustrates how to create a normal random variable and how to generate values.
 
@@ -235,7 +235,7 @@ JSLRandom.permutation(strList);
 System.out.println(strList);
 ```
 
-## Modeling Probability Distributions
+## Modeling Probability Distributions {#ch3-dist-java}
 
 The `jsl.utilities.random.rvariable` package is the key package for generating random variables; however, it does not facilitate performing calculations involving the underlying probability distributions. To perform calculations involving probability distributions, you should use the `jsl.utilities.distribution` package.  This package has almost all the same distributions represented within the `jsl.utilities.random.rvariable` package.  
 

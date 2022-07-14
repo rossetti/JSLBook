@@ -15,7 +15,7 @@ Figure \@ref(fig:Statistics) presents the major classes and interfaces within th
 
 ![(\#fig:Statistics)Major Classes and Interfaces in the Statistics Package](./figures/Statistics.png) 
 
-## Creating and Using a Statistic
+## Creating and Using a Statistic {#ch4-stat-java}
 
 The `Statistic` class has a great deal of functionality.  It accumulates summary statistics on the values presented to it via its `collect` methods. Recall also that since the `Statistic` class implements the `CollectorIfc` interface, you can use the `reset()` method to clear all accumulated statistics and reuse the `Statistic` instance.  The major statistical quantities are found in the `StatisticAccessor` interface.
 
@@ -108,7 +108,7 @@ The `Statistic` class has a number of very useful static methods that work on ar
 * `Statistic collectStatistics(double[] x, double[] w)` - returns an instance of `Statistic` that summarizes the array of values and the supplied weights.
 * `collectStatistics(double[] x)` - returns an instance of `Statistic` that summarizes the array of values 
 
-## Histograms and Frequencies
+## Histograms and Frequencies {#ch4-hist-java}
 
 A histogram tabulates counts and frequencies of observed data over a set of contiguous intervals.  Let $b_{0}, b_{1}, \cdots, b_{k}$ be the breakpoints (end points) of the class intervals such that $\left(b_{0}, b_{1} \right], \left(b_{1}, b_{2} \right], \cdots, \left(b_{k-1}, b_{k} \right]$ form $k$ disjoint and adjacent intervals.  The intervals do not have to be of equal width.  Also, $b_{0}$ can be equal to $-\infty$ resulting in interval $\left(-\infty, b_{1} \right]$ and $b_{k}$ can be equal to $+\infty$ resulting in interval $\left(b_{k-1}, +\infty \right)$. Define $\Delta b_j = b_{j} - b_{j-1}$ and if all the intervals have the same width (except perhaps for the end intervals), $\Delta b = \Delta b_j$. To count the number of observations that fall in each interval, we can use the count function:
 $$
@@ -303,7 +303,8 @@ Value 	 Count 	 Proportion
 5 	 1651 	 0.1651
 ----------------------------------------
 ```
-## Batch Statistics
+## Batch Statistics {#ch4-batch-java}
+
 In simulation, we often collect data that is correlated, that is not independent.  This causes difficulty in developing valid confidence intervals for the estimators.  Grouping the data into batches and computing the average of each batch is one methodology for reducing the dependence within the data.  The idea is that the average associated with each batch will tend to be less dependent, especially the larger the batch size.  The method of batch means provides a mechanism for developing an estimator for $Var\lbrack \bar{X} \rbrack$.
 
 The method of batch means is based on observations $(X_{1}, X_{2}, X_{3}, \dots, X_{n})$. The idea is to group the output into batches of size, $b$, such that the averages of the data within a batch are more nearly independent and possibly normally distributed.  

@@ -1,6 +1,6 @@
 \clearpage 
 
-# Queueing Theory {#app:qtAndInvT}
+# Queueing Theory {#app-qtAndInvT}
 
 **[Learning Objectives]{.smallcaps}**
 
@@ -31,7 +31,7 @@ First, it will provide an introduction to the key modeling issues, and
 second, it can provide approximate models for more complicated
 situations.  The purpose of this appendix is not to provide a comprehensive treatment of queueing theory for which there are many excellent books already.  The purpose of this appendix is to provide an introduction to this topic for persons new to simulation so that they can better understand their modeling and analysis of queueing systems. This appendix also serves as a reference for the formulas associated with these models to facilitate their use in verifying and validating simulation models.
 
-## Single Line Queueing Stations {#app:qts1}
+## Single Line Queueing Stations {#app-qts1}
 
 Chapter \@ref(introDEDS) presented
 the pharmacy model and analyzed it with a single server, single queue
@@ -382,7 +382,7 @@ results to be applicable, since if the mean arrival rate was greater
 than the mean capacity of the system, the waiting line would continue to
 grow over time.
 
-### Deriving Formulas for Markovian Single Queue Systems {#app:qts1sb1}
+### Deriving Formulas for Markovian Single Queue Systems {#app-qts1sb1}
 
 Notice that with $L = \lambda W$ and the other relationships, all of the
 major performance measures for the queue can be computed if a formula
@@ -683,10 +683,10 @@ B & = \frac{\lambda_e}{\mu} \\
 L & = L_q + B \\
 W & = W_q + \frac{1}{\mu}\end{aligned}$$
 
-Section \@ref(app:qt:sec:formulas) presents the results of applying the general solution for $P_n$ to different queueing system configurations.
+Section \@ref(app-qt-sec-formulas) presents the results of applying the general solution for $P_n$ to different queueing system configurations.
 Table \@ref(tab:mmcResults) presents specific results for the M/M/c
 queuing system for $c = 1,2,3$. Using these results and those in
-Section \@ref(app:qt:sec:formulas), the analysis of a variety of different queueing situations is possible.
+Section \@ref(app-qt-sec-formulas), the analysis of a variety of different queueing situations is possible.
 
 ::: {#tab:mmcResults}
    $c$                      $P_0$                                             $L_q$
@@ -706,7 +706,7 @@ depth theoretical development of the topic. There are also a number of
 free on-line resources available on the topic. The interested reader
 should search on "Queueing Theory Books On Line".  The next section presents some simple examples to illustrate the use of the formulas.
 
-## Examples and Applications of Queueing Analysis {#app:qts1sb2}
+## Examples and Applications of Queueing Analysis {#app-qts1sb2}
 
 The derivations and formulas in the previous section certainly appear to
 be intimidating and they can be tedious to apply. Fortunately, there is
@@ -792,7 +792,7 @@ service rate of $\mu = 12/hr$. Notice the input parameters have been
 converted to a common unit of measure (customers/hour).
 
 The equations for the M/M/1 can be readily applied. From
-Section \@ref(app:qt:sec:formulas) the following formulas can be applied:
+Section \@ref(app-qt-sec-formulas) the following formulas can be applied:
 
 $$
 \begin{aligned}
@@ -1263,7 +1263,7 @@ divided by the number of machines:
 
 $$\text{Machine Utilization} = \overline{\mathit{MU}} = \dfrac{k - L}{k} = 1 - \dfrac{L}{k}$$
 
-## Non-Markovian Queues and Approximations {#app:qts1sb3}
+## Non-Markovian Queues and Approximations {#app-qts1sb3}
 
 So far, the queueing models that have been analyzed all assume a Poisson
 arrival process and exponential service times. For other arrival and
@@ -1328,7 +1328,7 @@ should be examined.
 
 The following section summarizes the formulas for the previously mentioned queueing systems. The appendis is finished off with some example exercises that can be used to test your understanding of the application of these formulas.
 
-## Summary of Queueing Formulas {#app:qt:sec:formulas}
+## Summary of Queueing Formulas {#app-qt-sec-formulas}
 
 This section provides the formulas for basic single queue stations and is meant simply as a resource where the formulas are readily available for potential applicaiton.  The following notation is used within this section.
 

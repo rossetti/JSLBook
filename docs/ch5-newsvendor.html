@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Random Number Generator | JSL - Java Simulation Library</title>
+  <title>5.4 The News Vendor Problem | JSL - Java Simulation Library</title>
   <meta name="description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Random Number Generator | JSL - Java Simulation Library" />
+  <meta property="og:title" content="5.4 The News Vendor Problem | JSL - Java Simulation Library" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Random Number Generator | JSL - Java Simulation Library" />
+  <meta name="twitter:title" content="5.4 The News Vendor Problem | JSL - Java Simulation Library" />
   
   <meta name="twitter:description" content="A book that illustrates the basics of using the JSL. The output format for this book is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ch2-rng.html"/>
-<link rel="next" href="ch2-randompkg.html"/>
+<link rel="prev" href="ch5-craps.html"/>
+<link rel="next" href="summary-1.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -392,168 +392,160 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ch2-generator" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Random Number Generator</h2>
-<p>This section discusses how to random number generation is implemented
-within the JSL. The purpose is to present how these concepts can be put into
-practice.</p>
-<p>The random number generator used within the JSL is described in
-<span class="citation"><a href="#ref-ecuyer2002an" role="doc-biblioref">L’Ecuyer, Simard, and Kelton</a> (<a href="#ref-ecuyer2002an" role="doc-biblioref">2002</a>)</span> and has excellent statistical properties. It is based on the
-combination of two multiple recursive generators resulting in a period
-of approximately <span class="math inline">\(3.1 \times 10^{57}\)</span>. This is the same generator that
-is now used in many commercial simulation packages. The generator used in the JSL is
-defined by the following equations.</p>
-<p><span class="math display">\[
-\begin{aligned}
-R_{1,i} &amp; = (1,403,580 R_{1,i-2} - 810,728 R_{1,i-3})\bmod (2^{32}-209)\\
-R_{2,i} &amp; = (527,612R_{2,i-1} - 1,370,589 R_{2,i-3})\bmod (2^{32}-22,853)\\
-Y_i &amp; = (R_{1,i}-R_{2,i})\bmod(2^{32}-209)\\
-U_i &amp; = \frac{Y_i}{2^{32}-209}
-\end{aligned}
-\]</span></p>
-<p>To illustrate how this generator works, consider generating an initial sequence of
-pseudo-random numbers from the generator. The generator takes as its
-initial seed a vector of six initial values
-<span class="math inline">\((R_{1,0}, R_{1,1}, R_{1,2}, R_{2,0}, R_{2,1}, R_{2,2})\)</span>. The first
-initially generated value, <span class="math inline">\(U_{i}\)</span>, will start at index <span class="math inline">\(3\)</span>. To produce five pseudo random numbers using this generator we need an initial seed vector, such as:
-<span class="math display">\[\lbrace R_{1,0}, R_{1,1}, R_{1,2}, R_{2,0}, R_{2,1}, R_{2,2} \rbrace = \lbrace 12345, 12345, 12345, 12345, 12345, 12345\rbrace\]</span></p>
-<p>Using the recursive equations, the resulting random numbers are as follows:</p>
+<div id="ch5-newsvendor" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> The News Vendor Problem</h2>
+<p>The news vendor model is a classic inventory model that allows for the
+modeling of how much to order for a decision maker facing uncertain
+demand for an upcoming period of time. It takes on the news vendor
+moniker because of the context of selling newspapers at a newsstand. The
+vendor must anticipate how many papers to have on hand at the beginning
+of a day so as to not run short or have papers left over. This idea can
+be generalized to other more interesting situations (e.g. air plane
+seats). Discussion of the news vendor model is often presented in
+elementary textbooks on inventory theory. The reader is referred to
+<span class="citation">(<a href="#ref-Muckstadt2010aa" role="doc-biblioref">Muckstadt and Sapras 2010</a>)</span> for a discussion of this model.</p>
+<p>The basic model is considered a single period model; however, it can be
+extended to consider an analysis covering multiple (or infinite) future
+periods of demand. The representation of the costs within the modeling
+offers a number of variations.</p>
+<p>Let <span class="math inline">\(D\)</span> be a random variable representing the demand for the period. Let
+<span class="math inline">\(F(d)= P[D \leq d]\)</span> be the cumulative distribution function for the
+demand. Define <span class="math inline">\(G(q,D)\)</span> as the profit at the end of the period when <span class="math inline">\(q\)</span>
+units are ordered at the start of the period with <span class="math inline">\(D\)</span> units of demand.
+The parameter <span class="math inline">\(q\)</span> is the decision variable associated with this model.
+Depending on the value of <span class="math inline">\(q\)</span> chosen by the news vendor, a profit or
+loss will occur.</p>
+<p>There are two cases to consider <span class="math inline">\(D \geq q\)</span> or <span class="math inline">\(D &lt; q\)</span>. That is, when
+demand is greater than or equal to the amount ordered at the start of
+the period and when demand is less than the amount ordered at the start
+of the period. If <span class="math inline">\(D \geq q\)</span> the news vendor runs out of items, and if
+<span class="math inline">\(D &lt; q\)</span> the news vendor will have items left over.</p>
+<p>In order to develop a profit model for this situation, we need to define
+some model parameters. In addition, we need to determine the amount that
+we might be short and the amount we might have left over in order to
+determine the revenue or loss associated with a choice of <span class="math inline">\(q\)</span>. Let <span class="math inline">\(c\)</span>
+be the purchase cost. This is the cost that the news vendor pays the
+supplier for the item. Let <span class="math inline">\(s\)</span> be the selling price. This is the amount
+that the news vendor charges customers. Let <span class="math inline">\(u\)</span> be the salvage value
+(i.e. the amount per unit that can be received for the item after the
+planning period). For example, the salvage value can be the amount that
+the news vendor gets when selling a left over paper to a recycling
+center. We assume that selling price <span class="math inline">\(&gt;\)</span> purchase cost <span class="math inline">\(&gt;\)</span> salvage
+value.</p>
+<p>Consider the context of a news vendor planning for the day. What is the
+possible amount sold? If <span class="math inline">\(D\)</span> is the demand for the day and we start with
+<span class="math inline">\(q\)</span> items, then the most that can be sold is <span class="math inline">\(\min(D, q)\)</span>. That is, if
+<span class="math inline">\(D\)</span> is bigger than <span class="math inline">\(q\)</span>, you can only sell <span class="math inline">\(q\)</span>. If <span class="math inline">\(D\)</span> is smaller than
+<span class="math inline">\(q\)</span>, you can only sell <span class="math inline">\(D\)</span>.</p>
+<p>What is the possible amount left over (available for salvage)? If <span class="math inline">\(D\)</span> is
+the demand and we start with <span class="math inline">\(q\)</span>, then there are two cases: 1) demand is
+less than the amount ordered (<span class="math inline">\(D &lt; q\)</span>) or 2) demand is greater than or
+equal to the amount ordered (<span class="math inline">\(D \geq q\)</span>). In case 1, we will have <span class="math inline">\(q-D\)</span>
+items left over. In case 2, we will have <span class="math inline">\(0\)</span> left over. Thus, the amount
+left over at the end of the day is <span class="math inline">\(\max(0, q-D)\)</span>. Since the news vendor
+buys <span class="math inline">\(q\)</span> items for <span class="math inline">\(c\)</span>, the cost of the items for the day is
+<span class="math inline">\(c \times q\)</span>. Thus, the profit has the following form:</p>
+<p><span class="math display" id="eq:ExpRev">\[\begin{equation}
+G(D,q) = s \times \min(D, q) + u \times \max(0, q-D) - c \times q
+\tag{5.15}
+\end{equation}\]</span></p>
+<p>In words, the profit is equal to the sales revenue plus the salvage
+revenue minus the ordering cost. The sales revenue is the selling price
+times the amount sold. The salvage revenue is the salvage value times
+the amount left over. The ordering cost is the cost of the items times
+the amount ordered. To find the optimal value of <span class="math inline">\(q\)</span>, we should try to
+maximize the expected profit. Since <span class="math inline">\(D\)</span> is a random variable, <span class="math inline">\(G(D,q)\)</span>
+is also a random variable. Taking the expected value of both sides of
+Equation <a href="ch5-newsvendor.html#eq:ExpRev">(5.15)</a>, yields:</p>
+<p><span class="math display">\[g(q) = E[G(D,q)] =  sE[\min(D, q)] + uE[\max(0, q-D)] - cq\]</span></p>
+<p>Whether or not this equation can be optimized depends on the form of the
+distribution of <span class="math inline">\(D\)</span>; however, simulation can be used to estimate this
+expected value for any given <span class="math inline">\(q\)</span>. Let’s look at an example.</p>
+<hr />
+
+<div class="example">
+<p><span id="exm:BBQWing" class="example"><strong>Example 5.3  </strong></span>Sly’s convenience store sells BBQ wings for 25 cents a piece. They cost 15
+cents a piece to make. The BBQ wings that are not sold on a given day
+are purchased by a local food pantry for 2 cents each. Assuming that Sly
+decides to make 30 wings a day, what is the expected revenue for the
+wings provided that the demand distribution is as show in
+Table <a href="ch5-newsvendor.html#tab:BBQWingDemand">5.3</a>.</p>
+</div>
+<hr />
+<div id="tab:BBQWingDemand">
 <table>
+<caption><span id="tab:BBQWingDemand">Table 5.3: </span> Distribution of BBQ wing demand</caption>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">i=3</th>
-<th align="center">i=4</th>
-<th align="center">i=5</th>
-<th align="center">i=6</th>
-<th align="center">i=7</th>
-<th></th>
-<th></th>
+<th align="center"><span class="math inline">\(d_{i}\)</span></th>
+<th align="center">5</th>
+<th align="center">10</th>
+<th align="center">40</th>
+<th align="center">45</th>
+<th align="center">50</th>
+<th align="center">55</th>
+<th align="center">60</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(Z_{1,i-3}=\)</span></td>
-<td align="center">12345</td>
-<td align="center">12345</td>
-<td align="center">12345</td>
-<td align="center">3023790853</td>
-<td align="center">3023790853</td>
-<td></td>
-<td></td>
+<td align="center"><span class="math inline">\(f(d_{i})\)</span></td>
+<td align="center">0.1</td>
+<td align="center">0.2</td>
+<td align="center">0.3</td>
+<td align="center">0.2</td>
+<td align="center">0.1</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(Z_{1,i-2}=\)</span></td>
-<td align="center">12345</td>
-<td align="center">12345</td>
-<td align="center">3023790853</td>
-<td align="center">3023790853</td>
-<td align="center">3385359573</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(Z_{1,i-1}=\)</span></td>
-<td align="center">12345</td>
-<td align="center">3023790853</td>
-<td align="center">3023790853</td>
-<td align="center">3385359573</td>
-<td align="center">1322208174</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(Z_{2,i-3}=\)</span></td>
-<td align="center">12345</td>
-<td align="center">12345</td>
-<td align="center">12345</td>
-<td align="center">2478282264</td>
-<td align="center">1655725443</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(Z_{2,i-2}=\)</span></td>
-<td align="center">12345</td>
-<td align="center">12345</td>
-<td align="center">2478282264</td>
-<td align="center">1655725443</td>
-<td align="center">2057415812</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(Z_{2,i-1}=\)</span></td>
-<td align="center">12345</td>
-<td align="center">2478282264</td>
-<td align="center">1655725443</td>
-<td align="center">2057415812</td>
-<td align="center">2070190165</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(Z_{1,i}=\)</span></td>
-<td align="center">3023790853</td>
-<td align="center">3023790853</td>
-<td align="center">3385359573</td>
-<td align="center">1322208174</td>
-<td align="center">2930192941</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(Z_{2,i}=\)</span></td>
-<td align="center">2478282264</td>
-<td align="center">1655725443</td>
-<td align="center">2057415812</td>
-<td align="center">2070190165</td>
-<td align="center">1978299747</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(Y_i=\)</span></td>
-<td align="center">545508589</td>
-<td align="center">1368065410</td>
-<td align="center">1327943761</td>
-<td align="center">3546985096</td>
-<td align="center">951893194</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(U_i=\)</span></td>
-<td align="center">0.127011122076</td>
-<td align="center">0.318527565471</td>
-<td align="center">0.309186015655</td>
-<td align="center">0.82584686312</td>
-<td align="center">0.221629915834</td>
-<td></td>
-<td></td>
+<td align="center"><span class="math inline">\(F(d_{i})\)</span></td>
+<td align="center">0.1</td>
+<td align="center">0.3</td>
+<td align="center">0.6</td>
+<td align="center">0.8</td>
+<td align="center">0.9</td>
+<td align="center">0.95</td>
+<td align="center">1.0</td>
 </tr>
 </tbody>
 </table>
-<p>While it is beyond the scope of this document to explore the theoretical
-underpinnings of this generator, it is important to note that the generator allows multiple independent streams to be defined along with sub-streams.</p>
-<p>The fantastic thing about this generator is the sheer size of the
-period. Based on their analysis, <span class="citation"><a href="#ref-ecuyer2002an" role="doc-biblioref">L’Ecuyer, Simard, and Kelton</a> (<a href="#ref-ecuyer2002an" role="doc-biblioref">2002</a>)</span> state that it will be
-“approximately 219 years into the future before average desktop
-computers will have the capability to exhaust the cycle of the
-(generator) in a year of continuous computing.” In addition to the
-period length, the generator has an enormous number of streams,
-approximately <span class="math inline">\(1.8 \times 10^{19}\)</span> with stream lengths of
-<span class="math inline">\(1.7 \times 10^{38}\)</span> and sub-streams of length <span class="math inline">\(7.6 \times 10^{22}\)</span>
-numbering at <span class="math inline">\(2.3 \times 10^{15}\)</span> per stream. Clearly, with these
-properties, you do not have to worry about overlapping random numbers
-when performing simulation experiments. The generator was subjected to a
-rigorous battery of statistical tests and is known to have excellent
-statistical properties.</p>
+</div>
+<p>The code for the news vendor
+problem will require the generation of the demand from BBQ Wing demand distribution. In order to generate from this distribution, the DEmpirical class should be used. Since the cumulative distribution has already been computed, it
+is straight forward to write the inputs for the DEmpirical class.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb49-1"><a href="ch5-newsvendor.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> q <span class="op">=</span> <span class="dv">30</span><span class="op">;</span> <span class="co">// order qty</span></span>
+<span id="cb49-2"><a href="ch5-newsvendor.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> s <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span> <span class="co">//sales price</span></span>
+<span id="cb49-3"><a href="ch5-newsvendor.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> c <span class="op">=</span> <span class="fl">0.15</span><span class="op">;</span> <span class="co">// unit cost</span></span>
+<span id="cb49-4"><a href="ch5-newsvendor.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> u <span class="op">=</span> <span class="fl">0.02</span><span class="op">;</span> <span class="co">//salvage value</span></span>
+<span id="cb49-5"><a href="ch5-newsvendor.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">[]</span> values <span class="op">=</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">45</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">55</span><span class="op">,</span> <span class="dv">60</span><span class="op">};</span></span>
+<span id="cb49-6"><a href="ch5-newsvendor.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">[]</span> cdf <span class="op">=</span> <span class="op">{</span><span class="fl">0.1</span><span class="op">,</span> <span class="fl">0.3</span><span class="op">,</span> <span class="fl">0.6</span><span class="op">,</span> <span class="fl">0.8</span><span class="op">,</span> <span class="fl">0.9</span><span class="op">,</span> <span class="fl">0.95</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">};</span></span>
+<span id="cb49-7"><a href="ch5-newsvendor.html#cb49-7" aria-hidden="true" tabindex="-1"></a>DEmpiricalRV dCDF <span class="op">=</span> <span class="kw">new</span> <span class="fu">DEmpiricalRV</span><span class="op">(</span>values<span class="op">,</span> cdf<span class="op">);</span></span>
+<span id="cb49-8"><a href="ch5-newsvendor.html#cb49-8" aria-hidden="true" tabindex="-1"></a>Statistic stat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Statistic</span><span class="op">(</span><span class="st">&quot;Profit&quot;</span><span class="op">);</span></span>
+<span id="cb49-9"><a href="ch5-newsvendor.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> n <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> <span class="co">// sample size</span></span>
+<span id="cb49-10"><a href="ch5-newsvendor.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb49-11"><a href="ch5-newsvendor.html#cb49-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> d <span class="op">=</span> dCDF<span class="op">.</span><span class="fu">getValue</span><span class="op">();</span></span>
+<span id="cb49-12"><a href="ch5-newsvendor.html#cb49-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> amtSold <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span><span class="op">(</span>d<span class="op">,</span> q<span class="op">);</span></span>
+<span id="cb49-13"><a href="ch5-newsvendor.html#cb49-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> amtLeft <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> q <span class="op">-</span> d<span class="op">);</span></span>
+<span id="cb49-14"><a href="ch5-newsvendor.html#cb49-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> g <span class="op">=</span> s <span class="op">*</span> amtSold <span class="op">+</span> u <span class="op">*</span> amtLeft <span class="op">-</span> c <span class="op">*</span> q<span class="op">;</span></span>
+<span id="cb49-15"><a href="ch5-newsvendor.html#cb49-15" aria-hidden="true" tabindex="-1"></a>    stat<span class="op">.</span><span class="fu">collect</span><span class="op">(</span>g<span class="op">);</span></span>
+<span id="cb49-16"><a href="ch5-newsvendor.html#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb49-17"><a href="ch5-newsvendor.html#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st"> </span><span class="sc">\t</span><span class="st"> </span><span class="sc">%f</span><span class="st"> </span><span class="sc">%n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Count = &quot;</span><span class="op">,</span> stat<span class="op">.</span><span class="fu">getCount</span><span class="op">());</span></span>
+<span id="cb49-18"><a href="ch5-newsvendor.html#cb49-18" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st"> </span><span class="sc">\t</span><span class="st"> </span><span class="sc">%f</span><span class="st"> </span><span class="sc">%n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Average = &quot;</span><span class="op">,</span> stat<span class="op">.</span><span class="fu">getAverage</span><span class="op">());</span></span>
+<span id="cb49-19"><a href="ch5-newsvendor.html#cb49-19" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st"> </span><span class="sc">\t</span><span class="st"> </span><span class="sc">%f</span><span class="st"> </span><span class="sc">%n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Std. Dev. = &quot;</span><span class="op">,</span> stat<span class="op">.</span><span class="fu">getStandardDeviation</span><span class="op">());</span></span>
+<span id="cb49-20"><a href="ch5-newsvendor.html#cb49-20" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">printf</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st"> </span><span class="sc">\t</span><span class="st"> </span><span class="sc">%f</span><span class="st"> </span><span class="sc">%n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Half-width = &quot;</span><span class="op">,</span> stat<span class="op">.</span><span class="fu">getHalfWidth</span><span class="op">());</span></span>
+<span id="cb49-21"><a href="ch5-newsvendor.html#cb49-21" aria-hidden="true" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>stat<span class="op">.</span><span class="fu">getConfidenceLevel</span><span class="op">()</span> <span class="op">*</span> <span class="dv">100</span> <span class="op">+</span> <span class="st">&quot;% CI = &quot;</span> <span class="op">+</span> stat<span class="op">.</span><span class="fu">getConfidenceInterval</span><span class="op">());</span></span></code></pre></div>
+<p>Running the model for 100 days results in the following output.</p>
+<pre><code>Count =      100.000000 
+Average =    1.677500 
+Std. Dev. =      2.201324 
+Half-width =     0.436790 
+95.0% CI = [1.2407095787617952, 2.1142904212382048]</code></pre>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-ecuyer2002an" class="csl-entry">
-L’Ecuyer, P., R. Simard, and W. D. Kelton. 2002. <span>“An Object-Oriented Random Number Package with Many Long Streams and Substreams.”</span> <em>Operations Research</em> 50: 1073–75.
+<div id="ref-Muckstadt2010aa" class="csl-entry">
+Muckstadt, J. A., and A. Sapras. 2010. <em>Principles of Inventory Management: When You Are down to Four, Order More</em>. Springer.
 </div>
 </div>
             </section>
@@ -561,8 +553,8 @@ L’Ecuyer, P., R. Simard, and W. D. Kelton. 2002. <span>“An Object-Oriented R
           </div>
         </div>
       </div>
-<a href="ch2-rng.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ch2-randompkg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ch5-craps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -12,7 +12,7 @@
 -   To be able to create, run, and examine the results of a JSL model of
     a simple DEDS
 
-## Introduction {#introDEDS:Intro}
+## Introduction {#introDEDS-Intro}
 
 In Chapter \@ref(mcm), we
 explored how to develop models in the JSL for which time is not a
@@ -62,7 +62,7 @@ essentially the collection of states associated with all the objects in
 the system. The notion of modeling what happens to a system at
 particular events in time is the basis of discrete event modeling.
 
-## Discrete-Event Dynamic Systems {#introDEDS:deds}
+## Discrete-Event Dynamic Systems {#introDEDS-deds}
 
 Nelson (1995) states that the event-view "defines system events by
 describing what happens to the system as it encounters entities". In
@@ -913,7 +913,7 @@ to event). The JSL supports the scheduling and execution of events
 within its calendar and model packages. The next section overviews the
 libraries available within the JSL for discrete-event modeling.
 
-## Modeling DEDS in the JSL {#introDEDS:dedsJSL}
+## Modeling DEDS in the JSL {#introDEDS-dedsJSL}
 
 Discrete event modeling within the JSL is facilitated by two packages:
 1) the `jsl.simulation` package and 2) the `jsl.calendar` package. The `jsl.simulation`
@@ -1031,7 +1031,7 @@ provide event action code: 1) provide a class that implements the
 `EventActionIfc` interface and supply it when scheduling the event or 2)
 by treating the `EventActionIfc` as a functional interface and using Java 8's functional method representation.  Providing an inner class that implements the `EventActionIfc` interface will be illustrated here.
 
-### Simple Event Scheduling Examples {#introDEDS:schedExamples}
+### Simple Event Scheduling Examples {#introDEDS-schedExamples}
 
 This section presents two simple examples to illustrate event
 scheduling. The first example illustrates the scheduling of events using the `EventActionIfc` interface. The second example shows how to simulate a Poisson process and collect
@@ -1160,7 +1160,7 @@ EventActionTwo at time : 100.0
 
 Notice that event action one output occurs at time 10.0. This is due to the event that was scheduled within the `initialize()` method. Event action two occurs for the first time at time 20.0 and then every 20 time units. Notice that event action one occurs at time 35.0. This is due to the event being scheduled in the action method of event action two.
 
-#### Overview of Simuation Run Context {#introDEDS:overview}
+#### Overview of Simuation Run Context {#introDEDS-overview}
 
 When the simulation runs, much underlying code is executed. At this
 stage it is not critically important to understand how this code works;
@@ -1215,7 +1215,7 @@ executive because the events are scheduled. Thus, if you schedule
 events, you can be assured that the logic associated with the events
 will be executed.
 
-#### Simulating a Poisson Process {#introDEDS:pois}
+#### Simulating a Poisson Process {#introDEDS-pois}
 
 The second simple example illustrates how to simulate a Poisson process.
 Recall that a Poisson process models the number of events that occur
@@ -1340,7 +1340,7 @@ Counts events        20.500000      4.870779     50.000000
 -----------------------------------------------------------
 ```
 
-### Up and Down Component Example {#introDEDS:updown}
+### Up and Down Component Example {#introDEDS-updown}
 
 This section further illustrates DEDS modeling with a component of a
 system that is subject to random failures. The component has two states
@@ -1567,7 +1567,7 @@ of modeling can be achieved by making the individual model elements
 interact in complex ways. More complex modeling will be the focus of the
 next chapter.
 
-### Modeling a Simple Queueing System {#introDEDS:pharmacy}
+### Modeling a Simple Queueing System {#introDEDS-pharmacy}
 
 This example considers a small pharmacy that has a single line for
 waiting customers and only one pharmacist. Assume that customers arrive
@@ -1952,7 +1952,7 @@ interest for wide ranging queuing situations. For example, through
 simulation you can easily estimate the chance that there are 3 or more
 cars waiting.
 
-## Summary {#introDEDS:Summary}
+## Summary {#introDEDS-Summary}
 
 This chapter introduced how to model discrete event dynamic systems
 using the JSL. The JSL facilitates the model building process, the model

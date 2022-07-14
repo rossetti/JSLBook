@@ -259,7 +259,7 @@
 
 \title{JSL - Java Simulation Library}
 \author{Manuel D. Rossetti}
-\date{2022-07-07}
+\date{2022-07-14}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -783,7 +783,7 @@ day's worth of arrival data, but you need to simulate a month's worth of
 system operation. If you simply re-drive your simulation using the 1
 day's worth of data, you are not simulating different days! It is much
 more advisable to develop probability models either from historical data
-or from data that you capture in developing your model. Appendix \ref{app:idm}
+or from data that you capture in developing your model. Appendix \ref{app-idm}
 discusses some of the tools and techniques for modeling probability
 distributions.
 
@@ -795,7 +795,7 @@ scale. For example, if the inter-arrival time is exponential then a
 random sample drawn from that distribution would represent the time
 interval until the occurrence of the next arrival. The process of
 generating random numbers and random variables within simulation is
-presented in Appendix \ref{app:rnrv}.
+presented in Appendix \ref{app-rnrv}.
 
 \hypertarget{simulation-languages}{%
 \section{Simulation Languages}\label{simulation-languages}}
@@ -861,8 +861,8 @@ using , the modeler describes the process that an "entity" experiences
 while flowing through or using the elements of the system. You will
 learn about how facilitates process modeling throughout this textbook.
 
-\hypertarget{ch1:sec:simMeth}{%
-\section{Simulation Methodology}\label{ch1:sec:simMeth}}
+\hypertarget{ch1-sec-simMeth}{%
+\section{Simulation Methodology}\label{ch1-sec-simMeth}}
 
 This section presents a brief overview of the steps of simulation
 modeling by discussing the process in the context of a methodology. A
@@ -1472,8 +1472,8 @@ system.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{ch2:rng}{%
-\chapter{Random Number Generation}\label{ch2:rng}}
+\hypertarget{ch2-rng}{%
+\chapter{Random Number Generation}\label{ch2-rng}}
 
 \textbf{\textsc{Learning Objectives}}
 
@@ -1486,8 +1486,8 @@ system.
   To understand how to control random number streams within the JSL
 \end{itemize}
 
-\hypertarget{ch2:generator}{%
-\section{Random Number Generator}\label{ch2:generator}}
+\hypertarget{ch2-generator}{%
+\section{Random Number Generator}\label{ch2-generator}}
 
 This section discusses how to random number generation is implemented
 within the JSL. The purpose is to present how these concepts can be put into
@@ -1553,8 +1553,8 @@ when performing simulation experiments. The generator was subjected to a
 rigorous battery of statistical tests and is known to have excellent
 statistical properties.
 
-\hypertarget{ch2:randompkg}{%
-\section{Random Package}\label{ch2:randompkg}}
+\hypertarget{ch2-randompkg}{%
+\section{Random Package}\label{ch2-randompkg}}
 
 The concepts within L'Ecuyer et al.~(2002) have been implemented within the \href{https://rossetti.git-pages.uark.edu/JSL-Documentation/jsl/utilities/random/rng/package-summary.html}{\texttt{jsl.utilities.random.rng}} package in the JSL. A key organizing principle for the \texttt{random} package is the use of Java interfaces. A Java interface allows classes to act like other classes. It is a mechanism by which a class can promise to have
 certain behaviors (i.e.~methods). The JSL utilizes interfaces to
@@ -1667,8 +1667,8 @@ The random number stream provider also facilitates the control of all streams th
 
 Many random number generators require the specification of a seed to start the generated sequence. Even though the generator within the JSL use seeds, there really is not any need to utilize the seeds because of the well defined methods for moving within the streams. Now, let's illustrate how to create and manipulate streams.
 
-\hypertarget{ch2:creatingStreams}{%
-\subsection{Creating and Using Streams}\label{ch2:creatingStreams}}
+\hypertarget{ch2-creatingStreams}{%
+\subsection{Creating and Using Streams}\label{ch2-creatingStreams}}
 
 To create a random number stream, the user must utilize an instance of \texttt{RNStreamProvider}. This process is illustrated in in the following code. This code creates two instances of \texttt{RNStreamProvider} and gets the first stream from each instance. The instances of \texttt{RNStreamProvider} use the exact same underlying default seeds. Thus, they produce \emph{exactly the same} sequence of streams.
 
@@ -1788,8 +1788,8 @@ u = 0.9961841304801171
 Notice that they are different from the first 3.
 \end{verbatim}
 
-\hypertarget{ch2:crn}{%
-\subsection{Common Random Numbers}\label{ch2:crn}}
+\hypertarget{ch2-crn}{%
+\subsection{Common Random Numbers}\label{ch2-crn}}
 
 Common random numbers (CRN) is a Monte Carlo method that has different experiments utilize the same random numbers. CRN is a variance reduction technique that allows the experimenter to block out the effect of the random numbers used in the experiment. To facilitate the use of common random numbers the JSL has the aforementioned stream control mechanism. One way to implement common random numbers is to use two instances of \texttt{RNStreamProvider} as was previously illustrated. In that case, the two providers produce the same sequence of streams and thus those streams can be used on the different experiments. An alternative method that does not require the use of two providers is to create a copy of the stream directly from the stream instance. The following code clones the stream instance.
 
@@ -1853,8 +1853,8 @@ Notice that the generated numbers are the same.
 
 Thus, a experiment can be executed, then the random numbers reset to the desired location. Then, by changing the experimental conditions and re-running the simulation, the same random numbers are used. If many streams are used, then by accessing the \texttt{RNStreamProvider} you can reset all of the controlled streams with one call and then perform the next experiment.
 
-\hypertarget{ch2:antitheticStreams}{%
-\subsection{Creating and Using Antithetic Streams}\label{ch2:antitheticStreams}}
+\hypertarget{ch2-antitheticStreams}{%
+\subsection{Creating and Using Antithetic Streams}\label{ch2-antitheticStreams}}
 
 Recall that if a pseudo-random number is called \(U\) then its antithetic value is \(1-U\). There are a number of methods to access antithetic values. The simplest is to create an antithetic instance from a given stream. This is illustrated is in the following code. Please note that the antithetic stream instance is not produced by the underlying \texttt{RNStreamProvider} and thus it is not part of the set of streams managed or controlled by the provider. The new instance process directly creates the new stream based on the current stream so that it has the same underling state and it is set to produce antithetic values.
 
@@ -1925,8 +1925,8 @@ Notice that the second set of random numbers is the complement of the first set 
   5        0.778370
 \end{verbatim}
 
-\hypertarget{ch2:FAQ}{%
-\section{Frequently Asked Questions}\label{ch2:FAQ}}
+\hypertarget{ch2-FAQ}{%
+\section{Frequently Asked Questions}\label{ch2-FAQ}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1948,8 +1948,8 @@ Notice that the second set of random numbers is the complement of the first set 
   Sometimes by changing the order of method calls you change the sequence of random numbers that are assigned to various things that happen in the model (e.g.~attribute, generated service times, paths taken, etc.). Please see the FAQ ``How come my results are always the same?''. Now, the result can sometimes be radically different if different random numbers are used for different purposes. By using streams, you reduce this possibility and increase the likelihood that two models that have different configurations will have differences due to the change and not due to the random numbers used.
 \end{enumerate}
 
-\hypertarget{random-variate-generation-and-probability-modeling}{%
-\chapter{Random Variate Generation and Probability Modeling}\label{random-variate-generation-and-probability-modeling}}
+\hypertarget{ch3-rv}{%
+\chapter{Random Variate Generation and Probability Modeling}\label{ch3-rv}}
 
 \textbf{\textsc{Learning Objectives}}
 
@@ -1981,8 +1981,8 @@ example, if \texttt{d} is a reference to an instance of a sub-class of type
 \caption{\label{fig:RVariableIfc}Random Variable Interfaces}
 \end{figure}
 
-\hypertarget{continuous-and-discrete-random-variables}{%
-\section{Continuous and Discrete Random Variables}\label{continuous-and-discrete-random-variables}}
+\hypertarget{ch3-cont-disc-rv}{%
+\section{Continuous and Discrete Random Variables}\label{ch3-cont-disc-rv}}
 
 The names and parameters associated with the continuous random variables
 are as follows:
@@ -2055,8 +2055,8 @@ are as follows:
   value that can be changed
 \end{itemize}
 
-\hypertarget{overview-of-generation-algorithms}{%
-\section{Overview of Generation Algorithms}\label{overview-of-generation-algorithms}}
+\hypertarget{ch3-algo}{%
+\section{Overview of Generation Algorithms}\label{ch3-algo}}
 
 As you can see, the name of the distribution followed by the letters RV designate the class names. Implementations of these classes extend the \texttt{AbstractRVarable} class, which implements the \texttt{RVariableIfc} interface. Users simply create and instance of the class and then use it to get a sequence of values that have the named probability distribution. In order to implement a new random variable (i.e.~some random variable
 that is not already implemented) you can extend the class
@@ -2086,8 +2086,8 @@ use numerically stable methods to compute the cumulative distribution
 function values. The \texttt{DEmpiricalRV} class also searches through the
 cumulative distribution function.
 
-\hypertarget{creating-and-using-random-variables}{%
-\section{Creating and Using Random Variables}\label{creating-and-using-random-variables}}
+\hypertarget{ch3-rv-java}{%
+\section{Creating and Using Random Variables}\label{ch3-rv-java}}
 
 The following example code illustrates how to create a normal random variable and how to generate values.
 
@@ -2248,8 +2248,8 @@ without replacement. The following code provide examples of using these methods.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{modeling-probability-distributions}{%
-\section{Modeling Probability Distributions}\label{modeling-probability-distributions}}
+\hypertarget{ch3-dist-java}{%
+\section{Modeling Probability Distributions}\label{ch3-dist-java}}
 
 The \texttt{jsl.utilities.random.rvariable} package is the key package for generating random variables; however, it does not facilitate performing calculations involving the underlying probability distributions. To perform calculations involving probability distributions, you should use the \texttt{jsl.utilities.distribution} package. This package has almost all the same distributions represented within the \texttt{jsl.utilities.random.rvariable} package.
 
@@ -2435,8 +2435,8 @@ Figure \ref{fig:Statistics} presents the major classes and interfaces within the
 \caption{\label{fig:Statistics}Major Classes and Interfaces in the Statistics Package}
 \end{figure}
 
-\hypertarget{creating-and-using-a-statistic}{%
-\section{Creating and Using a Statistic}\label{creating-and-using-a-statistic}}
+\hypertarget{ch4-stat-java}{%
+\section{Creating and Using a Statistic}\label{ch4-stat-java}}
 
 The \texttt{Statistic} class has a great deal of functionality. It accumulates summary statistics on the values presented to it via its \texttt{collect} methods. Recall also that since the \texttt{Statistic} class implements the \texttt{CollectorIfc} interface, you can use the \texttt{reset()} method to clear all accumulated statistics and reuse the \texttt{Statistic} instance. The major statistical quantities are found in the \texttt{StatisticAccessor} interface.
 
@@ -2552,8 +2552,8 @@ The \texttt{Statistic} class has a number of very useful static methods that wor
   \texttt{collectStatistics(double{[}{]}\ x)} - returns an instance of \texttt{Statistic} that summarizes the array of values
 \end{itemize}
 
-\hypertarget{histograms-and-frequencies}{%
-\section{Histograms and Frequencies}\label{histograms-and-frequencies}}
+\hypertarget{ch4-hist-java}{%
+\section{Histograms and Frequencies}\label{ch4-hist-java}}
 
 A histogram tabulates counts and frequencies of observed data over a set of contiguous intervals. Let \(b_{0}, b_{1}, \cdots, b_{k}\) be the breakpoints (end points) of the class intervals such that \(\left(b_{0}, b_{1} \right], \left(b_{1}, b_{2} \right], \cdots, \left(b_{k-1}, b_{k} \right]\) form \(k\) disjoint and adjacent intervals. The intervals do not have to be of equal width. Also, \(b_{0}\) can be equal to \(-\infty\) resulting in interval \(\left(-\infty, b_{1} \right]\) and \(b_{k}\) can be equal to \(+\infty\) resulting in interval \(\left(b_{k-1}, +\infty \right)\). Define \(\Delta b_j = b_{j} - b_{j-1}\) and if all the intervals have the same width (except perhaps for the end intervals), \(\Delta b = \Delta b_j\). To count the number of observations that fall in each interval, we can use the count function:
 \[
@@ -2770,8 +2770,8 @@ Value    Count   Proportion
 ----------------------------------------
 \end{verbatim}
 
-\hypertarget{batch-statistics}{%
-\section{Batch Statistics}\label{batch-statistics}}
+\hypertarget{ch4-batch-java}{%
+\section{Batch Statistics}\label{ch4-batch-java}}
 
 In simulation, we often collect data that is correlated, that is not independent. This causes difficulty in developing valid confidence intervals for the estimators. Grouping the data into batches and computing the average of each batch is one methodology for reducing the dependence within the data. The idea is that the average associated with each batch will tend to be less dependent, especially the larger the batch size. The method of batch means provides a mechanism for developing an estimator for \(Var\lbrack \bar{X} \rbrack\).
 
@@ -3120,8 +3120,8 @@ Because confidence intervals may form the basis for decision making, you
 can use the confidence interval half-width in determining the sample
 size. A review of these and other statistical concepts will be the focus of the next section.
 
-\hypertarget{ch5:StatReview}{%
-\section{Review of Statistical Concepts}\label{ch5:StatReview}}
+\hypertarget{ch5-StatReview}{%
+\section{Review of Statistical Concepts}\label{ch5-StatReview}}
 
 The simulation models that have been illustrated have
 estimated the quantity of interest with a point estimate (i.e.
@@ -3132,8 +3132,8 @@ The approach that we will take is to determine the number of samples so
 that we can have high confidence in our point estimate. In order to
 address these issues, we need to review some basic statistical concepts in order to understand the meaning of sampling error.
 
-\hypertarget{point-estimates-and-confidence-intervals}{%
-\subsection{Point Estimates and Confidence Intervals}\label{point-estimates-and-confidence-intervals}}
+\hypertarget{ch5-point-est}{%
+\subsection{Point Estimates and Confidence Intervals}\label{ch5-point-est}}
 
 Let \(x_{i}\) represent the \(i^{th}\) observations in a sample, \(x_{1}, x_{2},...x_{n}\) of size \(n\). Represent the random variables in the sample as \(X_{1}, X_{2},...X_{n}\). The
 random variables form a random sample, if 1) the \(X_{i}\) are independent
@@ -3253,8 +3253,8 @@ t_{p, n} = qt(p,n)
 ## [1] 2.570582
 \end{verbatim}
 
-\hypertarget{ch5:SampleSize}{%
-\subsection{Sample Size Determination}\label{ch5:SampleSize}}
+\hypertarget{ch5-SampleSize}{%
+\subsection{Sample Size Determination}\label{ch5-SampleSize}}
 
 The confidence interval for a point estimator can serve as the basis for
 determining how many observations to have in the sample. From Equation (\eqref{eq:ci}), the quantity:
@@ -3338,8 +3338,8 @@ these sample size techniques for each of your performance measures and
 then use the maximum sample size required across the performance
 measures. Now, let's illustrate these methods based on a small Arena simulation.
 
-\hypertarget{determining-the-sample-size-for-a-monte-carlo-simulation-experiment}{%
-\subsection{Determining the Sample Size for a Monte Carlo Simulation Experiment}\label{determining-the-sample-size-for-a-monte-carlo-simulation-experiment}}
+\hypertarget{ch5-sample-size}{%
+\subsection{Determining the Sample Size for a Monte Carlo Simulation Experiment}\label{ch5-sample-size}}
 
 To facilitate some of the calculations related to determining the sample size for a simulation experiment, I have constructed a spreadsheet called \emph{SampleSizeDetermination.xlsx}, which is found in the book support files for this chapter. You may want to utilize that spreadsheet as you go through this an subsequent sections.
 
@@ -3521,8 +3521,8 @@ We see that for this pilot sample, the half-width ratio method recommends a subs
 Based on these examples, you should have a basic understanding of how a
 simulation experiment can be performed to meet a desired margin of error. In general, simulation models are much more interesting than this simple example.
 
-\hypertarget{craps}{%
-\section{Simulating the Game of Craps}\label{craps}}
+\hypertarget{ch5-craps}{%
+\section{Simulating the Game of Craps}\label{ch5-craps}}
 
 Consider the game of ``craps'' as played in Las Vegas. The basic rules of the game are as follows: one player, the ``shooter'', rolls a pair of dice. If the outcome of that roll is a 2, 3, or 12, the shooter immediately loses; if it is a 7 or an 11, the shooter wins. In all other cases, the number the shooter rolls on the first toss becomes the ``point'', which the shooter must try to duplicate on subsequent rolls. If the shooter manages to roll the point before rolling a 7, the shooter wins; otherwise the shooter loses. It may take several rolls to determine whether the shooter wins or loses. After the first roll, only a 7 or the point have any significance until the win or loss is decided. Using the JSL random and statistic packages give answers and corresponding estimates to the following questions. Be sure to report your estimates in the form of confidence intervals.
 
@@ -3599,8 +3599,8 @@ Now let's look at a slightly more complex static simulation.
 
 \FloatBarrier
 
-\hypertarget{the-news-vendor-problem}{%
-\section{The News Vendor Problem}\label{the-news-vendor-problem}}
+\hypertarget{ch5-newsvendor}{%
+\section{The News Vendor Problem}\label{ch5-newsvendor}}
 
 The news vendor model is a classic inventory model that allows for the
 modeling of how much to order for a decision maker facing uncertain
@@ -3781,8 +3781,8 @@ book.
   a simple DEDS
 \end{itemize}
 
-\hypertarget{introDEDS:Intro}{%
-\section{Introduction}\label{introDEDS:Intro}}
+\hypertarget{introDEDS-Intro}{%
+\section{Introduction}\label{introDEDS-Intro}}
 
 In Chapter \ref{mcm}, we
 explored how to develop models in the JSL for which time is not a
@@ -3832,8 +3832,8 @@ essentially the collection of states associated with all the objects in
 the system. The notion of modeling what happens to a system at
 particular events in time is the basis of discrete event modeling.
 
-\hypertarget{introDEDS:deds}{%
-\section{Discrete-Event Dynamic Systems}\label{introDEDS:deds}}
+\hypertarget{introDEDS-deds}{%
+\section{Discrete-Event Dynamic Systems}\label{introDEDS-deds}}
 
 Nelson (1995) states that the event-view ``defines system events by
 describing what happens to the system as it encounters entities''. In
@@ -4757,8 +4757,8 @@ to event). The JSL supports the scheduling and execution of events
 within its calendar and model packages. The next section overviews the
 libraries available within the JSL for discrete-event modeling.
 
-\hypertarget{introDEDS:dedsJSL}{%
-\section{Modeling DEDS in the JSL}\label{introDEDS:dedsJSL}}
+\hypertarget{introDEDS-dedsJSL}{%
+\section{Modeling DEDS in the JSL}\label{introDEDS-dedsJSL}}
 
 Discrete event modeling within the JSL is facilitated by two packages:
 1) the \texttt{jsl.simulation} package and 2) the \texttt{jsl.calendar} package. The \texttt{jsl.simulation}
@@ -4890,8 +4890,8 @@ provide event action code: 1) provide a class that implements the
 \texttt{EventActionIfc} interface and supply it when scheduling the event or 2)
 by treating the \texttt{EventActionIfc} as a functional interface and using Java 8's functional method representation. Providing an inner class that implements the \texttt{EventActionIfc} interface will be illustrated here.
 
-\hypertarget{introDEDS:schedExamples}{%
-\subsection{Simple Event Scheduling Examples}\label{introDEDS:schedExamples}}
+\hypertarget{introDEDS-schedExamples}{%
+\subsection{Simple Event Scheduling Examples}\label{introDEDS-schedExamples}}
 
 This section presents two simple examples to illustrate event
 scheduling. The first example illustrates the scheduling of events using the \texttt{EventActionIfc} interface. The second example shows how to simulate a Poisson process and collect
@@ -5039,8 +5039,8 @@ EventActionTwo at time : 100.0
 
 Notice that event action one output occurs at time 10.0. This is due to the event that was scheduled within the \texttt{initialize()} method. Event action two occurs for the first time at time 20.0 and then every 20 time units. Notice that event action one occurs at time 35.0. This is due to the event being scheduled in the action method of event action two.
 
-\hypertarget{introDEDS:overview}{%
-\subsubsection{Overview of Simuation Run Context}\label{introDEDS:overview}}
+\hypertarget{introDEDS-overview}{%
+\subsubsection{Overview of Simuation Run Context}\label{introDEDS-overview}}
 
 When the simulation runs, much underlying code is executed. At this
 stage it is not critically important to understand how this code works;
@@ -5107,8 +5107,8 @@ executive because the events are scheduled. Thus, if you schedule
 events, you can be assured that the logic associated with the events
 will be executed.
 
-\hypertarget{introDEDS:pois}{%
-\subsubsection{Simulating a Poisson Process}\label{introDEDS:pois}}
+\hypertarget{introDEDS-pois}{%
+\subsubsection{Simulating a Poisson Process}\label{introDEDS-pois}}
 
 The second simple example illustrates how to simulate a Poisson process.
 Recall that a Poisson process models the number of events that occur
@@ -5235,8 +5235,8 @@ Counts events        20.500000      4.870779     50.000000
 -----------------------------------------------------------
 \end{verbatim}
 
-\hypertarget{introDEDS:updown}{%
-\subsection{Up and Down Component Example}\label{introDEDS:updown}}
+\hypertarget{introDEDS-updown}{%
+\subsection{Up and Down Component Example}\label{introDEDS-updown}}
 
 This section further illustrates DEDS modeling with a component of a
 system that is subject to random failures. The component has two states
@@ -5483,8 +5483,8 @@ of modeling can be achieved by making the individual model elements
 interact in complex ways. More complex modeling will be the focus of the
 next chapter.
 
-\hypertarget{introDEDS:pharmacy}{%
-\subsection{Modeling a Simple Queueing System}\label{introDEDS:pharmacy}}
+\hypertarget{introDEDS-pharmacy}{%
+\subsection{Modeling a Simple Queueing System}\label{introDEDS-pharmacy}}
 
 This example considers a small pharmacy that has a single line for
 waiting customers and only one pharmacist. Assume that customers arrive
@@ -5898,8 +5898,8 @@ interest for wide ranging queuing situations. For example, through
 simulation you can easily estimate the chance that there are 3 or more
 cars waiting.
 
-\hypertarget{introDEDS:Summary}{%
-\section{Summary}\label{introDEDS:Summary}}
+\hypertarget{introDEDS-Summary}{%
+\section{Summary}\label{introDEDS-Summary}}
 
 This chapter introduced how to model discrete event dynamic systems
 using the JSL. The JSL facilitates the model building process, the model
@@ -6032,8 +6032,8 @@ develop an understanding of these concepts is with entities because
 entities represent things that flow through and are processed by the
 system.
 
-\hypertarget{dem:entities}{%
-\section{Entities and Attributes}\label{dem:entities}}
+\hypertarget{dem-entities}{%
+\section{Entities and Attributes}\label{dem-entities}}
 
 When modeling a system, there are often many types of entities. For
 example, consider a retail store. Besides customers, the products might
@@ -6103,8 +6103,8 @@ system, there needs to be mechanisms for causing events to occur that
 represent the arrival of objects to the system. The following section
 describes how the JSL allows for the modeling of a pattern of events.
 
-\hypertarget{dem:eg}{%
-\section{Event Generators}\label{dem:eg}}
+\hypertarget{dem-eg}{%
+\section{Event Generators}\label{dem-eg}}
 
 A basic mechanism by which the occurrence of a patterned sequence of
 events is modeled is through the EventGenerator class. The
@@ -6315,8 +6315,8 @@ action invokes the \texttt{resume()}method. Obviously, this can be within a
 sub-class of \texttt{EventGenerator} or within another class that has a reference
 to the event generator.
 
-\hypertarget{dem:station}{%
-\section{The Station Package}\label{dem:station}}
+\hypertarget{dem-station}{%
+\section{The Station Package}\label{dem-station}}
 
 This section describes a JSL package that facilitates the modeling of
 system components that can send or receive entities. Many systems have
@@ -6799,8 +6799,8 @@ stations can be formed and simulated.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{dem:sharedResources}{%
-\section{Sharing a Resource}\label{dem:sharedResources}}
+\hypertarget{dem-sharedResources}{%
+\section{Sharing a Resource}\label{dem-sharedResources}}
 
 In the previous queueing situations, at each station there was one
 resource that was used during the service operation. It is often the
@@ -7062,8 +7062,8 @@ Num in System                    4.123410        0.413465       30.00
 \bottomrule
 \end{longtable}
 
-\hypertarget{dem:tiedyeShirts}{%
-\section{Complex System Example}\label{dem:tiedyeShirts}}
+\hypertarget{dem-tiedyeShirts}{%
+\section{Complex System Example}\label{dem-tiedyeShirts}}
 
 This section presents a more complex system that illustrates how to
 model entities that flow through a system and how to coordinate the
@@ -7098,8 +7098,8 @@ according to a triangular distribution with a minimum of 5 minutes, a
 most likely value of 10 minutes, and a maximum value of 15 minutes.
 Finally, the boxed customer order is sent to shipping.
 
-\hypertarget{dem:tiedyeShirts:cm}{%
-\subsection{Conceptualizing the Model}\label{dem:tiedyeShirts:cm}}
+\hypertarget{dem-tiedyeShirts-cm}{%
+\subsection{Conceptualizing the Model}\label{dem-tiedyeShirts-cm}}
 
 Before proceeding you might want to jot down your answers to the
 following modeling recipe questions and then compare how you are doing
@@ -7154,8 +7154,8 @@ after each of these processes.
 \caption{\label{fig:TieDyeTShirtACD}Activity Diagram for Tie Dye T-Shirts System}
 \end{figure}
 
-\hypertarget{dem:tiedyeShirts:im}{%
-\subsection{Implementing the Model}\label{dem:tiedyeShirts:im}}
+\hypertarget{dem-tiedyeShirts-im}{%
+\subsection{Implementing the Model}\label{dem-tiedyeShirts-im}}
 
 If it was not for the coordination between the orders
 (paperwork/packaging) and the shirts in this system, the modeling would
@@ -7478,8 +7478,8 @@ Similar logic occurs within the \texttt{PaperWork} class. This is the
 notification that they are completed so that the \texttt{Order} classs is
 notified when they are completed.
 
-\hypertarget{dem:tiedyeShirts:results}{%
-\subsection{Model Results}\label{dem:tiedyeShirts:results}}
+\hypertarget{dem-tiedyeShirts-results}{%
+\subsection{Model Results}\label{dem-tiedyeShirts-results}}
 
 The following table presents the results of the simulation. From
 the utilization of the shirt making resource it is clear that more than
@@ -7515,8 +7515,8 @@ Num in System & 8.982821 & 2.067345 \\
 \bottomrule
 \end{longtable}
 
-\hypertarget{dem:summary}{%
-\section{Summary}\label{dem:summary}}
+\hypertarget{dem-summary}{%
+\section{Summary}\label{dem-summary}}
 
 In this chapter, you have learned a few fundamental JSL model elements
 that facilitate the modeling of simple queueing situations. The classes
@@ -7633,8 +7633,8 @@ alternatives. To begin the discussion you need to build an understanding
 of the types of statistical quantities that may be produced by a
 simulation experiment.
 
-\hypertarget{simoa:datatypes}{%
-\section{Types of Statistical Variables}\label{simoa:datatypes}}
+\hypertarget{simoa-datatypes}{%
+\section{Types of Statistical Variables}\label{simoa-datatypes}}
 
 A simulation experiment occurs when the modeler sets the input
 parameters to the model and executes the simulation. This causes events
@@ -7887,8 +7887,8 @@ replication, we need to develop an understanding for the types of
 simulation situations that require specialized statistical analysis. The
 next section introduces this important topic.
 
-\hypertarget{simoa:simtypes}{%
-\section{Types of Simulation With Respect To Output Analysis}\label{simoa:simtypes}}
+\hypertarget{simoa-simtypes}{%
+\section{Types of Simulation With Respect To Output Analysis}\label{simoa-simtypes}}
 
 When modeling a system, specific measurement goals for the simulation
 responses are often required. The goals, coupled with how the system
@@ -7997,8 +7997,8 @@ study to see if they can just as well be met with a finite planning
 horizon. The analysis of both of these types of simulations will be
 discussed in this chapter through examples.
 
-\hypertarget{simoa:finhorizon}{%
-\section{Analysis of Finite Horizon Simulations}\label{simoa:finhorizon}}
+\hypertarget{simoa-finhorizon}{%
+\section{Analysis of Finite Horizon Simulations}\label{simoa-finhorizon}}
 
 This section illustrates how tally-based and time-persistent statistics
 are collected within a replication and how statistics are collected
@@ -8118,12 +8118,12 @@ approximate results. The assumption of normality is typically justified
 when across replication statistics are based on within replication
 averages.
 
-Determining the sample size for a simulation experiment has already been discussed in Section \ref{ch5:SampleSize} of Chapter \ref{mcm}, the following section will illustrate the half-width ratio method for determining the number of replications because it is often seen in practice.
+Determining the sample size for a simulation experiment has already been discussed in Section \ref{ch5-SampleSize} of Chapter \ref{mcm}, the following section will illustrate the half-width ratio method for determining the number of replications because it is often seen in practice.
 
-\hypertarget{simoa:finhorizon:samplesize}{%
-\subsection{Determining the Number of Replications}\label{simoa:finhorizon:samplesize}}
+\hypertarget{simoa-finhorizon-samplesize}{%
+\subsection{Determining the Number of Replications}\label{simoa-finhorizon-samplesize}}
 
-As a reminder, we repeat some of the exposition from Section \ref{ch5:SampleSize}. If you make a pilot run of \(n_0\) replications you can use the half-width from the pilot run
+As a reminder, we repeat some of the exposition from Section \ref{ch5-SampleSize}. If you make a pilot run of \(n_0\) replications you can use the half-width from the pilot run
 to determine how many replications you need to have to be close to a
 desired half-width bound in the full experiment. This is called the
 \emph{half-width ratio method}.
@@ -8226,8 +8226,8 @@ distributed. In this case, since you are estimating a proportion, you
 can use the sample size determination techniques for estimating
 proportions via equations \eqref{eq:propCI} and \eqref{eq:pSampleSize}.
 
-\hypertarget{simoa:finhorizonex}{%
-\section{Finite Horizon Example}\label{simoa:finhorizonex}}
+\hypertarget{simoa-finhorizonex}{%
+\section{Finite Horizon Example}\label{simoa-finhorizonex}}
 
 This section presents a fictitious system involving the production of rings. The example illustrates how to collect tally based
 statistics, time based statistics, and statistics that can only be
@@ -8721,8 +8721,8 @@ assumptions are reasonably met, there will be a high likelihood that the
 desired half-width will be very close to the desired criteria, as show
 in this example.
 
-\hypertarget{simoa:seqsampling}{%
-\subsection{Sequential Sampling for Finite Horizon Simulations}\label{simoa:seqsampling}}
+\hypertarget{simoa-seqsampling}{%
+\subsection{Sequential Sampling for Finite Horizon Simulations}\label{simoa-seqsampling}}
 
 The methods discussed for determining the sample size are based on
 pre-determining a \emph{fixed} sample size and then making the replications.
@@ -8906,8 +8906,8 @@ Number of replications: 66 & & \\
 \bottomrule
 \end{longtable}
 
-\hypertarget{simoa:infhorizon}{%
-\section{Analysis of Infinite Horizon Simulations}\label{simoa:infhorizon}}
+\hypertarget{simoa-infhorizon}{%
+\section{Analysis of Infinite Horizon Simulations}\label{simoa-infhorizon}}
 
 This section discusses how to plan and analyze infinite horizon
 simulations. When analyzing infinite horizon simulations, the primary
@@ -9150,8 +9150,8 @@ addressing the problem of the non-stationary aspects of the data. The
 next section looks at ways to mitigate the non-stationary aspect of
 within-replication data for infinite horizon simulations.
 
-\hypertarget{simoa:infhorizon:initialbias}{%
-\subsection{Assessing the Effect of Initial Conditions}\label{simoa:infhorizon:initialbias}}
+\hypertarget{simoa-infhorizon-initialbias}{%
+\subsection{Assessing the Effect of Initial Conditions}\label{simoa-infhorizon-initialbias}}
 
 Consider the output stochastic process \(X_i\) of the simulation. Let
 \(F_i(x|I)\) be the conditional cumulative distribution function of \(X_i\)
@@ -9453,8 +9453,8 @@ points.
 The next section illustrates how to perform the method of
 replication-deletion on this simple M/M/1 model.
 
-\hypertarget{simoa:infhorizon:repDeletion}{%
-\subsection{Performing the Method of Replication-Deletion}\label{simoa:infhorizon:repDeletion}}
+\hypertarget{simoa-infhorizon-repDeletion}{%
+\subsection{Performing the Method of Replication-Deletion}\label{simoa-infhorizon-repDeletion}}
 
 The first step in performing the method of replication-deletion is to
 determine the length of the warm up period. This example illustrates how
@@ -9508,8 +9508,8 @@ of arrivals is 1 customer per minute. Thus, the initial \(T_w\) is
 and therefore the initial \(T_e\) should be 30,000 minutes. That is, you
 should specify 30,000 minutes for the replication length.
 
-\hypertarget{simoa:infhorizon:warmup}{%
-\subsubsection{Determining the Warm Up Period}\label{simoa:infhorizon:warmup}}
+\hypertarget{simoa-infhorizon-warmup}{%
+\subsubsection{Determining the Warm Up Period}\label{simoa-infhorizon-warmup}}
 
 To perform a more rigorous analysis of the warm up period, we need to
 run the simulation for multiple replications and capture the data
@@ -9714,8 +9714,8 @@ and has been automated in within the JSL. The next section discusses the
 statistical basis for the batch means method and addresses some of the
 practical issues of using it within the JSL.
 
-\hypertarget{simoa:infhorizon:batchmeans}{%
-\subsection{The Method of Batch Means}\label{simoa:infhorizon:batchmeans}}
+\hypertarget{simoa-infhorizon-batchmeans}{%
+\subsection{The Method of Batch Means}\label{simoa-infhorizon-batchmeans}}
 
 In the batch mean method, only one simulation run is executed. After
 deleting the warm up period, the remainder of the run is divided into
@@ -9890,8 +9890,8 @@ The hypothesis is rejected if \(C > z_\alpha\) for a given confidence
 level \(\alpha\). If the batch means do not pass the test, \emph{Correlated} is
 reported for the half-width on the statistical reports.
 
-\hypertarget{simoa:infhorizon:jslbatching}{%
-\subsection{Performing the Method of Batch Means}\label{simoa:infhorizon:jslbatching}}
+\hypertarget{simoa-infhorizon-jslbatching}{%
+\subsection{Performing the Method of Batch Means}\label{simoa-infhorizon-jslbatching}}
 
 Performing the method of batch means in the JSL is relatively straight
 forward. The following assumes that a warm up period analysis has
@@ -10099,8 +10099,8 @@ alternative system configurations and to assist in choosing which
 configurations are best according to the decision criteria. The next
 section discusses how to compare different system configurations.
 
-\hypertarget{simoa:comparingSystems}{%
-\section{Comparing System Configurations}\label{simoa:comparingSystems}}
+\hypertarget{simoa-comparingSystems}{%
+\section{Comparing System Configurations}\label{simoa-comparingSystems}}
 
 The previous sections have concentrated on estimating the performance of
 a system through the execution of a single simulation model. The running
@@ -10127,8 +10127,8 @@ methods to ensure that the differences in performance are not simply due
 to sampling error. In other words, you want to be confident that one
 system is statistically better (or worse) than the other system.
 
-\hypertarget{simoa:comparingSystems:two}{%
-\subsection{Comparing Two Systems}\label{simoa:comparingSystems:two}}
+\hypertarget{simoa-comparingSystems-two}{%
+\subsection{Comparing Two Systems}\label{simoa-comparingSystems-two}}
 
 The techniques for comparing two systems via simulation are essentially
 the same as that found in books that cover the statistical analysis of
@@ -10197,8 +10197,8 @@ of unknown variance with independent samples. Then, we focus on the case
 of dependence between the samples. Finally, how to use the JSL to do the
 work of the analysis will be illustrated.
 
-\hypertarget{simoa:comparingSystems:twoIND}{%
-\subsubsection{Analyzing Two Independent Samples}\label{simoa:comparingSystems:twoIND}}
+\hypertarget{simoa-comparingSystems-twoIND}{%
+\subsubsection{Analyzing Two Independent Samples}\label{simoa-comparingSystems-twoIND}}
 
 Although the variances are unknown, the unknown variances are either
 equal or not equal. In the situation where the variances are equal, the
@@ -10381,8 +10381,8 @@ contained within the indifference zone, then you can conclude with
 confidence that there is no practical difference between the two
 systems.
 
-\hypertarget{simoa:comparingSystems:twoDep}{%
-\subsubsection{Analyzing Two Dependent Samples}\label{simoa:comparingSystems:twoDep}}
+\hypertarget{simoa-comparingSystems-twoDep}{%
+\subsubsection{Analyzing Two Dependent Samples}\label{simoa-comparingSystems-twoDep}}
 
 In this situation, continue to assume that the observations within a
 sample are independent and identically distributed random variables;
@@ -10515,21 +10515,21 @@ method. In this context, the worker is the factor that should be
 blocked. In the simulation context, the random numbers are being blocked
 when using common random numbers.
 
-\hypertarget{simoa:comparingSystems:CRN}{%
-\subsubsection{Using Common Random Numbers}\label{simoa:comparingSystems:CRN}}
+\hypertarget{simoa-comparingSystems-CRN}{%
+\subsubsection{Using Common Random Numbers}\label{simoa-comparingSystems-CRN}}
 
 The following explores how independent sampling and common random
 numbers can be implemented.
 
 IN PROGRESS
 
-\hypertarget{simoa:comparingSystems:MCB}{%
-\subsection{Multiple Comparisons}\label{simoa:comparingSystems:MCB}}
+\hypertarget{simoa-comparingSystems-MCB}{%
+\subsection{Multiple Comparisons}\label{simoa-comparingSystems-MCB}}
 
 IN PROGRESS
 
-\hypertarget{simoa:summary}{%
-\section{Summary}\label{simoa:summary}}
+\hypertarget{simoa-summary}{%
+\section{Summary}\label{simoa-summary}}
 
 This chapter described many of the statistical aspects of simulation
 that you will typically encounter in performing a simulation study. An
@@ -11133,8 +11133,8 @@ JSL database.
 
 \clearpage
 
-\hypertarget{app:rnrv}{%
-\chapter{Generating Pseudo-Random Numbers and Random Variates}\label{app:rnrv}}
+\hypertarget{app-rnrv}{%
+\chapter{Generating Pseudo-Random Numbers and Random Variates}\label{app-rnrv}}
 
 \textbf{\textsc{Learning Objectives}}
 
@@ -11174,8 +11174,8 @@ sequences to be transformed so that they can represent a wide variety of
 random variables (e.g.~normal, Poisson, etc.). The algorithms that
 govern these procedures are described in the second part of this chapter.
 
-\hypertarget{app:rnrv:rn}{%
-\section{Pseudo Random Numbers}\label{app:rnrv:rn}}
+\hypertarget{app-rnrv-rn}{%
+\section{Pseudo Random Numbers}\label{app-rnrv-rn}}
 
 This section indicates how uniformly distributed random numbers over
 the range from 0 to 1 are obtained within simulation programs. While
@@ -11242,8 +11242,8 @@ implications of random number generation. A more rigorous treatment of
 random number and random variable generation can be found such texts as
 \citep{fishman2006first} and \citep{devroye1986nonuniform}.
 
-\hypertarget{app:rnrv:rngs}{%
-\subsection{Random Number Generators}\label{app:rnrv:rngs}}
+\hypertarget{app-rnrv-rngs}{%
+\subsection{Random Number Generators}\label{app-rnrv-rngs}}
 
 Over the history of scientific computing, there have been a wide variety
 of techniques and algorithms proposed and used for generating
@@ -11593,8 +11593,8 @@ when performing simulation experiments. The generator was subjected to a
 rigorous battery of statistical tests and is known to have excellent
 statistical properties. The subject of modeling and testing different distributions is deferred to a separate part of this book.
 
-\hypertarget{app:rnrv:rvs}{%
-\section{Generating Random Variates from Distributions}\label{app:rnrv:rvs}}
+\hypertarget{app-rnrv-rvs}{%
+\section{Generating Random Variates from Distributions}\label{app-rnrv-rvs}}
 
 In simulation, pseudo random numbers serve as the foundation for
 generating samples from probability distribution models. We will now
@@ -12477,8 +12477,8 @@ acceptance rejection algorithm for a probability density function,
 \(f(x)\), if it has an infinite range because it may be more challenging
 to find a good majorizing function.
 
-\hypertarget{AppRNRV:subsec:MTSRV}{%
-\subsection{Mixture Distributions, Truncated Distributions, and Shifted Random Variables}\label{AppRNRV:subsec:MTSRV}}
+\hypertarget{AppRNRV-subsec-MTSRV}{%
+\subsection{Mixture Distributions, Truncated Distributions, and Shifted Random Variables}\label{AppRNRV-subsec-MTSRV}}
 
 This section describes three random variate generation methods that
 build on the previously discussed methods. These methods allow for more
@@ -12762,7 +12762,7 @@ simulation including:
   Generating random variates and processes
 \end{itemize}
 
-Appendices \ref{app:DiscreteDistributions} and \ref{app:ContinuousDistributions} summarize many of the properties of common discrete and continuous distributions. These topics provide a solid foundation for modeling random components within simulation models. Not only should you now understand how
+Appendices \ref{app-DiscreteDistributions} and \ref{app-ContinuousDistributions} summarize many of the properties of common discrete and continuous distributions. These topics provide a solid foundation for modeling random components within simulation models. Not only should you now understand how
 random numbers are generated you also know how to transform those
 numbers to allow the generation from a wide variety of probability
 distributions. To further your study of random variate generation, you should study the generation of multi-variate distributions.
@@ -13334,8 +13334,8 @@ Derive an inverse cumulative distribution algorithm for generating from \(f(x)\)
 
 \clearpage
 
-\hypertarget{app:idm}{%
-\chapter{Probability Distribution Modeling}\label{app:idm}}
+\hypertarget{app-idm}{%
+\chapter{Probability Distribution Modeling}\label{app-idm}}
 
 \textbf{\textsc{Learning Objectives}}
 
@@ -13351,7 +13351,7 @@ Derive an inverse cumulative distribution algorithm for generating from \(f(x)\)
 When performing a simulation study, there is no substitution for
 actually observing the system and collecting the data required for the
 modeling effort. As outlined in
-Section~\ref{ch1:sec:simMeth}, a good simulation methodology recognizes
+Section~\ref{ch1-sec-simMeth}, a good simulation methodology recognizes
 that modeling and data collection often occurs in parallel. That is,
 observing the system allows conceptual modeling which allows for an
 understanding of the input models that are needed for the simulation.
@@ -13442,8 +13442,8 @@ you to illustrate how the data was collected.
 
 The following section provides a review of probability and statistical concepts that are useful in distribution modeling.
 
-\hypertarget{app:idm:sec:rvPD}{%
-\section{Random Variables and Probability Distributions}\label{app:idm:sec:rvPD}}
+\hypertarget{app-idm-sec-rvPD}{%
+\section{Random Variables and Probability Distributions}\label{app-idm-sec-rvPD}}
 
 This section discusses some concepts in probability and statistics that
 are especially relevant to simulation. These will serve you well as you
@@ -13698,11 +13698,11 @@ summarizing the distribution of the data.
 
 As noted in this section, a key decision in distribution modeling is whether the underlying random variable is discrete or continuous. The next section discusses how to model discrete distributions.
 
-\hypertarget{app:idm:sec:MDD}{%
-\section{Modeling with Discrete Distributions}\label{app:idm:sec:MDD}}
+\hypertarget{app-idm-sec-MDD}{%
+\section{Modeling with Discrete Distributions}\label{app-idm-sec-MDD}}
 
 There are a wide variety of discrete random variables that often occur
-in simulation modeling. Appendix~\ref{app:DiscreteDistributions} summarizes the functions and characteristics some common discrete
+in simulation modeling. Appendix~\ref{app-DiscreteDistributions} summarizes the functions and characteristics some common discrete
 distributions. Table \ref{tab:discreteD} provides an overview of some modeling situations for common discrete distributions.
 
 \hypertarget{tab:discreteD}{}
@@ -13728,8 +13728,8 @@ Poisson(\(\lambda\)) & counts of occurrences in an interval, area, or volume \\
 
 By understanding the modeling situations that produce data, you can hypothesize the appropriate distribution for the distribution fitting process.
 
-\hypertarget{app:idm:sec:fitDiscrete}{%
-\section{Fitting Discrete Distributions}\label{app:idm:sec:fitDiscrete}}
+\hypertarget{app-idm-sec-fitDiscrete}{%
+\section{Fitting Discrete Distributions}\label{app-idm-sec-fitDiscrete}}
 
 This section illustrates how to model and fit a discrete distribution to
 data. Although the steps in modeling discrete and continuous
@@ -13749,8 +13749,8 @@ modeler thinks that the data is continuous. The modeling starts with
 what is being collected and how it is being collected (not with looking
 at a file!).
 
-\hypertarget{AppDisFit:PoissonFit}{%
-\subsection{Fitting a Poisson Distribution}\label{AppDisFit:PoissonFit}}
+\hypertarget{AppDisFit-PoissonFit}{%
+\subsection{Fitting a Poisson Distribution}\label{AppDisFit-PoissonFit}}
 
 Since the Poisson distribution is very important in simulation modeling,
 the discrete input modeling process will be illustrated by fitting a
@@ -14292,8 +14292,8 @@ level.
 
 For a discrete distribution, the most common distributional test is the Chi-Squared goodness of fit test, which is the subject of the next section.
 
-\hypertarget{subsub:chisqGOF}{%
-\subsection{Chi-Squared Goodness of Fit Test}\label{subsub:chisqGOF}}
+\hypertarget{subsub-chisqGOF}{%
+\subsection{Chi-Squared Goodness of Fit Test}\label{subsub-chisqGOF}}
 
 The Chi-Square Test divides the range of the data into, \(k\), intervals (or classes)
 and tests if the number of observations that fall in each interval (or class) is
@@ -14719,14 +14719,14 @@ distribution functions.
 
 The previous two examples illustrated the process for fitting a discrete distribution to data for use in a simulation model. Because discrete event dynamic simulation involves modeling the behavior of a system over time, the modeling of distributions that represent the time to perform a task is important. Since the domain of time is on the set of positive real numbers, it is a continuous variable. We will explore the modeling of continuous distributions in the next section.
 
-\hypertarget{app:idm:sec:MCD}{%
-\section{Modeling with Continuous Distributions}\label{app:idm:sec:MCD}}
+\hypertarget{app-idm-sec-MCD}{%
+\section{Modeling with Continuous Distributions}\label{app-idm-sec-MCD}}
 
 Continuous distributions can be used to model situations where the
 set of possible values occurs in an interval or set of intervals. Within
 discrete event simulation, the most common use of continuous
 distributions is for the modeling of the time to perform a task.
-Appendix~\ref{app:ContinuousDistributions} summarizes the properties of common
+Appendix~\ref{app-ContinuousDistributions} summarizes the properties of common
 continuous distributions.
 
 The continuous uniform distribution can be used to model situations in
@@ -14824,7 +14824,7 @@ since a normal distribution can have negative values, using a normal
 distribution to model task times can be problematic. If you attempt to
 delay for negative time you will receive an error. Instead of using a
 normal distribution, you might use a truncated normal, see
-Section~\ref{AppRNRV:subsec:MTSRV}. Alternatively, you can choose from any of the
+Section~\ref{AppRNRV-subsec-MTSRV}. Alternatively, you can choose from any of the
 distributions that are defined on the range of positive real numbers,
 such as the lognormal, gamma, Weibull, and exponential distributions.
 The lognormal distribution is a convenient choice because it is also
@@ -14864,8 +14864,8 @@ Once we have a good idea about the type of random variable (discrete or
 continuous) and some ideas about the distribution of the random
 variable, the next step is to fit a distributional model to the data. In the following sections, we will illustrate how to fit continuous distributions to data.
 
-\hypertarget{app:idm:sec:fitContinuous}{%
-\section{Fitting Continuous Distributions}\label{app:idm:sec:fitContinuous}}
+\hypertarget{app-idm-sec-fitContinuous}{%
+\section{Fitting Continuous Distributions}\label{app-idm-sec-fitContinuous}}
 
 Previously, we examined the modeling of discrete
 distributions. In this section, we will look at modeling a continuous
@@ -14906,8 +14906,8 @@ minutes. Fit an appropriate distribution to this data.
 
 ~
 
-\hypertarget{app:idm:subsec:visualizedata}{%
-\subsection{Visualizing the Data}\label{app:idm:subsec:visualizedata}}
+\hypertarget{app-idm-subsec-visualizedata}{%
+\subsection{Visualizing the Data}\label{app-idm-subsec-visualizedata}}
 
 The first steps are to visualize the data and check for independence.
 This can be readily accomplished using the \emph{hist}, \emph{plot}, and \emph{acf}
@@ -14959,8 +14959,8 @@ number.
 Based on the visual analysis, we can conclude that the task times are
 likely to be independent and identically distributed.
 
-\hypertarget{app:idm:subsec:statsdata}{%
-\subsection{Statistically Summarize the Data}\label{app:idm:subsec:statsdata}}
+\hypertarget{app-idm-subsec-statsdata}{%
+\subsection{Statistically Summarize the Data}\label{app-idm-subsec-statsdata}}
 
 An analysis of the statistical properties of the task times can be
 easily accomplished in R using the \emph{summary}, \emph{mean}, \emph{var}, \emph{sd}, and
@@ -15073,8 +15073,8 @@ learned so far:
   statistical summary.
 \end{itemize}
 
-\hypertarget{app:idm:subsec:hypothDist}{%
-\subsection{Hypothesizing and Testing a Distribution}\label{app:idm:subsec:hypothDist}}
+\hypertarget{app-idm-subsec-hypothDist}{%
+\subsection{Hypothesizing and Testing a Distribution}\label{app-idm-subsec-hypothDist}}
 
 The next steps involve the model fitting processes of hypothesizing
 distributions, estimating the parameters, and checking for goodness of
@@ -15604,8 +15604,8 @@ differences and has a higher power than the K-S Test for many popular
 distributions. It can be found as standard output in commercial
 distribution fitting software.
 
-\hypertarget{app:idm:subsec:visFit}{%
-\subsection{Visualizing the Fit}\label{app:idm:subsec:visFit}}
+\hypertarget{app-idm-subsec-visFit}{%
+\subsection{Visualizing the Fit}\label{app-idm-subsec-visFit}}
 
 Another valuable diagnostic tool is to make probability-probability
 (P-P) plots and quantile-quantile (Q-Q) plots. A P-P Plot plots the empirical distribution function versus the theoretical distribution evaluated at each order statistic value. Recall
@@ -15853,8 +15853,8 @@ is not a good model for the task times.
 \caption{Distribution Plot from fitdistrplus for Uniform Distribution Fit of Computer Repair Times}\label{fig:fitPlotUnif}
 \end{figure}
 
-\hypertarget{app:idms2sb3}{%
-\subsection{Using the Input Analyzer}\label{app:idms2sb3}}
+\hypertarget{app-idms2sb3}{%
+\subsection{Using the Input Analyzer}\label{app-idms2sb3}}
 
 In this section, we will use the Arena Input Analyzer to fit
 a distribution to service times collected for the pharmacy example. The Arena Input Analyzer is a separate program hat comes with Arena. It is available as part of the free student edition of Arena.
@@ -15883,9 +15883,9 @@ observation is in row 1 column 2, and so forth. This data is available
 in the text file \emph{PharmacyInputModelingExampleData.txt} that accompanies
 this chapter.
 
-\hypertarget{tab:PharmacyData}{}
 \begin{longtable}[]{@{}ccccc@{}}
-\caption{\label{tab:PharmacyData} Pharmacy Service Times}\tabularnewline
+\caption{\label{tab:PharmacyData} Pharmacy Service Times
+:::}\tabularnewline
 \toprule
 \endhead
 61 & 278.73 & 194.68 & 55.33 & 398.39 \\
@@ -16000,7 +16000,7 @@ parameter. The visual fit of the data is shown in Figure \ref{fig:InputAnalyzerE
 \caption{Histogram for Exponential Fit to Service Times}\label{fig:InputAnalyzerExpFit}
 \end{figure}
 
-Recall the discussion in Section \ref{AppRNRV:subsec:MTSRV} concerning
+Recall the discussion in Section \ref{AppRNRV-subsec-MTSRV} concerning
 shifted distributions. Any distribution can have this additional
 parameter that shifts it along the x-axis. This can complicate parameter estimation procedures.
 The Input Analyzer has an algorithm which will attempt to estimate this
@@ -16235,8 +16235,8 @@ plot(fw)
 
 The P-P and Q-Q plots of the shifted data indicate that the exponential distribution is an excellent fit for the service time data.
 
-\hypertarget{app:distfit:testU01}{%
-\section{Testing Uniform (0,1) Pseudo-Random Numbers}\label{app:distfit:testU01}}
+\hypertarget{app-distfit-testU01}{%
+\section{Testing Uniform (0,1) Pseudo-Random Numbers}\label{app-distfit-testU01}}
 
 Now that we have seen the general process for fitting continuous distributions, this section will discuss the special case of testing for uniform (0,1) random variables. The reason that this is important is because these methods serve the basis for testing if pseudo-random numbers can reasonably be expected to perform as if they are U(0,1) random variates. Thus, this section provides an overview of what is involved in testing
 the statistical properties of random number generators. Essentially a
@@ -16710,8 +16710,8 @@ tested software.
 
 \FloatBarrier
 
-\hypertarget{app:distfit:idms2sb4}{%
-\section{Additional Distribution Modeling Concepts}\label{app:distfit:idms2sb4}}
+\hypertarget{app-distfit-idms2sb4}{%
+\section{Additional Distribution Modeling Concepts}\label{app-distfit-idms2sb4}}
 
 This section wraps up the discussion of input modeling by covering some
 additional topics that often come up during the modeling process.
@@ -16895,8 +16895,8 @@ process, you are in charge, not the software. The software is only there
 to support your decision making process. Use the software to justify
 your art.
 
-\hypertarget{app:idmSummary}{%
-\section{Summary}\label{app:idmSummary}}
+\hypertarget{app-idmSummary}{%
+\section{Summary}\label{app-idmSummary}}
 
 In this chapter you learned how to analyze data in order to model the
 input distributions for a simulation model. The input distributions
@@ -17202,8 +17202,8 @@ for the slow copier. The times, in seconds, are given in the data file \emph{pro
 
 \clearpage
 
-\hypertarget{app:qtAndInvT}{%
-\chapter{Queueing Theory}\label{app:qtAndInvT}}
+\hypertarget{app-qtAndInvT}{%
+\chapter{Queueing Theory}\label{app-qtAndInvT}}
 
 \textbf{\textsc{Learning Objectives}}
 
@@ -17237,8 +17237,8 @@ First, it will provide an introduction to the key modeling issues, and
 second, it can provide approximate models for more complicated
 situations. The purpose of this appendix is not to provide a comprehensive treatment of queueing theory for which there are many excellent books already. The purpose of this appendix is to provide an introduction to this topic for persons new to simulation so that they can better understand their modeling and analysis of queueing systems. This appendix also serves as a reference for the formulas associated with these models to facilitate their use in verifying and validating simulation models.
 
-\hypertarget{app:qts1}{%
-\section{Single Line Queueing Stations}\label{app:qts1}}
+\hypertarget{app-qts1}{%
+\section{Single Line Queueing Stations}\label{app-qts1}}
 
 Chapter \ref{introDEDS} presented
 the pharmacy model and analyzed it with a single server, single queue
@@ -17596,8 +17596,8 @@ results to be applicable, since if the mean arrival rate was greater
 than the mean capacity of the system, the waiting line would continue to
 grow over time.
 
-\hypertarget{app:qts1sb1}{%
-\subsection{Deriving Formulas for Markovian Single Queue Systems}\label{app:qts1sb1}}
+\hypertarget{app-qts1sb1}{%
+\subsection{Deriving Formulas for Markovian Single Queue Systems}\label{app-qts1sb1}}
 
 Notice that with \(L = \lambda W\) and the other relationships, all of the
 major performance measures for the queue can be computed if a formula
@@ -17912,10 +17912,10 @@ B & = \frac{\lambda_e}{\mu} \\
 L & = L_q + B \\
 W & = W_q + \frac{1}{\mu}\end{aligned}\]
 
-Section \ref{app:qt:sec:formulas} presents the results of applying the general solution for \(P_n\) to different queueing system configurations.
+Section \ref{app-qt-sec-formulas} presents the results of applying the general solution for \(P_n\) to different queueing system configurations.
 Table \ref{tab:mmcResults} presents specific results for the M/M/c
 queuing system for \(c = 1,2,3\). Using these results and those in
-Section \ref{app:qt:sec:formulas}, the analysis of a variety of different queueing situations is possible.
+Section \ref{app-qt-sec-formulas}, the analysis of a variety of different queueing situations is possible.
 
 \hypertarget{tab:mmcResults}{}
 \begin{longtable}[]{@{}ccc@{}}
@@ -17942,8 +17942,8 @@ depth theoretical development of the topic. There are also a number of
 free on-line resources available on the topic. The interested reader
 should search on ``Queueing Theory Books On Line''. The next section presents some simple examples to illustrate the use of the formulas.
 
-\hypertarget{app:qts1sb2}{%
-\section{Examples and Applications of Queueing Analysis}\label{app:qts1sb2}}
+\hypertarget{app-qts1sb2}{%
+\section{Examples and Applications of Queueing Analysis}\label{app-qts1sb2}}
 
 The derivations and formulas in the previous section certainly appear to
 be intimidating and they can be tedious to apply. Fortunately, there is
@@ -18041,7 +18041,7 @@ service rate of \(\mu = 12/hr\). Notice the input parameters have been
 converted to a common unit of measure (customers/hour).
 
 The equations for the M/M/1 can be readily applied. From
-Section \ref{app:qt:sec:formulas} the following formulas can be applied:
+Section \ref{app-qt-sec-formulas} the following formulas can be applied:
 
 \[
 \begin{aligned}
@@ -18525,8 +18525,8 @@ divided by the number of machines:
 
 \[\text{Machine Utilization} = \overline{\mathit{MU}} = \dfrac{k - L}{k} = 1 - \dfrac{L}{k}\]
 
-\hypertarget{app:qts1sb3}{%
-\section{Non-Markovian Queues and Approximations}\label{app:qts1sb3}}
+\hypertarget{app-qts1sb3}{%
+\section{Non-Markovian Queues and Approximations}\label{app-qts1sb3}}
 
 So far, the queueing models that have been analyzed all assume a Poisson
 arrival process and exponential service times. For other arrival and
@@ -18598,8 +18598,8 @@ should be examined.
 
 The following section summarizes the formulas for the previously mentioned queueing systems. The appendis is finished off with some example exercises that can be used to test your understanding of the application of these formulas.
 
-\hypertarget{app:qt:sec:formulas}{%
-\section{Summary of Queueing Formulas}\label{app:qt:sec:formulas}}
+\hypertarget{app-qt-sec-formulas}{%
+\section{Summary of Queueing Formulas}\label{app-qt-sec-formulas}}
 
 This section provides the formulas for basic single queue stations and is meant simply as a resource where the formulas are readily available for potential applicaiton. The following notation is used within this section.
 
@@ -19265,8 +19265,8 @@ of \(N(t\) is the value of the state variable just after time \(t\).
 \hypertarget{distributions}{%
 \chapter{Distributions}\label{distributions}}
 
-\hypertarget{app:DiscreteDistributions}{%
-\section{Discrete Distrbutions}\label{app:DiscreteDistributions}}
+\hypertarget{app-DiscreteDistributions}{%
+\section{Discrete Distrbutions}\label{app-DiscreteDistributions}}
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -19382,8 +19382,8 @@ Modeling: & equal occurrence over a range of integers \\
 \bottomrule
 \end{longtable}
 
-\hypertarget{app:ContinuousDistributions}{%
-\section{Continuous Distrbutions}\label{app:ContinuousDistributions}}
+\hypertarget{app-ContinuousDistributions}{%
+\section{Continuous Distrbutions}\label{app-ContinuousDistributions}}
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -19539,8 +19539,8 @@ Modeling: & task times, activity time when data is limited \\
 
 \clearpage
 
-\hypertarget{app:StatTables}{%
-\chapter{Statistical Tables}\label{app:StatTables}}
+\hypertarget{app-StatTables}{%
+\chapter{Statistical Tables}\label{app-StatTables}}
 
 \begin{table}
 

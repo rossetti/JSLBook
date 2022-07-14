@@ -1,6 +1,6 @@
 \clearpage 
 
-# Probability Distribution Modeling {#app:idm}
+# Probability Distribution Modeling {#app-idm}
 
 **[Learning Objectives]{.smallcaps}**
 
@@ -13,7 +13,7 @@
 When performing a simulation study, there is no substitution for
 actually observing the system and collecting the data required for the
 modeling effort. As outlined in
-Section \@ref(ch1:sec:simMeth), a good simulation methodology recognizes
+Section \@ref(ch1-sec-simMeth), a good simulation methodology recognizes
 that modeling and data collection often occurs in parallel. That is,
 observing the system allows conceptual modeling which allows for an
 understanding of the input models that are needed for the simulation.
@@ -100,7 +100,7 @@ you to illustrate how the data was collected.
 
 The following section provides a review of probability and statistical concepts that are useful in distribution modeling.
 
-## Random Variables and Probability Distributions {#app:idm:sec:rvPD}
+## Random Variables and Probability Distributions {#app-idm-sec-rvPD}
 
 This section discusses some concepts in probability and statistics that
 are especially relevant to simulation. These will serve you well as you
@@ -341,10 +341,10 @@ summarizing the distribution of the data.
 
 As noted in this section, a key decision in distribution modeling is whether the underlying random variable is discrete or continuous. The next section discusses how to model discrete distributions.
 
-## Modeling with Discrete Distributions {#app:idm:sec:MDD}
+## Modeling with Discrete Distributions {#app-idm-sec-MDD}
 
 There are a wide variety of discrete random variables that often occur
-in simulation modeling. Appendix \@ref(app:DiscreteDistributions) summarizes the functions and characteristics some common discrete
+in simulation modeling. Appendix \@ref(app-DiscreteDistributions) summarizes the functions and characteristics some common discrete
 distributions. Table \@ref(tab:discreteD) provides an overview of some modeling situations for common discrete distributions.
 
 
@@ -364,7 +364,7 @@ distributions. Table \@ref(tab:discreteD) provides an overview of some modeling 
 
 By understanding the modeling situations that produce data, you can hypothesize the appropriate distribution for the distribution fitting process.
 
-## Fitting Discrete Distributions {#app:idm:sec:fitDiscrete}
+## Fitting Discrete Distributions {#app-idm-sec-fitDiscrete}
 
 This section illustrates how to model and fit a discrete distribution to
 data. Although the steps in modeling discrete and continuous
@@ -384,7 +384,7 @@ modeler thinks that the data is continuous. The modeling starts with
 what is being collected and how it is being collected (not with looking
 at a file!).
 
-### Fitting a Poisson Distribution {#AppDisFit:PoissonFit}
+### Fitting a Poisson Distribution {#AppDisFit-PoissonFit}
 
 Since the Poisson distribution is very important in simulation modeling,
 the discrete input modeling process will be illustrated by fitting a
@@ -905,7 +905,7 @@ level.
 
 For a discrete distribution, the most common distributional test is the Chi-Squared goodness of fit test, which is the subject of the next section.
 
-### Chi-Squared Goodness of Fit Test {#subsub:chisqGOF}
+### Chi-Squared Goodness of Fit Test {#subsub-chisqGOF}
 
 The Chi-Square Test divides the range of the data into, $k$, intervals (or classes)
 and tests if the number of observations that fall in each interval (or class) is
@@ -1306,13 +1306,13 @@ $$
 
 The previous two examples illustrated the process for fitting a discrete distribution to data for use in a simulation model.  Because discrete event dynamic simulation involves modeling the behavior of a system over time, the modeling of distributions that represent the time to perform a task is important.  Since the domain of time is on the set of positive real numbers, it is a continuous variable.  We will explore the modeling of continuous distributions in the next section.
 
-## Modeling with Continuous Distributions {#app:idm:sec:MCD}
+## Modeling with Continuous Distributions {#app-idm-sec-MCD}
 
 Continuous distributions can be used to model situations where the
 set of possible values occurs in an interval or set of intervals. Within
 discrete event simulation, the most common use of continuous
 distributions is for the modeling of the time to perform a task.
-Appendix \@ref(app:ContinuousDistributions) summarizes the properties of common
+Appendix \@ref(app-ContinuousDistributions) summarizes the properties of common
 continuous distributions.
 
 The continuous uniform distribution can be used to model situations in
@@ -1410,7 +1410,7 @@ since a normal distribution can have negative values, using a normal
 distribution to model task times can be problematic. If you attempt to
 delay for negative time you will receive an error. Instead of using a
 normal distribution, you might use a truncated normal, see
-Section \@ref(AppRNRV:subsec:MTSRV). Alternatively, you can choose from any of the
+Section \@ref(AppRNRV-subsec-MTSRV). Alternatively, you can choose from any of the
 distributions that are defined on the range of positive real numbers,
 such as the lognormal, gamma, Weibull, and exponential distributions.
 The lognormal distribution is a convenient choice because it is also
@@ -1443,7 +1443,7 @@ Once we have a good idea about the type of random variable (discrete or
 continuous) and some ideas about the distribution of the random
 variable, the next step is to fit a distributional model to the data. In the following sections, we will illustrate how to fit continuous distributions to data.
 
-## Fitting Continuous Distributions {#app:idm:sec:fitContinuous}
+## Fitting Continuous Distributions {#app-idm-sec-fitContinuous}
 
 Previously, we examined the modeling of discrete
 distributions. In this section, we will look at modeling a continuous
@@ -1478,7 +1478,7 @@ minutes. Fit an appropriate distribution to this data.
 ***
 \ 
 
-### Visualizing the Data {#app:idm:subsec:visualizedata}
+### Visualizing the Data {#app-idm-subsec-visualizedata}
 
 The first steps are to visualize the data and check for independence.
 This can be readily accomplished using the *hist*, *plot*, and *acf*
@@ -1530,7 +1530,7 @@ number.
 Based on the visual analysis, we can conclude that the task times are
 likely to be independent and identically distributed.
 
-### Statistically Summarize the Data {#app:idm:subsec:statsdata}
+### Statistically Summarize the Data {#app-idm-subsec-statsdata}
 
 An analysis of the statistical properties of the task times can be
 easily accomplished in R using the *summary*, *mean*, *var*, *sd*, and
@@ -1632,7 +1632,7 @@ learned so far:
     unimodal. This conclusion is based on the histogram and from the
     statistical summary.
 
-### Hypothesizing and Testing a Distribution {#app:idm:subsec:hypothDist}
+### Hypothesizing and Testing a Distribution {#app-idm-subsec-hypothDist}
 
 The next steps involve the model fitting processes of hypothesizing
 distributions, estimating the parameters, and checking for goodness of
@@ -2136,7 +2136,7 @@ differences and has a higher power than the K-S Test for many popular
 distributions. It can be found as standard output in commercial
 distribution fitting software.
 
-### Visualizing the Fit {#app:idm:subsec:visFit}
+### Visualizing the Fit {#app-idm-subsec-visFit}
 
 Another valuable diagnostic tool is to make probability-probability
 (P-P) plots and quantile-quantile (Q-Q) plots. A P-P Plot plots the empirical distribution function versus the theoretical distribution evaluated at each order statistic value. Recall
@@ -2396,7 +2396,7 @@ is not a good model for the task times.
 \caption{Distribution Plot from fitdistrplus for Uniform Distribution Fit of Computer Repair Times}(\#fig:fitPlotUnif)
 \end{figure}
 
-### Using the Input Analyzer {#app:idms2sb3}
+### Using the Input Analyzer {#app-idms2sb3}
 
 In this section, we will use the Arena Input Analyzer to fit
 a distribution to service times collected for the pharmacy example. The Arena Input Analyzer is a separate program hat comes with Arena.  It is available as part of the free student edition of Arena. 
@@ -2425,7 +2425,7 @@ observation is in row 1 column 2, and so forth. This data is available
 in the text file *PharmacyInputModelingExampleData.txt* that accompanies
 this chapter.
 
-:::{#tab:PharmacyData}
+
   -------- -------- -------- -------- --------
      61     278.73   194.68   55.33    398.39
    59.09    70.55    151.65   58.45    86.88
@@ -2541,7 +2541,7 @@ parameter. The visual fit of the data is shown in Figure \@ref(fig:InputAnalyzer
 \caption{Histogram for Exponential Fit to Service Times}(\#fig:InputAnalyzerExpFit)
 \end{figure}
 
-Recall the discussion in Section \@ref(AppRNRV:subsec:MTSRV) concerning
+Recall the discussion in Section \@ref(AppRNRV-subsec-MTSRV) concerning
 shifted distributions. Any distribution can have this additional
 parameter that shifts it along the x-axis.  This can complicate parameter estimation procedures.
 The Input Analyzer has an algorithm which will attempt to estimate this
@@ -2767,7 +2767,7 @@ plot(fw)
 \end{figure}
 The P-P and Q-Q plots of the shifted data indicate that the exponential distribution is an excellent fit for the service time data.
 
-## Testing Uniform (0,1) Pseudo-Random Numbers {#app:distfit:testU01}
+## Testing Uniform (0,1) Pseudo-Random Numbers {#app-distfit-testU01}
 
 Now that we have seen the general process for fitting continuous distributions, this section will discuss the special case of testing for uniform (0,1) random variables.  The reason that this is important is because these methods serve the basis for testing if pseudo-random numbers can reasonably be expected to perform as if they are U(0,1) random variates.  Thus, this section provides an overview of what is involved in testing
 the statistical properties of random number generators. Essentially a
@@ -3204,7 +3204,7 @@ tested software.
 
 \FloatBarrier
 
-## Additional Distribution Modeling Concepts {#app:distfit:idms2sb4}
+## Additional Distribution Modeling Concepts {#app-distfit-idms2sb4}
 
 This section wraps up the discussion of input modeling by covering some
 additional topics that often come up during the modeling process.
@@ -3368,7 +3368,7 @@ process, you are in charge, not the software. The software is only there
 to support your decision making process. Use the software to justify
 your art.
 
-## Summary {#app:idmSummary}
+## Summary {#app-idmSummary}
 
 In this chapter you learned how to analyze data in order to model the
 input distributions for a simulation model. The input distributions

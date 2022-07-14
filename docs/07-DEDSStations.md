@@ -99,7 +99,7 @@ develop an understanding of these concepts is with entities because
 entities represent things that flow through and are processed by the
 system.
 
-## Entities and Attributes {#dem:entities}
+## Entities and Attributes {#dem-entities}
 
 When modeling a system, there are often many types of entities. For
 example, consider a retail store. Besides customers, the products might
@@ -162,7 +162,7 @@ system, there needs to be mechanisms for causing events to occur that
 represent the arrival of objects to the system. The following section
 describes how the JSL allows for the modeling of a pattern of events.
 
-## Event Generators {#dem:eg}
+## Event Generators {#dem-eg}
 
 A basic mechanism by which the occurrence of a patterned sequence of
 events is modeled is through the EventGenerator class. The
@@ -381,7 +381,7 @@ action invokes the `resume() `method. Obviously, this can be within a
 sub-class of `EventGenerator` or within another class that has a reference
 to the event generator.
 
-## The Station Package {#dem:station}
+## The Station Package {#dem-station}
 
 This section describes a JSL package that facilitates the modeling of
 system components that can send or receive entities. Many systems have
@@ -836,7 +836,7 @@ stations can be formed and simulated.
     }
 ```
 
-## Sharing a Resource {#dem:sharedResources}
+## Sharing a Resource {#dem-sharedResources}
 
 In the previous queueing situations, at each station there was one
 resource that was used during the service operation. It is often the
@@ -1079,7 +1079,7 @@ object-oriented approach to simulation modeling.
 | ```                                                                   |
 +-----------------------------------------------------------------------+
 
-## Complex System Example {#dem:tiedyeShirts}
+## Complex System Example {#dem-tiedyeShirts}
 
 This section presents a more complex system that illustrates how to
 model entities that flow through a system and how to coordinate the
@@ -1114,7 +1114,7 @@ according to a triangular distribution with a minimum of 5 minutes, a
 most likely value of 10 minutes, and a maximum value of 15 minutes.
 Finally, the boxed customer order is sent to shipping.
 
-### Conceptualizing the Model {#dem:tiedyeShirts:cm}
+### Conceptualizing the Model {#dem-tiedyeShirts-cm}
 
 Before proceeding you might want to jot down your answers to the
 following modeling recipe questions and then compare how you are doing
@@ -1162,7 +1162,7 @@ after each of these processes.
 
 ![(\#fig:TieDyeTShirtACD)Activity Diagram for Tie Dye T-Shirts System](./figures/ch5/TieDyeTShirtACD.png) 
 
-### Implementing the Model {#dem:tiedyeShirts:im}
+### Implementing the Model {#dem-tiedyeShirts-im}
 
 If it was not for the coordination between the orders
 (paperwork/packaging) and the shirts in this system, the modeling would
@@ -1473,7 +1473,7 @@ Similar logic occurs within the `PaperWork` class. This is the
 notification that they are completed so that the `Order` classs is
 notified when they are completed.
 
-### Model Results {#dem:tiedyeShirts:results}
+### Model Results {#dem-tiedyeShirts-results}
 
 The following table presents the results of the simulation. From
 the utilization of the shirt making resource it is clear that more than
@@ -1501,7 +1501,7 @@ one shirt maker is necessary.
 
   : Across Replication Statistics for Tie-Dye T-Shirts Example, Number of Replications 50
 
-## Summary {#dem:summary}
+## Summary {#dem-summary}
 
 In this chapter, you have learned a few fundamental JSL model elements
 that facilitate the modeling of simple queueing situations. The classes
